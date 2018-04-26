@@ -12,4 +12,4 @@ We were asked to design an **Android App** that would allow college students and
 * [Kanika Ranka](https://github.com/24kanika)   UI Designer
 
 Course Project under guidance of
-**Dr. Vikramaditya Dave**(Assistant Professor at **Electrical Department, College of Technology and Engineering, Udaipur**).
+**Dr. Vikramaditya Dave** (Assistant Professor at **Electrical Department, College of Technology and Engineering, Udaipur**).
