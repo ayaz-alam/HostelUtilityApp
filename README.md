@@ -11,6 +11,6 @@ We were asked to design an **Android App** that would allow college students and
 * [Ashish Aryan](https://github.com/AryaAshish) Database Designer
 * [Kanika Ranka](https://github.com/24kanika)   UI Designer
 
-Course Project under guidance of
+Project made under guidance of
 ### Dr. Vikramaditya Dave 
 (Assistant Professor at **Electrical Department, College of Technology and Engineering, Udaipur**).
