@@ -17,9 +17,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Home"
+            android:name=".student.Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".officials.OfficialsHome"
+            android:label="@string/title_activity_officials_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginAcitivity"></activity>
     </application>
 
 </manifest>

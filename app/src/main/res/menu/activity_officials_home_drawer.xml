@@ -6,34 +6,38 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_notice"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_menu_camera"
             android:title="Notice" />
+        <item
+            android:id="@+id/nav_gen_notice"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="General Notice" />
 
         <item
-            android:id="@+id/nav_complaint"
+            android:id="@+id/nav_send_notice"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Complaint" />
+            android:title="Send Notice" />
         <item
-            android:id="@+id/nav_mess_diet_off"
+            android:id="@+id/nav_complaints"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Mess Diet Off" />
+            android:title="Complaints" />
         <item
-            android:id="@+id/nav_net_refill"
+            android:id="@+id/nav_diet_off_requests"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Net Refill Request" />
+            android:title="Diet Off Requests" />
+        <item
+            android:id="@+id/nav_staff_details"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Staff Details" />
     </group>
 
     <item android:title="Communicate">
         <menu>
-            <item
-            android:id="@+id/nav_your_profile"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Your Profile" />
 
             <item
-                android:id="@+id/nav_your_complaints"
+                android:id="@+id/nav_your_profile"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Your Complaints" />
+                android:title="Your Profile" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_send"

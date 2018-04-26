@@ -7,19 +7,26 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <include
-        layout="@layout/app_bar_home"
+        layout="@layout/officials_app_bar_home"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+    <FrameLayout
+        android:id="@+id/fragment_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
+</LinearLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_home_drawer" />
+        app:headerLayout="@layout/official_nav_header_home"
+        app:menu="@menu/activity_officials_home_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
