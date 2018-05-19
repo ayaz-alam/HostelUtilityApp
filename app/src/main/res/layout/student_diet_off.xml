@@ -5,9 +5,94 @@
     tools:context="com.medeveloper.ayaz.hostelutility.student.DietOff">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Diet Off Fragment" />
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_margin="@dimen/default_margin"
+         android:text="Mess Diet of Request"
+         android:layout_centerHorizontal="true"
+         android:textSize="@dimen/heading_text_size"
+         android:id="@+id/title"
+         />
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_margin="@dimen/default_margin"
+         android:layout_below="@id/title"
+         android:layout_alignParentLeft="true"
+         android:layout_height="wrap_content">
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_margin="@dimen/default_margin"
+             android:layout_height="wrap_content"
+             android:textStyle="bold"
+             android:text="From"/>
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/from"
+             android:layout_margin="@dimen/default_margin"
+             android:text="Select Date"
+             />
+
+     </LinearLayout>
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_margin="@dimen/default_margin"
+         android:layout_below="@id/title"
+         android:id="@+id/date_layout"
+         android:layout_alignParentRight="true"
+         android:layout_height="wrap_content">
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_margin="@dimen/default_margin"
+             android:layout_height="wrap_content"
+             android:textStyle="bold"
+             android:text="To"/>
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/to"
+             android:layout_margin="@dimen/default_margin"
+             android:text="Select Date"
+             />
+
+     </LinearLayout>
+     <android.support.design.widget.TextInputLayout
+         android:layout_width="match_parent"
+         android:layout_margin="@dimen/default_margin"
+
+         android:layout_below="@+id/date_layout"
+         android:layout_height="wrap_content">
+         <EditText
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:hint="Reason for Mess Diet Off"
+             android:id="@+id/reason_diet_off"
+
+
+             />
+
+     </android.support.design.widget.TextInputLayout>
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/warning"
+         android:layout_above="@id/submit_request"
+         android:textColor="@color/warning_red"
+         android:layout_margin="@dimen/default_margin"
+         />
+     <Button
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/submit_request"
+         android:text="Submit Request"
+         android:layout_margin="@dimen/default_margin"
+         android:layout_alignParentBottom="true"
+         />
+
+ </RelativeLayout>
 
 </FrameLayout>

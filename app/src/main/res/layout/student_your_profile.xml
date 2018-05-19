@@ -4,10 +4,190 @@
     android:layout_height="match_parent"
     tools:context="com.medeveloper.ayaz.hostelutility.student.YourProfile">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Your Profile" />
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@color/colorAccent"
+            android:padding="@dimen/default_margin"
+            android:id="@+id/top_panel"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_face_white_24dp"
+                android:layout_marginRight="@dimen/default_margin_large"
+                android:id="@+id/display_image"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:id="@+id/display_name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sub_heading_text_size"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/display_image"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hostel"
+                android:id="@+id/student_hostel"
+                android:layout_below="@id/display_name"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/default_small_margin"
+                android:layout_toRightOf="@id/display_image"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Room Number"
+                android:id="@+id/student_room_no"
+                android:layout_below="@id/student_hostel"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/default_small_margin"
+                android:layout_toRightOf="@id/display_image"
+
+                />
+
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@color/colorAccent"
+            android:padding="@dimen/default_margin"
+            android:orientation="vertical"
+            android:layout_below="@id/top_panel"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Branch"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="16dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Branch"
+                    android:textColor="@color/white"
+                    android:id="@+id/student_branch"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Room no."
+                    android:textColor="@color/white"
+                    android:layout_marginRight="16dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Room Number"
+                    android:id="@+id/room_no"
+                    android:textColor="@color/white"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Adhaar Number"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="16dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Adhaar Number"
+                    android:textColor="@color/white"
+                    android:id="@+id/student_adhar_no"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Phone"
+                    android:layout_marginRight="16dp"
+                    android:textColor="@color/white"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Phone"
+                    android:id="@+id/student_phone"
+                    android:textColor="@color/white"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:text="Email"
+                    android:layout_marginRight="16dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Email"
+                    android:id="@+id/student_email"
+                    android:textColor="@color/white"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 </FrameLayout>

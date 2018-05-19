@@ -6,10 +6,12 @@
     tools:context="com.medeveloper.ayaz.hostelutility.student.Notice">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notice Fragment" />
+
+
+  </RelativeLayout>
 
 </FrameLayout>

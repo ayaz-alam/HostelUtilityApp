@@ -3,10 +3,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.medeveloper.ayaz.hostelutility.student.ComplaintFragment">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/default_margin"
+    android:layout_height="match_parent">
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/complaint_array"
+        android:layout_margin="@dimen/default_margin"
+        >
+    </Spinner>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Complaint Fragment" />
+        android:layout_height="wrap_content"
+        android:text="From when you're having this problem"
+        android:textAlignment="center"
+        android:layout_margin="@dimen/default_margin"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Date"
+        android:id="@+id/date"
+        android:textAlignment="center"
+        android:layout_margin="@dimen/default_margin"
+        />
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Please Enter Details about your comlaint"
+            android:id="@+id/complaint_details"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submit_complaint"
+        android:layout_margin="@dimen/default_margin"
+        android:text="Submit"
+        />
+
+
+</LinearLayout>
 
 </FrameLayout>

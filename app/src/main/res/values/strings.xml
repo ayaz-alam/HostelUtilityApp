@@ -6,9 +6,82 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string-array name="complaint_array">
+        <item>Select complaint feild</item>
+        <item>Electrical Appliances</item>
+        <item>RO Purifier</item>
+        <item>Mess</item>
+        <item>Plumber</item>
+        <item>Wifi Routers</item>
+        <item>Washrooms and Sanitary</item>
+        <item>Sweeper</item>
+        <item>Water Supply</item>
+        <item>Others</item>
+
+    </string-array>
+    <string-array name="categories">
+        <item>Select Category</item>
+        <item>General</item>
+        <item>OBC</item>
+        <item>SC/ST</item>
+    </string-array>
+    <string-array name="year">
+        <item>Year</item>
+        <item>I</item>
+        <item>II</item>
+        <item>III</item>
+        <item>IV</item>
+    </string-array>
+    <string-array name="branch">
+        <item>Branch</item>
+        <item>AGE</item>
+        <item>CE</item>
+        <item>CSE</item>
+        <item>EE</item>
+        <item>ECE</item>
+        <item>IT</item>
+        <item>ME</item>
+        <item>MI</item>
+        <item>Dairy and Food Science</item>
+    </string-array>
+    <string-array name="stream">
+        <item>Class</item>
+        <item>B-Tech</item>
+        <item>M-Tech</item>
+        <item>PhD</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="blood_group">
+        <item>Select Blood Group</item>
+        <item>A+</item>
+        <item>B+</item>
+        <item>AB+</item>
+        <item>O+</item>
+        <item>A-</item>
+        <item>B-</item>
+        <item>AB-</item>
+        <item>O-</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_officials_home">OfficialsHome</string>
     <string name="string_about">This app is designed to help student to raise complaint at individual level as well as the hostel level and also provides information platform for student and faculty.</string>
+    <string name="warning">Note: Those who will be found at hostel after submitting the diet of request will be fined and would get expelled from hostel</string>
+    <string name="warning_student_form">Please enter details same as you filled in the hostel form, Any wrong information can lead to expulsion from hostel</string>
+    <string name="type_notice_text">Type notice or select from gallery</string>
+    <string name="net_refill_request">Net Refill Request</string>
+    <string name="enter_your_room_number">Enter Your Room Number</string>
+    <string name="guardian_no">Local Guardian Mobile no.(Optional)</string>
+    <string name="enter_adhaar">Enter your Adhaar Number</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="enter_your_father_name">Enter Your Father Name</string>
+    <string name="mobile_no">Mobile no</string>
+    <string name="whatsapp_no_if_any">Whatsapp no. if any</string>
+    <string name="enter_your_email_address">Enter Your Email Address</string>
+    <string name="father_contact">Father Contact</string>
+    <string name="permanent_address">Permanent Address</string>
+    <string name="submit">Submit</string>
+    <string name="enter_your_enrollment">Enter Your Enrollment Number</string>
+    <string name="fill_this_form_to_proceed">Fill this form to proceed</string>
 </resources>

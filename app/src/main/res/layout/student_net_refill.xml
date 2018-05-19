@@ -5,9 +5,59 @@
     tools:context="com.medeveloper.ayaz.hostelutility.student.NetRefill">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Net Refill Fragment" />
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/net_refill_request"
+            android:textSize="@dimen/heading_text_size"
+            android:id="@+id/title"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/default_margin"
+            />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/default_margin"
+            android:layout_centerInParent="true"
+            android:id="@+id/email_layout"
+
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Please give your ID"
+                android:id="@+id/id"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/default_margin"
+            android:layout_below="@+id/email_layout"
+            android:id="@+id/id_layout"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Please Enter Email"
+                android:id="@+id/email"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Request Submit"
+            android:layout_margin="@dimen/default_margin"
+            android:layout_alignParentBottom="true"
+
+            />
+
+    </RelativeLayout>
+
+
+
 
 </FrameLayout>
