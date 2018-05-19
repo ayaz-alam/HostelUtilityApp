@@ -17,17 +17,6 @@ public class LoginAcitivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_acitivity);
 
 
-        (findViewById(R.id.student)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Home.class));
-            }
-        });
-        (findViewById(R.id.officials)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),OfficialsHome.class));
-            }
-        });
+
     }
 }
