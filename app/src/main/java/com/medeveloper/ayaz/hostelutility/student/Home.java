@@ -104,7 +104,7 @@ public class Home extends AppCompatActivity
 
 
         } else if (id == R.id.nav_net_refill) {
-            Tag="NetRefill";
+            Tag="NetRefClass";
             fragmentClass = NetRefill.class;
             inHome=false;
             BackPressedAgain=false;

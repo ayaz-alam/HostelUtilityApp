@@ -40,17 +40,16 @@
             android:textSize="@dimen/extra_large_heading"
             android:text="Get Started"
             android:textColor="@color/white"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="@dimen/default_margin"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login to Play and Have Fun"
+            android:text="Login to proceed or view as guest"
             android:textColor="@color/white"
-            android:textSize="@dimen/default_heading_size"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="14dp"
+            android:layout_marginLeft="@dimen/default_margin"
             />
+
 
         <EditText
             android:layout_width="match_parent"
@@ -64,9 +63,12 @@
             android:inputType="textEmailAddress"
             android:paddingBottom="4dp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
             android:minHeight="30dp"
+            android:paddingLeft="12dp"
+            android:drawablePadding="4dp"
+            android:drawableLeft="@drawable/ic_person_pin"
 
             />
 
@@ -77,17 +79,77 @@
             android:hint="Enter Password"
             android:id="@+id/password_login"
             android:minHeight="30dp"
-
+            android:drawableLeft="@drawable/ic_vpn_key"
+            android:paddingLeft="4dp"
             android:padding="4dp"
             android:drawablePadding="4dp"
             android:textColor="@color/colorPrimaryDark"
             android:inputType="textPassword"
             android:paddingBottom="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:paddingRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="2dp"
 
             />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log in as"
+                android:textSize="@dimen/text_normal"
+                android:id="@+id/someId"
+                android:layout_margin="@dimen/default_margin"
+                android:textColor="@color/white"
+                />
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:checkedButton="@id/student_radio"
+                android:layout_below="@+id/someId"
+                android:id="@+id/signin_radio"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/someId"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/student_radio"
+                    android:text="Student"
+                    android:textColor="@color/white"
+                    android:layout_margin="@dimen/default_margin"
+                    android:layout_alignParentRight="true"
+                    />
+               <RadioButton
+
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/teacher_radio"
+               android:text="Teacher"
+               android:textColor="@color/white"
+                   android:layout_margin="@dimen/default_margin"
+               android:layout_alignParentLeft="true"
+
+
+               />
+                <RadioButton
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/guest_radio"
+                    android:text="Guest"
+                    android:layout_margin="@dimen/default_margin"
+                    android:textColor="@color/white"
+                    android:layout_alignParentLeft="true"
+
+
+                    />
+
+            </RadioGroup>
+
+        </RelativeLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,7 +171,7 @@
             android:background="@drawable/register_button"
             android:text="Login"
             android:id="@+id/login_button"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             />
 
         <TextView
@@ -117,8 +179,8 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:layout_marginTop="16dp"
-            android:text="Not having fun yet??"
+            android:layout_marginTop="8dp"
+            android:text="Not registered yet??"
             android:textSize="@dimen/default_small_text_size"
             />
         <TextView
@@ -127,9 +189,9 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_marginTop="2dp"
-            android:textColor="#106a9b"
+            android:textColor="#6dc2ef"
             android:layout_marginLeft="4dp"
-            android:text="SIGN UP NOW"
+            android:text="Register"
             android:id="@+id/login_signup"
             android:textSize="@dimen/default_text_size"
             />

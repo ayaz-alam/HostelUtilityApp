@@ -5,11 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/rounded_white"
+        android:layout_margin="8dp"
         tools:ignore="UselessParent">
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +23,10 @@
         android:layout_height="wrap_content"
         android:text="@string/fill_this_form_to_proceed"
         android:textAlignment="center"
-        android:textSize="@dimen/heading_text_size"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/default_margin"
+        android:textColor="@color/colorPrimaryDark"
         />
 
 <android.support.design.widget.TextInputLayout
@@ -234,6 +240,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_margin"
                 android:id="@+id/submit"
+                android:background="@drawable/register_button"
+                android:textColor="@color/white"
                 android:text="@string/submit"
                 />
 

@@ -2,12 +2,20 @@
     <string name="app_name">Hostel Utility</string>
     <string name="title_activity_home">Home</string>
 
+
+    <!--College and hostel IDs, To make an app for a new Hostel, just change these two variables-->
+    <string name="college_id">CollegeID</string>
+    <string name="hostel_id">HostelID</string>
+
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
     <string-array name="complaint_array">
-        <item>Select complaint feild</item>
+        <item>Select complaint field</item>
+
         <item>Electrical Appliances</item>
         <item>RO Purifier</item>
         <item>Mess</item>
@@ -63,10 +71,11 @@
         <item>O-</item>
     </string-array>
 
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_officials_home">OfficialsHome</string>
-    <string name="string_about">This app is designed to help student to raise complaint at individual level as well as the hostel level and also provides information platform for student and faculty.</string>
+    <string name="string_about">This app is designed to help student to raise complaint at individual level as well as at hostel level and also provides information platform for student and faculty.</string>
     <string name="warning">Note: Those who will be found at hostel after submitting the diet of request will be fined and would get expelled from hostel</string>
     <string name="warning_student_form">Please enter details same as you filled in the hostel form, Any wrong information can lead to expulsion from hostel</string>
     <string name="type_notice_text">Type notice or select from gallery</string>
@@ -84,4 +93,16 @@
     <string name="submit">Submit</string>
     <string name="enter_your_enrollment">Enter Your Enrollment Number</string>
     <string name="fill_this_form_to_proceed">Fill this form to proceed</string>
+
+
+
+    <!-- Database Reference string that is used to refer the database content-->
+    <string name="staff_ref">Staff</string>
+    <string name="wardenId">WardenID</string>
+    <string name="student_list_ref">StudentList</string>
+    <string name="mess_days_left_ref">MessDietDays</string>
+    <string name="diet_off_complaints_ref">MessDietOffComplaints</string>
+    <string name="enroll_student_list_ref">EnrolledStudentList</string>
+    <string name="complaint_ref">Complaints</string>
+
 </resources>

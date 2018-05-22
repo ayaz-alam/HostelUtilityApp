@@ -6,4 +6,7 @@
     <color name="colorAccent">#099b6f</color>
     <color name="warning_red">#dbfd2200</color>
     <color name="white">#FFFFFF</color>
+    <color name="lightbackground">#87ecfd</color>
+    <color name="dark_grey">#c900bcd4</color>
+    <color name="light_grey">#e1bbbebb</color>
 </resources>

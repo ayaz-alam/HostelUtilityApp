@@ -182,27 +182,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Ashish Aryan"
-                    android:textSize="@dimen/sub_heading_text_size" />
-
-                <ImageView
-                    android:id="@+id/ashish_github"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/default_margin"
-                    android:src="@mipmap/ic_github_icon" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/default_margin"
-                    android:layout_toLeftOf="@+id/ashish_github"
-                    android:src="@drawable/ic_linkedi_con" />
             </RelativeLayout>
 
 

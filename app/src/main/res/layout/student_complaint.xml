@@ -3,43 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.medeveloper.ayaz.hostelutility.student.ComplaintFragment">
-<LinearLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_margin="@dimen/default_margin"
+
+    android:background="@color/lightbackground"
     android:layout_height="match_parent">
     <Spinner
+        android:padding="8dp"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/complaint_array"
-        android:layout_margin="@dimen/default_margin"
+        android:background="@drawable/rounded_white"
+        android:id="@+id/complaint_spinner"
+
         >
     </Spinner>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="From when you're having this problem"
-        android:textAlignment="center"
-        android:layout_margin="@dimen/default_margin"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Select Date"
-        android:id="@+id/date"
-        android:textAlignment="center"
-        android:layout_margin="@dimen/default_margin"
-        />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
+        android:layout_below="@+id/complaint_spinner"
         android:layout_margin="@dimen/default_margin"
+        android:background="@drawable/rounded_white"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/default_margin"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/complaint_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Please Enter Details about your comlaint"
-            android:id="@+id/complaint_details"
-            />
+            android:minHeight="150dp"
+            android:hint="Type details about your complaint"
+            android:layout_margin="2dp"
+            android:inputType="text|textMultiLine"
+            android:gravity="top"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -49,9 +50,11 @@
         android:id="@+id/submit_complaint"
         android:layout_margin="@dimen/default_margin"
         android:text="Submit"
+        android:background="@drawable/register_button"
+        android:layout_alignParentBottom="true"
         />
 
 
-</LinearLayout>
+</RelativeLayout>
 
 </FrameLayout>

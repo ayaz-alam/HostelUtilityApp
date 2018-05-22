@@ -1,6 +1,8 @@
 package com.medeveloper.ayaz.hostelutility.student;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +30,8 @@ import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 
 public class StudentForm extends AppCompatActivity {
+
+
 
     private String EnrollNo,AdhaarNo,
             Name,Category,BloodGroup,
@@ -48,6 +55,7 @@ public class StudentForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_form);
 
+        getSupportActionBar().hide();
         enrollNo=findViewById(R.id.enrollment_no);
         adhaarNo=findViewById(R.id.adhaar_no);
         nameofStudent=findViewById(R.id.your_name);
@@ -69,16 +77,16 @@ public class StudentForm extends AppCompatActivity {
 
         Submit=findViewById(R.id.submit);
         Authenticated();
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if(mAuth!=null)
         mAuth.signInAnonymously();
-        mRef= FirebaseDatabase.getInstance().getReference();
-        String hostelID = "MVHostel";
-        mRef=mRef.child(hostelID).child("EnrolledStudentList");
-       /* for(int i=1;i<=100;i++)
+        mRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).child(getString(R.string.enroll_student_list_ref));
+       for(int i=1;i<=100;i++)
         {
             mRef.child("2016CTAE"+String.format("%03d",i)).child("AdhaarNo").setValue("123456789"+String.format("%03d", i));
 
-        }*/
+        }
 
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -186,11 +194,16 @@ public class StudentForm extends AppCompatActivity {
 
     }
 
+    private String Password="123456";
     private void Authenticated() {
+
+
 
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 EnrollNo=enrollNo.getText().toString();
                 AdhaarNo=adhaarNo.getText().toString();
                 Name=nameofStudent.getText().toString();
@@ -207,7 +220,7 @@ public class StudentForm extends AppCompatActivity {
                 LocalGuardianNo=localGuardianNo.getText().toString();
                 CompleteAddress =address.getText().toString();
 
-                StudentDetailsClass thisStudent=new StudentDetailsClass(
+                final StudentDetailsClass thisStudent=new StudentDetailsClass(
                         EnrollNo,AdhaarNo,Name,Category,
                         BloodGroup,FatherName,Class,
                         Year,Branch,RoomNo,MobileNo,Email,FatherContact,
@@ -215,8 +228,37 @@ public class StudentForm extends AppCompatActivity {
                         );
                 if(CheckDetails())
                 {
+                    if(Password!=null)
+                    {
+                        Password="123456789";
+                        FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful())
+                                {
+                                    FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).
+                                            child(getString(R.string.hostel_id)).child(getString(R.string.student_list_ref))
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(thisStudent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful())
+                                            {
+                                                ShowDialog("Successfully Registered",0);
+                                                startActivity(new Intent(StudentForm.this,Home.class));
+                                            }
+                                        }
+                                    });
 
-                    String Password=createDialogForPassword();
+
+                                }
+                                else
+                                {
+                                    ShowDialog("Cannot Log you in :"+task.getException(), 0);
+                                }
+                            }
+                        });
+                    }
+                    else ShowDialog("Password not detected",0);
 
 
 
@@ -232,6 +274,11 @@ public class StudentForm extends AppCompatActivity {
         });
 
 
+    }
+
+    private void ShowDialog(String msg, int code) {
+
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 
     private String createDialogForPassword() {
@@ -256,6 +303,50 @@ public class StudentForm extends AppCompatActivity {
         DialogueForPassWord.setView(input);
 
         DialogueForPassWord.setCancelable(false);
+        DialogueForPassWord.setPositiveButton("Confirm Password", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if(input.getText().length()<4)
+                {
+
+                    createDialogForPassword();
+                    Toast.makeText(getBaseContext(),"Invalid Password",Toast.LENGTH_SHORT).show();
+                }
+                else confirmPassword(input.getText().toString());
+
+            }
+        });
+
+
+        DialogueForPassWord.create();
+        DialogueForPassWord.show();
+
+        return input.getText().toString();
+
+    }
+    private String confirmPassword(final String s) {
+
+        final EditText input=new EditText(this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        lp.setMargins(4,4,4,4);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        InputFilter[] filterArray = new InputFilter[1];
+        filterArray[0] = new InputFilter.LengthFilter(4);
+        input.setFilters(filterArray);
+        input.setLayoutParams(lp);
+
+
+
+        final AlertDialog.Builder DialogueForPassWord = new AlertDialog.Builder(this);
+        DialogueForPassWord.setTitle("Confirm your PassKey");
+        DialogueForPassWord.setMessage("Enter Your 4 digit passkey again");
+        DialogueForPassWord.setIcon(R.drawable.ic_menu_camera);
+        DialogueForPassWord.setView(input);
+
+        DialogueForPassWord.setCancelable(false);
         DialogueForPassWord.setPositiveButton("Set Password", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -265,6 +356,12 @@ public class StudentForm extends AppCompatActivity {
 
                     createDialogForPassword();
                     Toast.makeText(getBaseContext(),"Invalid Password",Toast.LENGTH_SHORT).show();
+                }
+                else if(s.equals(input.getText().toString()))
+                {
+                  Password=s;
+
+                    Toast.makeText(getBaseContext(),"Password Matched",Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -277,7 +374,6 @@ public class StudentForm extends AppCompatActivity {
         return input.getText().toString();
 
     }
-
 
 
     private boolean CheckDetails() {
