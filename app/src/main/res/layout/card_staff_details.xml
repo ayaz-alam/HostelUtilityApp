@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginBottom="16dp"
+    app:cardCornerRadius="@dimen/default_margin"
     android:layout_marginLeft="@dimen/large_margin"
     android:layout_marginRight="@dimen/large_margin"
     >
@@ -18,7 +19,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/dark_grey"
             android:text="Department"
@@ -44,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Staff Name"
+                android:id="@+id/card_staff_name"
                 />
 
         </LinearLayout>
@@ -64,6 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Staff Contact"
+                android:id="@+id/card_staff_contact"
                 />
 
         </LinearLayout>

@@ -24,7 +24,6 @@
         <item>Washrooms and Sanitary</item>
         <item>Sweeper</item>
         <item>Water Supply</item>
-        <item>Others</item>
 
     </string-array>
     <string-array name="categories">

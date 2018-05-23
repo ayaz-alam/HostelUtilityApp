@@ -2,94 +2,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.medeveloper.ayaz.hostelutility.officials.SendNotice">
+    tools:context="com.medeveloper.ayaz.hostelutility.officials.SendNotice">>
 
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="@dimen/heading_text_size"
-            android:text="Send Notice"
-            android:id="@+id/title"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_normal"
-            android:text="@string/type_notice_text"
-            android:layout_below="@id/title"
-            android:id="@+id/sub_head"
-            />
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:padding="@dimen/default_padding"
             android:id="@+id/image_notice"
-            android:layout_below="@id/sub_head"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:maxHeight="320dp"
-            />
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_above="@+id/below_container"
-            android:id="@+id/text_input"
             android:layout_margin="@dimen/default_margin"
-            android:layout_marginTop="32dp"
-            android:layout_height="wrap_content">
+            android:layout_above="@id/text_input"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:maxHeight="100dp"
+            android:padding="@dimen/default_padding" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/below_container"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@drawable/rounded_white">
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Type Notice here"
                 android:inputType="text|textMultiLine"
+                android:minHeight="120dp"
 
                 />
         </android.support.design.widget.TextInputLayout>
 
         <RelativeLayout
+            android:id="@+id/below_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
-            android:id="@+id/below_container"
-            android:padding="@dimen/smallpadding"
-            android:layout_margin="@dimen/default_margin">
+            android:layout_margin="@dimen/default_margin"
+            >
 
 
             <Button
+                android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send Notice"
-                android:id="@+id/submit"
-                android:padding="@dimen/smallpadding"
-                android:background="@color/white"
                 android:layout_alignParentLeft="true"
+                android:background="@drawable/register_button"
                 android:drawablePadding="16dp"
                 android:drawableRight="@drawable/ic_menu_send"
-                />
+                android:padding="@dimen/large_margin"
+                android:text="Send Notice" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_menu_gallery"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:id="@+id/gallery"
-                />
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_menu_gallery" />
+
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_menu_camera"
+                android:id="@+id/camera"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/default_margin"
-                android:id="@+id/camera"
                 android:layout_toLeftOf="@id/gallery"
-                />
+                android:src="@drawable/ic_menu_camera" />
 
         </RelativeLayout>
     </RelativeLayout>

@@ -1,11 +1,18 @@
 package com.medeveloper.ayaz.hostelutility.officials;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.icu.text.SimpleDateFormat;
+import android.media.ExifInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,17 +37,20 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+
 
 import static android.app.Activity.RESULT_OK;
 
 public class SendNotice extends Fragment {
 
     private static final int PICK_IMAGE_REQUEST = 111;
+    private static final int REQUEST_TAKE_PHOTO = 121;
+    private Uri thePhotoURI=null;
 
     public SendNotice() {
         // Required empty public constructor
@@ -49,121 +59,158 @@ public class SendNotice extends Fragment {
 
     View rootView;
     ImageView mImageView;
-    Uri ImageUri=null;
+    Bitmap myPhoto;
+    Uri ImageUri = null;
 
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
+    SweetAlertDialog pDialog;//ProgressDialog
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       rootView=inflater.inflate(R.layout.officials_send_notice, container, false);
-       isStoragePermissionGranted();
-        ((ImageView)rootView.findViewById(R.id.camera)).setOnClickListener(new View.OnClickListener() {
+        rootView = inflater.inflate(R.layout.officials_send_notice, container, false);
 
+
+        isPermissionGranted();//Checking the permission
+        pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Sending, Please wait..");
+        pDialog.setCancelable(false);
+
+
+
+        //Camera Button
+        ((ImageView) rootView.findViewById(R.id.camera)).setOnClickListener(new View.OnClickListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-                        requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-                    else
-                    dispatchTakePictureIntent(0);
-                }
+
+                if(isPermissionGranted())
+                dispatchTakePictureIntent(0);
+
             }
         });
-        ((ImageView)rootView.findViewById(R.id.gallery)).setOnClickListener(new View.OnClickListener() {
+
+        //Open Gallery Button
+        ((ImageView) rootView.findViewById(R.id.gallery)).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+
+                rotatePhoto(myPhoto);
+                /*
+                if(isPermissionGranted())
+                dispatchTakePictureIntent(1);
+                */
+            }
+        });
+
+        //Send button
+        ((Button) rootView.findViewById(R.id.submit)).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-                else
-                    dispatchTakePictureIntent(1);
-            }
-        });
-        ((Button)rootView.findViewById(R.id.submit)).setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-            if(ImageUri!=null)
-            {
-                StorageReference mStorage=FirebaseStorage.getInstance().getReference();
-                mStorage.child("CollegeID/HostelID/").child(ImageUri.getLastPathSegment()).
-                        putFile(ImageUri)
-                .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if(task.isSuccessful())
-                            Toast.makeText(getContext(),"Successfully Uploaded",Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(getContext(),"Failed: "+task.getException(),Toast.LENGTH_SHORT).show();
+                if(isNetworkAvailable())
+                if (ImageUri != null) {
+                    pDialog.show();
+                    StorageReference mStorage = FirebaseStorage.getInstance().getReference();
+                    mStorage.child("CollegeID/HostelID/").child(ImageUri.getLastPathSegment()).
+                            putFile(ImageUri)
+                            .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                    if (task.isSuccessful())
+                                    {
+                                        Toast.makeText(getContext(), "Successfully Uploaded", Toast.LENGTH_SHORT).show();
+                                        pDialog.dismiss();
+                                        ShowDialog("Successfully Uploaded",3).show();
+                                    }
+                                    else
+                                    {
+                                        ShowDialog("Error in sending",1).show();
+                                    }
 
-                    }
-                });
+                                }
+                            });
 
 
-
-
-            }
-            else Toast.makeText(getContext(),"Please Click/Select Photo First",Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getContext(), "Please Click/Select Photo First", Toast.LENGTH_SHORT).show();
+                else new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE).setTitleText("No internet connection").show();
 
             }
         });
 
 
-        mImageView=rootView.findViewById(R.id.image_notice);
+        mImageView = rootView.findViewById(R.id.image_notice);
 
 
 
-       return rootView;
+        return rootView;
     }
 
-    static final int IMAGE_CAPTURE_REQUEST = 1;
+    //Codes to rotate the photo
+    void rotatePhoto(Bitmap bitmap)
+    {
+        Matrix mMatrix = new Matrix();
+        Matrix mat=mImageView.getImageMatrix();
+        mMatrix.set(mat);
+        mMatrix.setRotate(90);
+        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                bitmap.getHeight(), mMatrix, false);
+        myPhoto=bitmap;
+        mImageView.setImageBitmap(bitmap);
+    }
 
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
+    }
+
+
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void dispatchTakePictureIntent(int Code) {
-        if(Code==0) {
+        if (Code == 0) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            // Ensure that there's a camera activity to handle the intent
+            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                // Create the File where the photo should go
+                File photoFile = null;
+                try {
+                    photoFile = createImageFile();
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
 
-                    startActivityForResult(takePictureIntent, IMAGE_CAPTURE_REQUEST);
+                }
+                // Continue only if the File was successfully created
+                if (photoFile != null) {
+                    Uri photoURI = FileProvider.getUriForFile(getContext().getApplicationContext(),
+                            "com.medeveloper.ayaz.hostelutility",
+                            photoFile);
+                    thePhotoURI=photoURI;
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                }
+            }
 
-        }
-        else if(Code==1)
-        {
+
+        } else if (Code == 1) {
 
             Intent intent = new Intent();
-// Show only images, no videos or anything else
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-// Always show the chooser (if there are multiple options available)
+            intent.setType("image/*");// Show only images, no videos or anything else
+            intent.setAction(Intent.ACTION_GET_CONTENT);//Always show the chooser (if there are multiple options available)
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
         }
     }
 
-
-
-
-    @Override
-
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == MY_CAMERA_REQUEST_CODE) {
-
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Toast.makeText(getContext(), "camera permission granted", Toast.LENGTH_LONG).show();
-
-            } else {
-
-                Toast.makeText(getContext(), "camera permission denied", Toast.LENGTH_LONG).show();
-
-            }
-
-        }
-
-
-    }
 
     String mCurrentPhotoPath;
 
@@ -186,18 +233,25 @@ public class SendNotice extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == IMAGE_CAPTURE_REQUEST && resultCode == RESULT_OK) {
-            if(data==null)
-                Toast.makeText(getContext(),"Data is null",Toast.LENGTH_SHORT).show();
-            else if(data.getData()==null)
-                Toast.makeText(getContext(),"Data's data is null",Toast.LENGTH_SHORT).show();
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
 
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Uri mImageUri=thePhotoURI;
+            getActivity().getContentResolver().notifyChange(mImageUri, null);
+            ContentResolver cr = getActivity().getContentResolver();
+            Bitmap bitmap;
+            try {
+                bitmap = android.provider.MediaStore.Images.Media.getBitmap(cr, mImageUri);
+                mImageView.setImageBitmap(bitmap);
+                myPhoto=bitmap;
+                ImageUri=thePhotoURI;
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Failed to load", Toast.LENGTH_SHORT).show();
 
-            mImageView.setImageBitmap(imageBitmap);
-        }
-        else if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            }
+
+
+
+        } else if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
             Uri uri = data.getData();
 
@@ -205,7 +259,8 @@ public class SendNotice extends Fragment {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                 // Log.d(TAG, String.valueOf(bitmap));
                 mImageView.setImageBitmap(bitmap);
-                ImageUri=uri;
+                myPhoto=bitmap;
+                ImageUri = uri;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -214,7 +269,7 @@ public class SendNotice extends Fragment {
 
 
     private void setPic() {
-       /* // Get the dimensions of the View
+
         int targetW = mImageView.getWidth();
         int targetH = mImageView.getHeight();
 
@@ -235,29 +290,82 @@ public class SendNotice extends Fragment {
 
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         mImageView.setImageBitmap(bitmap);
-        */
+
     }
 
 
-String TAG="df";
-    public  boolean isStoragePermissionGranted() {
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public boolean isPermissionGranted() {
+
+
+        boolean okay = true;
+
+        if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+            okay = false;
+        }
+
         if (Build.VERSION.SDK_INT >= 23) {
             if (getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG,"Permission is granted");
-                return true;
-            } else {
-
-                Log.v(TAG,"Permission is revoked");
+                    != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
+                okay = false;
             }
         }
-        else { //permission is automatically granted on sdk<23 upon installation
-            Log.v(TAG,"Permission is granted");
-            return true;
-        }
+
+    return okay;
     }
+
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+
+    }
+
+
+
+    private SweetAlertDialog ShowDialog(String msg,int code)
+    {
+        /*
+        * code = 0 : Normal Message
+        * code = 1 : Error Message
+        * code = 3 : ProgressBar
+        * code = 4 : Success Dialog
+        * */
+        SweetAlertDialog myDialog=null;
+
+        if(code==0)
+        {
+           myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.NORMAL_TYPE).setTitleText(msg);
+
+        }
+        else if(code==1)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).setTitleText(msg);
+
+        }
+        else if(code==2)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText(msg);
+
+        }
+        else if(code==3)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText(msg);
+        }
+
+
+
+        return myDialog;
+    }
+
+
+
+
 }
 
 
