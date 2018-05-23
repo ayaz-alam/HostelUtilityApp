@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StaffAdapter;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StaffDetailsClass;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class StaffDetails extends Fragment {
 
 
     private DatabaseReference baseRef;
+    private SweetAlertDialog pDialog;
 
     public StaffDetails() {
         // Required empty public constructor
@@ -45,6 +47,8 @@ public class StaffDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView=inflater.inflate(R.layout.officials_staff_details, container, false);
+        pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...");
+        pDialog.show();
         staffList=new ArrayList<>();
         mRecyclerView=rootView.findViewById(R.id.my_recycler_view);
         baseRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
@@ -55,14 +59,20 @@ public class StaffDetails extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
+                {
                     for(DataSnapshot d:dataSnapshot.getChildren())
-                     staffList.add(d.getValue(StaffDetailsClass.class));
+                        staffList.add(d.getValue(StaffDetailsClass.class));
+
+                    pDialog.dismiss();
+
+                    adapter=new StaffAdapter(getContext(),staffList);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    mRecyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
                 else Toast.makeText(getContext(),"No data found "+staffList.size(),Toast.LENGTH_LONG).show();
 
-                adapter=new StaffAdapter(getContext(),staffList);
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                mRecyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+
             }
 
             @Override

@@ -149,7 +149,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         {
             holder.studentName.setText(complaint.StudentName);
             holder.roomNo.setText(complaint.RoomNo);
-            holder.staffName.setText("Staff Name");
+            holder.staffName.setText("Staff studentName");
             holder.staffContact.setText(complaint.StaffContact);
         }
     }

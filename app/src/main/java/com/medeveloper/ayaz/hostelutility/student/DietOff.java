@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.DietOffRequestClass;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
@@ -50,6 +51,7 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
     int DaysRequested;
     Date choosenDate;
     DatabaseReference baseRef;
+    SweetAlertDialog pDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +62,7 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
         int month = mCurrentTime.get(Calendar.MONTH);
         final int day = mCurrentTime.get(Calendar.DAY_OF_MONTH);
         rootView=inflater.inflate(R.layout.student_diet_off, container, false);
+        pDialog=ShowDialog("Please wait,,",2);
 
         final Button submit=rootView.findViewById(R.id.submit_request);
         final TextView daysLeft=rootView.findViewById(R.id.days_left);
@@ -78,7 +81,7 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
                 {
                     daysLeft.setText("0 Days");
                     DaysLeft=7;
-                    ShowDialog("You don't have any diet off days left",0);
+                    ShowDialog("You don't have any diet off days left",1).show();
                     submit.setEnabled(false);
                 }
             }
@@ -136,6 +139,7 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pDialog.show();
                 final String To=((TextView)rootView.findViewById(R.id.to
                 )).getText().toString();
                 final String From=((TextView)rootView.findViewById(R.id.from
@@ -164,7 +168,8 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
                                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                             .setValue((DaysLeft+DaysRequested));
                                                     details.setText(null);
-                                                    ShowDialog("Successfull",0);
+                                                    ShowDialog("Successfull",3).show();
+                                                    pDialog.dismiss();
                                                     ((TextView)(rootView.findViewById(R.id.to))).setText("Select Date");
                                                     ((TextView)(rootView.findViewById(R.id.from))).setText("Select Date");
                                                     ((rootView.findViewById(R.id.to))).setEnabled(false);
@@ -202,22 +207,22 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
         if(to.equals("Select Date"))
         {
             okay=false;
-            ShowDialog("Please Select Date",0);
-        }
+            ShowDialog("Please Select Date",4).show();
+    }
         else if(from.equals("Select Date"))
         {
             okay=false;
-            ShowDialog("Please Select Date",0);
+            ShowDialog("Please Select Date",4).show();
         }
         else if(reason.equals(""))
         {
             okay=false;
-            ShowDialog("Please give the reason of the leave",0);
+            ShowDialog("Please give the reason of the leave",4).show();
         }
         else if(reason.length()<50)
         {
             okay=false;
-            ShowDialog("Reason should be of atleast 50 charactors",0);
+            ShowDialog("Reason should be of atleast 50 charactors",4).show();
         }
 
     return okay;
@@ -253,9 +258,44 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
 
     }
 
-    private void ShowDialog(String msg, int code) {
+    private SweetAlertDialog ShowDialog(String msg,int code)
+    {
+        /*
+         * code = 0 : Normal Message
+         * code = 1 : Error Message
+         * code = 3 : ProgressBar
+         * code = 4 : Success Dialog
+         * */
 
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        SweetAlertDialog myDialog=null;
+        if(code==0)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.NORMAL_TYPE).setTitleText(msg);
+
+        }
+        else if(code==1)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).setTitleText(msg);
+
+        }
+        else if(code==2)
+        {
+            myDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE)
+                    .setTitleText(msg);
+            myDialog.setCancelable(false);
+        }
+        else if(code==3)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText(msg);
+        }
+        else if(code==4)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE).setTitleText(msg);
+        }
+
+
+
+        return myDialog;
     }
 
     String getMonthForInt(int num) {

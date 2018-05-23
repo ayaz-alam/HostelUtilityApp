@@ -1,5 +1,6 @@
 package com.medeveloper.ayaz.hostelutility.officials;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,11 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.medeveloper.ayaz.hostelutility.About;
+import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.student.DietOff;
 import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.medeveloper.ayaz.hostelutility.student.Notice;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class OfficialsHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,6 +77,16 @@ public class OfficialsHome extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE).setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText("Logged out").show();
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(getApplication(), LoginAcitivity.class));
+                    finish();
+                }
+            });
+
             return true;
         }
 

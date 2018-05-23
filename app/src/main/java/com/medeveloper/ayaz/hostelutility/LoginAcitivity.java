@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
 import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.medeveloper.ayaz.hostelutility.student.StudentForm;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LoginAcitivity extends AppCompatActivity {
 
@@ -30,12 +31,14 @@ public class LoginAcitivity extends AppCompatActivity {
     EditText Email,Password;
     Button Login;
     TextView Register;
+    SweetAlertDialog pDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_acitivity);
         ActionBar bar=getSupportActionBar();
         bar.hide();
+        pDialog=new SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loging in").setContentText("Please wait while we log you in");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         final RadioGroup loginAs=findViewById(R.id.signin_radio);
 
@@ -57,16 +60,14 @@ public class LoginAcitivity extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
+                pDialog.show();
                 String email=Email.getText().toString();
                 String pass=Password.getText().toString();
                 int id=loginAs.getCheckedRadioButtonId();
-                tempLogIn(id);
+                //tempLogIn(id);
 
-                //if (isOkay(email,pass))
-                   ;// authenticate(email,pass,id);//*/
+                if (isOkay(email,pass))
+                   authenticate(email,pass,id);//*/
 
             }
         });
@@ -152,11 +153,12 @@ public class LoginAcitivity extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
 
+                        pDialog.dismiss();
                         startActivity(new Intent(LoginAcitivity.this,Home.class));
                         finish();
                     }
                     else
-                        Toast.makeText(getApplicationContext(),""+task.isSuccessful(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),""+task.getException(),Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -168,18 +170,21 @@ public class LoginAcitivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful())
                     {
-
+                        pDialog.dismiss();
                         startActivity(new Intent(LoginAcitivity.this,OfficialsHome.class));
                         finish();
                     }
                     else
-                        Toast.makeText(getApplicationContext(),""+task.isSuccessful(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),""+task.getException(),Toast.LENGTH_SHORT).show();
                 }
             });
         }
         else if(id==R.id.guest_radio)
         {
-            mAuth.signInAnonymously();
+            new SweetAlertDialog(this,SweetAlertDialog.NORMAL_TYPE).
+                    setTitleText("In progress").
+                    setContentText("Guest login is in development process").show();
+           //mAuth.signInAnonymously();
         }
 
 

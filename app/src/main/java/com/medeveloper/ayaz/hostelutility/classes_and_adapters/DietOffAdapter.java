@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.database.FirebaseDatabase;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -25,14 +24,14 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //each data item is just a string in this case
-        public TextView Name,RoomNo,EnrollmentNo,To,From,Reason,Time;
+        public TextView studentName,RoomNo,EnrollmentNo,To,From,Reason,Time;
         private Button Accept,Decline;
 
 
         public ViewHolder(View v) {
             super(v);
 
-            Name =v.findViewById(R.id.diet_off_name);
+            studentName =v.findViewById(R.id.diet_off_name);
             RoomNo = v.findViewById(R.id.diet_off_room);
             EnrollmentNo = v.findViewById(R.id.diet_off_enroll);
             To=v.findViewById(R.id.diet_off_to);
@@ -77,7 +76,7 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
         View itemView;
 
         itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_notice, parent, false);
+                .inflate(R.layout.card_diet_off, parent, false);
 
 
         return new DietOffAdapter.ViewHolder(itemView);
@@ -93,14 +92,14 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
         DietOffRequestClass notice = mDataSource.get(position);
 
 
-        holder.Name.setText(notice.Name);
+       holder.studentName.setText(""+notice.Name);
         holder.RoomNo.setText("Room: "+notice.RoomNo);
         holder.EnrollmentNo.setText("En. no: "+notice.EnrollmentNo);
         holder.Time.setText((""+notice.time.getTime()));
-        holder.From.setText("From date:"+notice.From);
-        holder.To.setText("Upto date:"+notice.To);
-        holder.Reason.setText("Reason \n:"+notice.From);
-        holder.From.setText("From date:"+notice.From);
+        holder.From.setText("From date:   "+notice.From);
+        holder.To.setText("Upto date:  "+notice.To);
+        holder.Reason.setText("\nReason:\n"+notice.Reason);
+
         holder.Accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

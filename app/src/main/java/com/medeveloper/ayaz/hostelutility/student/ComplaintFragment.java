@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.Complaint;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
@@ -29,6 +30,8 @@ import java.util.Calendar;
 
 public class ComplaintFragment extends Fragment {
 
+
+    private SweetAlertDialog pDialog;
 
     public ComplaintFragment() {
         // Required empty public constructor
@@ -42,9 +45,7 @@ public class ComplaintFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         rootView=inflater.inflate(R.layout.student_complaint, container, false);
-
-
-
+        pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Sending request..");
 
         //Declaring the views
         final Spinner complaint=rootView.findViewById(R.id.complaint_spinner);
@@ -55,7 +56,7 @@ public class ComplaintFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ShowProgressDialog();//Progress Bar
+                pDialog.show();//Progress Bar
 
 
                 String ComplaintType,ComplaintDetails;
@@ -70,12 +71,6 @@ public class ComplaintFragment extends Fragment {
                 //StudentDetailsClass tempDetails=new StudentDetailsClass("2016CTAE001","123456789001","adfa","adfa","adfa","adfa","adfa","adfa","adfa","123","9509126582","ayazalam922@gmail.com","adf","adfa","a");
                 //Checking if complaint fields are filled
                 if(isOkay(ComplaintType,ComplaintDetails)) {
-
-                    Toast.makeText(getActivity(),"Came",Toast.LENGTH_LONG).show();
-
-
-
-
 
                     //Getting Student details
                     ref=FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
@@ -109,11 +104,14 @@ public class ComplaintFragment extends Fragment {
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if(task.isSuccessful())
                                                             {
-                                                                Toast.makeText(getContext(),"Successfull",Toast.LENGTH_LONG).show();
+                                                                pDialog.dismiss();
+                                                                new SweetAlertDialog(getContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText("Successfully sent").show();
                                                                 complaint.setSelection(0);
                                                                 complaintDetails.setText(null);
                                                             }
-                                                            else Toast.makeText(getContext(),"not Successfull"+task.getException(),Toast.LENGTH_LONG).show();
+                                                            else new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).
+                                                                    setTitleText("not Successfull").setContentText(task.getException().toString()).
+                                                                    show();;
                                                         }
                                                     });
 
@@ -129,80 +127,84 @@ public class ComplaintFragment extends Fragment {
                                         });
 
                                     }
-                                    else ShowDialog("DataSnapshot does not exist",0);
+                                    else ShowDialog("DataSnapshot does not exist",1);
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
 
                                 }
                             });
-
-
-
                 }
-
-
-
-
-
 
 
             }
         });
 
 
-
-
-
-
-
         return rootView;
     }
 
-    private void ShowProgressDialog() {
-
-    }
 
     //Function to check the fields are valid or not
     private boolean isOkay(String complaintType, String complaintDetails) {
         boolean Okay=true;
         if(complaintType.equals("Select complaint field"))
         {
-            Toast.makeText(getContext(),"Please select a problem",Toast.LENGTH_LONG).show();
+            ShowDialog("Please select a complaint field",4);
             Okay=false;
         }
         else if(complaintDetails.equals(""))
         {
-            Toast.makeText(getContext(),"Please fill the complaint details",Toast.LENGTH_LONG).show();
+            ShowDialog("Please give some details about the complaint",4);
             Okay=false;
         }
         else if(complaintDetails.length()<50)
         {
-            Toast.makeText(getContext(),"Complaint details cannot be less than 50 letters",Toast.LENGTH_LONG).show();
+            ShowDialog("Please give details atleast 50 letters",4);
             Okay=false;
         }
 
         return Okay;
     }
-    private void ShowDialog(String msg, int code) {
-
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
-    }
-
-    Complaint newComplaint;
-
-    private Complaint prepareComplaintData(final String complaintType, final String complaintDetails, final String complaintDate)
+    private SweetAlertDialog ShowDialog(String msg,int code)
     {
+        /*
+         * code = 0 : Normal Message
+         * code = 1 : Error Message
+         * code = 3 : ProgressBar
+         * code = 4 : Success Dialog
+         * */
+
+        SweetAlertDialog myDialog=null;
+        if(code==0)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.NORMAL_TYPE).setTitleText(msg);
+
+        }
+        else if(code==1)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).setTitleText(msg);
+
+        }
+        else if(code==2)
+        {
+            myDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE)
+                    .setTitleText(msg);
+            myDialog.setCancelable(false);
+        }
+        else if(code==3)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText(msg);
+        }
+        else if(code==4)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE).setTitleText(msg);
+        }
 
 
 
-
-
-
-
-     return newComplaint;
+        return myDialog;
     }
-
 
     //Function returns name of the function for integer value of the month
     String getMonthForInt(int num) {

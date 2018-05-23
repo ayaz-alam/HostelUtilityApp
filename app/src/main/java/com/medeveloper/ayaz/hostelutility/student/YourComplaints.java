@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.Complaint;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.ComplaintAdapter;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,7 @@ public class YourComplaints extends Fragment {
         // Required empty public constructor
     }
 
+    SweetAlertDialog pDialog;
 
     RecyclerView recyclerView;
     ComplaintAdapter adapter;
@@ -44,7 +47,8 @@ public class YourComplaints extends Fragment {
 
         rootView=inflater.inflate(R.layout.student_your_complaints, container, false);
 
-
+        pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Please wait..");
+        pDialog.show();
         recyclerView = (RecyclerView)rootView.findViewById(R.id.my_recycler_view);
 
         final ArrayList<Complaint> mComplaintList = new ArrayList<>();//ArrayList to store the data
@@ -54,16 +58,22 @@ public class YourComplaints extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists())
+                        {
                             for(DataSnapshot d:dataSnapshot.getChildren())
                                 mComplaintList.add(d.getValue(Complaint.class));
 
-                        else Toast.makeText(getContext(),"No Data Available",Toast.LENGTH_LONG).show();
 
-                        adapter = new ComplaintAdapter(getContext(), mComplaintList,0);
-                        recyclerView.setAdapter(adapter);
-                        // recyclerView.setHasFixedSize(true);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                        adapter.notifyDataSetChanged();
+                            adapter = new ComplaintAdapter(getContext(), mComplaintList,0);
+                            recyclerView.setAdapter(adapter);
+                            // recyclerView.setHasFixedSize(true);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                            adapter.notifyDataSetChanged();
+                            pDialog.dismiss();
+                        }
+
+                        else new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).
+                                setTitleText("No Data Available").show();//,Toast.LENGTH_LONG).show();
+
 
                     }
 

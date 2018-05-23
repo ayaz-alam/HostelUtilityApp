@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.NetRefClass;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -31,11 +33,13 @@ public class NetRefill extends Fragment {
 
 
     View rootView;
+    SweetAlertDialog pDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView=inflater.inflate(R.layout.student_net_refill, container, false);
+        pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE);
         ((Button)rootView.findViewById(R.id.submit)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +55,7 @@ public class NetRefill extends Fragment {
                 }
                 else
                 {
+                    pDialog.show();
                     FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id))
                             .child("InternetRefills").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(new NetRefClass(ID,Email)).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -60,7 +65,9 @@ public class NetRefill extends Fragment {
                             {
                                 ((EditText)rootView.findViewById(R.id.email)).setText(null);
                                 ((EditText)rootView.findViewById(R.id.id)).setText(null);
-                                Toast.makeText(getContext(),"Successfull",Toast.LENGTH_LONG).show();
+                                pDialog.dismiss();
+                                new SweetAlertDialog(getContext(),SweetAlertDialog.SUCCESS_TYPE).
+                                        setTitleText("Successfull").show();
 
                             }
 
