@@ -56,7 +56,7 @@ public class ComplaintFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                pDialog.show();//Progress Bar
+               //Progress Bar
 
 
                 String ComplaintType,ComplaintDetails;
@@ -72,6 +72,7 @@ public class ComplaintFragment extends Fragment {
                 //Checking if complaint fields are filled
                 if(isOkay(ComplaintType,ComplaintDetails)) {
 
+                    pDialog.show();
                     //Getting Student details
                     ref=FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
                     ref.child(getString(R.string.student_list_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -150,17 +151,17 @@ public class ComplaintFragment extends Fragment {
         boolean Okay=true;
         if(complaintType.equals("Select complaint field"))
         {
-            ShowDialog("Please select a complaint field",4);
+            ShowDialog("Please select a complaint field",4).show();
             Okay=false;
         }
         else if(complaintDetails.equals(""))
         {
-            ShowDialog("Please give some details about the complaint",4);
+            ShowDialog("Please give details",4).show();
             Okay=false;
         }
         else if(complaintDetails.length()<50)
         {
-            ShowDialog("Please give details atleast 50 letters",4);
+            ShowDialog("Atleast 50 letters",4).show();
             Okay=false;
         }
 

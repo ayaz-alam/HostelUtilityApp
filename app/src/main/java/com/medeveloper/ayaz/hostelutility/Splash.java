@@ -6,11 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.medeveloper.ayaz.hostelutility.student.StudentForm;
 
 public class Splash extends AppCompatActivity {
 
-    private static final long SPLASH_DISPLAY_LENGTH = 3000;
+    private static final long SPLASH_DISPLAY_LENGTH = 1500;
+    static {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

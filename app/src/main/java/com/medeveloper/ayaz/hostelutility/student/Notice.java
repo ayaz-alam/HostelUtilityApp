@@ -50,9 +50,9 @@ public class Notice extends Fragment {
         pDialog.show();
         noticeList=new ArrayList<>();
         mRecyclerView=rootView.findViewById(R.id.my_recycler_view);
-        mRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
-
-        mRef.child(getString(R.string.notice_ref)).addValueEventListener(new ValueEventListener() {
+        mRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).child(getString(R.string.notice_ref));
+        mRef.keepSynced(true);
+        mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -60,7 +60,7 @@ public class Notice extends Fragment {
                 {
                     for(DataSnapshot d:dataSnapshot.getChildren())
                         noticeList.add(d.getValue(NoticeClass.class));
-                    Toast.makeText(getContext(),"List Length"+noticeList.size(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(),"List Length"+noticeList.size(),Toast.LENGTH_SHORT).show();
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     adapter=new NoticeClassAdapter(getContext(),noticeList);
                     mRecyclerView.setAdapter(adapter);

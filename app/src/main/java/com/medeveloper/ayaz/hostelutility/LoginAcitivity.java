@@ -44,14 +44,13 @@ public class LoginAcitivity extends AppCompatActivity {
 
 
         mAuth= FirebaseAuth.getInstance();
-       /*
+
 
         if(mAuth.getCurrentUser()!=null)
         {
             startActivity(new Intent(this,Home.class));
             finish();
         }
-        */
         Email=findViewById(R.id.email_login);
         Password=findViewById(R.id.password_login);
         Login=findViewById(R.id.login_button);
@@ -108,9 +107,11 @@ public class LoginAcitivity extends AppCompatActivity {
             Email.setError("Required Field");
             Email.requestFocus();
             isOkay=false;
+            pDialog.dismiss();
         }
         else if(email.length()<6||!email.contains("@")||!email.contains(".com"))
         {
+            pDialog.dismiss();
             Email.setError("Invalid Email");
             Email.requestFocus();
             isOkay=false;
@@ -118,6 +119,7 @@ public class LoginAcitivity extends AppCompatActivity {
         }
         else if(pass.equals(""))
         {
+            pDialog.dismiss();
             Password.setError("Required Field");
             Password.requestFocus();
             isOkay=false;

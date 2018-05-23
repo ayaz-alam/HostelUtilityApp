@@ -139,7 +139,7 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pDialog.show();
+
                 final String To=((TextView)rootView.findViewById(R.id.to
                 )).getText().toString();
                 final String From=((TextView)rootView.findViewById(R.id.from
@@ -149,6 +149,7 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
 
                 if(isOkay(To,From,Reason))
                 {
+                    pDialog.show();
                     baseRef.child(getString(R.string.student_list_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(
                             new ValueEventListener() {
                                 @Override

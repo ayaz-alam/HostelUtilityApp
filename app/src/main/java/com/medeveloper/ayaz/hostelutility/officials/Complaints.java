@@ -64,6 +64,7 @@ public class Complaints extends Fragment {
                      mRecyclerView.setAdapter(adapter);
                      mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                      adapter.notifyDataSetChanged();
+                     pDialog.dismiss();
 
                  }
                  else new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).setTitleText("No Data available").show();

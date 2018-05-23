@@ -79,9 +79,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_below="@id/card_text"
-            android:background="@color/light_grey"
+            android:elevation="12dp"
+
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                 android:id="@+id/card_info"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_small_margin"
-                android:textColor="@color/white"
+
                 />
             <TextView
                 android:background="@drawable/register_button"
@@ -120,7 +120,6 @@
                 android:layout_below="@id/phone_the_staff"
                 android:layout_alignParentRight="true"
                 android:textSize="12dp"
-                android:textColor="@color/white"
                 android:text="Call staff"
                 android:layout_marginRight="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_small_margin"

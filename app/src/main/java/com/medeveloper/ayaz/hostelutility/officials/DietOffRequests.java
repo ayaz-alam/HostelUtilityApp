@@ -64,7 +64,7 @@ public class DietOffRequests extends Fragment {
                 {
                     for(DataSnapshot d:dataSnapshot.getChildren())
                         requestList.add(d.getValue(DietOffRequestClass.class));
-                    Toast.makeText(getContext(),"List Length"+requestList.size(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(),"List Length"+requestList.size(),Toast.LENGTH_SHORT).show();
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     adapter=new DietOffAdapter(getContext(),requestList);
                     mRecyclerView.setAdapter(adapter);
