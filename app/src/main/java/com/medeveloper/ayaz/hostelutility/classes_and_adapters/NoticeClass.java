@@ -14,7 +14,7 @@ public class NoticeClass {
     @Keep
     public String noticeTitle,noticeBody,noticeGenerator;
     @Keep
-    public String photoUrl;
+    public String photoUrl=null;
 
     @Keep
     public Date noticeDate;

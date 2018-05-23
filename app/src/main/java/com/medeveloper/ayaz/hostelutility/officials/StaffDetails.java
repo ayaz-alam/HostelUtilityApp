@@ -58,7 +58,7 @@ public class StaffDetails extends Fragment {
                     for(DataSnapshot d:dataSnapshot.getChildren())
                      staffList.add(d.getValue(StaffDetailsClass.class));
                 else Toast.makeText(getContext(),"No data found "+staffList.size(),Toast.LENGTH_LONG).show();
-                Toast.makeText(getContext(),"data found "+staffList.size(),Toast.LENGTH_LONG).show();
+
                 adapter=new StaffAdapter(getContext(),staffList);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 mRecyclerView.setAdapter(adapter);

@@ -91,7 +91,7 @@ public class SendNotice extends Fragment {
         noticeBody=rootView.findViewById(R.id.notice_body);
 
         baseRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
-        StorageReference storageRef=FirebaseStorage.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
+
 
 
 
@@ -194,10 +194,12 @@ public class SendNotice extends Fragment {
     {
         Log.d("Tag","Photo Intent called");
         //Trimming the size of the Image
-        Uri ImageUri=getImageUri(getContext(),getResizedBitmap(myPhoto,2250));
+        Uri ImageUri=getImageUri(getContext(),getResizedBitmap(myPhoto,1800));
 
-        StorageReference mStorage = FirebaseStorage.getInstance().getReference();
-        mStorage.child("CollegeID/HostelID/").child(ImageUri.getLastPathSegment()).
+        StorageReference storageRef=FirebaseStorage.getInstance().
+                getReference(getString(R.string.college_id)).
+                child(getString(R.string.hostel_id));
+        storageRef.child(ImageUri.getLastPathSegment()).
                 putFile(ImageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
