@@ -16,6 +16,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -29,18 +30,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApiNotAvailableException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.NoticeClass;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -60,7 +71,8 @@ public class SendNotice extends Fragment {
     View rootView;
     ImageView mImageView;
     Bitmap myPhoto;
-    Uri ImageUri = null;
+    DatabaseReference baseRef;
+    TextView noticeTitle,noticeBody;
 
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
@@ -74,15 +86,18 @@ public class SendNotice extends Fragment {
 
 
         isPermissionGranted();//Checking the permission
-        pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Sending, Please wait..");
-        pDialog.setCancelable(false);
+        pDialog=ShowDialog("Sending, please wait..",2);
+        noticeTitle=rootView.findViewById(R.id.notice_title);
+        noticeBody=rootView.findViewById(R.id.notice_body);
+
+        baseRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
+        StorageReference storageRef=FirebaseStorage.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
+
 
 
 
         //Camera Button
-        ((ImageView) rootView.findViewById(R.id.camera)).setOnClickListener(new View.OnClickListener() {
+        (rootView.findViewById(R.id.camera)).setOnClickListener(new View.OnClickListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -95,62 +110,154 @@ public class SendNotice extends Fragment {
         });
 
         //Open Gallery Button
-        ((ImageView) rootView.findViewById(R.id.gallery)).setOnClickListener(new View.OnClickListener() {
+        (rootView.findViewById(R.id.gallery)).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-
-                rotatePhoto(myPhoto);
-                /*
                 if(isPermissionGranted())
                 dispatchTakePictureIntent(1);
-                */
+
             }
         });
 
         //Send button
-        ((Button) rootView.findViewById(R.id.submit)).setOnClickListener(new View.OnClickListener() {
+        (rootView.findViewById(R.id.submit)).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                if(isNetworkAvailable())
-                if (ImageUri != null) {
+
+
+                String Title=noticeTitle.getText().toString();
+                String Body=noticeBody.getText().toString();
+                if(Title.equals(""))
+                    ShowDialog("Please give title for Notice",4).show();
+                else if(Body.equals(""))
+                    ShowDialog("Notice body can't be empty",4).show();
+                else
+                    if(isNetworkAvailable())//Checking for internet connection
+                if (myPhoto != null)
+                {
+                    SendPhotoNotice(Title,Body);
                     pDialog.show();
-                    StorageReference mStorage = FirebaseStorage.getInstance().getReference();
-                    mStorage.child("CollegeID/HostelID/").child(ImageUri.getLastPathSegment()).
-                            putFile(ImageUri)
-                            .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                    if (task.isSuccessful())
-                                    {
-                                        Toast.makeText(getContext(), "Successfully Uploaded", Toast.LENGTH_SHORT).show();
-                                        pDialog.dismiss();
-                                        ShowDialog("Successfully Uploaded",3).show();
-                                    }
-                                    else
-                                    {
-                                        ShowDialog("Error in sending",1).show();
-                                    }
+                }
+                else
+                {
+                    pDialog.show();
+                    Log.d("Tag","without Photo Intent called");
+                    Date currentTime = Calendar.getInstance().getTime();
+                    baseRef.child(getString(R.string.notice_ref)).
+                            push().setValue(
+                                    new NoticeClass(Title, Body,
+                                            FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
+                                            currentTime)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful())
+                            {
+                                pDialog.dismiss();
+                                noticeBody.setText(null);
+                                noticeTitle.setText(null);
+                                mImageView.setImageBitmap(null);
+                                ShowDialog("Successfully sent",3).setContentText("Notice has been sent successfully").show();
 
-                                }
-                            });
-
-
-                } else
-                    Toast.makeText(getContext(), "Please Click/Select Photo First", Toast.LENGTH_SHORT).show();
-                else new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE).setTitleText("No internet connection").show();
+                            }
+                        }
+                    });
+                }
+                else
+                    ShowDialog("No Internet Connection",4);
 
             }
         });
 
 
-        mImageView = rootView.findViewById(R.id.image_notice);
+
+        mImageView = rootView.findViewById(R.id.image_notice);//ImageView Reference
+
+        ImageView rotatePhotoButton=rootView.findViewById(R.id.rotate_photo);//Rotate Photo Reference
+        rotatePhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(myPhoto!=null)
+                rotatePhoto(myPhoto);
+                else ShowDialog("No photo selected",1).show();
+            }
+        });
 
 
 
         return rootView;
     }
+
+    //When Photo Notice is being sent
+    void SendPhotoNotice(final String title, final String body)
+    {
+        Log.d("Tag","Photo Intent called");
+        //Trimming the size of the Image
+        Uri ImageUri=getImageUri(getContext(),getResizedBitmap(myPhoto,2250));
+
+        StorageReference mStorage = FirebaseStorage.getInstance().getReference();
+        mStorage.child("CollegeID/HostelID/").child(ImageUri.getLastPathSegment()).
+                putFile(ImageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        Date currentTime = Calendar.getInstance().getTime();
+                        //Creating notice class object to push into the firebase
+                        NoticeClass newNotice= new NoticeClass(title,body,
+                                FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
+                                taskSnapshot.getDownloadUrl().toString(), currentTime);
+                        baseRef.child(getString(R.string.notice_ref)).push().setValue(newNotice).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                {
+                                    noticeBody.setText(null);
+                                    noticeTitle.setText(null);
+                                    mImageView.setImageBitmap(null);
+                                    pDialog.dismiss();
+                                    ShowDialog("Successfully sent",3).setContentText("Notice has been sent successfully").show();
+                                }
+                            }
+                        });
+                    }
+                });
+
+
+    }
+
+
+    //Generating Uri from Bitmap
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    //Resizing the photo to upload.
+    /**
+     * reduces the size of the image
+     * @param image
+     * @param maxSize
+     * @return
+     */
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float)width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
 
     //Codes to rotate the photo
     void rotatePhoto(Bitmap bitmap)
@@ -165,17 +272,7 @@ public class SendNotice extends Fragment {
         mImageView.setImageBitmap(bitmap);
     }
 
-    public static Bitmap rotateImage(Bitmap source, float angle) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
-                matrix, true);
-    }
-
-
-
-
-
+    // Function to call ImagePicker and Camera
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void dispatchTakePictureIntent(int Code) {
         if (Code == 0) {
@@ -211,9 +308,8 @@ public class SendNotice extends Fragment {
         }
     }
 
-
+    //Creating a file in temporary source
     String mCurrentPhotoPath;
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -231,9 +327,14 @@ public class SendNotice extends Fragment {
         return image;
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+
+        //This is called when we select a photo or click a photo
+
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK)//Camera Intent Result
+        {
 
             Uri mImageUri=thePhotoURI;
             getActivity().getContentResolver().notifyChange(mImageUri, null);
@@ -241,9 +342,10 @@ public class SendNotice extends Fragment {
             Bitmap bitmap;
             try {
                 bitmap = android.provider.MediaStore.Images.Media.getBitmap(cr, mImageUri);
-                mImageView.setImageBitmap(bitmap);
                 myPhoto=bitmap;
-                ImageUri=thePhotoURI;
+                rotatePhoto(myPhoto);
+                mImageView.setImageBitmap(myPhoto);
+
             } catch (Exception e) {
                 Toast.makeText(getContext(), "Failed to load", Toast.LENGTH_SHORT).show();
 
@@ -251,49 +353,22 @@ public class SendNotice extends Fragment {
 
 
 
-        } else if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        }
+        else if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)//The Result given by Phot Picker
+        {
 
             Uri uri = data.getData();
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-                // Log.d(TAG, String.valueOf(bitmap));
                 mImageView.setImageBitmap(bitmap);
                 myPhoto=bitmap;
-                ImageUri = uri;
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
-
-    private void setPic() {
-
-        int targetW = mImageView.getWidth();
-        int targetH = mImageView.getHeight();
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        mImageView.setImageBitmap(bitmap);
-
-    }
-
-
+    //To Check Permissions
     @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean isPermissionGranted() {
 
@@ -316,8 +391,7 @@ public class SendNotice extends Fragment {
     return okay;
     }
 
-
-
+    //To check network connection
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -326,7 +400,7 @@ public class SendNotice extends Fragment {
 
     }
 
-
+    //Alert Dialog Box
 
     private SweetAlertDialog ShowDialog(String msg,int code)
     {
@@ -336,8 +410,8 @@ public class SendNotice extends Fragment {
         * code = 3 : ProgressBar
         * code = 4 : Success Dialog
         * */
-        SweetAlertDialog myDialog=null;
 
+        SweetAlertDialog myDialog=null;
         if(code==0)
         {
            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.NORMAL_TYPE).setTitleText(msg);
@@ -350,12 +424,17 @@ public class SendNotice extends Fragment {
         }
         else if(code==2)
         {
-            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText(msg);
-
+            myDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE)
+                    .setTitleText(msg);
+            myDialog.setCancelable(false);
         }
         else if(code==3)
         {
             myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText(msg);
+        }
+        else if(code==4)
+        {
+            myDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE).setTitleText(msg);
         }
 
 

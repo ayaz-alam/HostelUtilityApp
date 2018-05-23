@@ -27,6 +27,15 @@ public class Notice extends Fragment {
 
         // Inflate the layout for this fragment
         rrotView=inflater.inflate(R.layout.student_notice, container, false);
+
+
+
+
+
+
+
+
+
         return rrotView;
     }
 

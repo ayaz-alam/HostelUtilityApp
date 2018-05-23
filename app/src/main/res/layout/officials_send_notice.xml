@@ -6,12 +6,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/light_grey"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/image_notice"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/default_margin"
@@ -20,61 +21,89 @@
             android:maxHeight="100dp"
             android:padding="@dimen/default_padding" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/below_container"
+            android:id="@+id/text_input"
+            android:layout_above="@id/below_container"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_white"
+            android:padding="@dimen/default_margin"
             android:layout_margin="@dimen/default_margin"
-            android:background="@drawable/rounded_white">
-
+            android:layout_height="wrap_content">
             <EditText
+                android:id="@+id/notice_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Type Notice here"
+                android:minHeight="50dp"
+                android:hint="Type notice subject/title here..."
+                android:layout_margin="2dp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:gravity="top"/>
+            <EditText
+                android:id="@+id/notice_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:hint="Type notice here..."
+                android:layout_margin="2dp"
                 android:inputType="text|textMultiLine"
-                android:minHeight="120dp"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
+                android:gravity="top"/>
+        </LinearLayout>
         <RelativeLayout
             android:id="@+id/below_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_margin="4dp"
+            android:padding="@dimen/default_padding"
+            android:background="@drawable/rounded_white"
             >
 
 
             <Button
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/register_button"
-                android:drawablePadding="16dp"
-                android:drawableRight="@drawable/ic_menu_send"
-                android:padding="@dimen/large_margin"
-                android:text="Send Notice" />
+                android:drawablePadding="8dp"
+                android:drawableRight="@drawable/ic_send"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_padding"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:paddingLeft="@dimen/large_margin"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Send" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_toLeftOf="@id/camera"
+                android:src="@drawable/ic_rotate_right"
+                android:id="@+id/rotate_photo"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/default_margin"
+                />
 
             <ImageView
                 android:id="@+id/gallery"
 
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/large_margin"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_menu_gallery" />
+                android:src="@drawable/ic_photo_library" />
 
             <ImageView
                 android:id="@+id/camera"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/default_margin"
                 android:layout_toLeftOf="@id/gallery"
-                android:src="@drawable/ic_menu_camera" />
+                android:src="@drawable/ic_add_a_photo" />
 
         </RelativeLayout>
     </RelativeLayout>

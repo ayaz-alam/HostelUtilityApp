@@ -103,5 +103,6 @@
     <string name="diet_off_complaints_ref">MessDietOffComplaints</string>
     <string name="enroll_student_list_ref">EnrolledStudentList</string>
     <string name="complaint_ref">Complaints</string>
+    <string name="notice_ref">Notices</string>
 
 </resources>
