@@ -51,6 +51,8 @@ public class LoginAcitivity extends AppCompatActivity {
             startActivity(new Intent(this,Home.class));
             finish();
         }
+
+
         Email=findViewById(R.id.email_login);
         Password=findViewById(R.id.password_login);
         Login=findViewById(R.id.login_button);
@@ -67,6 +69,7 @@ public class LoginAcitivity extends AppCompatActivity {
 
                 if (isOkay(email,pass))
                    authenticate(email,pass,id);//*/
+                else pDialog.dismiss();
 
             }
         });
@@ -133,18 +136,18 @@ public class LoginAcitivity extends AppCompatActivity {
             isOkay=false;
         }
         else if(pass.equals("123456"))
-        {
+        {/*
             Password.setError("Password must be complicated");
             Password.requestFocus();
-
             isOkay=false;
+            */
         }
 
         return isOkay;
     }
 
 
-    private void authenticate(String email, String pass, int id) {
+    private void authenticate(final String email, final String pass, int id) {
 
 
         if(id==R.id.student_radio)
@@ -160,7 +163,22 @@ public class LoginAcitivity extends AppCompatActivity {
                         finish();
                     }
                     else
+                    {
                         Toast.makeText(getApplicationContext(),""+task.getException(),Toast.LENGTH_SHORT).show();
+
+                        pDialog.dismiss();
+                        final SweetAlertDialog sDialog=new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE);
+                        sDialog.setCancelable(false);
+                        sDialog.setTitleText("Can't log you in").setContentText("Email: "+email+"\nPass: "+pass+"\nError: "+task.getException()).
+                                setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sDialog.dismiss();
+                                        // finish();
+                                    }
+                                });
+                        sDialog.show();
+                    }
                 }
             });
         }

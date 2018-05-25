@@ -21,4 +21,6 @@
     <dimen name="large_margin">16dp</dimen>
     <dimen name="card_action_button">16sp</dimen>
     <dimen name="cardview_subhead">16dp</dimen>
+    <dimen name="extra_large_margin">24dp</dimen>
+    <dimen name="xxx_large_margin">64dp</dimen>
 </resources>

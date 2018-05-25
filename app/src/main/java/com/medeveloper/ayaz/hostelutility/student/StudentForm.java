@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class StudentForm extends AppCompatActivity {
 
@@ -48,6 +49,7 @@ public class StudentForm extends AppCompatActivity {
     DatabaseReference mRef;
     DataSnapshot studentList;
     private Button Submit;
+    SweetAlertDialog pDialog;
 
 
     @Override
@@ -65,6 +67,8 @@ public class StudentForm extends AppCompatActivity {
         year=findViewById(R.id.year);
         branch=findViewById(R.id.branch);
         class_=findViewById(R.id.class_);
+        pDialog=new SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.setTitleText("Please wait..").setContentText("Please wait while we register you").setCancelable(false);
 
 
         fatherName=findViewById(R.id.student_father);
@@ -81,13 +85,7 @@ public class StudentForm extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         if(mAuth!=null)
         mAuth.signInAnonymously();
-        mRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).child(getString(R.string.enroll_student_list_ref));
-       for(int i=1;i<=100;i++)
-        {
-            mRef.child("2016CTAE"+String.format("%03d",i)).child("AdhaarNo").setValue("123456789"+String.format("%03d", i));
-
-        }
-
+        mRef=FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).child(getString(R.string.enroll_student_list_ref));
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -96,7 +94,7 @@ public class StudentForm extends AppCompatActivity {
                     if(dataSnapshot.exists())
                     studentList=dataSnapshot;
                     else {
-                        Toast.makeText(getBaseContext(),"Warden Not Uploaded the list yet",Toast.LENGTH_SHORT).show();
+                        new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.ERROR_TYPE).setTitleText("Warden Not Uploaded the list yet").show();//,Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -194,7 +192,7 @@ public class StudentForm extends AppCompatActivity {
 
     }
 
-    private String Password="123456";
+    private String Password="123456789";
     private void Authenticated() {
 
 
@@ -202,7 +200,6 @@ public class StudentForm extends AppCompatActivity {
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 EnrollNo=enrollNo.getText().toString();
                 AdhaarNo=adhaarNo.getText().toString();
@@ -228,9 +225,10 @@ public class StudentForm extends AppCompatActivity {
                         );
                 if(CheckDetails())
                 {
+                    pDialog.show();
                     if(Password!=null)
                     {
-                        Password="123456789";
+                        Password="000000";
                         FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -243,8 +241,16 @@ public class StudentForm extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful())
                                             {
-                                                ShowDialog("Successfully Registered",0);
-                                                startActivity(new Intent(StudentForm.this,Home.class));
+                                                pDialog.dismiss();
+                                                ShowDialog("Successfully Registered",3).
+                                                        setContentText("Your default password is "+Password+" \nPlease change it once we log you in").
+                                                        setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        startActivity(new Intent(StudentForm.this,Home.class));
+                                                    }
+                                                }).show();
+
                                             }
                                         }
                                     });
@@ -253,12 +259,16 @@ public class StudentForm extends AppCompatActivity {
                                 }
                                 else
                                 {
-                                    ShowDialog("Cannot Log you in :"+task.getException(), 0);
+                                    pDialog.dismiss();
+                                    ShowDialog("Cannot Log you in :"+task.getException(), 0).show();
                                 }
                             }
                         });
                     }
-                    else ShowDialog("Password not detected",0);
+                    else {
+                        pDialog.dismiss();
+                        ShowDialog("Password not detected",0).show();
+                    }
 
 
 
@@ -276,105 +286,46 @@ public class StudentForm extends AppCompatActivity {
 
     }
 
-    private void ShowDialog(String msg, int code) {
+    private SweetAlertDialog ShowDialog(String msg,int code)
+    {
+        /*
+         * code = 0 : Normal Message
+         * code = 1 : Error Message
+         * code = 3 : ProgressBar
+         * code = 4 : Success Dialog
+         * */
 
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        SweetAlertDialog myDialog=null;
+        if(code==0)
+        {
+            myDialog=new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.ERROR_TYPE).setTitleText(msg);
+
+
+        }
+        else if(code==1)
+        {
+            myDialog=new SweetAlertDialog(this,SweetAlertDialog.NORMAL_TYPE).setTitleText(msg);
+
+        }
+        else if(code==2)
+        {
+            myDialog = new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.PROGRESS_TYPE)
+                    .setTitleText(msg);
+            myDialog.setCancelable(false);
+        }
+        else if(code==3)
+        {
+            myDialog=new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText(msg);
+        }
+        else if(code==4)
+        {
+            myDialog=new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.WARNING_TYPE).setTitleText(msg);
+        }
+
+
+
+        return myDialog;
     }
-
-    private String createDialogForPassword() {
-
-        final EditText input=new EditText(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        lp.setMargins(4,4,4,4);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        InputFilter[] filterArray = new InputFilter[1];
-        filterArray[0] = new InputFilter.LengthFilter(4);
-        input.setFilters(filterArray);
-        input.setLayoutParams(lp);
-
-
-
-        final AlertDialog.Builder DialogueForPassWord = new AlertDialog.Builder(this);
-        DialogueForPassWord.setTitle("Create your PassKey");
-        DialogueForPassWord.setMessage("Enter Your 4 digit passkey");
-        DialogueForPassWord.setIcon(R.drawable.ic_menu_camera);
-        DialogueForPassWord.setView(input);
-
-        DialogueForPassWord.setCancelable(false);
-        DialogueForPassWord.setPositiveButton("Confirm Password", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if(input.getText().length()<4)
-                {
-
-                    createDialogForPassword();
-                    Toast.makeText(getBaseContext(),"Invalid Password",Toast.LENGTH_SHORT).show();
-                }
-                else confirmPassword(input.getText().toString());
-
-            }
-        });
-
-
-        DialogueForPassWord.create();
-        DialogueForPassWord.show();
-
-        return input.getText().toString();
-
-    }
-    private String confirmPassword(final String s) {
-
-        final EditText input=new EditText(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        lp.setMargins(4,4,4,4);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        InputFilter[] filterArray = new InputFilter[1];
-        filterArray[0] = new InputFilter.LengthFilter(4);
-        input.setFilters(filterArray);
-        input.setLayoutParams(lp);
-
-
-
-        final AlertDialog.Builder DialogueForPassWord = new AlertDialog.Builder(this);
-        DialogueForPassWord.setTitle("Confirm your PassKey");
-        DialogueForPassWord.setMessage("Enter Your 4 digit passkey again");
-        DialogueForPassWord.setIcon(R.drawable.ic_menu_camera);
-        DialogueForPassWord.setView(input);
-
-        DialogueForPassWord.setCancelable(false);
-        DialogueForPassWord.setPositiveButton("Set Password", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if(input.getText().length()<4)
-                {
-
-                    createDialogForPassword();
-                    Toast.makeText(getBaseContext(),"Invalid Password",Toast.LENGTH_SHORT).show();
-                }
-                else if(s.equals(input.getText().toString()))
-                {
-                  Password=s;
-
-                    Toast.makeText(getBaseContext(),"Password Matched",Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
-
-
-        DialogueForPassWord.create();
-        DialogueForPassWord.show();
-
-        return input.getText().toString();
-
-    }
-
 
     private boolean CheckDetails() {
         return true;

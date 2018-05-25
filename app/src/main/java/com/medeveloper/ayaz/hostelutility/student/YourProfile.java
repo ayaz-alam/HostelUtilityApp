@@ -1,11 +1,13 @@
 package com.medeveloper.ayaz.hostelutility.student;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,8 +16,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.medeveloper.ayaz.hostelutility.ChangePassword;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -59,9 +63,16 @@ YourProfile extends Fragment {
                     ((TextView)rootView.findViewById(R.id.student_blood_group)).setText(myDetails.BloodGroup);
                     ((TextView)rootView.findViewById(R.id.student_address)).setText(myDetails.Address);
                     ((TextView)rootView.findViewById(R.id.local_guardian_no)).setText(myDetails.LocalGuardianNo);
+                    ((Button)rootView.findViewById(R.id.change_password)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(getContext(),ChangePassword.class));
+                        }
+                    });
 
                 }
-                else Toast.makeText(getContext(),"Cannot show profile try again later",Toast.LENGTH_LONG).show();
+                else new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).
+                        setTitleText("Can't show your profile\nTry again").show();
             }
 
             @Override

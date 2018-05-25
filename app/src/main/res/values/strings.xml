@@ -8,7 +8,6 @@
     <string name="hostel_id">HostelID</string>
 
 
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -70,8 +69,6 @@
         <item>O-</item>
     </string-array>
 
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_officials_home">OfficialsHome</string>
     <string name="string_about">This app is designed to help student to raise complaint at individual level as well as at hostel level and also provides information platform for student and faculty.</string>
@@ -92,7 +89,6 @@
     <string name="submit">Submit</string>
     <string name="enter_your_enrollment">Enter Your Enrollment Number</string>
     <string name="fill_this_form_to_proceed">Fill this form to proceed</string>
-
 
 
     <!-- Database Reference string that is used to refer the database content-->

@@ -355,7 +355,7 @@
             android:textStyle="bold"
             android:textColor="@color/white"
             android:text="Change Password"
-            android:id="@+id/change_pass"
+            android:id="@+id/change_password"
             android:layout_margin="@dimen/default_margin"
             android:background="@drawable/register_button"
             android:layout_alignParentBottom="true"
