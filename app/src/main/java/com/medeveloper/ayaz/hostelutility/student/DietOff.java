@@ -81,7 +81,7 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
                 {
                     daysLeft.setText("0 Days");
                     DaysLeft=7;
-                    ShowDialog("You don't have any diet off days left",1).show();
+                    ShowDialog("Sorry",1).setContentText("You don't have any diet off days left").show();
                     submit.setEnabled(false);
                 }
             }
@@ -180,6 +180,10 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
                                             }
                                         });
                                     }
+                                    else {
+                                        ShowDialog("Student doesn't exist",1).show();
+                                        pDialog.dismiss();
+                                    }
 
 
                                 }
@@ -199,7 +203,7 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
             }
         });
 
-        return rootView;//inflater.inflate(R.layout.student_complaint, container, false);
+        return rootView;
     }
 
     private boolean isOkay(String to, String from, String reason) {
@@ -208,22 +212,22 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
         if(to.equals("Select Date"))
         {
             okay=false;
-            ShowDialog("Please Select Date",4).show();
+            ShowDialog("Date Missing",4).setContentText("Please tell from when you want diet off").show();
     }
         else if(from.equals("Select Date"))
         {
             okay=false;
-            ShowDialog("Please Select Date",4).show();
+            ShowDialog("Date Missing",4).setContentText("Please tell until when you need diet off").show();
         }
         else if(reason.equals(""))
         {
             okay=false;
-            ShowDialog("Please give the reason of the leave",4).show();
+            ShowDialog("No Reason",4).setContentText("Please provide a reason for the diet of and it should be atleast 50 words").show();
         }
         else if(reason.length()<50)
         {
             okay=false;
-            ShowDialog("Reason should be of atleast 50 charactors",4).show();
+            ShowDialog("Too Short",4).setContentText("Reason for diet off should be atleast 50 charactors").show();
         }
 
     return okay;

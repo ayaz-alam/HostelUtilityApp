@@ -17,7 +17,7 @@ import static com.medeveloper.ayaz.hostelutility.R.*;
 public class Complaint {
 
     @Keep
-    public String studentEnrollNo,StudentName,HostelID,RoomNo, Field,StaffContact,WardenUID,ComplaintDate,ComplaintDescription;
+    public String studentEnrollNo,StudentName,HostelID,RoomNo, Field,StaffContact,WardenUID,ComplaintDate,ComplaintDescription,complaintUID;
     @Keep
     boolean Resolved;
 
@@ -27,22 +27,18 @@ public class Complaint {
 
     }
     @Keep
-    public Complaint(String studentEnrollmentNo,String StudentName,
-                     String HostelID,String RoomNo,
-                     String field, String staffContact,
-                     String WardenUID, String complaintDate,
-                     String complaintDescription,boolean Resolved)
-    {
-
-        this.studentEnrollNo =studentEnrollmentNo;
-        this.WardenUID=WardenUID;
-        this.HostelID=HostelID;
-        this.StudentName=StudentName;
-        this.RoomNo= RoomNo;
+    public Complaint(String studentEnrollNo, String studentName, String hostelID, String roomNo, String field, String staffContact, String wardenUID, String complaintDate, String complaintDescription, String complaintUID, boolean resolved) {
+        this.studentEnrollNo = studentEnrollNo;
+        StudentName = studentName;
+        HostelID = hostelID;
+        RoomNo = roomNo;
         Field = field;
         StaffContact = staffContact;
+        WardenUID = wardenUID;
         ComplaintDate = complaintDate;
         ComplaintDescription = complaintDescription;
-        this.Resolved=Resolved;
+        this.complaintUID = complaintUID;
+        Resolved = resolved;
     }
+
 }

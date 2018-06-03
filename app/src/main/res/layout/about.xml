@@ -140,6 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/default_margin"
                     android:layout_toLeftOf="@+id/ayaz_github"
+                    android:id="@+id/msg_sent"
                     android:src="@drawable/ic_linkedi_con" />
             </RelativeLayout>
 

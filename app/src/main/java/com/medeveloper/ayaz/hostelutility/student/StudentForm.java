@@ -1,19 +1,16 @@
 package com.medeveloper.ayaz.hostelutility.student;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -216,13 +215,20 @@ public class StudentForm extends AppCompatActivity {
                 FatherContact=fatherContact.getText().toString();
                 LocalGuardianNo=localGuardianNo.getText().toString();
                 CompleteAddress =address.getText().toString();
-
+/*
                 final StudentDetailsClass thisStudent=new StudentDetailsClass(
                         EnrollNo,AdhaarNo,Name,Category,
                         BloodGroup,FatherName,Class,
                         Year,Branch,RoomNo,MobileNo,Email,FatherContact,
                         LocalGuardianNo,CompleteAddress
                         );
+                        */
+                final StudentDetailsClass Student=new StudentDetailsClass(
+                        EnrollNo,AdhaarNo,"Name","Category",
+                        "Blood Group","Father Name","Class",
+                        "Year","Branch","Room No.","9509126582",Email,"Father Contact",
+                        "LG","Address"
+                );
                 if(CheckDetails())
                 {
                     pDialog.show();
@@ -236,20 +242,34 @@ public class StudentForm extends AppCompatActivity {
                                 {
                                     FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).
                                             child(getString(R.string.hostel_id)).child(getString(R.string.student_list_ref))
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(thisStudent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(Student).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful())
                                             {
+                                                /**
+                                                 * Saving some data in the SharedPrefrences so that they can Accessed easily
+                                                 * For now, saving only HostelID,EnrollmentNo,Name and RoomNo
+                                                 * */
+                                                savePrefs(getString(R.string.pref_hostel_id),getString(R.string.hostel_id));
+                                                savePrefs(getString(R.string.pref_enroll),Student.EnrollNo);
+                                                savePrefs(getString(R.string.pref_name),Student.Name);
+                                                savePrefs(getString(R.string.pref_room),Student.RoomNo);
+                                                createCredentials(Student.Name);
+
                                                 pDialog.dismiss();
-                                                ShowDialog("Successfully Registered",3).
-                                                        setContentText("Your default password is "+Password+" \nPlease change it once we log you in").
-                                                        setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                               final SweetAlertDialog d=ShowDialog("Successfully Registered",3).
+                                                        setContentText("Your default password is "+Password+" \nPlease change it once we log you in");
+                                               d.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                                     @Override
                                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        d.dismiss();
                                                         startActivity(new Intent(StudentForm.this,Home.class));
+                                                        finish();
                                                     }
-                                                }).show();
+                                                });
+                                               d.show();
+
 
                                             }
                                         }
@@ -260,7 +280,7 @@ public class StudentForm extends AppCompatActivity {
                                 else
                                 {
                                     pDialog.dismiss();
-                                    ShowDialog("Cannot Log you in :"+task.getException(), 0).show();
+                                    ShowDialog("Can't Login:", 0).setContentText(""+task.getException()).show();
                                 }
                             }
                         });
@@ -286,6 +306,25 @@ public class StudentForm extends AppCompatActivity {
 
     }
 
+    private void createCredentials(String Name) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null) {
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(Name).build();
+            user.updateProfile(profileUpdates);
+        }
+    }
+
+    void savePrefs(String Key,String Value)
+    {
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString(Key,Value).apply();
+        Log.d("Ayaz","Preference Saved :"+getPrefs(Key,"-1"));
+    }
+    String getPrefs(String Key,String defaultValue)
+    {
+        return PreferenceManager.getDefaultSharedPreferences(this).getString(Key, defaultValue);
+    }
+
     private SweetAlertDialog ShowDialog(String msg,int code)
     {
         /*
@@ -298,7 +337,7 @@ public class StudentForm extends AppCompatActivity {
         SweetAlertDialog myDialog=null;
         if(code==0)
         {
-            myDialog=new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.ERROR_TYPE).setTitleText(msg);
+            myDialog=new SweetAlertDialog(this,SweetAlertDialog.ERROR_TYPE).setTitleText(msg);
 
 
         }
@@ -309,17 +348,17 @@ public class StudentForm extends AppCompatActivity {
         }
         else if(code==2)
         {
-            myDialog = new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.PROGRESS_TYPE)
+            myDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
                     .setTitleText(msg);
             myDialog.setCancelable(false);
         }
         else if(code==3)
         {
-            myDialog=new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText(msg);
+            myDialog=new SweetAlertDialog(this,SweetAlertDialog.SUCCESS_TYPE).setTitleText(msg);
         }
         else if(code==4)
         {
-            myDialog=new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.WARNING_TYPE).setTitleText(msg);
+            myDialog=new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE).setTitleText(msg);
         }
 
 

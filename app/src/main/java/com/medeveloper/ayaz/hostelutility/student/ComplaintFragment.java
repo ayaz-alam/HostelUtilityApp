@@ -1,8 +1,18 @@
 package com.medeveloper.ayaz.hostelutility.student;
 
+import android.Manifest;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +29,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.Complaint;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StaffDetailsClass;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
+import com.medeveloper.ayaz.hostelutility.officials.StaffDetails;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.text.DateFormatSymbols;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -32,6 +46,7 @@ public class ComplaintFragment extends Fragment {
 
 
     private SweetAlertDialog pDialog;
+    private int MY_PERMISSIONS_REQUEST_SEND_SMS=142;
 
     public ComplaintFragment() {
         // Required empty public constructor
@@ -75,46 +90,82 @@ public class ComplaintFragment extends Fragment {
                     pDialog.show();
                     //Getting Student details
                     ref=FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
-                    ref.child(getString(R.string.student_list_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .addValueEventListener(new ValueEventListener() {
+                    ref.child(getString(R.string.staff_ref)).child(complaint.getSelectedItem().toString()).
+                            addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
+                                    StaffDetailsClass StaffToContact;
                                     if(dataSnapshot.exists())
+
                                     {
-                                        myDetails = dataSnapshot.getValue(StudentDetailsClass.class);
-                                        ShowDialog("Came in Prepare First "+myDetails.Name,0);
-                                        ref.child(getString(R.string.staff_ref)).child(complaint.getSelectedItem().toString()).
-                                                addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                String StaffToContact;
-                                                if(dataSnapshot.exists())
-                                                {
-                                                    StaffToContact=dataSnapshot.child("Contact").getValue(String.class);
-                                                    ShowDialog("Came in Prepare "+StaffToContact,0);
-
-                                                    Complaint newCmpnt = new Complaint(myDetails.EnrollNo, myDetails.Name,
-                                                            getString(R.string.hostel_id), myDetails.RoomNo, complaint.getSelectedItem().toString()
-                                                            , StaffToContact, getString(R.string.wardenId), complaintDate, complaintDetails.getText().toString(),
-                                                            false);
-
+                                        StaffToContact=dataSnapshot.getValue(StaffDetailsClass.class);
+                                        Log.d("Ayaz","Staff to contact: "+StaffToContact.ContactNumber);
+                                        // ShowDialog("Came in Prepare "+StaffToContact,0);
                                                     //Refering to the complaint section in the database
-                                                    ref.child("Complaints").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().
-                                                            setValue(newCmpnt).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if(task.isSuccessful())
-                                                            {
-                                                                pDialog.dismiss();
-                                                                new SweetAlertDialog(getContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText("Successfully sent").show();
-                                                                complaint.setSelection(0);
-                                                                complaintDetails.setText(null);
-                                                            }
-                                                            else new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).
-                                                                    setTitleText("not Successfull").setContentText(task.getException().toString()).
-                                                                    show();;
-                                                        }
-                                                    });
+                                        String EnrollNumber=getPrefs(getString(R.string.pref_enroll),"NULL");
+                                        String Name=getPrefs(getString(R.string.pref_name),"NULL");
+                                        String Room=getPrefs(getString(R.string.pref_room),"NULL");
+                                        if(EnrollNumber.equals("NULL")||Name.equals("NULL")||Room.equals("NULL"))
+                                        {
+                                            new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).setTitleText("Session Expired!!").setConfirmText("Please login again..").setConfirmText("Login").setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                @Override
+                                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                    startActivity(new Intent(getActivity(), LoginAcitivity.class));
+                                                    sweetAlertDialog.dismiss();
+                                                    getActivity().finish();
+                                                }
+                                            });
+                                        }
+                                        else
+                                            {
+
+                                            DatabaseReference temp = ref.child(getString(R.string.complaint_ref)).child(EnrollNumber);
+                                            final String pushID = temp.push().getKey();
+
+                                            //Creating complaint class object to be pushed on firebase
+                                            final Complaint newCmpnt = new Complaint(EnrollNumber, Name,
+                                                    getString(R.string.hostel_id), Room, complaint.getSelectedItem().toString()
+                                                    , StaffToContact.ContactNumber, getString(R.string.warden_number),
+                                                    complaintDate,
+                                                    complaintDetails.getText().toString()
+                                                    , pushID, false);
+
+
+                                            temp.child(pushID).setValue(newCmpnt).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.d("Ayaz", "PushID: " +
+                                                                "" + pushID);
+                                                        pDialog.dismiss();
+
+                                                        /*
+                                                         * Here we are sending the SMS to the warden and to the respective staff member to be contacted
+                                                         * We are using in-built messaging services to send the message and custom notification to all the app users
+                                                         * */
+                                                        sendSMSMessage(newCmpnt.StaffContact, "Complaint Reported,\n" + "Hostel: " + newCmpnt.HostelID + "\nRoom Number: " + newCmpnt.RoomNo + "\nRegarding: " + newCmpnt.Field +
+                                                                        "\nDescription: " + newCmpnt.ComplaintDescription + "\nName: " + newCmpnt.StudentName + "\nStudent Contact: " + newCmpnt.StaffContact
+                                                                , getContext());
+                                                        sendSMSMessage(getString(R.string.warden_number), "To warden,\nComplaint Reported, Hostel: " + newCmpnt.HostelID + "\nRoom Number: " + newCmpnt.RoomNo + "\nRegarding: " + newCmpnt.Field +
+                                                                        "\nDescription: " + newCmpnt.ComplaintDescription + "\nName: " + newCmpnt.StudentName + "\nStudent Contact: " + newCmpnt.StaffContact
+                                                                , getContext()
+                                                        );
+                                                        complaint.setSelection(0);
+                                                        complaintDetails.setText(null);
+                                                    } else
+                                                        new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE).
+                                                                setTitleText("not Successfull").setContentText(task.getException().toString()).
+                                                                show();
+                                                    ;
+                                                }
+                                            });
+                                        }
+
+
+                                                }
+                                                else {
+                                                    pDialog.dismiss();
+                                                    new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE).setTitleText("Error").show();
 
 
                                                 }
@@ -129,23 +180,42 @@ public class ComplaintFragment extends Fragment {
 
                                     }
                                     else ShowDialog("DataSnapshot does not exist",1);
-                                }
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
+
 
                                 }
+
                             });
-                }
 
 
-            }
-        });
+
 
 
         return rootView;
     }
 
 
+    protected void sendSMSMessage(String phoneNo, String message, Context context) {
+
+        SmsManager sm = SmsManager.getDefault();
+        ArrayList<String> parts =sm.divideMessage(message);
+        int numParts = parts.size();
+
+        ArrayList<PendingIntent> sentIntents = new ArrayList<PendingIntent>();
+        ArrayList<PendingIntent> deliveryIntents = new ArrayList<PendingIntent>();
+
+        sm.sendMultipartTextMessage(phoneNo,null,parts,null,null);
+
+    }
+
+    void savePrefs(String Key,String Value)
+    {
+        PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(Key,Value).apply();
+        Log.d("Ayaz","Preference Saved :"+getPrefs(Key,"-1"));
+    }
+    String getPrefs(String Key,String defaultValue)
+    {
+        return PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Key, defaultValue);
+    }
     //Function to check the fields are valid or not
     private boolean isOkay(String complaintType, String complaintDetails) {
         boolean Okay=true;

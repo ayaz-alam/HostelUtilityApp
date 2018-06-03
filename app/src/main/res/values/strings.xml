@@ -98,7 +98,16 @@
     <string name="mess_days_left_ref">MessDietDays</string>
     <string name="diet_off_complaints_ref">MessDietOffComplaints</string>
     <string name="enroll_student_list_ref">EnrolledStudentList</string>
-    <string name="complaint_ref">Complaints</string>
     <string name="notice_ref">Notices</string>
+    <string name="warden_number">9509126582</string>
+    <string name="complaint_ref">Complaints</string>
+    <string name="pref_hostel_id">pref_HostelID</string>
+    <string name="pref_enroll">pref_Enroll</string>
+    <string name="pref_name">pref_Name</string>
+    <string name="pref_room">pref_Room_no</string>
+    <string name="pref_department">pref_Department</string>
+    <string name="pref_employee_id">pref_EmployeeID</string>
+    <string name="officials_id_ref">Officials_Records</string>
+    <string name="pref_post">pref_Post</string>
 
 </resources>

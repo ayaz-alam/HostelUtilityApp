@@ -46,6 +46,8 @@ YourProfile extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //If user has details in the firebase, then proceed.
                 if(dataSnapshot.exists())
                 {
                     myDetails=dataSnapshot.getValue(StudentDetailsClass.class);

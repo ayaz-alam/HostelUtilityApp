@@ -92,6 +92,26 @@
             android:layout_marginBottom="2dp"
 
             />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_white"
+            android:hint="Enter Employee ID"
+            android:id="@+id/employee_id"
+            android:visibility="gone"
+            android:minHeight="30dp"
+            android:drawableLeft="@drawable/ic_vpn_key"
+            android:paddingLeft="4dp"
+            android:padding="4dp"
+            android:drawablePadding="4dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:inputType="textPassword"
+            android:paddingBottom="4dp"
+            android:paddingRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="2dp"
+
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
