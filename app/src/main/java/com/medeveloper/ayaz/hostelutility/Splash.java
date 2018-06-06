@@ -3,13 +3,16 @@ package com.medeveloper.ayaz.hostelutility;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,7 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialID;
+import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
 import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.medeveloper.ayaz.hostelutility.student.StudentForm;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
@@ -34,6 +39,7 @@ public class Splash extends AppCompatActivity {
 
     private int MY_CAMERA_REQUEST_CODE=111;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,43 +50,25 @@ public class Splash extends AppCompatActivity {
 
         isPermissionGranted();
 
-
-        FirebaseAuth.getInstance().signInWithEmailAndPassword("employee001@gmail.com","000000");
-        /*OfficialID tempId=new OfficialID("Warden1","EE","Warden","EMP001",
-                "employee001@gmail.com","9509126582",getString(R.string.hostel_id));
-        FirebaseDatabase.getInstance().getReference(getString(R.string.college_id))
-        .child(getString(R.string.officials_id_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-        .setValue(tempId);
-        createCredentials("Warden1");
+        /*
         */
 
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null)
-            startActivity(new Intent(this,LoginAcitivity.class));
-        else startActivity(new Intent(this, LoginAcitivity.class));
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(FirebaseAuth.getInstance().getCurrentUser()!=null)
+                {
+                    if(new MyData(Splash.this).getData(MyData.EMPLOYEE_ID).equals("NULL"))
+                        startActivity(new Intent(Splash.this,Home.class));
+                    else
+                        startActivity(new Intent(Splash.this, OfficialsHome.class));
+                }
+                else startActivity(new Intent(Splash.this, LoginAcitivity.class));
+            }
+        },1500);
 
 
-   /*     SweetAlertDialog showPermissionMessage=new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE).setTitleText("Please give permissions")
-                .setContentText("Please provide the asked permissions so that we can provide you all the services").
-                        setConfirmText("Try Again").
-                        setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                if(isPermissionGranted())
-                                {
-                                    startActivity(new Intent(Splash.this, LoginAcitivity.class));
-                                }
-                                sweetAlertDialog.dismiss();
-                            }
-                        }).
-                        setCancelText("Exit").
-                        setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                startActivity(new Intent(Splash.this,LoginAcitivity.class));
-                            }
-                        });
-
-        */
 
 
 
@@ -99,6 +87,7 @@ public class Splash extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean isPermissionGranted() {
 
 

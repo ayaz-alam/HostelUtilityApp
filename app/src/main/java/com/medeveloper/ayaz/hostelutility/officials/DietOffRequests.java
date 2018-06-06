@@ -18,8 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.DietOffAdapter;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.DietOffRequestClass;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.NoticeClass;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.NoticeClassAdapter;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.util.ArrayList;
@@ -56,15 +54,21 @@ public class DietOffRequests extends Fragment {
         mRecyclerView=rootView.findViewById(R.id.my_recycler_view);
         mRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
 
-        mRef.child(getString(R.string.diet_off_complaints_ref)).addValueEventListener(new ValueEventListener() {
+        mRef.child(getString(R.string.diet_off_req_ref)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                requestList.clear();
                 if(dataSnapshot.exists())
                 {
-                    for(DataSnapshot d:dataSnapshot.getChildren())
-                        requestList.add(d.getValue(DietOffRequestClass.class));
+
+                    for(DataSnapshot d:dataSnapshot.getChildren())//Traversing to the enrollment node
+                    {
+                        for(DataSnapshot x:d.getChildren())//Traversing in the main node
+                        requestList.add(x.getValue(DietOffRequestClass.class));
+                    }
                     //Toast.makeText(getContext(),"List Length"+requestList.size(),Toast.LENGTH_SHORT).show();
+
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     adapter=new DietOffAdapter(getContext(),requestList);
                     mRecyclerView.setAdapter(adapter);
@@ -72,7 +76,14 @@ public class DietOffRequests extends Fragment {
                     pDialog.dismiss();
 
                 }
-                else Toast.makeText(getContext(),"No data found",Toast.LENGTH_SHORT).show();
+                else {
+                    pDialog.dismiss();
+                    Toast.makeText(getContext(),"No data found",Toast.LENGTH_SHORT).show();
+                    new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("No data found")
+                            .setContentText("It seems that no student have submitted any request yet")
+                            .show();
+                }
             }
 
             @Override

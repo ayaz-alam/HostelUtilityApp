@@ -50,9 +50,15 @@
             android:name=".officials.OfficialsHome"
             android:label="@string/title_activity_officials_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginAcitivity" />
-        <activity android:name=".student.StudentForm" />
-        <activity android:name=".officials.OfficialsForm" />
+        <activity android:name=".LoginAcitivity"
+            android:label="Login"
+            />
+        <activity android:name=".student.StudentForm"
+            android:label="Register"
+            />
+        <activity android:name=".officials.OfficialsForm"
+            android:label="Register"
+            />
         <activity android:name=".ChangePassword" android:theme="@style/Theme.Transparent"></activity>
     </application>
 

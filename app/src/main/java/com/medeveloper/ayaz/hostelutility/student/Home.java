@@ -13,11 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.medeveloper.ayaz.hostelutility.About;
 import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
+import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Home extends AppCompatActivity
@@ -41,6 +45,8 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View v=findViewById(R.id.drawer);
+        ((TextView)v.findViewById(R.id.display_name)).setText(new MyData(this).getData(MyData.NAME));
         FragmentManager fn=getSupportFragmentManager();
         fn.beginTransaction().replace(R.id.fragment_layout,new Notice(),"Notice").commit();
     }
@@ -70,16 +76,8 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE).setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                @Override
-                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                    new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText("Logged out").show();
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(getApplication(), LoginAcitivity.class));
-                    finish();
-                }
-            });
+        if (id == R.id.action_logout) {
+
 
 
             return true;
@@ -150,6 +148,25 @@ public class Home extends AppCompatActivity
             BackPressedAgain=false;
 
         }
+        else if(id==R.id.nav_log_out)
+        {    new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure ?")
+                .setContentText("Hello "+new MyData(this).getData(MyData.NAME)+"\nAre you sure that you want to logout from this device")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                sweetAlertDialog.dismiss();
+                FirebaseAuth.getInstance().signOut();
+                new MyData(getApplication()).clearPreferences();
+                Intent intent=new Intent(Home.this,LoginAcitivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+            }
+        }).show();
+
+
+        }
 
 
         try {
@@ -158,11 +175,13 @@ public class Home extends AppCompatActivity
             e.printStackTrace();
         }
 
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction F=fragmentManager.beginTransaction();
-        F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-        F.replace(R.id.fragment_layout, fragment,Tag).commit();
+        if(!(id==R.id.nav_log_out)) {
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction F = fragmentManager.beginTransaction();
+            F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+            F.replace(R.id.fragment_layout, fragment, Tag).commit();
+        }
 
 
 

@@ -17,10 +17,12 @@
     <dimen name="default_heading_size">12dp</dimen>
     <dimen name="default_small_text_size">10dp</dimen>
     <dimen name="default_text_size">18dp</dimen>
-    <dimen name="cardview_title">20dp</dimen>
+    <dimen name="cardview_title">16dp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="card_action_button">16sp</dimen>
     <dimen name="cardview_subhead">16dp</dimen>
     <dimen name="extra_large_margin">24dp</dimen>
     <dimen name="xxx_large_margin">64dp</dimen>
+    <dimen name="subhead">10sp</dimen>
+    <dimen name="small_margin">4dp</dimen>
 </resources>

@@ -21,19 +21,24 @@
             android:id="@+id/nav_net_refill"
             android:icon="@drawable/ic_menu_manage"
             android:title="Net Refill Request" />
+
+        <item
+            android:id="@+id/nav_your_complaints"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Your Complaints" />
+        <item
+            android:id="@+id/nav_your_profile"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Your Profile" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-            android:id="@+id/nav_your_profile"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Your Profile" />
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/ic_phone"
+            android:title="@string/action_logout" />
 
-            <item
-                android:id="@+id/nav_your_complaints"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Your Complaints" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_send"

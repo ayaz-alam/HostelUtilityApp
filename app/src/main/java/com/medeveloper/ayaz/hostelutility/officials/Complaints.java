@@ -54,12 +54,14 @@ public class Complaints extends Fragment {
          baseRef.child(getString(R.string.complaint_ref)).addValueEventListener(new ValueEventListener() {
              @Override
              public void onDataChange(DataSnapshot dataSnapshot) {
+                 mComplaintList.clear();
                  if(dataSnapshot.exists())
                  {
                      for(DataSnapshot d:dataSnapshot.getChildren())
                          for(DataSnapshot d2:d.getChildren())
                              mComplaintList.add(d2.getValue(Complaint.class));
 
+                     reverseList();
                      adapter = new ComplaintAdapter(getContext(), mComplaintList,1);
                      mRecyclerView.setAdapter(adapter);
                      mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -78,6 +80,17 @@ public class Complaints extends Fragment {
          });
 
          return rootView;
+    }
+
+    private void reverseList() {
+        int len=mComplaintList.size();
+        for(int i=0;i<len/2;i++)
+        {
+            Complaint temp=mComplaintList.get(i);
+            mComplaintList.add(i,mComplaintList.get(len-i-1));
+            mComplaintList.add(len-i-1,temp);
+
+        }
     }
 
 }

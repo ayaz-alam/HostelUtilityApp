@@ -24,11 +24,15 @@
         <item
             android:id="@+id/nav_diet_off_requests"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Diet Off Requests" />
+            android:title="Diet off requests" />
         <item
             android:id="@+id/nav_staff_details"
             android:icon="@drawable/ic_menu_share"
             android:title="Staff Details" />
+        <item
+            android:id="@+id/nav_student_list"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Student List" />
     </group>
 
     <item android:title="Communicate">
@@ -38,6 +42,10 @@
                 android:id="@+id/nav_your_profile"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Your Profile" />
+            <item
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_phone"
+                android:title="@string/action_logout" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_send"

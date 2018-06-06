@@ -1,7 +1,6 @@
 package com.medeveloper.ayaz.hostelutility;
 
 import android.content.Intent;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -21,13 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialID;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
@@ -68,6 +65,11 @@ public class LoginAcitivity extends AppCompatActivity {
         Official.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+             /*   employeeID.animate().alpha(0.0f).setDuration(500);
+                Email.animate().alpha(0.0f).setDuration(500);
+                Password.animate().alpha(0.0f).setDuration(500);
+                */
+
                 employeeID.setVisibility(View.VISIBLE);
                 Email.setVisibility(View.VISIBLE);
                 Password.setVisibility(View.VISIBLE);
@@ -80,6 +82,12 @@ public class LoginAcitivity extends AppCompatActivity {
         Student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /*
+                employeeID.animate().alpha(1.0f).setDuration(500);
+                Email.animate().alpha(0.0f).setDuration(500);
+                Password.animate().alpha(0.0f).setDuration(500);
+                */
                 employeeID.setVisibility(View.GONE);
                 Email.setVisibility(View.VISIBLE);
                 Password.setVisibility(View.VISIBLE);
@@ -92,6 +100,10 @@ public class LoginAcitivity extends AppCompatActivity {
         Guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*employeeID.animate().alpha(1.0f).setDuration(500);
+                Email.animate().alpha(1.0f).setDuration(500);
+                Password.animate().alpha(1.0f).setDuration(500);
+                */
                 employeeID.setVisibility(View.GONE);
                 Email.setVisibility(View.GONE);
                 Password.setVisibility(View.GONE);
@@ -301,7 +313,6 @@ public class LoginAcitivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-
                     saveStudentPrefs();
                 }
                 else
@@ -348,7 +359,11 @@ public class LoginAcitivity extends AppCompatActivity {
                                                 if(Id.mEmployeeId.equals(EmployeeID))
                                                 {
                                                     Log.d("Ayaz","All Credentials Authenticated\tValid User");
-                                                    saveTeacherPrefs(Id);
+                                                    MyData prefs=new MyData(LoginAcitivity.this);
+                                                    prefs.saveTeacherPrefs(Id);
+                                                    pDialog.dismiss();
+                                                    startActivity(new Intent(LoginAcitivity.this,OfficialsHome.class));
+                                                    finish();
                                                 }
                                                 else
                                                 {
@@ -356,6 +371,7 @@ public class LoginAcitivity extends AppCompatActivity {
                                                             .setTitleText("Invalid Credentials")
                                                             .setContentText("Please make sure you've entered valid credentials\nContact admin if problem persists")
                                                             .show();
+                                                    pDialog.dismiss();
                                                 }
                                             }
                                         }
@@ -398,21 +414,28 @@ public class LoginAcitivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
                 {
-                    StudentDetailsClass Student=dataSnapshot.getValue(StudentDetailsClass.class);
-                    /**
-                     * Saving some data in the SharedPrefrences so that they can Accessed easily
-                     * For now, saving only HostelID,EnrollmentNo,Name and RoomNo
-                     * */
-                    savePrefs(getString(R.string.pref_hostel_id),getString(R.string.hostel_id));
-                    savePrefs(getString(R.string.pref_enroll),Student.EnrollNo);
-                    savePrefs(getString(R.string.pref_name),Student.Name);
-                    savePrefs(getString(R.string.pref_room),Student.RoomNo);
+                    StudentDetailsClass student=dataSnapshot.getValue(StudentDetailsClass.class);
+                    MyData prefs=new MyData(getApplicationContext());
+                    prefs.saveStudentPrefs(student);
                     pDialog.dismiss();
                     startActivity(new Intent(LoginAcitivity.this,Home.class));
                     finish();
 
 
 
+                }
+                else {
+                    {
+                        new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Invalid User").setContentText("Please check your credentials and try again")
+                                .show();
+                        FirebaseAuth.getInstance().signOut();
+
+                        new MyData(LoginAcitivity.this).clearPreferences();
+                        Email.setText("");
+                        Password.setText("");
+                        pDialog.dismiss();
+                    }
                 }
             }
 
@@ -423,31 +446,7 @@ public class LoginAcitivity extends AppCompatActivity {
         });
 
     }
-    private void saveTeacherPrefs(OfficialID id)
-    {
 
-                    /**
-                     * Saving some data in the SharedPrefrences so that they can Accessed easily
-                     * For now, saving only HostelID,EmployeeID,mDepartment and RoomNo
-                     * */
-                    Log.d("Ayaz /"+"LoginAct.","Creating Preferences and opening Home Page");
-                    savePrefs(getString(R.string.pref_hostel_id),getString(R.string.hostel_id));
-                    savePrefs(getString(R.string.pref_employee_id),id.mEmployeeId);
-                    savePrefs(getString(R.string.pref_name),id.mName);
-                    savePrefs(getString(R.string.pref_department),id.mDepartment);
-                    savePrefs(getString(R.string.pref_post),id.mPost);
-                    pDialog.dismiss();
-                    startActivity(new Intent(LoginAcitivity.this,OfficialsHome.class));
-                    finish();
-    }
-    void savePrefs(String Key,String Value)
-    {
-        PreferenceManager.getDefaultSharedPreferences(this).edit().putString(Key,Value).apply();
-        Log.d("Ayaz","Preference Saved :"+getPrefs(Key,"-1"));
-    }
-    String getPrefs(String Key,String defaultValue)
-    {
-        return PreferenceManager.getDefaultSharedPreferences(this).getString(Key, defaultValue);
-    }
+
 
 }

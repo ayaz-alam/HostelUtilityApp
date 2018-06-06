@@ -11,17 +11,17 @@ import java.util.Date;
 
 public class DietOffRequestClass {
     @Keep
-    public String Name,RoomNo,EnrollmentNo,To,From,Reason;
+    public String Name,RoomNo,EnrollmentNo,To,From,Reason,requestID,studentMobile;
     @Keep
     public Date time;
     @Keep
-    boolean accepted;
+    boolean accepted,seen;
 
     public DietOffRequestClass() {
     }
 
     @Keep
-    public DietOffRequestClass(String name, String roomNo, String enrollmentNo, String to, String from, String reason,Date time,boolean accepted) {
+    public DietOffRequestClass(String name, String roomNo, String enrollmentNo, String to, String from, String reason,Date time,boolean accepted,String requestID,String studentMobile,boolean seen) {
         Name = name;
         RoomNo = roomNo;
         EnrollmentNo = enrollmentNo;
@@ -30,5 +30,8 @@ public class DietOffRequestClass {
         Reason = reason;
         this.time =time;
         this.accepted=accepted;
+        this.requestID=requestID;
+        this.studentMobile=studentMobile;
+        this.seen=seen;
     }
 }

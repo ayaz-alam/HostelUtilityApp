@@ -177,15 +177,19 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         holder.complaintTitle.setText(complaint.Field);
         holder.complaintDetails.setText(complaint.ComplaintDescription);
         holder.complaintDate.setText(complaint.ComplaintDate);
+
         if(complaint.Resolved)
         {
-            holder.resolvedImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_resolved));
-            holder.resolvedButton.setEnabled(false);
-            holder.resolvedButton.setAlpha(0.5f);
+
+            holder.resolvedImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_done));
+            if(code==0) {
+                holder.resolvedButton.setEnabled(false);
+                holder.resolvedButton.setAlpha(0.5f);
+            }
         }
         else
         {
-            holder.resolvedImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_waiting));
+            holder.resolvedImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_cancel));
         }
 
         if(code!=0)

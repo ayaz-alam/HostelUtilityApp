@@ -2,6 +2,7 @@ package com.medeveloper.ayaz.hostelutility.student;
 
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,7 +13,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,8 +22,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.DietOffRequestClass;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -140,68 +142,66 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
             @Override
             public void onClick(View v) {
 
-                final String To=((TextView)rootView.findViewById(R.id.to
+                final String To = ((TextView) rootView.findViewById(R.id.to
                 )).getText().toString();
-                final String From=((TextView)rootView.findViewById(R.id.from
+                final String From = ((TextView) rootView.findViewById(R.id.from
                 )).getText().toString();
-                final String Reason=details.getText().toString();
+                final String Reason = details.getText().toString();
 
 
-                if(isOkay(To,From,Reason))
-                {
+                if (isOkay(To, From, Reason)) {
                     pDialog.show();
-                    baseRef.child(getString(R.string.student_list_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(
-                            new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.exists())
-                                    {
-                                        myDetails=dataSnapshot.getValue(StudentDetailsClass.class);
-                                        Date currentTime = Calendar.getInstance().getTime();
-                                        DietOffRequestClass myRequest=new DietOffRequestClass(myDetails.Name,myDetails.RoomNo,myDetails.EnrollNo,To,From,Reason,currentTime,false);
-                                        baseRef.child(getString(R.string.diet_off_complaints_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(myRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    final MyData prefs = new MyData(getContext());
+
+                    String PushID = baseRef.child(getString(R.string.diet_off_req_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().getKey();
+                    DietOffRequestClass myRequest = new DietOffRequestClass(
+                            prefs.getData(MyData.NAME),
+                            prefs.getData(MyData.ROOM_NO),
+                            prefs.getData(MyData.ENROLLMENT_NO),
+                            To, From, Reason,
+                            Calendar.getInstance().getTime(),
+                            false, PushID,prefs.getData(MyData.MOBILE),false);
+
+                    baseRef.child(getString(R.string.diet_off_req_ref)).child(prefs.getData(MyData.ENROLLMENT_NO))
+                            .child(PushID).setValue(myRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful())
+                            {
+                                 baseRef.child(getString(R.string.mess_days_left_ref))
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue((DaysLeft+DaysRequested));
+                                details.setText(null);
+                                ShowDialog("Successfull",3).show();
+                                pDialog.dismiss();
+                                ((TextView)(rootView.findViewById(R.id.to))).setText("Select Date");
+                                ((TextView)(rootView.findViewById(R.id.from))).setText("Select Date");
+                                ((rootView.findViewById(R.id.to))).setEnabled(false);
+
+
+                            }
+                            else {
+                                pDialog.dismiss();
+                                new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("Error")
+                                        .setContentText("Can't submit your request, please login again\nContact Admin if problem persisits")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                             @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful())
-                                                {
-                                                    baseRef.child(getString(R.string.mess_days_left_ref))
-                                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                            .setValue((DaysLeft+DaysRequested));
-                                                    details.setText(null);
-                                                    ShowDialog("Successfull",3).show();
-                                                    pDialog.dismiss();
-                                                    ((TextView)(rootView.findViewById(R.id.to))).setText("Select Date");
-                                                    ((TextView)(rootView.findViewById(R.id.from))).setText("Select Date");
-                                                    ((rootView.findViewById(R.id.to))).setEnabled(false);
-
-
-                                                }
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                getActivity().finish();
+                                                startActivity(new Intent(getContext(), LoginAcitivity.class));
                                             }
                                         });
-                                    }
-                                    else {
-                                        ShowDialog("Student doesn't exist",1).show();
-                                        pDialog.dismiss();
-                                    }
-
-
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
                             }
-                    );
-
-
+                        }
+                    });
                 }
-
-
-
             }
+
         });
+
+
+
 
         return rootView;
     }

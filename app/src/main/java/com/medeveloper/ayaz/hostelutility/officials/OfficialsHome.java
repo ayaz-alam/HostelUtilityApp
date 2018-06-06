@@ -2,17 +2,15 @@ package com.medeveloper.ayaz.hostelutility.officials;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.medeveloper.ayaz.hostelutility.About;
 import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
-import com.medeveloper.ayaz.hostelutility.student.DietOff;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.medeveloper.ayaz.hostelutility.student.Notice;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
@@ -76,7 +74,8 @@ public class OfficialsHome extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            Log.d("Ayaz","Came in Logout");
             new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE).setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                 @Override
                 public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -154,6 +153,30 @@ public class OfficialsHome extends AppCompatActivity
             inHome=false;
             BackPressedAgain=false;
         }
+        else if (id == R.id.nav_student_list) {
+            Tag="About";
+            fragmentClass = StudentList.class;
+            inHome=false;
+            BackPressedAgain=false;
+        }
+        else if(id==R.id.nav_log_out) {
+            Log.d("Ayaz: Official Home","Logged Out");
+            new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Are you sure ?")
+                    .setContentText("Hello " + new MyData(this).getData(MyData.NAME) + "\nAre you sure that you want to logout from this device")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.dismiss();
+                            FirebaseAuth.getInstance().signOut();
+                            new MyData(getApplication()).clearPreferences();
+                            Intent intent=new Intent(OfficialsHome.this,LoginAcitivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+
+                        }
+                    }).show();
+        }
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -161,11 +184,13 @@ public class OfficialsHome extends AppCompatActivity
             e.printStackTrace();
         }
 
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction F=fragmentManager.beginTransaction();
-        F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-        F.replace(R.id.fragment_layout, fragment,Tag).commit();
+        if(!(id==R.id.nav_log_out)) {
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction F = fragmentManager.beginTransaction();
+            F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+            F.replace(R.id.fragment_layout, fragment, Tag).commit();
+        }
 
 
 
