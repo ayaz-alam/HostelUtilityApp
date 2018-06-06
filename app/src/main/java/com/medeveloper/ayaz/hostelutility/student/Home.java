@@ -45,8 +45,6 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View v=findViewById(R.id.drawer);
-        ((TextView)v.findViewById(R.id.display_name)).setText(new MyData(this).getData(MyData.NAME));
         FragmentManager fn=getSupportFragmentManager();
         fn.beginTransaction().replace(R.id.fragment_layout,new Notice(),"Notice").commit();
     }
