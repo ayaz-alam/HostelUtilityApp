@@ -91,10 +91,6 @@ public class MyData {
     {
         return getPrefs(context.getString(R.string.pref_name),"NULL");
     }
-    public String HostelID()
-    {
-        return getPrefs(context.getString(R.string.pref_name),"NULL");
-    }
     public String getData(String Key)
     {
         return getPrefs(Key,"NULL");

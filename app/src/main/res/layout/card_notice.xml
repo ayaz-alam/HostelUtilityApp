@@ -5,7 +5,6 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="200dp"
     android:layout_gravity="center"
     android:layout_marginBottom="16dp"
     android:layout_marginLeft="@dimen/large_margin"
@@ -21,7 +20,7 @@
             android:id="@+id/head_container_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
+            android:background="@color/colorPrimary"
 
             >
 
@@ -30,9 +29,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="4dp"
                 android:text="Notice Heading"
-                android:textColor="@color/white"
+                android:textColor="@color/PrimaryText"
                 android:textSize="@dimen/cardview_title"
                 android:textStyle="bold" />
 
@@ -41,10 +42,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/notice_title"
-                android:layout_marginBottom="@dimen/smallpadding"
-                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="4dp"
+                android:textSize="@dimen/card_subhed"
                 android:text="by: Faculty"
-                android:textColor="@color/white" />
+                android:alpha=".75"
+                android:textColor="@color/PrimaryText" />
 
             <TextView
                 android:id="@+id/notice_date"
@@ -54,7 +58,7 @@
                 android:layout_centerVertical="true"
                 android:layout_margin="@dimen/default_margin"
                 android:text="Date"
-                android:textColor="@color/white" />
+                android:textColor="@color/PrimaryText" />
         </RelativeLayout>
 
         <ProgressBar
@@ -76,23 +80,28 @@
             <ImageView
                 android:id="@+id/image_notice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="160dp"
                 android:layout_margin="@dimen/default_margin"
-                android:minHeight="200dp" />
+                />
 
             <TextView
                 android:id="@+id/notice_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
-                android:maxLines="3"
-                android:minHeight="40dp"
                 android:textSize="16sp"
+                android:maxLines="2"
                 tools:text="Body of the Notice" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Read more.."
+                android:id="@+id/expand_colapse"
+                android:textAlignment="viewEnd"
+                android:textStyle="bold"
+                />
 
         </LinearLayout>
     </RelativeLayout>

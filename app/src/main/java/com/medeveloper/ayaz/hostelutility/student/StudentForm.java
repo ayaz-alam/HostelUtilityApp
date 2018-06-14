@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 public class StudentForm extends AppCompatActivity {
 
 
-
+//TODO Complete student form
     private String EnrollNo,AdhaarNo,
             Name,Category,BloodGroup,
             FatherName,Class,Year,Branch,
@@ -66,6 +67,9 @@ public class StudentForm extends AppCompatActivity {
         year=findViewById(R.id.year);
         branch=findViewById(R.id.branch);
         class_=findViewById(R.id.class_);
+        final LinearLayout ll=findViewById(R.id.form_container);
+        ll.setEnabled(false);
+        ll.setVisibility(View.GONE);
         pDialog=new SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE);
         pDialog.setTitleText("Please wait..").setContentText("Please wait while we register you").setCancelable(false);
 
@@ -81,7 +85,8 @@ public class StudentForm extends AppCompatActivity {
         Submit=findViewById(R.id.submit);
         Authenticated();
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        //TODO write some way to implement the temporary data access of enrolled student list
         if(mAuth!=null)
         mAuth.signInAnonymously();
         mRef=FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).child(getString(R.string.enroll_student_list_ref));
@@ -91,10 +96,13 @@ public class StudentForm extends AppCompatActivity {
                 if(dataSnapshot.exists())
                 {
                     if(dataSnapshot.exists())
-                    studentList=dataSnapshot;
+                    {
+                        studentList=dataSnapshot;
+                        mAuth.signOut();
+                    }
                     else {
                         new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.ERROR_TYPE).setTitleText("Warden Not Uploaded the list yet").show();//,Toast.LENGTH_SHORT).show();
-
+                        mAuth.signOut();
                     }
 
                 }
@@ -106,34 +114,8 @@ public class StudentForm extends AppCompatActivity {
             }
         });
 
-        enrollNo.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                enrollNo.setError(null);
-               if(s.length()<11)
-               {
-                   if(!enrollNo.hasFocus())
-                   enrollNo.setError("Please Enter a Valid Enroll Number");
-
-               }
-               else {
-                   if(!studentList.hasChild(s.toString()))
-                       enrollNo.setError("Can't find your Enrollment Number");
-               }
-
-            }
-        });
-
+        mAuth.signOut();
         adhaarNo.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -166,6 +148,11 @@ public class StudentForm extends AppCompatActivity {
                         {
                             adhaarNo.setError(null);
                             Authenticated();
+                            ll.setEnabled(true);
+                            ll.setVisibility(View.VISIBLE);
+
+                            adhaarNo.setVisibility(View.GONE);
+                            enrollNo.setVisibility(View.GONE);
                             Toast.makeText(getBaseContext(),"Can Proceed",Toast.LENGTH_SHORT).show();
                         }
                         else adhaarNo.setError("Cannot Find Student");
@@ -215,20 +202,22 @@ public class StudentForm extends AppCompatActivity {
                 FatherContact=fatherContact.getText().toString();
                 LocalGuardianNo=localGuardianNo.getText().toString();
                 CompleteAddress =address.getText().toString();
-/*
+
                 final StudentDetailsClass thisStudent=new StudentDetailsClass(
                         EnrollNo,AdhaarNo,Name,Category,
                         BloodGroup,FatherName,Class,
                         Year,Branch,RoomNo,MobileNo,Email,FatherContact,
                         LocalGuardianNo,CompleteAddress
                         );
-                        */
-                final StudentDetailsClass Student=new StudentDetailsClass(
+
+              /*  final StudentDetailsClass Student=new StudentDetailsClass(
                         EnrollNo,AdhaarNo,"Name","Category",
                         "Blood Group","Father Name","Class",
                         "Year","Branch","Room No.","9509126582",Email,"Father Contact",
                         "LG","Address"
                 );
+                */
+
                 if(CheckDetails())
                 {
                     pDialog.show();
@@ -242,7 +231,7 @@ public class StudentForm extends AppCompatActivity {
                                 {
                                     FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).
                                             child(getString(R.string.hostel_id)).child(getString(R.string.student_list_ref))
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(Student).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(thisStudent).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful())
@@ -252,10 +241,10 @@ public class StudentForm extends AppCompatActivity {
                                                  * For now, saving only HostelID,EnrollmentNo,Name and RoomNo
                                                  * */
                                                 savePrefs(getString(R.string.pref_hostel_id),getString(R.string.hostel_id));
-                                                savePrefs(getString(R.string.pref_enroll),Student.EnrollNo);
-                                                savePrefs(getString(R.string.pref_name),Student.Name);
-                                                savePrefs(getString(R.string.pref_room),Student.RoomNo);
-                                                createCredentials(Student.Name);
+                                                savePrefs(getString(R.string.pref_enroll),thisStudent.EnrollNo);
+                                                savePrefs(getString(R.string.pref_name),thisStudent.Name);
+                                                savePrefs(getString(R.string.pref_room),thisStudent.RoomNo);
+                                                createCredentials(thisStudent.Name);
 
                                                 pDialog.dismiss();
                                                final SweetAlertDialog d=ShowDialog("Successfully Registered",3).
@@ -366,9 +355,79 @@ public class StudentForm extends AppCompatActivity {
         return myDialog;
     }
 
-    private boolean CheckDetails() {
-        return true;
-    }
 
+
+    private boolean CheckDetails() {
+        boolean isOkay=true;
+        enrollNo.setError(null);
+        adhaarNo.setError(null);
+        nameofStudent.setError(null);
+        fatherName.setError(null);
+        roomNo.setError(null);
+        mobileNo.setError(null);
+        email.setError(null);
+        fatherContact.setError(null);
+        localGuardianNo.setError(null);
+        address.setError(null);
+        nameofStudent.setError(null);
+
+        if(Name.equals(""))
+        {
+            nameofStudent.setError("Required");
+            nameofStudent.requestFocus();
+            isOkay=false;
+        }
+        else if(Email.equals(""))
+        {
+            email.setError("Required");
+            email.requestFocus();
+            isOkay=false;
+        }
+        else if(fatherName.getText().toString().equals(""))
+        {
+            fatherName.setError("Required");
+            fatherName.requestFocus();
+            isOkay=false;
+        }
+        else if(mobileNo.getText().toString().equals(""))
+        {
+            mobileNo.setError("Required");
+            mobileNo.requestFocus();
+            isOkay=false;
+
+        }
+        else if(roomNo.getText().toString().equals(""))
+        {
+            roomNo.setError("Required");
+            roomNo.requestFocus();
+            isOkay=false;
+        }
+        else if(localGuardianNo.getText().toString().equals(""))
+        {
+            localGuardianNo.setError("Required");
+            localGuardianNo.requestFocus();
+            isOkay=false;
+        }
+        else if(category.getSelectedItem().equals("Select Category"))
+        {
+            Toast.makeText(this,"Please select category",Toast.LENGTH_SHORT).show();
+            isOkay=false;
+            category.requestFocus();
+        }
+        else if(bloodGroup.getSelectedItem().equals("Select Blood Group"))
+        {
+            Toast.makeText(this,"Please select blood group",Toast.LENGTH_SHORT).show();
+            isOkay=false;
+            bloodGroup.requestFocus();
+        }
+        else if(year.getSelectedItem().equals("Year")||branch.getSelectedItem().equals("Branch")||class_.getSelectedItem().equals("Class"))
+        {
+            Toast.makeText(this,"Please select valid class details",Toast.LENGTH_SHORT).show();
+            isOkay=false;
+            year.requestFocus();
+
+        }
+        return isOkay;
+    }
 
 }

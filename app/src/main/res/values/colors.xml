@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00bcd4</color>
-    <color name="colorPrimaryDark">#008ba3</color>
-    <color name="PrimaryText">#000000</color>
+    <color name="colorPrimary">#a8e6cf</color>
+    <color name="colorPrimaryDark">#78b49e</color>
+    <color name="PrimaryText">#0b3846</color>
     <color name="colorAccent">#099b6f</color>
     <color name="warning_red">#dbfd2200</color>
     <color name="white">#FFFFFF</color>
-    <color name="lightbackground">#87ecfd</color>
-    <color name="dark_grey">#c900bcd4</color>
+    <color name="lightbackground">#f4f9f4</color>
+    <color name="dark_grey">#ffd3b6</color>
     <color name="light_grey">#e1bbbebb</color>
+    <color name="menu_item_selected">#1d566e</color>
+    <color name="translucent">#ef000000</color>
+    <color name="translucent_1">#ae000000</color>
 </resources>
+<!--
+Set 1
+<color name="colorPrimary">#00bcd4</color>
+<color name="colorPrimaryDark">#008ba3</color>
+<color name="PrimaryText">#000000</color>
+
+-->

@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/complaint_array"
-        android:background="@drawable/rounded_white"
+        android:background="@drawable/slight_curved_white"
         android:id="@+id/complaint_spinner"
 
         >
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/complaint_spinner"
         android:layout_margin="@dimen/default_margin"
-        android:background="@drawable/rounded_white"
+        android:background="@drawable/slight_curved_white"
         android:layout_centerVertical="true"
         android:padding="@dimen/default_margin"
         android:layout_height="wrap_content">
@@ -50,7 +50,8 @@
         android:id="@+id/submit_complaint"
         android:layout_margin="@dimen/default_margin"
         android:text="Submit"
-        android:background="@drawable/register_button"
+        android:textColor="@color/white"
+        android:background="@drawable/success_green_button"
         android:layout_alignParentBottom="true"
         />
 

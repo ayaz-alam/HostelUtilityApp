@@ -46,6 +46,7 @@ public class OfficialsHome extends AppCompatActivity
         fn.beginTransaction().replace(R.id.fragment_layout,new Notice(),"Notice").commit();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -75,16 +76,7 @@ public class OfficialsHome extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            Log.d("Ayaz","Came in Logout");
-            new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE).setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                @Override
-                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                    new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText("Logged out").show();
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(getApplication(), LoginAcitivity.class));
-                    finish();
-                }
-            });
+
 
             return true;
         }
@@ -164,6 +156,8 @@ public class OfficialsHome extends AppCompatActivity
             new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Are you sure ?")
                     .setContentText("Hello " + new MyData(this).getData(MyData.NAME) + "\nAre you sure that you want to logout from this device")
+                    .setConfirmText("Yes")
+                    .setCancelText("No")
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {

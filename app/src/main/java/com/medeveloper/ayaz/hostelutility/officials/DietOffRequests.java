@@ -70,7 +70,8 @@ public class DietOffRequests extends Fragment {
                     //Toast.makeText(getContext(),"List Length"+requestList.size(),Toast.LENGTH_SHORT).show();
 
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    adapter=new DietOffAdapter(getContext(),requestList);
+                    requestList=reverseList(requestList);
+                    adapter=new DietOffAdapter(getContext(),requestList,DietOffRequestClass.OFFICIAL_SIDE);
                     mRecyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     pDialog.dismiss();
@@ -100,5 +101,15 @@ public class DietOffRequests extends Fragment {
 
         return rootView;
     }
+
+    private ArrayList<DietOffRequestClass> reverseList(ArrayList<DietOffRequestClass> list)
+    {
+        ArrayList<DietOffRequestClass> tempList=new ArrayList<>(list.size());
+        int size=list.size();
+        for(int i=0;i<size;i++)
+            tempList.add(list.get(size-1-i));
+        return tempList;
+    }
+
 
 }

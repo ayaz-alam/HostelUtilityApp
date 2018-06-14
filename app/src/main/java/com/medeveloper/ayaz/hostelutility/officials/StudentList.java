@@ -57,9 +57,10 @@ public class StudentList extends Fragment {
         pDialog.show();
         studentList =new ArrayList<>();
         mRecyclerView=rootView.findViewById(R.id.my_recycler_view);
-        mRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
+        mRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).child(getString(R.string.student_list_ref));
+        mRef.keepSynced(true);
 
-        mRef.child(getString(R.string.student_list_ref)).addValueEventListener(new ValueEventListener() {
+        mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 studentList.clear();

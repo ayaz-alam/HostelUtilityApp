@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dark_back"
     tools:context="com.medeveloper.ayaz.hostelutility.Splash">
 
     <TextView
@@ -12,12 +11,12 @@
         android:layout_height="wrap_content"
         android:text="The Hostel App"
         android:textSize="44dp"
-        android:fontFamily="cursive"
+        android:id="@+id/splash_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textColor="@color/white"
+        android:textColor="@color/PrimaryText"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.683" />
@@ -27,7 +26,7 @@
         android:layout_height="24dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Dr. V.K Dave"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.753"

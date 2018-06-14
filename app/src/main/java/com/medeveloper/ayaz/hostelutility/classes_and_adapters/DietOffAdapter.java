@@ -5,11 +5,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,16 +24,17 @@ import java.util.ArrayList;
 public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHolder> {
 
     private Context mContext;
-    // private LayoutInflater mInflater;
     private ArrayList<DietOffRequestClass> mDataSource;
     DietOffAdapter.OnItemClickListener mItemClickListener;
+    private int code;
 
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //each data item is just a string in this case
         public TextView studentName,RoomNo,EnrollmentNo,To,From,Reason,Time;
-        private Button Accept,Decline;
+        private Button Accept,Decline,StudentAccepted;
+        private LinearLayout buttonHolderForOfficials;
 
 
         public ViewHolder(View v) {
@@ -48,8 +49,22 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
             Time=v.findViewById(R.id.diet_off_date);
             Accept=v.findViewById(R.id.accept_button);
             Decline=v.findViewById(R.id.decline_button);
-            Accept.setOnClickListener(this);
-            Decline.setOnClickListener(this);
+            StudentAccepted=v.findViewById(R.id.student_accepted);
+            buttonHolderForOfficials=v.findViewById(R.id.official_button_holder);
+
+
+
+            if(code==DietOffRequestClass.STUDENT_SIDE)
+            {
+                buttonHolderForOfficials.setVisibility(View.GONE);
+                StudentAccepted.setVisibility(View.VISIBLE);
+            }
+           else {
+                buttonHolderForOfficials.setVisibility(View.VISIBLE);
+                Accept.setOnClickListener(this);
+                Decline.setOnClickListener(this);
+                StudentAccepted.setVisibility(View.GONE);
+            }
 
 
             v.setOnClickListener(this);
@@ -70,7 +85,7 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
                                 DietOffRequestClass dietOffReq=mDataSource.get(getAdapterPosition());
                                 FirebaseDatabase.getInstance().getReference(mContext.getString(R.string.college_id))
                                         .child(mContext.getString(R.string.hostel_id)).child(mContext.getString(R.string.diet_off_req_ref))
-                                        .child(new MyData(mContext).getData(MyData.ENROLLMENT_NO))
+                                        .child(dietOffReq.EnrollmentNo)
                                         .child(dietOffReq.requestID)
                                         .child("accepted").setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -92,7 +107,6 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
                                         }
                                     }
                                 });
-                                Log.d("Ayaz","Item Clicked: "+mDataSource.get(getAdapterPosition()).requestID);
                             }
                         })
                         .setCancelText("Cancel")
@@ -119,7 +133,7 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
                                     public void onClick(final SweetAlertDialog sweetAlertDialog) {
                                         FirebaseDatabase.getInstance().getReference(mContext.getString(R.string.college_id))
                                                 .child(mContext.getString(R.string.hostel_id)).child(mContext.getString(R.string.diet_off_req_ref))
-                                                .child(new MyData(mContext).getData(MyData.ENROLLMENT_NO))
+                                                .child(request.EnrollmentNo)
                                                 .child(dietOffReq.requestID)
                                                 .child("seen").setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -163,11 +177,10 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
         this.mItemClickListener = mItemClickListener;
     }
 
-    public DietOffAdapter(Context context, ArrayList<DietOffRequestClass> items) {
+    public DietOffAdapter(Context context, ArrayList<DietOffRequestClass> items,int code) {
         mContext = context;
         mDataSource = items;
-
-
+        this.code=code;
     }
 
 
@@ -183,6 +196,12 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
     }
 
 
+    /**
+     * This function is for sending the sms
+     * @param phoneNo
+     * @param message
+     * @param context
+     */
     protected void sendSMSMessage(String phoneNo, String message, Context context) {
 
         SmsManager sm = SmsManager.getDefault();
@@ -200,23 +219,37 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
     @Override
     public void onBindViewHolder(final DietOffAdapter.ViewHolder holder, int position) {
 
-        // - get element from arraylist at this position
-        // - replace the contents of the view with that element
-
         DietOffRequestClass notice = mDataSource.get(position);
-
-        if(notice.accepted)
+        if(code== DietOffRequestClass.OFFICIAL_SIDE&&!(new MyData(mContext).getData(MyData.EMPLOYEE_ID).equals("NULL"))) // if official
         {
-            holder.Accept.setText("Accepted");
-            holder.Accept.setEnabled(false);
-            holder.Decline.setVisibility(View.GONE);
+            if (notice.accepted) {
+                holder.Accept.setText("Accepted");
+                holder.Accept.setEnabled(false);
+                holder.Decline.setVisibility(View.GONE);
+
+            } else if (notice.seen) {
+                holder.Decline.setText("Declined");
+                holder.Accept.setVisibility(View.GONE);
+                holder.Decline.setEnabled(false);
+            }
+        }
+        else if(code==DietOffRequestClass.STUDENT_SIDE)
+        {
+
+            if (notice.accepted) {
+                holder.StudentAccepted.setText("Accepted");
+                holder.StudentAccepted.setBackground(mContext.getDrawable(R.drawable.success_green_button));
+                holder.StudentAccepted.setEnabled(false);
+
+            } else if (notice.seen) {
+                holder.StudentAccepted.setText("Declined");
+                holder.StudentAccepted.setBackground(mContext.getDrawable(R.drawable.red_button));
+                holder.StudentAccepted.setEnabled(false);
+
+            }
 
         }
-        else if(notice.seen){
-            holder.Decline.setText("Declined");
-            holder.Accept.setVisibility(View.GONE);
-            holder.Decline.setEnabled(false);
-        }
+
 
         holder.studentName.setText(""+notice.Name);
         holder.RoomNo.setText("Room: "+notice.RoomNo);
@@ -224,10 +257,7 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
         holder.Time.setText((""+notice.time.getTime()));
         holder.From.setText("From date:   "+notice.From);
         holder.To.setText("Upto date:  "+notice.To);
-        holder.Reason.setText("\nReason:\n"+notice.Reason);
-
-
-
+        holder.Reason.setText("Reason:\n"+notice.Reason);
 
     }
 

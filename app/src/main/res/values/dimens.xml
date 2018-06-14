@@ -3,12 +3,12 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
-    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="nav_header_height">140dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="heading_text_size">22sp</dimen>
     <dimen name="default_padding">4sp</dimen>
     <dimen name="text_normal">16sp</dimen>
-    <dimen name="default_margin">8dp</dimen>
+    <dimen name="default_margin">6dp</dimen>
     <dimen name="sub_heading_text_size">16sp</dimen>
     <dimen name="default_small_margin">4dp</dimen>
     <dimen name="default_margin_large">16dp</dimen>
@@ -17,7 +17,7 @@
     <dimen name="default_heading_size">12dp</dimen>
     <dimen name="default_small_text_size">10dp</dimen>
     <dimen name="default_text_size">18dp</dimen>
-    <dimen name="cardview_title">16dp</dimen>
+    <dimen name="cardview_title">16sp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="card_action_button">16sp</dimen>
     <dimen name="cardview_subhead">16dp</dimen>
@@ -25,4 +25,8 @@
     <dimen name="xxx_large_margin">64dp</dimen>
     <dimen name="subhead">10sp</dimen>
     <dimen name="small_margin">4dp</dimen>
+    <dimen name="card_view_sub_head_margin">4dp</dimen>
+    <dimen name="card_subhed">12sp</dimen>
+    <dimen name="def_16dp">16dp</dimen>
+    <dimen name="display_email_text_size">10sp</dimen>
 </resources>

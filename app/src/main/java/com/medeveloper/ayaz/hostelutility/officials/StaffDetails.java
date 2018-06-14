@@ -51,11 +51,12 @@ public class StaffDetails extends Fragment {
         pDialog.show();
         staffList=new ArrayList<>();
         mRecyclerView=rootView.findViewById(R.id.my_recycler_view);
-        baseRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
+        baseRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).child(getString(R.string.staff_ref));
         /*String Array[]=getResources().getStringArray(R.array.complaint_array);
             for(int i=0;i<Array.length;i++)*/
 
-        baseRef.child(getString(R.string.staff_ref)).addValueEventListener(new ValueEventListener() {
+        baseRef.keepSynced(true);
+        baseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())

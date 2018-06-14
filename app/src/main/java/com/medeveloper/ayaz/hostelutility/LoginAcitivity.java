@@ -281,13 +281,16 @@ public class LoginAcitivity extends AppCompatActivity {
 
         return isOkay;
     }
+
+
+
     private void authenticate(final String email, final String pass, int id)
     {
 
 
         if(id==R.id.student_radio)
         {
-           authtenticateStudent(email,pass);
+           authenticateStudent(email,pass);
         }
         else if(id==R.id.teacher_radio)
         {
@@ -306,7 +309,10 @@ public class LoginAcitivity extends AppCompatActivity {
 
 
     }
-    private void authtenticateStudent(final String email, final String pass)
+
+
+
+    private void authenticateStudent(final String email, final String pass)
     {
         mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -327,7 +333,7 @@ public class LoginAcitivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sDialog.dismiss();
-                                    // finish();
+                                    finish();
                                 }
                             });
                     sDialog.show();

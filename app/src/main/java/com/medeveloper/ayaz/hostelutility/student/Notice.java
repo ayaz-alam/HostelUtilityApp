@@ -68,7 +68,11 @@ public class Notice extends Fragment {
                     pDialog.dismiss();
 
                 }
-                else Toast.makeText(getContext(),"No data found",Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(getContext(),"No data found",Toast.LENGTH_SHORT).show();
+                    pDialog.dismiss();
+
+                }
             }
 
             @Override

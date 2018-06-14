@@ -10,7 +10,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_white"
         android:layout_margin="8dp"
         tools:ignore="UselessParent">
@@ -57,6 +57,12 @@
                     />
 
             </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/form_container"
+                android:layout_height="wrap_content">
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
@@ -240,10 +246,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_margin"
                 android:id="@+id/submit"
-                android:background="@drawable/register_button"
+                android:background="@drawable/success_green_button"
                 android:textColor="@color/white"
                 android:text="@string/submit"
                 />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

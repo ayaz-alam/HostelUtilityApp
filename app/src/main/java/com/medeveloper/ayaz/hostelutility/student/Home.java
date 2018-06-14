@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,11 +43,24 @@ public class Home extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        setUpUser();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
         FragmentManager fn=getSupportFragmentManager();
         fn.beginTransaction().replace(R.id.fragment_layout,new Notice(),"Notice").commit();
+    }
+
+    private void setUpUser() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        MyData prefs=new MyData(this);
+/*
+        ((TextView)navigationView.findViewById(R.id.display_name)).setText(prefs.getData(MyData.NAME));
+        ((TextView)navigationView.findViewById(R.id.display_email)).setText(prefs.getData(MyData.ROOM_NO));
+       // ((TextView)navigationView.findViewById(R.id.display_name)).setText(prefs.getData(MyData.NAM));
+       */
+
     }
 
     @Override
@@ -114,7 +128,16 @@ public class Home extends AppCompatActivity
             BackPressedAgain=false;
 
 
-        } else if (id == R.id.nav_net_refill) {
+        }
+        else if (id == R.id.nav_your_dietoff_requests) {
+            Tag="DietOffList";
+            fragmentClass = YourDietOffRequest.class;
+            inHome=false;
+            BackPressedAgain=false;
+
+        }
+
+        else if (id == R.id.nav_net_refill) {
             Tag="NetRefClass";
             fragmentClass = NetRefill.class;
             inHome=false;
@@ -150,6 +173,8 @@ public class Home extends AppCompatActivity
         {    new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Are you sure ?")
                 .setContentText("Hello "+new MyData(this).getData(MyData.NAME)+"\nAre you sure that you want to logout from this device")
+                .setConfirmText("Yes")
+                .setCancelText("No")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -175,6 +200,7 @@ public class Home extends AppCompatActivity
 
         if(!(id==R.id.nav_log_out)) {
             // Insert the fragment by replacing any existing fragment
+            Log.d("Camehere","Inside the ChangeFragment: "+fragment);
             FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction F = fragmentManager.beginTransaction();
             F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
