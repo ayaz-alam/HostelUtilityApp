@@ -8,17 +8,7 @@
  <RelativeLayout
      android:layout_width="match_parent"
      android:layout_height="match_parent"
-     android:background="@color/lightbackground">
-     <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_margin="@dimen/large_margin"
-         android:text="Mess Diet of Request"
-         android:textColor="@color/PrimaryText"
-         android:layout_centerHorizontal="true"
-         android:textSize="@dimen/heading_text_size"
-         android:id="@+id/title"
-         />
+   >
      <RelativeLayout
          android:layout_width="match_parent"
          android:layout_below="@id/title"

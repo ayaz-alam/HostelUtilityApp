@@ -6,7 +6,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/light_grey"
         android:layout_height="match_parent">
         <ImageView
             android:layout_width="wrap_content"
@@ -77,7 +76,7 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="4dp"
             android:padding="@dimen/default_padding"
-            android:background="@drawable/rounded_white"
+            android:background="@drawable/slight_curved_white"
             >
 
 
