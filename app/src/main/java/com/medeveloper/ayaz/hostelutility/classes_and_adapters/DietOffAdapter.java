@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 import com.medeveloper.ayaz.hostelutility.R;
+
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.util.ArrayList;
@@ -254,7 +255,9 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
         holder.studentName.setText(""+notice.Name);
         holder.RoomNo.setText("Room: "+notice.RoomNo);
         holder.EnrollmentNo.setText("En. no: "+notice.EnrollmentNo);
-        holder.Time.setText((""+notice.time.getTime()));
+        CustomDateClass date=new CustomDateClass();
+        date.getDate(notice.time);
+        holder.Time.setText((""+date.getDate(notice.time)));
         holder.From.setText("From date:   "+notice.From);
         holder.To.setText("Upto date:  "+notice.To);
         holder.Reason.setText("Reason:\n"+notice.Reason);

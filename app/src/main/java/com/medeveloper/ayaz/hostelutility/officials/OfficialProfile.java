@@ -12,10 +12,10 @@ import com.medeveloper.ayaz.hostelutility.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class YourProfile extends Fragment {
+public class OfficialProfile extends Fragment {
 
 
-    public YourProfile() {
+    public OfficialProfile() {
         // Required empty public constructor
     }
 

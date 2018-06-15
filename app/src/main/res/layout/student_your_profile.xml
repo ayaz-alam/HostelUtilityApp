@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.medeveloper.ayaz.hostelutility.student.YourProfile">
+    tools:context="com.medeveloper.ayaz.hostelutility.student.StudentProfile">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,6 +30,22 @@
                 android:textSize="@dimen/sub_heading_text_size"
                 android:textStyle="bold"
                 android:layout_toRightOf="@id/display_image"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change"
+                android:drawableLeft="@drawable/ic_mode_edit"
+                android:drawablePadding="4dp"
+                android:layout_below="@id/display_image"
+                android:id="@+id/edit_photo"
+                android:textColor="@color/white"
+
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="8dp"
+
 
                 />
             <TextView

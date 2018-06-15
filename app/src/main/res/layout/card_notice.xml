@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="@dimen/card_margin"
     android:layout_marginLeft="@dimen/large_margin"
     android:layout_marginRight="@dimen/large_margin"
     >
@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
+            android:padding="@dimen/notice_title_padding"
 
             >
 
@@ -28,36 +29,34 @@
                 android:id="@+id/notice_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="4dp"
                 android:text="Notice Heading"
+                android:alpha=".90"
                 android:textColor="@color/PrimaryText"
                 android:textSize="@dimen/cardview_title"
-                android:textStyle="bold" />
+
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/generated_by"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/notice_title"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="4dp"
-                android:textSize="@dimen/card_subhed"
+                android:textSize="@dimen/date_size_small"
                 android:text="by: Faculty"
-                android:alpha=".75"
+                android:alpha=".60"
                 android:textColor="@color/PrimaryText" />
 
             <TextView
                 android:id="@+id/notice_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/notice_title"
+                android:textSize="@dimen/date_size_small"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/default_margin"
                 android:text="Date"
+                android:alpha=".60"
                 android:textColor="@color/PrimaryText" />
         </RelativeLayout>
 
@@ -65,9 +64,7 @@
             android:id="@+id/photo_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="159dp"
+            android:layout_centerInParent="true"
             android:indeterminate="true" />
 
         <LinearLayout
@@ -91,7 +88,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
-                android:textSize="16sp"
+                android:textSize="@dimen/card_body_12sp"
                 android:maxLines="2"
                 tools:text="Body of the Notice" />
             <TextView

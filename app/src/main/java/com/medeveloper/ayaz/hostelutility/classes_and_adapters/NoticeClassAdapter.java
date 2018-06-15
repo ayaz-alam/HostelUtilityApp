@@ -20,7 +20,7 @@ import com.medeveloper.ayaz.hostelutility.student.PhotoViewer;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CustomDateClass;
 import java.util.ArrayList;
 
 public class NoticeClassAdapter extends RecyclerView.Adapter<NoticeClassAdapter.ViewHolder> {
@@ -144,7 +144,7 @@ public class NoticeClassAdapter extends RecyclerView.Adapter<NoticeClassAdapter.
 
         holder.noticeBody.setText(notice.noticeBody);
         holder.noticeGenerator.setText("by: "+notice.noticeGenerator);
-        holder.noticeDate.setText((""+notice.noticeDate.getTime()));
+        holder.noticeDate.setText((""+CustomDateClass.getDate(notice.noticeDate)));
         if(notice.noticeBody.length()>80)
         holder.expand_colapse.setVisibility(View.VISIBLE);
         else holder.expand_colapse.setVisibility(View.GONE);

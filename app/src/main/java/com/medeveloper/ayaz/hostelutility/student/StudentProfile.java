@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,26 +22,52 @@ import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
+import org.w3c.dom.Text;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class
-YourProfile extends Fragment {
+StudentProfile extends Fragment {
 
 
-    public YourProfile() {
+    public StudentProfile() {
         // Required empty public constructor
     }
 
 
     View rootView;
     StudentDetailsClass myDetails;
+    SweetAlertDialog dialogForImageChange;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView=inflater.inflate(R.layout.student_your_profile, container, false);
+        setUpDialogForImageChange();
+
+        final ImageView displayImage=(ImageView)rootView.findViewById(R.id.display_image);
+        final TextView changePhoto=(TextView)rootView.findViewById(R.id.edit_photo);
+        changePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogForImageChange.show();
+            }
+        });
+        displayImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               dialogForImageChange.show();
+            }
+        });
+
+
+
+
+
+
+
         FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).
                 child(getString(R.string.student_list_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
@@ -89,6 +116,31 @@ YourProfile extends Fragment {
 
 
         return rootView;
+    }
+
+    private void setUpDialogForImageChange() {
+        dialogForImageChange=new SweetAlertDialog(getContext(),
+                SweetAlertDialog.NORMAL_TYPE)
+                .setCustomImage(R.drawable.ic_add_a_photo)
+                .setTitleText("Change photo")
+                .setContentText("Choose from gallery or click a new one!!")
+                .setConfirmText("Gallery")
+                .setCancelText("Camera")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        //From Gallery
+                        dialogForImageChange.dismiss();
+                    }
+                })
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        //From Camera
+                        dialogForImageChange.dismiss();
+                    }
+                });
+
     }
 
 }

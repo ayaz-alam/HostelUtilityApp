@@ -22,20 +22,18 @@ import java.util.ArrayList;
 
 
 /**
- * Created by ESIDEM jnr on 12/10/2016.
+ * Created by Ayaz Alam on 12/05/2018.
  */
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder>{
 
     private Context mContext;
-    // private LayoutInflater mInflater;
     private ArrayList<Complaint> mDataSource;
-    OnItemClickListener mItemClickListener;
     private int code;
 
 
     public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        //each data item is just a string in this case
+
         public TextView complaintTitle;
         public TextView complaintDetails;
         public TextView complaintDate;
@@ -65,7 +63,6 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 staffName=v.findViewById(R.id.card_staff_name);
 
                 staffContact=v.findViewById(R.id.card_staff_contact);
-
             }
 
 
@@ -110,16 +107,11 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                                 }
                             }
                         });
-                        Log.d("Ayaz","Item Clicked: "+mDataSource.get(getAdapterPosition()).complaintUID);
                     }
                 }).show();
 
 
             }
-
-            //TODO OnClick Item
-
-
         }
 
 
@@ -127,13 +119,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
 
     }
-    public interface OnItemClickListener{
-        public void onItemClick(View view, int Position);
-    }
 
-    public void SetOnItemClickListner(final OnItemClickListener mItemClickListener){
-        this.mItemClickListener = mItemClickListener;
-    }
     public ComplaintAdapter(Context context, ArrayList<Complaint> items,int code) {
         mContext = context;
         mDataSource = items;

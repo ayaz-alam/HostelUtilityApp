@@ -11,10 +11,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +22,6 @@ import com.medeveloper.ayaz.hostelutility.About;
 import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
-import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Home extends AppCompatActivity
@@ -49,17 +48,36 @@ public class Home extends AppCompatActivity
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
         FragmentManager fn=getSupportFragmentManager();
+        getSupportActionBar().setTitle("Notice");
         fn.beginTransaction().replace(R.id.fragment_layout,new Notice(),"Notice").commit();
     }
 
     private void setUpUser() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerLayout = navigationView.getHeaderView(0);
+        ImageView imageView=headerLayout.findViewById(R.id.display_image);
+        headerLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fn=getSupportFragmentManager();
+                getSupportActionBar().setTitle("Profile");
+                fn.beginTransaction().replace(R.id.fragment_layout,new StudentProfile(),"Profile").commit();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
         MyData prefs=new MyData(this);
 /*
-        ((TextView)navigationView.findViewById(R.id.display_name)).setText(prefs.getData(MyData.NAME));
-        ((TextView)navigationView.findViewById(R.id.display_email)).setText(prefs.getData(MyData.ROOM_NO));
-       // ((TextView)navigationView.findViewById(R.id.display_name)).setText(prefs.getData(MyData.NAM));
-       */
+        if(imageView!=null)
+            Picasso.with(this)
+                    .load(uri)
+                    .transform(new CircularTransform())
+                    .resize(150, 150)
+                    .centerCrop()
+                    .into(imageView);
+                    */
+        ((TextView)headerLayout.findViewById(R.id.display_name)).setText(prefs.getName());
+        ((TextView)headerLayout.findViewById(R.id.display_email)).setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
     }
 
@@ -109,8 +127,8 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_your_profile) {
-            Tag="YourProfile";
-            fragmentClass = YourProfile.class;
+            Tag="Your profile";
+            fragmentClass = StudentProfile.class;
             inHome=false;
             BackPressedAgain=false;
 
@@ -122,7 +140,7 @@ public class Home extends AppCompatActivity
             BackPressedAgain=false;
 
         } else if (id == R.id.nav_mess_diet_off) {
-            Tag="MessDietOff";
+            Tag="Mess diet off";
             fragmentClass = DietOff.class;
             inHome=false;
             BackPressedAgain=false;
@@ -130,7 +148,7 @@ public class Home extends AppCompatActivity
 
         }
         else if (id == R.id.nav_your_dietoff_requests) {
-            Tag="DietOffList";
+            Tag="Your requests";
             fragmentClass = YourDietOffRequest.class;
             inHome=false;
             BackPressedAgain=false;
@@ -138,7 +156,7 @@ public class Home extends AppCompatActivity
         }
 
         else if (id == R.id.nav_net_refill) {
-            Tag="NetRefClass";
+            Tag="Net refill";
             fragmentClass = NetRefill.class;
             inHome=false;
             BackPressedAgain=false;
@@ -155,7 +173,7 @@ public class Home extends AppCompatActivity
             Tag="Notice";
 
         } else if (id == R.id.nav_your_complaints) {
-            Tag="YourComplaints";
+            Tag="Your complaints";
             fragmentClass = YourComplaints.class;
             inHome=false;
             BackPressedAgain=false;
@@ -200,7 +218,7 @@ public class Home extends AppCompatActivity
 
         if(!(id==R.id.nav_log_out)) {
             // Insert the fragment by replacing any existing fragment
-            Log.d("Camehere","Inside the ChangeFragment: "+fragment);
+            getSupportActionBar().setTitle(Tag);
             FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction F = fragmentManager.beginTransaction();
             F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);

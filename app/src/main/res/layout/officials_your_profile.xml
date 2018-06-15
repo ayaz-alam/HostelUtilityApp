@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.medeveloper.ayaz.hostelutility.officials.YourProfile">
+    tools:context="com.medeveloper.ayaz.hostelutility.officials.OfficialProfile">
 
     <!-- TODO: Update blank fragment layout -->
  <RelativeLayout

@@ -13,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.medeveloper.ayaz.hostelutility.About;
@@ -44,6 +47,8 @@ public class OfficialsHome extends AppCompatActivity
 
         FragmentManager fn=getSupportFragmentManager();
         fn.beginTransaction().replace(R.id.fragment_layout,new Notice(),"Notice").commit();
+        getSupportActionBar().setTitle("Notice");
+        setUpUser();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
@@ -58,6 +63,35 @@ public class OfficialsHome extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void setUpUser() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerLayout = navigationView.getHeaderView(0);
+        ImageView imageView=headerLayout.findViewById(R.id.display_image);
+        headerLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fn=getSupportFragmentManager();
+                getSupportActionBar().setTitle("Profile");
+                fn.beginTransaction().replace(R.id.fragment_layout,new OfficialProfile(),"Profile").commit();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+        MyData prefs=new MyData(this);
+/*
+        if(imageView!=null)
+            Picasso.with(this)
+                    .load(uri)
+                    .transform(new CircularTransform())
+                    .resize(150, 150)
+                    .centerCrop()
+                    .into(imageView);
+                    */
+        ((TextView)headerLayout.findViewById(R.id.display_name)).setText(prefs.getName());
+        ((TextView)headerLayout.findViewById(R.id.display_email)).setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
     }
 
     @Override
@@ -107,35 +141,35 @@ public class OfficialsHome extends AppCompatActivity
             Tag="Notice";
             // Handle the camera action
         } else if (id == R.id.nav_gen_notice) {
-            Tag="GeneralNotice";
+            Tag="General notice";
             fragmentClass = GeneralNotice.class;
             inHome=false;
             BackPressedAgain=false;
         } else if (id == R.id.nav_send_notice) {
-            Tag="SendNotice";
+            Tag="Send notice";
             fragmentClass = SendNotice.class;
             inHome=false;
             BackPressedAgain=false;
         } else if (id == R.id.nav_complaints) {
-            Tag="Complaint";
+            Tag="Complaints";
             fragmentClass = Complaints.class;
             inHome=false;
             BackPressedAgain=false;
 
         } else if (id == R.id.nav_diet_off_requests) {
-            Tag="DietOffRequests";
+            Tag="Diet off requests";
             fragmentClass = DietOffRequests.class;
             inHome=false;
             BackPressedAgain=false;
         } else if (id == R.id.nav_staff_details) {
-            Tag="StaffDetails";
+            Tag="Staffs";
             fragmentClass = StaffDetails.class;
             inHome=false;
             BackPressedAgain=false;
         }
         else if (id == R.id.nav_your_profile) {
-            Tag="YourProfile";
-            fragmentClass = YourProfile.class;
+            Tag="Profile";
+            fragmentClass = OfficialProfile.class;
             inHome=false;
             BackPressedAgain=false;
         }
@@ -146,7 +180,7 @@ public class OfficialsHome extends AppCompatActivity
             BackPressedAgain=false;
         }
         else if (id == R.id.nav_student_list) {
-            Tag="About";
+            Tag="Student list";
             fragmentClass = StudentList.class;
             inHome=false;
             BackPressedAgain=false;
@@ -180,6 +214,7 @@ public class OfficialsHome extends AppCompatActivity
 
         if(!(id==R.id.nav_log_out)) {
             // Insert the fragment by replacing any existing fragment
+            getSupportActionBar().setTitle(Tag);
             FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction F = fragmentManager.beginTransaction();
             F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
