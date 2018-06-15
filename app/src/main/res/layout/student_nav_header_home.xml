@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="4dp"
+        android:layout_marginLeft="6dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/display_image"
         >
@@ -46,8 +46,14 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/display_email_text_size"
             android:textColor="@color/PrimaryText"
-
             android:text="ayazalam922@gmail.com" />
+        <TextView
+            android:id="@+id/display_room_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/display_email_text_size"
+            android:textColor="@color/PrimaryText"
+            android:text="Room" />
     </LinearLayout>
 
 </RelativeLayout>

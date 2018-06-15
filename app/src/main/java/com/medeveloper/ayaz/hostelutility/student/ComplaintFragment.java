@@ -135,9 +135,10 @@ public class ComplaintFragment extends Fragment {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        Log.d("Ayaz", "PushID: " +
-                                                                "" + pushID);
                                                         pDialog.dismiss();
+                                                        new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE).
+                                                                setTitleText("Successfull").
+                                                                show();
 
                                                         /*
                                                          * Here we are sending the SMS to the warden and to the respective staff member to be contacted

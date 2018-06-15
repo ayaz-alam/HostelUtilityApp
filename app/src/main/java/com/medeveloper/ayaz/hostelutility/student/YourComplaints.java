@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,7 +50,7 @@ public class YourComplaints extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView=inflater.inflate(R.layout.student_your_complaints, container, false);
+        rootView=inflater.inflate(R.layout.fragment_with_a_recycler, container, false);
 
         pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Please wait..");
         pDialog.show();
@@ -88,6 +89,12 @@ public class YourComplaints extends Fragment {
                             mComplaintList.clear();
                             for(DataSnapshot d:dataSnapshot.getChildren())
                                 mComplaintList.add(d.getValue(Complaint.class));
+                            if(mComplaintList.size()>0)
+                            {
+                                (rootView.findViewById(R.id.no_data_found)).setVisibility(View.GONE);
+                                (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
                             adapter = new ComplaintAdapter(getContext(), mComplaintList,0);
                             recyclerView.setAdapter(adapter);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -97,8 +104,12 @@ public class YourComplaints extends Fragment {
                         else
                         {
                             pDialog.dismiss();
-                            new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).
-                                    setTitleText("You didn't submit any complaint").show();
+                            pDialog.dismiss();
+                            recyclerView.setVisibility(View.GONE);
+                            (rootView.findViewById(R.id.no_data_found)).setVisibility(View.VISIBLE);
+                            (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.VISIBLE);
+                            ((TextView)rootView.findViewById(R.id.no_data_found_text)).setText("It seems that you didn't submitted any complaints yet");
+
                         }
 
 

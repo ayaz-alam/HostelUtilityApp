@@ -31,6 +31,6 @@
     <dimen name="display_email_text_size">10sp</dimen>
     <dimen name="card_margin">12dp</dimen>
     <dimen name="date_size_small">10dp</dimen>
-    <dimen name="notice_title_padding">4dp</dimen>
+    <dimen name="notice_title_padding">6dp</dimen>
     <dimen name="card_body_12sp">12sp</dimen>
 </resources>

@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context="com.medeveloper.ayaz.hostelutility.student.Notice">
+    tools:context="com.medeveloper.ayaz.hostelutility.officials.Complaints">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +18,31 @@
             android:paddingTop="@dimen/default_margin"
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/no_data_found"
+            android:visibility="gone"
+            android:src="@drawable/ic_notdatafound"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Some error text"
+            android:maxWidth="200dp"
+            android:textAlignment="center"
+            android:alpha=".8"
+            android:layout_margin="8dp"
+            android:visibility="gone"
+            android:layout_below="@id/no_data_found"
+            android:id="@+id/no_data_found_text"
+            />
+
     </RelativeLayout>
+
+
 
 
 </FrameLayout>

@@ -18,11 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.medeveloper.ayaz.hostelutility.About;
 import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CircularTransform;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.squareup.picasso.Picasso;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,6 +56,25 @@ public class Home extends AppCompatActivity
     }
 
     private void setUpUser() {
+        final MyData prefs=new MyData(this);
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null)
+        {
+            FirebaseAuth.getInstance().signOut();
+            new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Session Expired")
+                    .setContentText("Please login again")
+                    .setConfirmText("Login")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            startActivity(new Intent(Home.this,LoginAcitivity.class));
+                            prefs.clearPreferences();
+                            finish();
+                        }
+                    }).show();
+            return;
+        }
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout = navigationView.getHeaderView(0);
         ImageView imageView=headerLayout.findViewById(R.id.display_image);
@@ -66,18 +88,18 @@ public class Home extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
-        MyData prefs=new MyData(this);
-/*
-        if(imageView!=null)
-            Picasso.with(this)
-                    .load(uri)
-                    .transform(new CircularTransform())
-                    .resize(150, 150)
-                    .centerCrop()
-                    .into(imageView);
-                    */
+
+
+        Picasso.get().
+                load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
+                .centerCrop()
+                .transform(new CircularTransform())
+                .fit()
+                .into(imageView);
+
         ((TextView)headerLayout.findViewById(R.id.display_name)).setText(prefs.getName());
-        ((TextView)headerLayout.findViewById(R.id.display_email)).setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        ((TextView)headerLayout.findViewById(R.id.display_email)).setText(user.getEmail());
+        ((TextView)headerLayout.findViewById(R.id.display_room_no)).setText(prefs.getData(MyData.ROOM_NO));
 
     }
 

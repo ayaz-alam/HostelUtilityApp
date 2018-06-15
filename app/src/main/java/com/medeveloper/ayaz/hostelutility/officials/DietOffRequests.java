@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -44,7 +45,7 @@ public class DietOffRequests extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView=inflater.inflate(R.layout.officials_diet_off_requests, container, false);
+        rootView=inflater.inflate(R.layout.fragment_with_a_recycler, container, false);
 
         pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Please Wait...");
         pDialog.show();
@@ -71,6 +72,13 @@ public class DietOffRequests extends Fragment {
 
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     requestList=reverseList(requestList);
+                    if(requestList.size()>0)
+                    {
+                        (rootView.findViewById(R.id.no_data_found)).setVisibility(View.GONE);
+                        (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.GONE);
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                    }
+
                     adapter=new DietOffAdapter(getContext(),requestList,DietOffRequestClass.OFFICIAL_SIDE);
                     mRecyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
@@ -79,11 +87,12 @@ public class DietOffRequests extends Fragment {
                 }
                 else {
                     pDialog.dismiss();
-                    Toast.makeText(getContext(),"No data found",Toast.LENGTH_SHORT).show();
-                    new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("No data found")
-                            .setContentText("It seems that no student have submitted any request yet")
-                            .show();
+                    pDialog.dismiss();
+                    mRecyclerView.setVisibility(View.GONE);
+                    (rootView.findViewById(R.id.no_data_found)).setVisibility(View.VISIBLE);
+                    (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.VISIBLE);
+                    ((TextView)rootView.findViewById(R.id.no_data_found_text)).setText("It seems that there's no requests yet");
+
                 }
             }
 

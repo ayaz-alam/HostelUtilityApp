@@ -2,14 +2,13 @@ package com.medeveloper.ayaz.hostelutility.officials;
 
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,11 +43,12 @@ public class Complaints extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         rootView=inflater.inflate(R.layout.officials_complaint_list, container, false);
+         rootView=inflater.inflate(R.layout.fragment_with_a_recycler, container, false);
          pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...");
          pDialog.show();
          mComplaintList=new ArrayList<>();
          mRecyclerView = (RecyclerView)rootView.findViewById(R.id.my_recycler_view);
+
 
         baseRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
          baseRef.child(getString(R.string.complaint_ref)).addValueEventListener(new ValueEventListener() {
@@ -60,7 +60,12 @@ public class Complaints extends Fragment {
                      for(DataSnapshot d:dataSnapshot.getChildren())
                          for(DataSnapshot d2:d.getChildren())
                              mComplaintList.add(d2.getValue(Complaint.class));
-
+                     if(mComplaintList.size()>0)
+                     {
+                         (rootView.findViewById(R.id.no_data_found)).setVisibility(View.GONE);
+                         (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.GONE);
+                         mRecyclerView.setVisibility(View.VISIBLE);
+                     }
                      reverseList();
                      adapter = new ComplaintAdapter(getContext(), mComplaintList,1);
                      mRecyclerView.setAdapter(adapter);
@@ -69,7 +74,13 @@ public class Complaints extends Fragment {
                      pDialog.dismiss();
 
                  }
-                 else new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).setTitleText("No Data available").show();
+                 else {
+                     pDialog.dismiss();
+                     mRecyclerView.setVisibility(View.GONE);
+                     (rootView.findViewById(R.id.no_data_found)).setVisibility(View.VISIBLE);
+                     (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.VISIBLE);
+                     ((TextView)rootView.findViewById(R.id.no_data_found_text)).setText("It seems that there's no complaints yet");
+                 }
 
              }
 
