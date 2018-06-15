@@ -25,7 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialID;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialsDetailsClass;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
 import com.medeveloper.ayaz.hostelutility.student.Home;
@@ -352,7 +352,7 @@ public class LoginAcitivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            Log.d("Ayaz","Credentials Authenticated\tChecking EmployeeID");
+
                             FirebaseDatabase.getInstance().getReference(getString(R.string.college_id))
                                     .child(getString(R.string.officials_id_ref))
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -361,8 +361,8 @@ public class LoginAcitivity extends AppCompatActivity {
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             if(dataSnapshot.exists())
                                             {
-                                                OfficialID Id=dataSnapshot.getValue(OfficialID.class);
-                                                if(Id.mEmployeeId.equals(EmployeeID))
+                                                OfficialsDetailsClass Id=dataSnapshot.getValue(OfficialsDetailsClass.class);
+                                                if(Id.mEmployeeID.equals(EmployeeID))
                                                 {
                                                     Log.d("Ayaz","All Credentials Authenticated\tValid User");
                                                     MyData prefs=new MyData(LoginAcitivity.this);
@@ -377,6 +377,8 @@ public class LoginAcitivity extends AppCompatActivity {
                                                             .setTitleText("Invalid Credentials")
                                                             .setContentText("Please make sure you've entered valid credentials\nContact admin if problem persists")
                                                             .show();
+                                                    new MyData(LoginAcitivity.this).clearPreferences();
+                                                    FirebaseAuth.getInstance().signOut();
                                                     pDialog.dismiss();
                                                 }
                                             }

@@ -47,7 +47,7 @@ public class MyData {
                     savePrefs(context.getString(R.string.pref_mobile_no),Student.MobileNo);
 
     }
-    public void saveTeacherPrefs(OfficialID id)
+    public void saveTeacherPrefs(OfficialsDetailsClass id)
     {
         /**
          * Saving some data in the SharedPrefrences so that they can Accessed easily
@@ -55,11 +55,12 @@ public class MyData {
          * */
         Log.d("Ayaz /"+"LoginAct.","Creating MyData and opening Home Page");
         savePrefs(context.getString(R.string.pref_hostel_id),context.getString(R.string.hostel_id));
-        savePrefs(context.getString(R.string.pref_employee_id),id.mEmployeeId);
+        savePrefs(context.getString(R.string.pref_employee_id),id.mEmployeeID);
         savePrefs(context.getString(R.string.pref_name),id.mName);
         savePrefs(context.getString(R.string.pref_department),id.mDepartment);
         savePrefs(context.getString(R.string.pref_post),id.mPost);
         savePrefs(context.getString(R.string.pref_mobile_no),id.mPhone);
+
 
     }
 
@@ -73,6 +74,7 @@ public class MyData {
         savePrefs(context.getString(R.string.pref_post),null);
         savePrefs(context.getString(R.string.pref_enroll),null);
         savePrefs(context.getString(R.string.pref_room),null);
+        savePrefs(MOBILE,null);
 
     }
 
@@ -80,7 +82,6 @@ public class MyData {
     public void savePrefs(String Key,String Value)
     {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString(Key,Value).apply();
-        Log.d("Ayaz","Preference Saved :"+getPrefs(Key,"-1"));
     }
     public String getPrefs(String Key,String defaultValue)
     {

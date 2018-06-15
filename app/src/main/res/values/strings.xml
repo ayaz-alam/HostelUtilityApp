@@ -112,5 +112,6 @@
     <string name="pref_mobile_no">MobileNo</string>
     <string name="mess_contractor_number">9969472062</string>
     <string name="action_logout">Logout</string>
+    <string name="official">Officials_Records</string>
 
 </resources>

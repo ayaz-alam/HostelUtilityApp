@@ -48,7 +48,6 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
 
-
         Animation animation1= AnimationUtils.makeInChildBottomAnimation(this);
         animation1.setDuration(400);
         TextView t=findViewById(R.id.splash_text);
