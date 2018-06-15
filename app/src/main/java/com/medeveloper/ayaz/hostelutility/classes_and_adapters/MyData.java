@@ -88,6 +88,24 @@ public class MyData {
         return PreferenceManager.getDefaultSharedPreferences(context).getString(Key, defaultValue);
     }
 
+    public void setFirstTimeUser(boolean isFirstLogin)
+    {
+        if(isFirstLogin)
+            savePrefs("FirstTime","true");
+        else
+            savePrefs("FirstTime","false");
+
+    }
+
+
+    public boolean isFirstTimeUser()
+    {
+        if(getPrefs("FirstTime","null").equals("true"))
+            return true;
+        else
+            return false;
+    }
+
     public String getName()
     {
         return getPrefs(context.getString(R.string.pref_name),"NULL");

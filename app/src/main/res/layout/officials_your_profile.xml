@@ -26,8 +26,7 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_margin="@dimen/default_margin"
-         android:elevation="8dp"
-         android:background="@drawable/slight_curved_white"
+         android:background="@color/colorAccent"
          android:padding="@dimen/default_margin">
 
          <ImageView
@@ -35,7 +34,7 @@
              android:layout_width="80dp"
              android:layout_height="80dp"
              android:layout_marginRight="@dimen/default_margin_large"
-             android:src="@drawable/ic_student" />
+             android:src="@drawable/ic_face_white_24dp" />
 
          <TextView
              android:id="@+id/display_name"
@@ -43,7 +42,7 @@
              android:layout_height="wrap_content"
              android:layout_toRightOf="@id/display_image"
              android:text="Name"
-             android:textColor="@color/text_color"
+             android:textColor="@color/white"
              android:textSize="@dimen/sub_heading_text_size"
              android:textStyle="bold"
 
@@ -55,18 +54,15 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_below="@id/display_image"
-             android:layout_marginLeft="6dp"
+             android:layout_marginLeft="8dp"
              android:drawableLeft="@drawable/ic_mode_edit"
              android:drawablePadding="4dp"
              android:text="Change"
              android:textColor="@color/white"
              android:textSize="12sp"
              android:textStyle="bold"
-             android:paddingLeft="8dp"
-             android:paddingRight="8dp"
-             android:paddingTop="4dp"
-             android:paddingBottom="4dp"
-             android:background="@drawable/success_green_button"
+
+
              />
 
          <TextView
@@ -77,7 +73,7 @@
              android:layout_marginTop="@dimen/default_small_margin"
              android:layout_toRightOf="@id/display_image"
              android:text="Hostel"
-             android:textColor="@color/text_color"
+             android:textColor="@color/white"
 
              />
 
@@ -89,7 +85,7 @@
              android:layout_marginTop="@dimen/default_small_margin"
              android:layout_toRightOf="@id/display_image"
              android:text="Room Number"
-             android:textColor="@color/text_color"
+             android:textColor="@color/white"
 
              />
 

@@ -14,13 +14,13 @@
             android:padding="@dimen/default_margin"
             android:id="@+id/top_panel"
             android:layout_height="wrap_content">
+
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_face_white_24dp"
-                android:layout_marginRight="@dimen/default_margin_large"
                 android:id="@+id/display_image"
-                />
+                android:layout_width="80dp"
+                android:layout_height="83dp"
+                android:layout_marginRight="@dimen/default_margin_large"
+                android:src="@drawable/ic_face_white_24dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Change"
+                android:layout_marginTop="4dp"
                 android:drawableLeft="@drawable/ic_mode_edit"
                 android:drawablePadding="4dp"
                 android:layout_below="@id/display_image"

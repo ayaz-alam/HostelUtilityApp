@@ -34,11 +34,12 @@ public class Home extends AppCompatActivity
     private boolean BackPressedAgain=false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -51,8 +52,28 @@ public class Home extends AppCompatActivity
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
         FragmentManager fn=getSupportFragmentManager();
-        getSupportActionBar().setTitle("Notice");
-        fn.beginTransaction().replace(R.id.fragment_layout,new Notice(),"Notice").commit();
+        if(new MyData(this).isFirstTimeUser())
+        {
+            new SweetAlertDialog(this,SweetAlertDialog.NORMAL_TYPE)
+                    .setTitleText("Hey there!!")
+                    .setContentText("Please change your password and your profile photo\n" +
+                            "We know you look great in real")
+                    .setConfirmText("Okay")
+                    .setCustomImage(getDrawable(R.drawable.ic_add_a_photo))
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.dismiss();
+                        }
+                    }).show();
+            getSupportActionBar().setTitle("Profile");
+            new MyData(getApplicationContext()).setFirstTimeUser(false);
+            fn.beginTransaction().replace(R.id.fragment_layout, new StudentProfile(), "Profile").commit();
+        }
+        else {
+            getSupportActionBar().setTitle("Notice");
+            fn.beginTransaction().replace(R.id.fragment_layout, new Notice(), "Notice").commit();
+        }
     }
 
     private void setUpUser() {
