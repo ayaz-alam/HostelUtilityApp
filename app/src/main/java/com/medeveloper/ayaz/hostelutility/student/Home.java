@@ -24,6 +24,7 @@ import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CircularTransform;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
+import com.medeveloper.ayaz.hostelutility.officials.GeneralNotice;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.squareup.picasso.Picasso;
 
@@ -176,7 +177,13 @@ public class Home extends AppCompatActivity
             BackPressedAgain=false;
 
             // Handle the camera action
-        } else if (id == R.id.nav_complaint) {
+        }else if (id == R.id.nav_gen_notice) {
+            Tag="General notice";
+            fragmentClass = GeneralNotice.class;
+            inHome=false;
+            BackPressedAgain=false;
+        }
+        else if (id == R.id.nav_complaint) {
             Tag="Complaint";
             fragmentClass = ComplaintFragment.class;
             inHome=false;

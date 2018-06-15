@@ -8,11 +8,16 @@
             android:id="@+id/nav_notice"
             android:icon="@drawable/ic_notice"
             android:title="Notice" />
+        <item
+            android:id="@+id/nav_gen_notice"
+            android:icon="@drawable/ic_general_notice"
+            android:title="General notice" />
 
         <item
             android:id="@+id/nav_complaint"
             android:icon="@drawable/ic_complaint"
             android:title="Complaint" />
+
         <item
             android:id="@+id/nav_mess_diet_off"
             android:icon="@drawable/ic_diet_off"
