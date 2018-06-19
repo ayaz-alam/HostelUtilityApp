@@ -76,18 +76,18 @@
     <string name="warning_student_form">Please enter details same as you filled in the hostel form, Any wrong information can lead to expulsion from hostel</string>
     <string name="type_notice_text">Type notice or select from gallery</string>
     <string name="net_refill_request">Net Refill Request</string>
-    <string name="enter_your_room_number">Enter Your Room Number</string>
-    <string name="guardian_no">Local Guardian Mobile no.(Optional)</string>
-    <string name="enter_adhaar">Enter your Adhaar Number</string>
-    <string name="enter_your_name">Enter Your Name</string>
-    <string name="enter_your_father_name">Enter Your Father Name</string>
+    <string name="enter_your_room_number">Room number</string>
+    <string name="guardian_no">Local guadian no.(Opt)</string>
+    <string name="enter_adhaar">Adhaar no.</string>
+    <string name="enter_your_name">Name</string>
+    <string name="enter_your_father_name">Father Name</string>
     <string name="mobile_no">Mobile no</string>
-    <string name="whatsapp_no_if_any">Whatsapp no. if any</string>
-    <string name="enter_your_email_address">Enter Your Email Address</string>
+    <string name="whatsapp_no_if_any">Whatsapp no(Opt)</string>
+    <string name="enter_your_email_address">Email Address</string>
     <string name="father_contact">Father Contact</string>
     <string name="permanent_address">Permanent Address</string>
     <string name="submit">Submit</string>
-    <string name="enter_your_enrollment">Enter Your Enrollment Number</string>
+    <string name="enter_your_enrollment">Enrollment Number</string>
     <string name="fill_this_form_to_proceed">Fill this form to proceed</string>
 
 
@@ -99,6 +99,7 @@
     <string name="diet_off_req_ref">MessDietOffRequests</string>
     <string name="enroll_student_list_ref">EnrolledStudentList</string>
     <string name="notice_ref">Notices</string>
+
     <string name="warden_number">9509126582</string>
     <string name="complaint_ref">Complaints</string>
     <string name="pref_hostel_id">pref_HostelID</string>
@@ -112,5 +113,26 @@
     <string name="pref_mobile_no">MobileNo</string>
     <string name="mess_contractor_number">9969472062</string>
     <string name="action_logout">Logout</string>
+    <string name="official">Officials_Records</string>
+
+    <string name="new_message_notification_title_template">New message: %1$s</string>
+
+    <!-- TODO: remove this placeholder text -->
+    <string name="new_message_notification_placeholder_text_template">You said %1$s and lorem ipsum
+        dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel
+        semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
+        Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
+        ornare lacus. Duis ac mauris sed massa congue volutpat. Donec sed erat sit amet turpis
+        viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec
+        tortor.
+    </string>
+
+    <string name="action_share">Share</string>
+    <string name="action_reply">Reply</string>
+    <string name="channel_name">new channer</string>
+    <string name="channel_description">this is a new channel</string>
+    <string name="reg_first_war_text">Give your details to register\nMake sure you\'re entering same information that you\'ve given to the hostel form</string>
+    <string name="enroll_hint">Enrollment number</string>
+    <string name="empId_hint">Employee Id</string>
 
 </resources>

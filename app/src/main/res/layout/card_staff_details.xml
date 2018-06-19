@@ -15,23 +15,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
+            android:background="@color/colorPrimary"
             android:text="Department"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/PrimaryText"
             android:id="@+id/staff_department"
             android:textSize="@dimen/cardview_title" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_margin="4dp"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -50,7 +49,7 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_margin="@dimen/default_margin"
+            android:layout_margin="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -71,7 +70,7 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_margin="@dimen/default_margin"
+            android:layout_margin="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

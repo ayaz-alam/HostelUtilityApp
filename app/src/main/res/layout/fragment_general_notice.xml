@@ -19,7 +19,6 @@
        <WebView
            android:layout_width="match_parent"
            android:id="@+id/general_notice"
-           android:layout_below="@+id/progress_bar"
            android:layout_height="match_parent">
 
        </WebView>

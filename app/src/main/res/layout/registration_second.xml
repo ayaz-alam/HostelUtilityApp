@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Registration.Second">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/def_16dp"
+        tools:ignore="UselessParent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/extra_large_heading"
+                android:text="Fill your detail"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/default_margin"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Complete this form to proceed"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/default_margin"
+                />
+
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_white"
+                    android:hint="Enter your name"
+                    android:id="@+id/your_name"
+                    android:padding="4dp"
+                    android:maxLines="1"
+                    android:maxEms="1"
+                    android:inputType="textPersonName"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp"
+                    android:minHeight="30dp"
+                    android:paddingLeft="12dp"
+                    android:drawablePadding="4dp"
+                    android:drawableLeft="@drawable/ic_name"
+
+                    />
+
+                <EditText
+                    android:id="@+id/mobile_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/ic_mobile"
+                    android:drawablePadding="4dp"
+                    android:hint="@string/mobile_no"
+                    android:maxLength="10"
+                    android:inputType="number"
+                    android:maxEms="1"
+                    android:maxLines="1"
+                    android:minHeight="30dp"
+                    android:padding="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="12dp"
+                    android:textColor="@color/colorPrimaryDark"
+
+                    />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/categories"
+                    android:id="@+id/student_category"
+                    android:background="@drawable/rounded_white"
+                    android:padding="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/blood_group"
+                    android:id="@+id/student_blood_group"
+                    android:padding="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/rounded_white"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_white"
+                    android:hint="@string/enter_your_father_name"
+                    android:id="@+id/student_father"
+                    android:padding="4dp"
+                    android:maxLines="1"
+                    android:maxEms="1"
+                    android:inputType="textPersonName"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:minHeight="30dp"
+                    android:paddingLeft="12dp"
+                    android:drawablePadding="4dp"
+                    android:drawableLeft="@drawable/ic_name"
+
+                    />
+
+
+                <EditText
+                    android:id="@+id/father_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/ic_mobile"
+                    android:drawablePadding="4dp"
+                    android:hint="@string/father_contact"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:maxEms="1"
+                    android:maxLines="1"
+                    android:minHeight="30dp"
+                    android:padding="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="12dp"
+                    android:textColor="@color/colorPrimaryDark"
+
+                    />
+
+                <LinearLayout
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/rounded_white"
+                    android:padding="4dp"
+                    android:layout_height="wrap_content">
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:entries="@array/stream"
+                        android:layout_marginEnd="4dp"
+                        android:id="@+id/class_"
+                        android:layout_height="wrap_content">
+
+                    </Spinner>
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:id="@+id/year"
+                        android:entries="@array/year">
+
+                    </Spinner>
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:id="@+id/branch"
+                        android:entries="@array/branch">
+
+                    </Spinner>
+
+                </LinearLayout>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_white"
+                    android:hint="@string/enter_your_room_number"
+                    android:id="@+id/room_no"
+                    android:padding="4dp"
+                    android:maxLines="1"
+                    android:maxEms="1"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:minHeight="30dp"
+                    android:paddingLeft="12dp"
+                    android:drawablePadding="4dp"
+                    android:drawableLeft="@drawable/ic_room_no"
+
+                    />
+
+
+                <EditText
+                    android:hint="@string/guardian_no"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:id="@+id/local_guardian_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/ic_mobile"
+                    android:drawablePadding="4dp"
+                    android:maxEms="1"
+                    android:maxLines="1"
+                    android:minHeight="30dp"
+                    android:padding="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="12dp"
+                    android:textColor="@color/colorPrimaryDark"
+
+                    />
+
+                <EditText
+                    android:id="@+id/whatsapp_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/ic_whatsapp"
+                    android:drawablePadding="4dp"
+                    android:hint="@string/whatsapp_no_if_any"
+                    android:inputType="number"
+                    android:maxEms="1"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:minHeight="30dp"
+                    android:padding="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="12dp"
+                    android:textColor="@color/colorPrimaryDark"
+
+                    />
+
+                <EditText
+                    android:hint="@string/permanent_address"
+                    android:id="@+id/permanent_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/ic_address"
+                    android:drawablePadding="4dp"
+                    android:inputType="text"
+                    android:maxEms="1"
+                    android:maxLines="1"
+                    android:minHeight="30dp"
+                    android:padding="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="12dp"
+                    android:textColor="@color/colorPrimaryDark"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:text="@string/warning_student_form"
+                    android:textColor="@color/warning_red"
+                    />
+
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

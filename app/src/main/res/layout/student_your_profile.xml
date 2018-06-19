@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.medeveloper.ayaz.hostelutility.student.YourProfile">
+    tools:context="com.medeveloper.ayaz.hostelutility.student.StudentProfile">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,13 +14,13 @@
             android:padding="@dimen/default_margin"
             android:id="@+id/top_panel"
             android:layout_height="wrap_content">
+
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_face_white_24dp"
-                android:layout_marginRight="@dimen/default_margin_large"
                 android:id="@+id/display_image"
-                />
+                android:layout_width="80dp"
+                android:layout_height="83dp"
+                android:layout_marginRight="@dimen/default_margin_large"
+                android:src="@drawable/ic_face_white_24dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,6 +30,23 @@
                 android:textSize="@dimen/sub_heading_text_size"
                 android:textStyle="bold"
                 android:layout_toRightOf="@id/display_image"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change"
+                android:layout_marginTop="4dp"
+                android:drawableLeft="@drawable/ic_mode_edit"
+                android:drawablePadding="4dp"
+                android:layout_below="@id/display_image"
+                android:id="@+id/edit_photo"
+                android:textColor="@color/white"
+
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="8dp"
+
 
                 />
             <TextView
@@ -357,7 +374,7 @@
             android:text="Change Password"
             android:id="@+id/change_password"
             android:layout_margin="@dimen/default_margin"
-            android:background="@drawable/register_button"
+            android:background="@drawable/success_green_button"
             android:layout_alignParentBottom="true"
             />
 

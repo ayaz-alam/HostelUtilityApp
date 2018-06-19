@@ -52,6 +52,7 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
     int Month;
     int DaysRequested;
     Date choosenDate;
+    boolean alreadyInhere=false;
     DatabaseReference baseRef;
     SweetAlertDialog pDialog;
 
@@ -83,8 +84,16 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
                 {
                     daysLeft.setText("0 Days");
                     DaysLeft=7;
-                    ShowDialog("Sorry",1).setContentText("You don't have any diet off days left").show();
+
+                    if(!alreadyInhere) {
+                        ShowDialog("Sorry", 1).setContentText("You don't have any diet off days left").show();
+                    }
+                    ((TextView)(rootView.findViewById(R.id.to))).setEnabled(false);
+                    ((TextView)(rootView.findViewById(R.id.from))).setEnabled(false);
+                    ((rootView.findViewById(R.id.to))).setEnabled(false);
+
                     submit.setEnabled(false);
+                    submit.setAlpha(.5f);
                 }
             }
 
@@ -174,7 +183,10 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
                                 details.setText(null);
                                 ShowDialog("Successfull",3).show();
                                 pDialog.dismiss();
+                                alreadyInhere=true;
                                 ((TextView)(rootView.findViewById(R.id.to))).setText("Select Date");
+                                ((TextView)(rootView.findViewById(R.id.to))).setEnabled(true);
+                                choosenDate=null;
                                 ((TextView)(rootView.findViewById(R.id.from))).setText("Select Date");
                                 ((rootView.findViewById(R.id.to))).setEnabled(false);
 
@@ -204,6 +216,12 @@ public class DietOff extends Fragment implements DatePickerDialog.OnDateSetListe
 
 
         return rootView;
+    }
+
+
+    private void initListeners()
+    {
+
     }
 
     private boolean isOkay(String to, String from, String reason) {

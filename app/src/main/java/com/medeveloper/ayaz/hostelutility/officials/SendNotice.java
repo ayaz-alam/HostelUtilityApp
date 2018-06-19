@@ -6,11 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.icu.text.SimpleDateFormat;
-import android.media.ExifInterface;
+import java.text.SimpleDateFormat;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -28,7 +25,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,15 +32,14 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApiNotAvailableException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CameraUtitlity;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.NoticeClass;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -77,25 +72,24 @@ public class SendNotice extends Fragment {
 
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     SweetAlertDialog pDialog;//ProgressDialog
+    CameraUtitlity myCamera;
+    ImageView removePhoto;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.officials_send_notice, container, false);
 
 
-        isPermissionGranted();//Checking the permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            isPermissionGranted();//Checking the permission
+        }
         pDialog=ShowDialog("Sending, please wait..",2);
         noticeTitle=rootView.findViewById(R.id.notice_title);
         noticeBody=rootView.findViewById(R.id.notice_body);
-
         baseRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
 
-
-
-
-
+        myCamera=new CameraUtitlity(getContext());
         //Camera Button
         (rootView.findViewById(R.id.camera)).setOnClickListener(new View.OnClickListener() {
 
@@ -105,6 +99,21 @@ public class SendNotice extends Fragment {
 
                 if(isPermissionGranted())
                 dispatchTakePictureIntent(0);
+
+            }
+        });
+
+        removePhoto=rootView.findViewById(R.id.cancel_photo_button);
+        removePhoto.setVisibility(View.GONE);
+        removePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(myPhoto!=null)
+                    mImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_camera_icon));
+                    mImageView.setAlpha(0.5f);
+                    (rootView.findViewById(R.id.photo_hint)).setVisibility(View.VISIBLE);
+                    (rootView.findViewById(R.id.cancel_photo_button)).setVisibility(View.GONE);
+                    myPhoto=null;
 
             }
         });
@@ -143,7 +152,6 @@ public class SendNotice extends Fragment {
                 else
                 {
                     pDialog.show();
-                    Log.d("Tag","without Photo Intent called");
                     Date currentTime = Calendar.getInstance().getTime();
                     baseRef.child(getString(R.string.notice_ref)).
                             push().setValue(
@@ -172,7 +180,8 @@ public class SendNotice extends Fragment {
 
 
 
-        mImageView = rootView.findViewById(R.id.image_notice);//ImageView Reference
+        mImageView = rootView.findViewById(R.id.image_notice);
+        mImageView.setAlpha(0.5f);//ImageView Reference
 
         ImageView rotatePhotoButton=rootView.findViewById(R.id.rotate_photo);//Rotate Photo Reference
         rotatePhotoButton.setOnClickListener(new View.OnClickListener() {
@@ -275,7 +284,6 @@ public class SendNotice extends Fragment {
     }
 
     // Function to call ImagePicker and Camera
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void dispatchTakePictureIntent(int Code) {
         if (Code == 0) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -312,7 +320,6 @@ public class SendNotice extends Fragment {
 
     //Creating a file in temporary source
     String mCurrentPhotoPath;
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -346,7 +353,10 @@ public class SendNotice extends Fragment {
                 bitmap = android.provider.MediaStore.Images.Media.getBitmap(cr, mImageUri);
                 myPhoto=bitmap;
                 rotatePhoto(myPhoto);
+                removePhoto.setVisibility(View.VISIBLE);
+                rootView.findViewById(R.id.photo_hint).setVisibility(View.GONE);
                 mImageView.setImageBitmap(myPhoto);
+                mImageView.setAlpha(1f);
 
             } catch (Exception e) {
                 Toast.makeText(getContext(), "Failed to load", Toast.LENGTH_SHORT).show();
@@ -363,6 +373,9 @@ public class SendNotice extends Fragment {
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                rootView.findViewById(R.id.photo_hint).setVisibility(View.GONE);
+                removePhoto.setVisibility(View.VISIBLE);
+                mImageView.setAlpha(1f);
                 mImageView.setImageBitmap(bitmap);
                 myPhoto=bitmap;
             } catch (IOException e) {

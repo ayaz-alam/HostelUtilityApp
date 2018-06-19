@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,20 +23,18 @@ import java.util.ArrayList;
 
 
 /**
- * Created by ESIDEM jnr on 12/10/2016.
+ * Created by Ayaz Alam on 12/05/2018.
  */
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder>{
 
     private Context mContext;
-    // private LayoutInflater mInflater;
     private ArrayList<Complaint> mDataSource;
-    OnItemClickListener mItemClickListener;
     private int code;
 
 
     public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        //each data item is just a string in this case
+
         public TextView complaintTitle;
         public TextView complaintDetails;
         public TextView complaintDate;
@@ -67,7 +64,6 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 staffName=v.findViewById(R.id.card_staff_name);
 
                 staffContact=v.findViewById(R.id.card_staff_contact);
-
             }
 
 
@@ -107,35 +103,56 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful())
                                 {
+                                    resolveComplaint();
                                     sweetAlertDialog.dismiss();
                                     new SweetAlertDialog(mContext,SweetAlertDialog.SUCCESS_TYPE).setTitleText("Successfull").show();
                                 }
                             }
                         });
-                        Log.d("Ayaz","Item Clicked: "+mDataSource.get(getAdapterPosition()).complaintUID);
                     }
                 }).show();
 
 
             }
-
-            //TODO OnClick Item
-
-
         }
 
 
 
 
 
-    }
-    public interface OnItemClickListener{
-        public void onItemClick(View view, int Position);
+
+
+
+
+
+
+
+        private void resolveComplaint() {
+            String complaintID=mDataSource.get(getAdapterPosition()).complaintUID;
+            FirebaseDatabase.getInstance(mContext.getString(R.string.college_id)).getReference(mContext.getString(R.string.hostel_id))
+                    .child(mContext.getString(R.string.complaint_ref))
+                    .child(new MyData(mContext).getData(MyData.ENROLLMENT_NO))
+                    .child(complaintID)
+                    .child("Resolved")
+                    .setValue(true)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                    new SweetAlertDialog(mContext,SweetAlertDialog.SUCCESS_TYPE).
+                                            setTitleText("Successfull").
+                                            show();
+
+
+                        }
+                    });
+
+
+        }
+
+
     }
 
-    public void SetOnItemClickListner(final OnItemClickListener mItemClickListener){
-        this.mItemClickListener = mItemClickListener;
-    }
     public ComplaintAdapter(Context context, ArrayList<Complaint> items,int code) {
         mContext = context;
         mDataSource = items;
@@ -174,21 +191,35 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         Complaint complaint = mDataSource.get(position);
 
 
+
         holder.complaintTitle.setText(complaint.Field);
         holder.complaintDetails.setText(complaint.ComplaintDescription);
         holder.complaintDate.setText(complaint.ComplaintDate);
 
+        if(code==0)
+        {
+            if(complaint.Resolved)
+            {
+                holder.resolvedImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_done));
+                holder.resolvedButton.setEnabled(false);
+                holder.resolvedButton.setText("Resolved");
+                holder.resolvedButton.setBackground(mContext.getDrawable(R.drawable.success_green_button));
+
+            }
+            else
+            {
+                holder.resolvedButton.setText("Resolve ? ");
+                holder.resolvedButton.setBackground(mContext.getDrawable(R.drawable.pending_button));
+            }
+        }
         if(complaint.Resolved)
         {
-
             holder.resolvedImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_done));
-            if(code==0) {
-                holder.resolvedButton.setEnabled(false);
-                holder.resolvedButton.setAlpha(0.5f);
-            }
+
         }
         else
         {
+
             holder.resolvedImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_cancel));
         }
 
@@ -196,7 +227,8 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         {
             holder.studentName.setText(complaint.StudentName);
             holder.roomNo.setText(complaint.RoomNo);
-            holder.staffName.setText("Staff studentName");
+            //TODO Something to do with the staff contact
+            holder.staffName.setText("Staff contact");
             holder.staffContact.setText(complaint.StaffContact);
         }
     }

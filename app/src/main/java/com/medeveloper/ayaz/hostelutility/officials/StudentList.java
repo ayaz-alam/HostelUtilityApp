@@ -43,40 +43,47 @@ public class StudentList extends Fragment {
 
     View rootView;
     DatabaseReference mRef;
-    TextView defaultText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView=inflater.inflate(R.layout.officials_student_list, container, false);
-        defaultText=rootView.findViewById(R.id.default_text);
-
+        rootView=inflater.inflate(R.layout.fragment_with_a_recycler, container, false);
 
         pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...");
         pDialog.show();
         studentList =new ArrayList<>();
         mRecyclerView=rootView.findViewById(R.id.my_recycler_view);
-        mRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
+        mRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).child(getString(R.string.student_list_ref));
+        mRef.keepSynced(true);
 
-        mRef.child(getString(R.string.student_list_ref)).addValueEventListener(new ValueEventListener() {
+        mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 studentList.clear();
                 if(dataSnapshot.exists())
                 {
-                    defaultText.setVisibility(View.GONE);
                     for(DataSnapshot d:dataSnapshot.getChildren())
                         studentList.add(d.getValue(StudentDetailsClass.class));
-
                     pDialog.dismiss();
-
+                    if(studentList.size()>0)
+                    {
+                        (rootView.findViewById(R.id.no_data_found)).setVisibility(View.GONE);
+                        (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.GONE);
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                    }
                     adapter=new StudentListAdapter(getContext(), studentList);
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     mRecyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
-                else Toast.makeText(getContext(),"No data found "+ studentList.size(),Toast.LENGTH_LONG).show();
+                else {
+                    pDialog.dismiss();
+                    mRecyclerView.setVisibility(View.GONE);
+                    (rootView.findViewById(R.id.no_data_found)).setVisibility(View.VISIBLE);
+                    (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.VISIBLE);
+                    ((TextView)rootView.findViewById(R.id.no_data_found_text)).setText("It seems that there's no student list yet");
+                }
 
 
             }

@@ -13,15 +13,22 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.medeveloper.ayaz.hostelutility.About;
 import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CircularTransform;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.medeveloper.ayaz.hostelutility.student.Notice;
+import com.medeveloper.ayaz.hostelutility.student.StudentProfile;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.squareup.picasso.Picasso;
 
 public class OfficialsHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,8 +51,11 @@ public class OfficialsHome extends AppCompatActivity
 
         FragmentManager fn=getSupportFragmentManager();
         fn.beginTransaction().replace(R.id.fragment_layout,new Notice(),"Notice").commit();
+        getSupportActionBar().setTitle("Notice");
+        setUpUser();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -57,6 +67,54 @@ public class OfficialsHome extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void setUpUser() {
+        final MyData prefs=new MyData(this);
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null)
+        {
+            FirebaseAuth.getInstance().signOut();
+            new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Session Expired")
+                    .setContentText("Please login again")
+                    .setConfirmText("Login")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            startActivity(new Intent(OfficialsHome.this,LoginAcitivity.class));
+                            prefs.clearPreferences();
+                            finish();
+                        }
+                    }).show();
+            return;
+        }
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerLayout = navigationView.getHeaderView(0);
+        ImageView imageView=headerLayout.findViewById(R.id.display_image);
+        headerLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fn=getSupportFragmentManager();
+                getSupportActionBar().setTitle("Profile");
+                fn.beginTransaction().replace(R.id.fragment_layout,new OfficialProfile(),"Profile").commit();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+
+        Picasso.get().
+                load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
+                .centerCrop()
+                .transform(new CircularTransform())
+                .fit()
+                .into(imageView);
+
+        ((TextView)headerLayout.findViewById(R.id.display_name)).setText(prefs.getName());
+        ((TextView)headerLayout.findViewById(R.id.display_email)).setText(user.getEmail());
+        ((TextView)headerLayout.findViewById(R.id.display_department)).setText(prefs.getData(MyData.DEPARTMENT));
+
     }
 
     @Override
@@ -75,16 +133,7 @@ public class OfficialsHome extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            Log.d("Ayaz","Came in Logout");
-            new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE).setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                @Override
-                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                    new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.SUCCESS_TYPE).setTitleText("Logged out").show();
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(getApplication(), LoginAcitivity.class));
-                    finish();
-                }
-            });
+
 
             return true;
         }
@@ -115,35 +164,35 @@ public class OfficialsHome extends AppCompatActivity
             Tag="Notice";
             // Handle the camera action
         } else if (id == R.id.nav_gen_notice) {
-            Tag="GeneralNotice";
+            Tag="General notice";
             fragmentClass = GeneralNotice.class;
             inHome=false;
             BackPressedAgain=false;
         } else if (id == R.id.nav_send_notice) {
-            Tag="SendNotice";
+            Tag="Send notice";
             fragmentClass = SendNotice.class;
             inHome=false;
             BackPressedAgain=false;
         } else if (id == R.id.nav_complaints) {
-            Tag="Complaint";
+            Tag="Complaints";
             fragmentClass = Complaints.class;
             inHome=false;
             BackPressedAgain=false;
 
         } else if (id == R.id.nav_diet_off_requests) {
-            Tag="DietOffRequests";
+            Tag="Diet off requests";
             fragmentClass = DietOffRequests.class;
             inHome=false;
             BackPressedAgain=false;
         } else if (id == R.id.nav_staff_details) {
-            Tag="StaffDetails";
+            Tag="Staffs";
             fragmentClass = StaffDetails.class;
             inHome=false;
             BackPressedAgain=false;
         }
         else if (id == R.id.nav_your_profile) {
-            Tag="YourProfile";
-            fragmentClass = YourProfile.class;
+            Tag="Profile";
+            fragmentClass = OfficialProfile.class;
             inHome=false;
             BackPressedAgain=false;
         }
@@ -154,7 +203,7 @@ public class OfficialsHome extends AppCompatActivity
             BackPressedAgain=false;
         }
         else if (id == R.id.nav_student_list) {
-            Tag="About";
+            Tag="Student list";
             fragmentClass = StudentList.class;
             inHome=false;
             BackPressedAgain=false;
@@ -164,6 +213,8 @@ public class OfficialsHome extends AppCompatActivity
             new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Are you sure ?")
                     .setContentText("Hello " + new MyData(this).getData(MyData.NAME) + "\nAre you sure that you want to logout from this device")
+                    .setConfirmText("Yes")
+                    .setCancelText("No")
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -186,6 +237,7 @@ public class OfficialsHome extends AppCompatActivity
 
         if(!(id==R.id.nav_log_out)) {
             // Insert the fragment by replacing any existing fragment
+            getSupportActionBar().setTitle(Tag);
             FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction F = fragmentManager.beginTransaction();
             F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);

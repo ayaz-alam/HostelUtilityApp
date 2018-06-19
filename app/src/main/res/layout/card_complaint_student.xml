@@ -5,7 +5,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="180dp"
+    android:minHeight="160dp"
     android:layout_gravity="center"
     android:layout_marginBottom="16dp"
     android:layout_marginLeft="@dimen/large_margin"
@@ -20,7 +20,7 @@
         <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/dark_grey"
+    android:background="@color/colorPrimary"
     android:id="@+id/head_container_card"
 
     >
@@ -73,7 +73,7 @@
             tools:text="body"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/PrimaryText"
             android:minHeight="100dp"
             android:textSize="16sp" />
 
@@ -94,7 +94,7 @@
 
                 />
             <TextView
-                android:background="@drawable/register_button"
+                android:background="@drawable/success_green_button"
                 android:layout_width="wrap_content"
                 android:padding="@dimen/smallpadding"
                 android:layout_height="wrap_content"

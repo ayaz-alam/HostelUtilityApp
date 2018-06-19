@@ -20,7 +20,7 @@
             android:id="@+id/head_container_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
+            android:background="@color/colorPrimary"
 
             >
 
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_margin"
                 android:text="Name"
-                android:textColor="@color/white"
+                android:textColor="@color/PrimaryText"
                 android:textSize="@dimen/cardview_title"
                 android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
                 android:layout_marginLeft="@dimen/default_margin"
                 android:text="Room Number"
                 android:textSize="@dimen/subhead"
-                android:textColor="@color/white" />
+                android:textColor="@color/PrimaryText" />
 
             <TextView
                 android:id="@+id/diet_off_date"
@@ -55,7 +55,7 @@
                 android:layout_marginRight="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/smallpadding"
                 android:text="Date"
-                android:textColor="@color/white" />
+                android:textColor="@color/PrimaryText" />
             <TextView
                 android:id="@+id/diet_off_enroll"
                 android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
                 android:layout_marginBottom="@dimen/smallpadding"
                 android:textSize="@dimen/subhead"
                 android:text="Enrollment Number"
-                android:textColor="@color/white" />
+                android:textColor="@color/PrimaryText" />
         </RelativeLayout>
 
 
@@ -109,6 +109,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/official_button_holder"
                 >
             <Button
                 android:layout_width="wrap_content"
@@ -117,7 +119,7 @@
                 android:text="Accept"
 
                 android:id="@+id/accept_button"
-                android:background="@drawable/register_button"
+                android:background="@drawable/success_green_button"
                 />
                 <Button
                     android:layout_width="wrap_content"
@@ -129,6 +131,20 @@
                     android:background="@drawable/red_button"
                     />
             </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:id="@+id/student_accepted"
+                android:height="28dp"
+                android:background="@drawable/pending_button"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:text="Pending"
+                android:clickable="false"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
+                />
+
 
         </LinearLayout>
     </RelativeLayout>

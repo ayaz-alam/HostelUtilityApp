@@ -7,23 +7,24 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/lightbackground"
-        android:layout_height="match_parent">
-        <TextView
+        android:layout_height="match_parent">\
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/net_refill_request"
-            android:textSize="@dimen/heading_text_size"
-            android:id="@+id/title"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/default_margin"
+            android:src="@drawable/ic_internet"
+            android:layout_margin="24dp"
+            android:layout_alignParentTop="true"
+            android:id="@+id/image"
+            android:alpha=".5"
+            android:layout_centerInParent="true"
             />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_margin="@dimen/default_margin"
-            android:layout_centerInParent="true"
+            android:layout_above="@id/id_layout"
             android:id="@+id/email_layout"
-            android:background="@color/white"
+            android:background="@drawable/slight_curved_white"
             android:padding="2dp"
             android:layout_height="wrap_content">
             <EditText
@@ -37,9 +38,9 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_margin="@dimen/default_margin"
-            android:layout_below="@+id/email_layout"
+            android:layout_above="@+id/submit"
             android:id="@+id/id_layout"
-            android:background="@color/white"
+            android:background="@drawable/slight_curved_white"
             android:padding="2dp"
 
             android:layout_height="wrap_content">
@@ -59,7 +60,7 @@
             android:textColor="@color/white"
             android:id="@+id/submit"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/register_button"
+            android:background="@drawable/success_green_button"
 
             />
 

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="240dp"
+    android:layout_height="180dp"
+    android:minHeight="0dp"
     android:layout_gravity="center"
     android:layout_marginBottom="16dp"
     android:layout_marginLeft="@dimen/large_margin"
@@ -20,7 +20,7 @@
         <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/dark_grey"
+    android:background="@color/colorPrimary"
     android:id="@+id/head_container_card"
 
     >
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/card_title"
-        android:textColor="@color/white"
+        android:textColor="@color/PrimaryText"
         android:layout_toRightOf="@id/resolve_image"
         android:text="Title of Problem"
         android:layout_margin="@dimen/default_margin"
@@ -55,14 +55,14 @@
         android:layout_marginRight="@dimen/default_margin"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="@dimen/default_small_margin"
-        android:textColor="@color/white"
+        android:textColor="@color/PrimaryText"
         />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/card_student_name"
-                android:textColor="@color/white"
+                android:textColor="@color/PrimaryText"
                 android:layout_alignParentRight="true"
                 android:text="Student Name"
                 android:layout_margin="@dimen/default_margin"
@@ -81,7 +81,7 @@
                 android:layout_marginTop="0dp"
                 android:textSize="12dp"
                 android:layout_marginBottom="@dimen/default_small_margin"
-                android:textColor="@color/white"
+                android:textColor="@color/PrimaryText"
                 />
 </RelativeLayout>
 
@@ -99,7 +99,7 @@
             tools:text="body"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/PrimaryText"
             android:minHeight="100dp"
             android:textSize="16sp" />
 

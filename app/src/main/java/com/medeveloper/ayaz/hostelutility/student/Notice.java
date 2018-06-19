@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -44,7 +45,7 @@ public class Notice extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        rootView =inflater.inflate(R.layout.student_notice, container, false);
+        rootView =inflater.inflate(R.layout.fragment_with_a_recycler, container, false);
 
         pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Please wait..");
         pDialog.show();
@@ -60,6 +61,14 @@ public class Notice extends Fragment {
                 {
                     for(DataSnapshot d:dataSnapshot.getChildren())
                         noticeList.add(d.getValue(NoticeClass.class));
+                    {
+                        if(noticeList.size()>0)
+                        {
+                            (rootView.findViewById(R.id.no_data_found)).setVisibility(View.GONE);
+                            (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.GONE);
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                        }
+                    }
                     //Toast.makeText(getContext(),"List Length"+noticeList.size(),Toast.LENGTH_SHORT).show();
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     adapter=new NoticeClassAdapter(getContext(),noticeList);
@@ -68,7 +77,15 @@ public class Notice extends Fragment {
                     pDialog.dismiss();
 
                 }
-                else Toast.makeText(getContext(),"No data found",Toast.LENGTH_SHORT).show();
+                else {
+                    mRecyclerView.setVisibility(View.GONE);
+                    (rootView.findViewById(R.id.no_data_found)).setVisibility(View.VISIBLE);
+                    (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.VISIBLE);
+                    ((TextView)rootView.findViewById(R.id.no_data_found_text)).setText("It seems that there's no notice yet");
+
+                    pDialog.dismiss();
+
+                }
             }
 
             @Override

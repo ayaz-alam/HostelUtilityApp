@@ -6,51 +6,48 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_notice"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_notice"
             android:title="Notice" />
         <item
             android:id="@+id/nav_gen_notice"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="General Notice" />
+            android:icon="@drawable/ic_general_notice"
+            android:title="General notice" />
 
         <item
             android:id="@+id/nav_send_notice"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Send Notice" />
+            android:icon="@drawable/ic_send_notice"
+            android:title="Send notice" />
         <item
             android:id="@+id/nav_complaints"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_complaint_list"
             android:title="Complaints" />
         <item
             android:id="@+id/nav_diet_off_requests"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_requests"
             android:title="Diet off requests" />
+
         <item
             android:id="@+id/nav_staff_details"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Staff Details" />
+            android:icon="@drawable/ic_staff"
+            android:title="Staff details" />
         <item
             android:id="@+id/nav_student_list"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Student List" />
+            android:icon="@drawable/ic_student"
+            android:title="Student list" />
+
+        <item
+            android:id="@+id/nav_your_profile"
+            android:icon="@drawable/ic_face"
+            android:title="Your Profile" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/action_logout" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:title="About" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-
-            <item
-                android:id="@+id/nav_your_profile"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Your Profile" />
-            <item
-                android:id="@+id/nav_log_out"
-                android:icon="@drawable/ic_phone"
-                android:title="@string/action_logout" />
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_menu_send"
-                android:title="About" />
-        </menu>
-    </item>
 
 </menu>

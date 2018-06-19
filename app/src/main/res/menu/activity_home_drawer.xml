@@ -6,44 +6,50 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_notice"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_notice"
             android:title="Notice" />
+        <item
+            android:id="@+id/nav_gen_notice"
+            android:icon="@drawable/ic_general_notice"
+            android:title="General notice" />
 
         <item
             android:id="@+id/nav_complaint"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_complaint"
             android:title="Complaint" />
+
         <item
             android:id="@+id/nav_mess_diet_off"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_diet_off"
             android:title="Mess Diet Off" />
+
         <item
             android:id="@+id/nav_net_refill"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_internet_refill"
             android:title="Net Refill Request" />
 
         <item
             android:id="@+id/nav_your_complaints"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_complaint_list"
             android:title="Your Complaints" />
         <item
+            android:id="@+id/nav_your_dietoff_requests"
+            android:icon="@drawable/ic_requests"
+            android:title="Your Diet Off Requests" />
+        <item
             android:id="@+id/nav_your_profile"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_face"
             android:title="Your Profile" />
-    </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
+        <item
             android:id="@+id/nav_log_out"
-            android:icon="@drawable/ic_phone"
+            android:icon="@drawable/ic_logout"
             android:title="@string/action_logout" />
 
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_menu_send"
-                android:title="About" />
-        </menu>
-    </item>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:title="About" />
+    </group>
+
 
 </menu>

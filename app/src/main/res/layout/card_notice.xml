@@ -5,9 +5,8 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="200dp"
     android:layout_gravity="center"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="@dimen/card_margin"
     android:layout_marginLeft="@dimen/large_margin"
     android:layout_marginRight="@dimen/large_margin"
     >
@@ -21,7 +20,8 @@
             android:id="@+id/head_container_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/notice_title_padding"
 
             >
 
@@ -29,41 +29,42 @@
                 android:id="@+id/notice_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_margin="@dimen/default_margin"
                 android:text="Notice Heading"
-                android:textColor="@color/white"
+                android:alpha=".90"
+                android:textColor="@color/PrimaryText"
                 android:textSize="@dimen/cardview_title"
-                android:textStyle="bold" />
+
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/generated_by"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/notice_title"
-                android:layout_marginBottom="@dimen/smallpadding"
-                android:layout_marginLeft="@dimen/default_margin"
+                android:textSize="@dimen/date_size_small"
                 android:text="by: Faculty"
-                android:textColor="@color/white" />
+                android:alpha=".60"
+                android:textColor="@color/PrimaryText" />
 
             <TextView
                 android:id="@+id/notice_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/notice_title"
+                android:textSize="@dimen/date_size_small"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/default_margin"
                 android:text="Date"
-                android:textColor="@color/white" />
+                android:alpha=".60"
+                android:textColor="@color/PrimaryText" />
         </RelativeLayout>
 
         <ProgressBar
             android:id="@+id/photo_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="159dp"
+            android:layout_centerInParent="true"
             android:indeterminate="true" />
 
         <LinearLayout
@@ -76,23 +77,28 @@
             <ImageView
                 android:id="@+id/image_notice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="160dp"
                 android:layout_margin="@dimen/default_margin"
-                android:minHeight="200dp" />
+                />
 
             <TextView
                 android:id="@+id/notice_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
-                android:maxLines="3"
-                android:minHeight="40dp"
-                android:textSize="16sp"
+                android:textSize="@dimen/card_body_12sp"
+                android:maxLines="2"
                 tools:text="Body of the Notice" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Read more.."
+                android:id="@+id/expand_colapse"
+                android:textAlignment="viewEnd"
+                android:textStyle="bold"
+                />
 
         </LinearLayout>
     </RelativeLayout>

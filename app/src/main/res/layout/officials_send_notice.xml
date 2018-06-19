@@ -6,8 +6,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/light_grey"
         android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cancel"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="12dp"
+            android:id="@+id/cancel_photo_button"
+            android:visibility="gone"
+            />
 
         <ImageView
             android:id="@+id/image_notice"
@@ -16,17 +25,27 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/default_margin"
+            android:src="@drawable/ic_camera_icon"
             android:layout_above="@id/text_input"
             android:layout_marginBottom="@dimen/large_margin"
-            android:maxHeight="100dp"
             android:padding="@dimen/default_padding" />
+
+        <TextView
+            android:id="@+id/photo_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:alpha=".7"
+            android:maxWidth="200dp"
+            android:text="You can send text notice and can also click a photo or select from gallery"
+            android:textAlignment="center" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:id="@+id/text_input"
             android:layout_above="@id/below_container"
             android:orientation="vertical"
-            android:background="@drawable/rounded_white"
+            android:background="@drawable/slight_curved_white"
             android:padding="@dimen/default_margin"
             android:layout_margin="@dimen/default_margin"
             android:layout_height="wrap_content">
@@ -57,7 +76,7 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="4dp"
             android:padding="@dimen/default_padding"
-            android:background="@drawable/rounded_white"
+            android:background="@drawable/slight_curved_white"
             >
 
 
@@ -66,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
-                android:background="@drawable/register_button"
+                android:background="@drawable/success_green_button"
                 android:drawablePadding="8dp"
                 android:drawableRight="@drawable/ic_send"
                 android:layout_marginLeft="@dimen/default_margin"

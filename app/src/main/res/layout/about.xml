@@ -17,6 +17,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="8dp"
             android:text="We're happy to have you here"
+            android:textAlignment="center"
             android:textSize="@dimen/heading_text_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +25,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.207" />
+            app:layout_constraintVertical_bias="0.282" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,13 +40,14 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.299">
+            app:layout_constraintVertical_bias="0.387">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/string_about"
+                android:textAlignment="center"
                 android:textSize="@dimen/sub_heading_text_size"
                 tools:layout_editor_absoluteX="97dp"
                 tools:layout_editor_absoluteY="63dp" />
@@ -66,7 +68,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.617">
+            app:layout_constraintVertical_bias="0.677">
 
 
             <TextView
@@ -96,10 +98,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
-            android:layout_marginRight="8dp"
             android:padding="@dimen/default_padding"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -136,11 +138,11 @@
                     android:src="@mipmap/ic_github_icon" />
 
                 <ImageView
+                    android:id="@+id/msg_sent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/default_margin"
                     android:layout_toLeftOf="@+id/ayaz_github"
-                    android:id="@+id/msg_sent"
                     android:src="@drawable/ic_linkedi_con" />
             </RelativeLayout>
 
@@ -160,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Kanika Ranka"
-                    android:textSize="@dimen/sub_heading_text_size"/>
+                    android:textSize="@dimen/sub_heading_text_size" />
 
                 <ImageView
                     android:id="@+id/kanika_github"
@@ -191,15 +193,16 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginBottom="432dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:src="@drawable/ic_linkedi_con"
+            android:src="@mipmap/ic_launcher"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.06" />
 
 
     </android.support.constraint.ConstraintLayout>

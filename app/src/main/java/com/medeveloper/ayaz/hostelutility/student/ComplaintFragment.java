@@ -46,13 +46,9 @@ public class ComplaintFragment extends Fragment {
 
 
     private SweetAlertDialog pDialog;
-    private int MY_PERMISSIONS_REQUEST_SEND_SMS=142;
-
     public ComplaintFragment() {
         // Required empty public constructor
     }
-
-    StudentDetailsClass myDetails;
     DatabaseReference ref;
     View rootView;
     @Override
@@ -99,9 +95,6 @@ public class ComplaintFragment extends Fragment {
 
                                     {
                                         StaffToContact=dataSnapshot.getValue(StaffDetailsClass.class);
-                                        Log.d("Ayaz","Staff to contact: "+StaffToContact.ContactNumber);
-                                        // ShowDialog("Came in Prepare "+StaffToContact,0);
-                                                    //Refering to the complaint section in the database
                                         String EnrollNumber=getPrefs(getString(R.string.pref_enroll),"NULL");
                                         String Name=getPrefs(getString(R.string.pref_name),"NULL");
                                         String Room=getPrefs(getString(R.string.pref_room),"NULL");
@@ -135,10 +128,10 @@ public class ComplaintFragment extends Fragment {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        Log.d("Ayaz", "PushID: " +
-                                                                "" + pushID);
                                                         pDialog.dismiss();
-
+                                                        new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE).
+                                                                setTitleText("Successfull").
+                                                                show();
                                                         /*
                                                          * Here we are sending the SMS to the warden and to the respective staff member to be contacted
                                                          * We are using in-built messaging services to send the message and custom notification to all the app users

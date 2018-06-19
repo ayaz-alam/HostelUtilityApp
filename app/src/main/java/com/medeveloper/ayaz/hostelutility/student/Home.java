@@ -14,15 +14,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.medeveloper.ayaz.hostelutility.About;
 import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CircularTransform;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
-import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
+import com.medeveloper.ayaz.hostelutility.officials.GeneralNotice;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
+import com.squareup.picasso.Picasso;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,24 +35,76 @@ public class Home extends AppCompatActivity
     private boolean BackPressedAgain=false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        setUpUser();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
-        View v=findViewById(R.id.drawer);
-        ((TextView)v.findViewById(R.id.display_name)).setText(new MyData(this).getData(MyData.NAME));
         FragmentManager fn=getSupportFragmentManager();
-        fn.beginTransaction().replace(R.id.fragment_layout,new Notice(),"Notice").commit();
+        fn.beginTransaction().replace(R.id.fragment_layout, new StudentProfile(), "Profile").commit();
+        getSupportActionBar().setTitle("Notice");
+        fn.beginTransaction().replace(R.id.fragment_layout, new Notice(), "Notice").commit();
+
+    }
+
+    private void setUpUser() {
+        final MyData prefs=new MyData(this);
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null)
+        {
+            FirebaseAuth.getInstance().signOut();
+            new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Session Expired")
+                    .setContentText("Please login again")
+                    .setConfirmText("Login")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            startActivity(new Intent(Home.this,LoginAcitivity.class));
+                            prefs.clearPreferences();
+                            finish();
+                        }
+                    }).show();
+            return;
+        }
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerLayout = navigationView.getHeaderView(0);
+        ImageView imageView=headerLayout.findViewById(R.id.display_image);
+        headerLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fn=getSupportFragmentManager();
+                getSupportActionBar().setTitle("Profile");
+                fn.beginTransaction().replace(R.id.fragment_layout,new StudentProfile(),"Profile").commit();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+
+        Picasso.get().
+                load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
+                .centerCrop()
+                .transform(new CircularTransform())
+                .fit()
+                .into(imageView);
+
+        ((TextView)headerLayout.findViewById(R.id.display_name)).setText(prefs.getName());
+        ((TextView)headerLayout.findViewById(R.id.display_email)).setText(user.getEmail());
+        ((TextView)headerLayout.findViewById(R.id.display_room_no)).setText(prefs.getData(MyData.ROOM_NO));
+
     }
 
     @Override
@@ -97,27 +153,42 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_your_profile) {
-            Tag="YourProfile";
-            fragmentClass = YourProfile.class;
+            Tag="Your profile";
+            fragmentClass = StudentProfile.class;
             inHome=false;
             BackPressedAgain=false;
 
             // Handle the camera action
-        } else if (id == R.id.nav_complaint) {
+        }else if (id == R.id.nav_gen_notice) {
+            Tag="General notice";
+            fragmentClass = GeneralNotice.class;
+            inHome=false;
+            BackPressedAgain=false;
+        }
+        else if (id == R.id.nav_complaint) {
             Tag="Complaint";
             fragmentClass = ComplaintFragment.class;
             inHome=false;
             BackPressedAgain=false;
 
         } else if (id == R.id.nav_mess_diet_off) {
-            Tag="MessDietOff";
+            Tag="Mess diet off";
             fragmentClass = DietOff.class;
             inHome=false;
             BackPressedAgain=false;
 
 
-        } else if (id == R.id.nav_net_refill) {
-            Tag="NetRefClass";
+        }
+        else if (id == R.id.nav_your_dietoff_requests) {
+            Tag="Your requests";
+            fragmentClass = YourDietOffRequest.class;
+            inHome=false;
+            BackPressedAgain=false;
+
+        }
+
+        else if (id == R.id.nav_net_refill) {
+            Tag="Net refill";
             fragmentClass = NetRefill.class;
             inHome=false;
             BackPressedAgain=false;
@@ -134,7 +205,7 @@ public class Home extends AppCompatActivity
             Tag="Notice";
 
         } else if (id == R.id.nav_your_complaints) {
-            Tag="YourComplaints";
+            Tag="Your complaints";
             fragmentClass = YourComplaints.class;
             inHome=false;
             BackPressedAgain=false;
@@ -152,6 +223,8 @@ public class Home extends AppCompatActivity
         {    new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Are you sure ?")
                 .setContentText("Hello "+new MyData(this).getData(MyData.NAME)+"\nAre you sure that you want to logout from this device")
+                .setConfirmText("Yes")
+                .setCancelText("No")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -177,6 +250,7 @@ public class Home extends AppCompatActivity
 
         if(!(id==R.id.nav_log_out)) {
             // Insert the fragment by replacing any existing fragment
+            getSupportActionBar().setTitle(Tag);
             FragmentManager fragmentManager = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction F = fragmentManager.beginTransaction();
             F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);

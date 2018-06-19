@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Registration.Third">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="Passkey"
+                android:textColor="@color/white"
+                android:textSize="@dimen/extra_large_heading" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="Generate a passkey, Easy for you to remember and hard for other to guess"
+                android:textColor="@color/white" />
+
+
+            <EditText
+                android:id="@+id/pass_key"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_white"
+                android:drawableLeft="@drawable/ic_vpn_key"
+                android:drawablePadding="4dp"
+                android:hint="Enter a passkey"
+                android:maxLength="6"
+                android:inputType="number"
+                android:maxEms="1"
+                android:maxLines="1"
+                android:minHeight="30dp"
+                android:padding="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="12dp"
+                android:textColor="@color/colorPrimaryDark"
+
+                />
+
+            <EditText
+                android:id="@+id/password_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/rounded_white"
+                android:drawableLeft="@drawable/ic_confirm_passwrd"
+                android:drawablePadding="4dp"
+                android:hint="Confirm passkey"
+                android:inputType="numberPassword"
+                android:maxLength="6"
+                android:minHeight="30dp"
+                android:padding="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="@color/colorPrimaryDark"
+
+                />
+
+        </LinearLayout>
+
+</FrameLayout>

@@ -16,6 +16,9 @@ public class DietOffRequestClass {
     public Date time;
     @Keep
     boolean accepted,seen;
+    public final static  int STUDENT_SIDE=1;
+    public final static int OFFICIAL_SIDE=0;
+
 
     public DietOffRequestClass() {
     }
