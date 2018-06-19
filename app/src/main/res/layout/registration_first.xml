@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Registration.First">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/container"
+            android:layout_alignParentBottom="true"
+            android:padding="12dp"
+            android:paddingBottom="24dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/extra_large_heading"
+                android:text="Register"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/default_margin"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/reg_first_war_text"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/default_margin"
+                />
+
+
+            <EditText
+                android:id="@+id/adhaar_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_white"
+                android:drawableLeft="@drawable/ic_person_pin"
+                android:drawablePadding="4dp"
+                android:hint="Adhaar Number"
+                android:inputType="number"
+                android:maxEms="1"
+                android:maxLength="12"
+                android:maxLines="1"
+                android:minHeight="30dp"
+                android:padding="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="12dp"
+                android:textColor="@color/colorPrimaryDark"
+
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_white"
+                android:hint="Enrollment number"
+                android:id="@+id/unique_id"
+                android:minHeight="30dp"
+                android:drawableLeft="@drawable/ic_vpn_key"
+                android:paddingLeft="4dp"
+                android:padding="4dp"
+                android:drawablePadding="4dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="4dp"
+                android:paddingRight="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+
+                />
+
+            <EditText
+                android:id="@+id/email_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/rounded_white"
+                android:drawableLeft="@drawable/ic_mail"
+                android:drawablePadding="6dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:minHeight="30dp"
+                android:padding="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="@color/colorPrimaryDark"
+
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Register as"
+                    android:textSize="@dimen/text_normal"
+                    android:id="@+id/someId"
+                    android:layout_margin="@dimen/default_margin"
+                    android:textColor="@color/white"
+                    />
+                <RadioGroup
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:checkedButton="@id/student_radio"
+                    android:layout_below="@+id/someId"
+                    android:id="@+id/signup_radio"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_below="@+id/someId"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/student_radio"
+                        android:text="Student"
+                        android:textColor="@color/white"
+                        android:layout_margin="@dimen/default_margin"
+                        android:layout_alignParentRight="true"
+                        />
+                    <RadioButton
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/teacher_radio"
+                        android:text="Teacher"
+                        android:textColor="@color/white"
+                        android:layout_margin="@dimen/default_margin"
+                        android:layout_alignParentLeft="true"
+                        />
+                </RadioGroup>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+</FrameLayout>

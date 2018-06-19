@@ -25,14 +25,15 @@
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:fontFamily="sans-serif-condensed"
-        android:text="Dr. V.K Dave"
-        android:textColor="@color/colorPrimary"
+        android:text="Dr. VK Dave"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.753"
+        app:layout_constraintHorizontal_bias="0.881"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.757" />
+        app:layout_constraintVertical_bias="0.755" />
 
 </android.support.constraint.ConstraintLayout>

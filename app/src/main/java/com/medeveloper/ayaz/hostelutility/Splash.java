@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
+import com.medeveloper.ayaz.hostelutility.Registration.Registration;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
 import com.medeveloper.ayaz.hostelutility.student.Home;
@@ -47,6 +48,8 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
+       //startActivity(new Intent(this,Registration.class));
+
         Animation animation1= AnimationUtils.makeInChildBottomAnimation(this);
         animation1.setDuration(400);
         TextView t=findViewById(R.id.splash_text);

@@ -34,7 +34,6 @@ import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 public class StudentForm extends AppCompatActivity {
 
 
-//TODO Complete student form
     private String EnrollNo,AdhaarNo,
             Name,Category,BloodGroup,
             FatherName,Class,Year,Branch,

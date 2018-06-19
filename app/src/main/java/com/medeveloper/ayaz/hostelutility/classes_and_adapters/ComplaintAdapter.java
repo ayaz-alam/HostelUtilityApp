@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
@@ -102,6 +103,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful())
                                 {
+                                    resolveComplaint();
                                     sweetAlertDialog.dismiss();
                                     new SweetAlertDialog(mContext,SweetAlertDialog.SUCCESS_TYPE).setTitleText("Successfull").show();
                                 }
@@ -116,6 +118,37 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
 
 
+
+
+
+
+
+
+
+
+
+        private void resolveComplaint() {
+            String complaintID=mDataSource.get(getAdapterPosition()).complaintUID;
+            FirebaseDatabase.getInstance(mContext.getString(R.string.college_id)).getReference(mContext.getString(R.string.hostel_id))
+                    .child(mContext.getString(R.string.complaint_ref))
+                    .child(new MyData(mContext).getData(MyData.ENROLLMENT_NO))
+                    .child(complaintID)
+                    .child("Resolved")
+                    .setValue(true)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                    new SweetAlertDialog(mContext,SweetAlertDialog.SUCCESS_TYPE).
+                                            setTitleText("Successfull").
+                                            show();
+
+
+                        }
+                    });
+
+
+        }
 
 
     }

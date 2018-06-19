@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.medeveloper.ayaz.hostelutility.Registration.Registration;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialsDetailsClass;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
@@ -147,7 +148,7 @@ public class LoginAcitivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pDialog.dismiss();
-                startActivity(new Intent(LoginAcitivity.this,StudentForm.class));
+                startActivity(new Intent(LoginAcitivity.this,Registration.class));
                 finish();
             }
         });
@@ -343,28 +344,30 @@ public class LoginAcitivity extends AppCompatActivity {
     }
 
 
-    private void authenticateOfficial(final String email, String pass, final String EmployeeID)
+    private void authenticateOfficial(final String email, final String pass, final String EmployeeID)
     {
-        Log.d("Ayaz","Authenticating as Officials");
+
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-
                             FirebaseDatabase.getInstance().getReference(getString(R.string.college_id))
                                     .child(getString(R.string.officials_id_ref))
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
+                                            Toast.makeText(LoginAcitivity.this,"DataSnapshot "+dataSnapshot.exists(),Toast.LENGTH_SHORT).show();
+
                                             if(dataSnapshot.exists())
                                             {
                                                 OfficialsDetailsClass Id=dataSnapshot.getValue(OfficialsDetailsClass.class);
                                                 if(Id.mEmployeeID.equals(EmployeeID))
                                                 {
-                                                    Log.d("Ayaz","All Credentials Authenticated\tValid User");
+
+                                                    Toast.makeText(LoginAcitivity.this,"Came here 1",Toast.LENGTH_SHORT).show();
                                                     MyData prefs=new MyData(LoginAcitivity.this);
                                                     prefs.saveTeacherPrefs(Id);
                                                     pDialog.dismiss();
@@ -382,11 +385,22 @@ public class LoginAcitivity extends AppCompatActivity {
                                                     pDialog.dismiss();
                                                 }
                                             }
+                                            else
+                                            {
+                                                new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE)
+                                                        .setTitleText("Invalid Credentials")
+                                                        .setContentText("Please make sure you've entered valid credentials\nContact admin if problem persists")
+                                                        .show();
+                                                new MyData(LoginAcitivity.this).clearPreferences();
+                                                FirebaseAuth.getInstance().signOut();
+                                                pDialog.dismiss();
+                                            }
                                         }
 
                                         @Override
                                         public void onCancelled(DatabaseError databaseError) {
-
+                                            pDialog.dismiss();
+                                            FirebaseAuth.getInstance().signOut();
                                         }
                                     });
 
@@ -432,7 +446,8 @@ public class LoginAcitivity extends AppCompatActivity {
 
 
                 }
-                else {
+                else
+                    {
                     {
                         new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Invalid User").setContentText("Please check your credentials and try again")
@@ -450,6 +465,8 @@ public class LoginAcitivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+                FirebaseAuth.getInstance().signOut();
+                pDialog.dismiss();
             }
         });
 

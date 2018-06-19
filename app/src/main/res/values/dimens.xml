@@ -27,7 +27,7 @@
     <dimen name="small_margin">4dp</dimen>
     <dimen name="card_view_sub_head_margin">4dp</dimen>
     <dimen name="card_subhed">12sp</dimen>
-    <dimen name="def_16dp">16dp</dimen>
+    <dimen name="def_16dp">14dp</dimen>
     <dimen name="display_email_text_size">10sp</dimen>
     <dimen name="card_margin">12dp</dimen>
     <dimen name="date_size_small">10dp</dimen>
