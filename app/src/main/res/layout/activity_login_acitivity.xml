@@ -119,6 +119,19 @@
                 android:layout_margin="@dimen/default_margin"
                 android:textColor="@color/white"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password ?"
+                android:drawableLeft="@drawable/ic_forgot_password"
+                android:drawablePadding="4dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/def_16dp"
+                android:textSize="@dimen/text_normal"
+                android:id="@+id/forgot_password"
+                android:layout_margin="@dimen/default_margin"
+                android:textColor="@color/button_text_color"
+                />
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:orientation="horizontal"
@@ -200,11 +213,12 @@
             />
         <TextView
             android:layout_width="match_parent"
+            android:padding="4dp"
             android:textAlignment="center"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_marginTop="2dp"
-            android:textColor="#4a555b"
+            android:textColor="@color/PrimaryText"
             android:layout_marginLeft="4dp"
             android:text="Register"
             android:id="@+id/login_signup"

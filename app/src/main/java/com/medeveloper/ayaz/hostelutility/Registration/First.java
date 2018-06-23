@@ -177,7 +177,7 @@ public class First extends Fragment {
                     pDialog.dismiss();
                     new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Ooops..")
-                            .setContentText("It seems that you don't exist..\nObviously in our database\nWhat you can do" +
+                            .setContentText("It seems that you don't exist..\nObviously in our database\nWhat you can do " +
                                     "is try with correct data or contact admin").show();
                 }
 

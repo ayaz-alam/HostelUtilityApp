@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -265,5 +266,18 @@ public class Home extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    @Override
+    protected void onStart() {
+        if(FirebaseAuth.getInstance().getCurrentUser()==null)
+        {
+            new MyData(this).clearPreferences();
+            Toast.makeText(this,"Session expired\nPlease login again",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this,LoginAcitivity.class));
+            finishAffinity();
+        }
+        super.onStart();
     }
 }

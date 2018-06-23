@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="@dimen/def_16dp"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <TextView
+        android:textAlignment="center"
+        android:textSize="@dimen/card_body_12sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_pass_hint"
+        android:id="@+id/someId"
+        android:layout_marginBottom="8dp"
+        />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"
+    android:textAlignment="center"
+    android:textColor="@color/PrimaryText"
+    android:layout_below="@id/someId"
+    android:layout_above="@id/forgot_password_email"
+    android:layout_marginBottom="8dp"
+    android:text="@string/reset_pass_number_hint"
+    />
+    <EditText
+        android:drawableLeft="@drawable/ic_mail"
+        android:id="@+id/forgot_password_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimary"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/enter_your_email_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</LinearLayout>

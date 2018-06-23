@@ -123,7 +123,7 @@ public class Third extends Fragment {
         FirebaseDatabase.getInstance().getReference(getContext().getString(R.string.college_id))
                 .child(getContext().getString(R.string.hostel_id))
                 .child(getContext().getString(R.string.student_list_ref))
-                .child(student.EnrollNo)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .setValue(student)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -161,7 +161,7 @@ public class Third extends Fragment {
                 d.dismiss();
                 sweetAlertDialog.dismiss();
                 startActivity(new Intent(getActivity(),Home.class));
-                getActivity().finish();
+                getActivity().finishAffinity();
             }
         });
         d.show();
