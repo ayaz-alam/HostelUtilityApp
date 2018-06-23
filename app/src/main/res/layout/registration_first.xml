@@ -16,6 +16,18 @@
             android:paddingBottom="24dp"
             >
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_credentials"
+                    android:layout_margin="4dp"
+                    android:layout_centerHorizontal="true"
+                    />
+
+            </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,8 +107,10 @@
 
                 />
 
+            <!--
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
@@ -139,7 +153,20 @@
                 </RadioGroup>
 
             </RelativeLayout>
-
+            -->
+            <Button
+                android:id="@+id/reg_button"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginBottom="@dimen/def_16dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginRight="64dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/success_green_button"
+                android:text="Next"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </LinearLayout>
 
 </FrameLayout>

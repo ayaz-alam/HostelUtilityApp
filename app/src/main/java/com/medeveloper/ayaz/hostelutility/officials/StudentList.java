@@ -28,7 +28,8 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StudentList extends Fragment {
+public class
+StudentList extends Fragment {
 
 
     private SweetAlertDialog pDialog;

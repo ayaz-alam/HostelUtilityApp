@@ -2,11 +2,13 @@ package com.medeveloper.ayaz.hostelutility.classes_and_adapters;
 
 import android.support.annotation.Keep;
 
+import java.io.Serializable;
+
 /**
  * Created by Ayaz on 5/2/2018.
  */
 
-public class StudentDetailsClass {
+public class StudentDetailsClass implements Serializable {
     @Keep
     public String EnrollNo,AdhaarNo,Name,Category,BloodGroup,FatherName,Class,Year,Branch,RoomNo,MobileNo,Email,FatherContact,LocalGuardianNo,Address;
 

@@ -8,7 +8,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/def_16dp"
+        android:layout_margin="8dp"
         tools:ignore="UselessParent">
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,12 +143,12 @@
                     android:layout_marginBottom="4dp"
                     android:layout_width="match_parent"
                     android:background="@drawable/rounded_white"
-                    android:padding="4dp"
+                    android:padding="2dp"
                     android:layout_height="wrap_content">
                     <Spinner
                         android:layout_width="wrap_content"
                         android:entries="@array/stream"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="2dp"
                         android:id="@+id/class_"
                         android:layout_height="wrap_content">
 
@@ -156,7 +156,7 @@
                     <Spinner
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="2dp"
                         android:id="@+id/year"
                         android:entries="@array/year">
 
@@ -164,7 +164,7 @@
                     <Spinner
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/default_margin"
+                        android:layout_marginEnd="2dp"
                         android:id="@+id/branch"
                         android:entries="@array/branch">
 
@@ -267,6 +267,20 @@
                     android:text="@string/warning_student_form"
                     android:textColor="@color/warning_red"
                     />
+            <Button
+                android:id="@+id/reg_button"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/def_16dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginRight="64dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/success_green_button"
+                android:text="Next"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
 
         </LinearLayout>

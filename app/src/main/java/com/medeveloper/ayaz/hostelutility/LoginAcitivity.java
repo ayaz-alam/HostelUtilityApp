@@ -1,6 +1,7 @@
 package com.medeveloper.ayaz.hostelutility;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -33,6 +35,9 @@ import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.medeveloper.ayaz.hostelutility.student.StudentForm;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
+import tyrantgit.explosionfield.ExplosionField;
+import tyrantgit.explosionfield.Utils;
+
 public class LoginAcitivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -51,7 +56,6 @@ public class LoginAcitivity extends AppCompatActivity {
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         employeeID=findViewById(R.id.employee_id);
-
         Email=findViewById(R.id.email_login);
         Password=findViewById(R.id.password_login);
         Login=findViewById(R.id.login_button);

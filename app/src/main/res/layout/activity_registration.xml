@@ -6,28 +6,15 @@
     >
 
 
-
         <FrameLayout
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/trans_white_rectangle"
             android:id="@+id/fragment_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/reg_button"
-            android:layout_marginBottom="@dimen/def_16dp" />
+            android:layout_margin="@dimen/def_16dp" />
 
-        <Button
-            android:id="@+id/reg_button"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/def_16dp"
-            android:layout_marginLeft="64dp"
-            android:layout_marginRight="64dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/success_green_button"
-            android:text="Next"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+
 
 
 

@@ -69,7 +69,7 @@ public class OfficialsHome extends AppCompatActivity
         }
     }
 
-    private void setUpUser() {
+    public void setUpUser() {
         final MyData prefs=new MyData(this);
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         if(user==null)
@@ -104,6 +104,7 @@ public class OfficialsHome extends AppCompatActivity
         });
 
 
+        if(user.getPhotoUrl()!=null)
         Picasso.get().
                 load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
                 .centerCrop()

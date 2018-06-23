@@ -12,6 +12,18 @@
             android:orientation="vertical"
             android:padding="12dp"
             android:paddingBottom="24dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_margin="8dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_pass_word"
+                    />
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -52,13 +64,13 @@
                 />
 
             <EditText
-                android:id="@+id/password_login"
+                android:id="@+id/confirm_pass_key"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/rounded_white"
-                android:drawableLeft="@drawable/ic_confirm_passwrd"
+                android:drawableLeft="@drawable/ic_confirmpassword"
                 android:drawablePadding="4dp"
                 android:hint="Confirm passkey"
                 android:inputType="numberPassword"
@@ -71,6 +83,19 @@
                 android:textColor="@color/colorPrimaryDark"
 
                 />
+            <Button
+                android:id="@+id/reg_button"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginBottom="@dimen/def_16dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginRight="64dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/success_green_button"
+                android:text="Confirm"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

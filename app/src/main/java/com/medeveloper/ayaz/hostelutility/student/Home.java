@@ -53,13 +53,13 @@ public class Home extends AppCompatActivity
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
         FragmentManager fn=getSupportFragmentManager();
-        fn.beginTransaction().replace(R.id.fragment_layout, new StudentProfile(), "Profile").commit();
         getSupportActionBar().setTitle("Notice");
         fn.beginTransaction().replace(R.id.fragment_layout, new Notice(), "Notice").commit();
 
     }
+    ImageView imageView;
 
-    private void setUpUser() {
+    public void setUpUser() {
         final MyData prefs=new MyData(this);
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         if(user==null)
@@ -81,7 +81,7 @@ public class Home extends AppCompatActivity
         }
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout = navigationView.getHeaderView(0);
-        ImageView imageView=headerLayout.findViewById(R.id.display_image);
+        imageView=headerLayout.findViewById(R.id.display_image);
         headerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +94,7 @@ public class Home extends AppCompatActivity
         });
 
 
+        if(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()!=null)
         Picasso.get().
                 load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
                 .centerCrop()
@@ -106,6 +107,7 @@ public class Home extends AppCompatActivity
         ((TextView)headerLayout.findViewById(R.id.display_room_no)).setText(prefs.getData(MyData.ROOM_NO));
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -142,7 +144,7 @@ public class Home extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+   @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 

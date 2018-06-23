@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -33,6 +34,8 @@ import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialsDetailsC
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -217,8 +220,13 @@ public class OfficialProfile extends Fragment {
                     .transform(new CircularTransform())
                     .fit()
                     .into(displayImage);
-            UpdateUserPhoto();
-
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                myPhoto=cameraUtitlity.getResizedBitmap(bitmap,500);
+                UpdateUserPhoto();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -233,7 +241,10 @@ public class OfficialProfile extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful())
+                    {
                         Toast.makeText(getContext(),"Successfull",Toast.LENGTH_SHORT).show();
+                        ((OfficialsHome)getActivity()).setUpUser();
+                    }
                     else
                         Toast.makeText(getContext(),"Unsuccessful : "+task.getException(),Toast.LENGTH_SHORT).show();
 

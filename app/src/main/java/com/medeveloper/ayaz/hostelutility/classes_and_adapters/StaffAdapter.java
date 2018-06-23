@@ -87,8 +87,6 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
         // - replace the contents of the view with that element
 
         StaffDetailsClass staff = mDataSource.get(position);
-
-
         holder.staffDepartment.setText(staff.Department);
         holder.staffName.setText(staff.NameOfStaff);
         holder.staffContact.setText(staff.ContactNumber);

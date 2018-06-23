@@ -88,8 +88,8 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
-                android:textSize="@dimen/card_body_12sp"
                 android:maxLines="2"
+                android:textSize="@dimen/card_body_12sp"
                 tools:text="Body of the Notice" />
             <TextView
                 android:layout_width="match_parent"

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
@@ -17,10 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class First extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private Button submit;
 
     public First() {
         // Required empty public constructor
@@ -45,7 +49,7 @@ public class First extends Fragment {
 
     View rootView;
     EditText adhaarNumber,uniqueId,email;
-    RadioGroup regRadioGroup;
+    //RadioGroup regRadioGroup;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,8 +61,6 @@ public class First extends Fragment {
          * */
         initViews();
 
-
-
         return rootView;
     }
 
@@ -67,8 +69,16 @@ public class First extends Fragment {
         adhaarNumber=rootView.findViewById(R.id.adhaar_no);
         uniqueId=rootView.findViewById(R.id.unique_id);
         email=rootView.findViewById(R.id.email_address);
-        regRadioGroup=rootView.findViewById(R.id.signup_radio);
-
+       // regRadioGroup=rootView.findViewById(R.id.signup_radio);
+        submit=rootView.findViewById(R.id.reg_button);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fieldOkay())
+                    tryTOAuthenticate(User);
+            }
+        });
+/*
         regRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -84,36 +94,18 @@ public class First extends Fragment {
                 }
             }
         });
-    }
-
-    /**
-     * This function is triggered by button on the parent activity
-     * which communicate with the fragment
-     * @return
-     */
-    public boolean canProceed()
-    {
-        boolean okay=false;
-        if(fieldOkay())
-        {
-            if(tryTOAuthenticate(User))// if user exists in database
-            {
-                okay=true;
-            }
-            else // if user is not present in the database
-            {
-
-            }
-
-        }
-
-        return okay;
+        */
     }
 
     boolean validUser=false;
+    SweetAlertDialog pDialog;
     private boolean tryTOAuthenticate(final int Code) {
-        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference(getString(R.string.college_id));
+        pDialog=new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Please wait...")
+                .setContentText("While we check details in database");
+        pDialog.show();
 
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference(getString(R.string.college_id));
         if(Registration.EMPLOYEE==Code)
             mRef=mRef.child(getString(R.string.officials_id_ref)).child(uniqueId.getText().toString());
         else if(Code==Registration.STUDENT)
@@ -121,8 +113,8 @@ public class First extends Fragment {
 
         final String ID_1=adhaarNumber.getText().toString();
         final String ID_2=uniqueId.getText().toString();
-        String ID_3=email.getText().toString();
-        //TODO remove when database rule is set
+        final String ID_3=email.getText().toString();
+        //TODO remove when -/database rule is set
        // FirebaseAuth.getInstance().signInAnonymously();
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -134,20 +126,59 @@ public class First extends Fragment {
                         if(ID_2.equals(dataSnapshot.getKey()))
                         if(ID_1.equals(dataSnapshot.child("AdhaarNo").getValue()))
                             validUser=true;
+                        if(validUser)
+                        {
+                            pDialog.dismiss();
+                            Registration.FLAG_STEP_NUMBER++;
+                            Second second=Second.newInstance(ID_1,ID_2,ID_3,Registration.STUDENT);
+                            FragmentManager fn = getActivity().getSupportFragmentManager();
+                            fn.beginTransaction().replace(R.id.fragment_layout, second, "Second").commit();
+                        }
+                        else
+                        {
+                            pDialog.dismiss();
+                            new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText("Ooops..")
+                                    .setContentText("It seems that you don't exist\nObviously in our database\nWhat you can do" +
+                                            " is try with correct data or contact admin").show();
+                        }
+
                     }
                     else if(Code==Registration.EMPLOYEE)
                     {
+
                         //TODO generate a base ref for the employee
+                        /*
                         if(ID_2.equals(dataSnapshot.getKey()))
                             if(ID_1.equals(dataSnapshot.child("AdhaarNo").getValue()))
                                 validUser=true;
+                        if(validUser)
+                        {
+                            pDialog.dismiss();
+                            Registration.FLAG_STEP_NUMBER++;
+                            FragmentManager fn = getActivity().getSupportFragmentManager();
+                            Second second=new Second();
+                            fn.beginTransaction().replace(R.id.fragment_layout, new Second(), "Second").commit();
+                        }
+                        else
+                        {
+                            pDialog.dismiss();
+                            new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText("Ooops..")
+                                    .setContentText("It seems that you don't exist\nObviously in our database\nWhat you can do" +
+                                            "is try with correct data or contact admin").show();
+                        }
+                        */
                     }
 
                 }
                 else
                 {
-                    //Cannot find student
-                    showDialog(0);
+                    pDialog.dismiss();
+                    new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Ooops..")
+                            .setContentText("It seems that you don't exist..\nObviously in our database\nWhat you can do" +
+                                    "is try with correct data or contact admin").show();
                 }
 
 
@@ -164,14 +195,6 @@ public class First extends Fragment {
         return validUser;
     }
 
-    private void showDialog(int i) {
-        if(i==0)
-        {
-            //Error
-
-        }
-
-    }
 
     private boolean fieldOkay()
     {

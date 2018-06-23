@@ -16,14 +16,14 @@
         android:id="@+id/display_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginRight="@dimen/nav_bar_large"
         android:layout_alignParentTop="true"
-        app:srcCompat="@drawable/ic_student" />
+        app:srcCompat="@drawable/ic_user_large" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="4dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/display_image"
         >

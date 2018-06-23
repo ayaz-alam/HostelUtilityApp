@@ -94,21 +94,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                         .setConfirmText("Confirm").setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(final SweetAlertDialog sweetAlertDialog) {
-                        Complaint complaint=mDataSource.get(getAdapterPosition());
-                        FirebaseDatabase.getInstance().getReference(mContext.getString(R.string.college_id))
-                                .child(mContext.getString(R.string.hostel_id)).child(mContext.getString(R.string.complaint_ref))
-                                .child(complaint.studentEnrollNo).child(complaint.complaintUID)
-                                .child("Resolved").setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful())
-                                {
-                                    resolveComplaint();
-                                    sweetAlertDialog.dismiss();
-                                    new SweetAlertDialog(mContext,SweetAlertDialog.SUCCESS_TYPE).setTitleText("Successfull").show();
-                                }
-                            }
-                        });
+                         resolveComplaint();
                     }
                 }).show();
 

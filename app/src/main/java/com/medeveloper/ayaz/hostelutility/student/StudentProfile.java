@@ -31,6 +31,7 @@ import com.medeveloper.ayaz.hostelutility.ChangePassword;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CameraUtitlity;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CircularTransform;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.squareup.picasso.Callback;
@@ -90,6 +91,7 @@ StudentProfile extends Fragment {
 
         setUpUserData();
 
+        if(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()!=null)
         Picasso.get().
                 load(user.getPhotoUrl())
                 .centerCrop()
@@ -104,7 +106,7 @@ StudentProfile extends Fragment {
 
 
         FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).
-                child(getString(R.string.student_list_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                child(getString(R.string.student_list_ref)).child(new MyData(getActivity()).getData(MyData.ENROLLMENT_NO))
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -218,7 +220,14 @@ StudentProfile extends Fragment {
                     .transform(new CircularTransform())
                     .fit()
                     .into(displayImage);
-            UpdateUserPhoto();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                myPhoto=cameraUtitlity.getResizedBitmap(bitmap,500);
+                UpdateUserPhoto();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
         }
     }
@@ -234,12 +243,18 @@ StudentProfile extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                if(task.isSuccessful())
+               {
                    Toast.makeText(getContext(),"Successfull",Toast.LENGTH_SHORT).show();
+                   ((Home)getActivity()).setUpUser();
+
+               }
                else
                    Toast.makeText(getContext(),"Unsuccessful : "+task.getException(),Toast.LENGTH_SHORT).show();
 
                 }
             });
+
+
 
         }
     }
