@@ -1,4 +1,4 @@
-# HostelUtilityApp
+# Hostel Utility App
 ## Complaint Management and Information distribution platform
 
 ## Overview
