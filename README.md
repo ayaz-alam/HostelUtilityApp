@@ -11,9 +11,9 @@ We were asked to design an **Android App** that would allow college students and
 * [Kanika Ranka](https://github.com/24kanika)   UI Designer
 
 ## Addtional guidance and help
-*Dr. Sudha Srinivasan **IDC IIT Bombay** [UI]
-*Miss Vinaya Tavde **IDC IIIT Bombay** [UI]
-*Mr. Rahul Jigde **IDC IIT Bombay** [Programming Style]
+* Dr. Sudha Srinivasan **IDC IIT Bombay** [UI]
+* Miss Vinaya Tavde **IDC IIIT Bombay** [UI]
+* Mr. Rahul Jigde **IDC IIT Bombay** [Programming Style]
 
 Project made under guidance of
 ### Dr. Vikramaditya Dave 
