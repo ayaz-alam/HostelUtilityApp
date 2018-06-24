@@ -7,28 +7,22 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_cancel"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="12dp"
-            android:id="@+id/cancel_photo_button"
-            android:visibility="gone"
-            />
 
         <ImageView
             android:id="@+id/image_notice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@id/text_input"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/default_margin"
-            android:src="@drawable/ic_camera_icon"
-            android:layout_above="@id/text_input"
-            android:layout_marginBottom="@dimen/large_margin"
-            android:padding="@dimen/default_padding" />
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:padding="@dimen/default_padding"
+            android:src="@drawable/ic_camera_icon" />
 
         <TextView
             android:id="@+id/photo_hint"
@@ -37,91 +31,93 @@
             android:layout_centerInParent="true"
             android:alpha=".7"
             android:maxWidth="200dp"
-            android:text="You can send text notice and can also click a photo or select from gallery"
+            android:text="You can send text and photo notice\nClick here to add photo"
             android:textAlignment="center" />
 
         <LinearLayout
-            android:layout_width="match_parent"
             android:id="@+id/text_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_above="@id/below_container"
-            android:orientation="vertical"
-            android:background="@drawable/slight_curved_white"
-            android:padding="@dimen/default_margin"
             android:layout_margin="@dimen/default_margin"
-            android:layout_height="wrap_content">
+            android:background="@drawable/slight_curved_white"
+            android:orientation="vertical"
+            android:padding="@dimen/default_margin">
+
             <EditText
                 android:id="@+id/notice_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="50dp"
-                android:hint="Type notice subject/title here..."
                 android:layout_margin="2dp"
+                android:gravity="top"
+                android:maxLength="28"
+                android:hint="Type notice subject/title here..."
                 android:inputType="text"
                 android:maxLines="1"
-                android:gravity="top"/>
+                android:minHeight="50dp" />
+
             <EditText
                 android:id="@+id/notice_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="50dp"
-                android:hint="Type notice here..."
                 android:layout_margin="2dp"
+                android:gravity="top"
+                android:hint="Type notice here..."
                 android:inputType="text|textMultiLine"
-                android:gravity="top"/>
+                android:minHeight="50dp" />
         </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/below_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="4dp"
-            android:padding="@dimen/default_padding"
             android:background="@drawable/slight_curved_white"
-            >
+            android:padding="@dimen/default_padding">
 
 
             <Button
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_padding"
                 android:background="@drawable/success_green_button"
                 android:drawablePadding="8dp"
                 android:drawableRight="@drawable/ic_send"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_padding"
-                android:layout_marginBottom="@dimen/default_padding"
                 android:paddingLeft="@dimen/large_margin"
+                android:text="Send"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:text="Send" />
+                android:textStyle="bold" />
+
             <ImageView
+                android:id="@+id/rotate_photo"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_toLeftOf="@id/camera"
-                android:src="@drawable/ic_rotate_right"
-                android:id="@+id/rotate_photo"
                 android:layout_centerVertical="true"
                 android:layout_margin="@dimen/default_margin"
-                />
+                android:layout_toRightOf="@id/camera"
+                android:src="@drawable/ic_rotate_right" />
 
             <ImageView
-                android:id="@+id/gallery"
-
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/large_margin"
+                android:id="@+id/remove_photo"
+                android:layout_width="26dp"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_photo_library" />
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/rotate_photo"
+                android:src="@drawable/ic_delete_photo" />
 
             <ImageView
                 android:id="@+id/camera"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/default_margin"
-                android:layout_toLeftOf="@id/gallery"
                 android:src="@drawable/ic_add_a_photo" />
 
         </RelativeLayout>

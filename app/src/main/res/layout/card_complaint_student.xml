@@ -39,8 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:id="@+id/card_title"
-        android:textColor="@color/white"
+        android:textColor="@color/PrimaryText"
         android:text="Title of Problem"
+        android:layout_marginRight="@dimen/default_margin"
         android:layout_margin="@dimen/small_margin"
         android:textSize="@dimen/cardview_title"
 
@@ -52,13 +53,13 @@
         android:text="Date"
         android:layout_below="@id/card_title"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/small_margin"
+
+        android:layout_marginRight="@dimen/default_margin"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="@dimen/default_small_margin"
-        android:textColor="@color/white"
+        android:textColor="@color/PrimaryText"
         />
 </RelativeLayout>
-
 
 
         <TextView
@@ -66,16 +67,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/head_container_card"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            tools:text="body"
+            android:layout_marginTop="4dp"
             android:ellipsize="end"
-            android:maxLines="3"
-            android:textColor="@color/PrimaryText"
             android:minHeight="100dp"
-            android:textSize="16sp" />
+            android:textColor="@color/PrimaryText"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin"
+            android:textSize="16sp"
+            tools:text="body" />
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.medeveloper.ayaz.hostelutility.R;
 
+import java.util.Calendar;
+
 import static com.medeveloper.ayaz.hostelutility.R.*;
 
 /**
@@ -20,6 +22,8 @@ public class Complaint {
     public String studentEnrollNo,StudentName,HostelID,RoomNo, Field,StaffContact,WardenUID,ComplaintDate,ComplaintDescription,complaintUID;
     @Keep
     boolean Resolved;
+    @Keep
+    public long TimeStamp;
 
     @Keep
     public Complaint()
@@ -39,6 +43,7 @@ public class Complaint {
         ComplaintDescription = complaintDescription;
         this.complaintUID = complaintUID;
         Resolved = resolved;
+        this.TimeStamp= Calendar.getInstance().getTimeInMillis();
     }
 
 }

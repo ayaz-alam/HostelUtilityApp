@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,8 +132,10 @@ public class First extends Fragment {
                             pDialog.dismiss();
                             Registration.FLAG_STEP_NUMBER++;
                             Second second=Second.newInstance(ID_1,ID_2,ID_3,Registration.STUDENT);
-                            FragmentManager fn = getActivity().getSupportFragmentManager();
-                            fn.beginTransaction().replace(R.id.fragment_layout, second, "Second").commit();
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            android.support.v4.app.FragmentTransaction fn = fragmentManager.beginTransaction();
+                            fn.setCustomAnimations(R.anim.slide_out_right,R.anim.slide_in_left);
+                            fn.replace(R.id.fragment_layout, second, "Second").commit();
                         }
                         else
                         {
@@ -186,6 +189,10 @@ public class First extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                pDialog.dismiss();
+                new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Ooops..")
+                        .setContentText("Error: "+databaseError.getMessage()).show();
 
             }
         });

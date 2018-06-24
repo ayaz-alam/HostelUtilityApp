@@ -157,7 +157,7 @@ public class NoticeClassAdapter extends RecyclerView.Adapter<NoticeClassAdapter.
             Picasso.get().
                     load(notice.photoUrl)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_face_white_24dp)
+                    .placeholder(R.drawable.ic_notdatafound)
                     .fit()
                     .into(holder.noticeImage, new Callback() {
                         @Override

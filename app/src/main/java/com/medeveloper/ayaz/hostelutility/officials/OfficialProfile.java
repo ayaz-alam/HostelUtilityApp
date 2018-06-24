@@ -84,6 +84,13 @@ public class OfficialProfile extends Fragment {
             }
         });
 
+        ((Button)rootView.findViewById(R.id.change_password)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),ChangePassword.class));
+            }
+        });
+
         setUpUserData();
 
         if(user.getPhotoUrl()!=null)
@@ -99,14 +106,13 @@ public class OfficialProfile extends Fragment {
     }
 
     private void setUpUserData() {
-
-
+        FirebaseAuth user=FirebaseAuth.getInstance();
+        if(user==null)
+            Toast.makeText(getActivity(),"user is not present ",Toast.LENGTH_SHORT).show();
+        else
         FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).
                 child(getString(R.string.official)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-               // .setValue(new OfficialsDetailsClass("Officials Name","employee001@gmail.com","EMP001","HostelID","1234567890","Warden","EE","MV Hostel","123456789001"));
-
-
-                .addValueEventListener(new ValueEventListener() {
+               .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -128,12 +134,7 @@ public class OfficialProfile extends Fragment {
                             ((TextView)rootView.findViewById(R.id.employee_hostel_name)).setText(myDetails.mHostelName);
                             ((TextView)rootView.findViewById(R.id.employee_post)).setText(myDetails.mPost);
 
-                            ((Button)rootView.findViewById(R.id.change_password)).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(getContext(),ChangePassword.class));
-                                }
-                            });
+
 
                         }
                         else new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).
@@ -142,6 +143,9 @@ public class OfficialProfile extends Fragment {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+                        new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).
+                                setTitleText("Error")
+                                .setContentText(""+databaseError.getMessage()).show();
 
                     }
                 });
@@ -150,7 +154,7 @@ public class OfficialProfile extends Fragment {
 
     private void setUpDialogForImageChange() {
         dialogForImageChange=new SweetAlertDialog(getContext(),
-                SweetAlertDialog.NORMAL_TYPE)
+                SweetAlertDialog.CUSTOM_IMAGE_TYPE)
                 .setCustomImage(R.drawable.ic_add_a_photo)
                 .setTitleText("Change photo")
                 .setContentText("Choose from gallery or click a new one!!")

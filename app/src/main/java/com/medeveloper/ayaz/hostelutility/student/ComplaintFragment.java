@@ -78,8 +78,7 @@ public class ComplaintFragment extends Fragment {
                 int month = mCurrentTime.get(Calendar.MONTH);
                 int day = mCurrentTime.get(Calendar.DAY_OF_MONTH);
                 //Date of the complaint creation
-                final String complaintDate = day + " " + getMonthForInt(month) + " " + year;
-                //StudentDetailsClass tempDetails=new StudentDetailsClass("2016CTAE001","123456789001","adfa","adfa","adfa","adfa","adfa","adfa","adfa","123","9509126582","ayazalam922@gmail.com","adf","adfa","a");
+                final String complaintDate = day + " " + getMonthForInt(++month) + " " + year;
                 //Checking if complaint fields are filled
                 if(isOkay(ComplaintType,ComplaintDetails)) {
 
@@ -147,7 +146,7 @@ public class ComplaintFragment extends Fragment {
                                                         complaintDetails.setText(null);
                                                     } else
                                                         new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE).
-                                                                setTitleText("not Successfull").setContentText(task.getException().toString()).
+                                                                setTitleText("Not Successfull").setContentText(task.getException().getMessage().toString()).
                                                                 show();
                                                     ;
                                                 }
@@ -167,6 +166,9 @@ public class ComplaintFragment extends Fragment {
 
                                             @Override
                                             public void onCancelled(DatabaseError databaseError) {
+                                                pDialog.dismiss();
+                                                new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE).setTitleText("Error")
+                                                        .setContentText(databaseError.getMessage()).show();
 
                                             }
                                         });
@@ -195,16 +197,10 @@ public class ComplaintFragment extends Fragment {
 
         ArrayList<PendingIntent> sentIntents = new ArrayList<PendingIntent>();
         ArrayList<PendingIntent> deliveryIntents = new ArrayList<PendingIntent>();
-
         sm.sendMultipartTextMessage(phoneNo,null,parts,null,null);
 
     }
 
-    void savePrefs(String Key,String Value)
-    {
-        PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(Key,Value).apply();
-        Log.d("Ayaz","Preference Saved :"+getPrefs(Key,"-1"));
-    }
     String getPrefs(String Key,String defaultValue)
     {
         return PreferenceManager.getDefaultSharedPreferences(getContext()).getString(Key, defaultValue);

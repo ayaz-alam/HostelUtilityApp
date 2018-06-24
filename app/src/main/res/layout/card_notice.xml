@@ -71,15 +71,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/head_container_card"
-            android:layout_margin="@dimen/default_margin"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/image_notice"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:layout_margin="@dimen/default_margin"
-                />
+                android:layout_margin="@dimen/default_margin" />
 
             <TextView
                 android:id="@+id/notice_body"
@@ -89,10 +87,12 @@
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:layout_margin="@dimen/default_margin"
                 android:textSize="@dimen/card_body_12sp"
                 tools:text="Body of the Notice" />
             <TextView
                 android:layout_width="match_parent"
+                android:padding="4dp"
                 android:layout_height="wrap_content"
                 android:text="Read more.."
                 android:id="@+id/expand_colapse"

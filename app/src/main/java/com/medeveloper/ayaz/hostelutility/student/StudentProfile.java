@@ -106,7 +106,7 @@ StudentProfile extends Fragment {
 
 
         FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).
-                child(getString(R.string.student_list_ref)).child(new MyData(getActivity()).getData(MyData.ENROLLMENT_NO))
+                child(getString(R.string.student_list_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -150,7 +150,7 @@ StudentProfile extends Fragment {
 
     private void setUpDialogForImageChange() {
         dialogForImageChange=new SweetAlertDialog(getContext(),
-                SweetAlertDialog.NORMAL_TYPE)
+                SweetAlertDialog.CUSTOM_IMAGE_TYPE)
                 .setCustomImage(R.drawable.ic_add_a_photo)
                 .setTitleText("Change photo")
                 .setContentText("Choose from gallery or click a new one!!")

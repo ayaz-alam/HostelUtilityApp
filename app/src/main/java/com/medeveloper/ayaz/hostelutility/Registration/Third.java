@@ -108,8 +108,7 @@ public class Third extends Fragment {
                            pDialog.dismiss();
                            new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
                                    .setTitleText("Registration failed")
-                                   .setContentText("Can not create user").show();
-                           Toast.makeText(getContext(),"Error: "+task.getException(),Toast.LENGTH_LONG).show();
+                                   .setContentText(""+task.getException().getMessage()).show();
                        }
                         }
                     });
@@ -143,6 +142,10 @@ public class Third extends Fragment {
 
 
     }
+
+    /**
+     * Create user
+     */
     private void createUser()
     {
         /**

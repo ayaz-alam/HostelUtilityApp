@@ -49,7 +49,7 @@ public class About extends Fragment {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Uri uri = Uri.parse("https://www.github.com/42kanika");
+                        Uri uri = Uri.parse("https://www.github.com/24kanika");
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                     }

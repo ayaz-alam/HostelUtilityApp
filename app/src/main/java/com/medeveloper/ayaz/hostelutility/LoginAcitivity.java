@@ -397,12 +397,11 @@ public class LoginAcitivity extends AppCompatActivity {
                     pDialog.dismiss();
                     final SweetAlertDialog sDialog=new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE);
                     sDialog.setCancelable(false);
-                    sDialog.setTitleText("Can't log you in").setContentText("Email: "+email+"\nPass: "+pass+"\nError: "+task.getException()).
+                    sDialog.setTitleText("Can't log you in").setContentText(""+task.getException().getMessage()).
                             setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sDialog.dismiss();
-                                    finish();
                                 }
                             });
                     sDialog.show();
@@ -427,15 +426,12 @@ public class LoginAcitivity extends AppCompatActivity {
                                     .addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
-                                            Toast.makeText(LoginAcitivity.this,"DataSnapshot "+dataSnapshot.exists(),Toast.LENGTH_SHORT).show();
 
                                             if(dataSnapshot.exists())
                                             {
                                                 OfficialsDetailsClass Id=dataSnapshot.getValue(OfficialsDetailsClass.class);
                                                 if(Id.mEmployeeID.equals(EmployeeID))
                                                 {
-
-                                                    Toast.makeText(LoginAcitivity.this,"Came here 1",Toast.LENGTH_SHORT).show();
                                                     MyData prefs=new MyData(LoginAcitivity.this);
                                                     prefs.saveTeacherPrefs(Id);
                                                     pDialog.dismiss();
@@ -445,8 +441,8 @@ public class LoginAcitivity extends AppCompatActivity {
                                                 else
                                                 {
                                                     new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE)
-                                                            .setTitleText("Invalid Credentials")
-                                                            .setContentText("Please make sure you've entered valid credentials\nContact admin if problem persists")
+                                                        .setTitleText(getString(R.string.invalid_credentials))
+                                                            .setContentText(getString(R.string.login_error_off))
                                                             .show();
                                                     new MyData(LoginAcitivity.this).clearPreferences();
                                                     FirebaseAuth.getInstance().signOut();
@@ -456,8 +452,8 @@ public class LoginAcitivity extends AppCompatActivity {
                                             else
                                             {
                                                 new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE)
-                                                        .setTitleText("Invalid Credentials")
-                                                        .setContentText("Please make sure you've entered valid credentials\nContact admin if problem persists")
+                                                        .setTitleText(getString(R.string.invalid_credentials))
+                                                        .setContentText(getString(R.string.login_error_off))
                                                         .show();
                                                 new MyData(LoginAcitivity.this).clearPreferences();
                                                 FirebaseAuth.getInstance().signOut();
@@ -476,12 +472,10 @@ public class LoginAcitivity extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(getApplicationContext(),""+task.getException(),Toast.LENGTH_SHORT).show();
-
                             pDialog.dismiss();
                             final SweetAlertDialog sDialog=new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE);
                             sDialog.setCancelable(false);
-                            sDialog.setTitleText("Can't log you in").setContentText("Please check Email: "+email+"\n and Password \nError is: "+task.getException()).
+                            sDialog.setTitleText("Can't log you in").setContentText(""+task.getException().getLocalizedMessage()).
                                     setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sweetAlertDialog) {

@@ -157,8 +157,10 @@ public class Second extends Fragment {
                 if(checkDetails())
                 {
                     Third thirdStep=Third.newInstance(prepareData(),UserCode);
-                    FragmentTransaction fn=getActivity().getSupportFragmentManager().beginTransaction();
-                    fn.replace(R.id.fragment_layout, thirdStep, "Second").commit();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    android.support.v4.app.FragmentTransaction fn = fragmentManager.beginTransaction();
+                    fn.setCustomAnimations(R.anim.slide_out_right,R.anim.slide_in_left);
+                    fn.replace(R.id.fragment_layout, thirdStep, "Third").commit();
                 }
             }
         });

@@ -136,5 +136,10 @@
     <string name="empId_hint">Employee Id</string>
     <string name="forgot_pass_hint">Please give your email address same as you have given while creating the account so that we can send you a verification email.</string>
     <string name="reset_pass_number_hint">Please enter 6 digit numeric password on the portal, otherwise you wont be able to login</string>
+    <string name="login_error_off">Please make sure you\'ve entered valid credentials Contact admin if problem persists</string>
+    <string name="invalid_credentials">Invalid Credentials</string>
+
+
+    <!--Error string related to firebase-->
 
 </resources>

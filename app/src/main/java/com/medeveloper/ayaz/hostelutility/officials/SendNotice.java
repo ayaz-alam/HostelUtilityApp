@@ -13,7 +13,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -21,7 +20,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +28,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.medeveloper.ayaz.hostelutility.FirebaseHelp.SEND_NOTICE;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CameraUtitlity;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.NoticeClass;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -80,7 +75,6 @@ public class SendNotice extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.officials_send_notice, container, false);
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             isPermissionGranted();//Checking the permission
         }
@@ -88,101 +82,46 @@ public class SendNotice extends Fragment {
         noticeTitle=rootView.findViewById(R.id.notice_title);
         noticeBody=rootView.findViewById(R.id.notice_body);
         baseRef= FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id));
-
         myCamera=new CameraUtitlity(getContext());
         //Camera Button
         (rootView.findViewById(R.id.camera)).setOnClickListener(new View.OnClickListener() {
 
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-
-                if(isPermissionGranted())
-                dispatchTakePictureIntent(0);
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (isPermissionGranted())
+                        setUpDialogForImageAdd();
+                }
+                else
+                    setUpDialogForImageAdd();
             }
         });
 
-        removePhoto=rootView.findViewById(R.id.cancel_photo_button);
+        removePhoto=rootView.findViewById(R.id.remove_photo);
         removePhoto.setVisibility(View.GONE);
         removePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(myPhoto!=null)
-                    mImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_camera_icon));
-                    mImageView.setAlpha(0.5f);
-                    (rootView.findViewById(R.id.photo_hint)).setVisibility(View.VISIBLE);
-                    (rootView.findViewById(R.id.cancel_photo_button)).setVisibility(View.GONE);
-                    myPhoto=null;
-
+                clearPhoto();
             }
         });
-
-        //Open Gallery Button
-        (rootView.findViewById(R.id.gallery)).setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onClick(View v) {
-                if(isPermissionGranted())
-                dispatchTakePictureIntent(1);
-
-            }
-        });
-
         //Send button
         (rootView.findViewById(R.id.submit)).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-
-
-                String Title=noticeTitle.getText().toString();
-                String Body=noticeBody.getText().toString();
-                if(Title.equals(""))
-                    ShowDialog("Please give title for Notice",4).show();
-                else if(Body.equals(""))
-                    ShowDialog("Notice body can't be empty",4).show();
-                else
-                    if(isNetworkAvailable())//Checking for internet connection
-                if (myPhoto != null)
-                {
-                    SendPhotoNotice(Title,Body);
-                    pDialog.show();
-                }
-                else
-                {
-                    pDialog.show();
-                    Date currentTime = Calendar.getInstance().getTime();
-                    baseRef.child(getString(R.string.notice_ref)).
-                            push().setValue(
-                                    new NoticeClass(Title, Body,
-                                            FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
-                                            currentTime)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {
-                                pDialog.dismiss();
-                                noticeBody.setText(null);
-                                noticeTitle.setText(null);
-                                mImageView.setImageBitmap(null);
-                                ShowDialog("Successfully sent",3).setContentText("Notice has been sent successfully").show();
-
-                            }
-                        }
-                    });
-                }
-                else
-                    ShowDialog("No Internet Connection",4);
-
+                prepareNotice();
             }
         });
 
-
-
         mImageView = rootView.findViewById(R.id.image_notice);
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setUpDialogForImageAdd();
+            }
+        });
         mImageView.setAlpha(0.5f);//ImageView Reference
-
         ImageView rotatePhotoButton=rootView.findViewById(R.id.rotate_photo);//Rotate Photo Reference
         rotatePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,54 +132,139 @@ public class SendNotice extends Fragment {
             }
         });
 
-
-
         return rootView;
     }
 
-    //When Photo Notice is being sent
-    void SendPhotoNotice(final String title, final String body)
-    {
-        Log.d("Tag","Photo Intent called");
-        //Trimming the size of the Image
-        Uri ImageUri=getImageUri(getContext(),getResizedBitmap(myPhoto,1800));
+    /**
+     * Prepare the data to be sent on submit button click
+     */
+    private void prepareNotice() {
 
-        StorageReference storageRef=FirebaseStorage.getInstance().
-                getReference(getString(R.string.college_id)).
-                child(getString(R.string.hostel_id));
-        storageRef.child(ImageUri.getLastPathSegment()).
-                putFile(ImageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        String Title=noticeTitle.getText().toString();
+        String Body=noticeBody.getText().toString();
+        if(Title.equals(""))
+            ShowDialog("Please give title for Notice",4).show();
+        else if(Body.equals(""))
+            ShowDialog("Notice body can't be empty",4).show();
+        else
+        if(isNetworkAvailable())//Checking for internet connection
+            if (myPhoto != null)
+            {
+                pDialog.show();
+                sendPhotoNotice(Title,Body);
+
+            }
+            else
+            {
+                pDialog.show();
+                Date currentTime = Calendar.getInstance().getTime();
+                baseRef.child(getString(R.string.notice_ref)).
+                        push().setValue(
+                        new NoticeClass(Title, Body,
+                                new MyData(getContext()).getData(MyData.NAME),
+                                currentTime)).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            pDialog.dismiss();
+                            noticeBody.setText(null);
+                            noticeTitle.setText(null);
+                            mImageView.setImageBitmap(null);
+                            myPhoto=null;
+                            clearPhoto();
+                            ShowDialog("Successfully sent",3).setContentText("Notice has been sent successfully").show();
 
-                        Date currentTime = Calendar.getInstance().getTime();
-                        //Creating notice class object to push into the firebase
-                        NoticeClass newNotice= new NoticeClass(title,body,
-                                FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
-                                taskSnapshot.getDownloadUrl().toString(), currentTime);
-                        baseRef.child(getString(R.string.notice_ref)).push().setValue(newNotice).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful())
-                                {
-                                    noticeBody.setText(null);
-                                    noticeTitle.setText(null);
-                                    mImageView.setImageBitmap(null);
-                                    pDialog.dismiss();
-                                    ShowDialog("Successfully sent",3).setContentText("Notice has been sent successfully").show();
-                                }
-                            }
-                        });
+
+                        }
                     }
                 });
+            }
+        else
+            ShowDialog("No Internet Connection",4);
+    }
+
+    /**
+     * Setups the Dialog that is popped for choosing how to take the photo
+     */
+    private void setUpDialogForImageAdd() {
+        final SweetAlertDialog dialogForImageChange=new SweetAlertDialog(getContext(),
+                SweetAlertDialog.CUSTOM_IMAGE_TYPE)
+                .setCustomImage(R.drawable.ic_add_a_photo)
+                .setTitleText("Add a photo")
+                .setContentText("Choose from gallery or click a new one!!")
+                .setConfirmText("Gallery")
+                .setCancelText("Camera")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dispatchTakePictureIntent(1);
+                        sweetAlertDialog.dismiss();
+                    }
+                })
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        //From Camera
+                        dispatchTakePictureIntent(0);
+                        sweetAlertDialog.dismiss();
+                    }
+                });
+        dialogForImageChange.setCancelable(true);
+        dialogForImageChange.show();
+
+    }
+
+    /**
+     * Clear the selected photo
+     */
+    private void clearPhoto() {
+        if(myPhoto!=null) {
+            mImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_camera_icon));
+            mImageView.setAlpha(0.5f);
+            (rootView.findViewById(R.id.photo_hint)).setVisibility(View.VISIBLE);
+            (rootView.findViewById(R.id.remove_photo)).setVisibility(View.GONE);
+            myPhoto = null;
+        }
+        else
+        {
+            mImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_camera_icon));
+            mImageView.setAlpha(0.5f);
+            (rootView.findViewById(R.id.photo_hint)).setVisibility(View.VISIBLE);
+            (rootView.findViewById(R.id.remove_photo)).setVisibility(View.GONE);
+        }
+
+
+        (rootView.findViewById(R.id.image_notice)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setUpDialogForImageAdd();
+            }
+        });
+    }
+
+    /**
+     * Send the photo notice if the photo is selected
+     * @param title
+     * @param body
+     */
+    void sendPhotoNotice(final String title, final String body)
+    {
+        pDialog.dismiss();
+        //Trimming the size of the Image
+        Uri ImageUri=getImageUri(getContext(),getResizedBitmap(myPhoto,2000));
+        new SEND_NOTICE(getActivity(),ImageUri,title,body).execute();
+        noticeBody.setText(null);
+        noticeTitle.setText(null);
+        mImageView.setImageBitmap(null);
+        clearPhoto();
 
 
     }
 
-
     //Generating Uri from Bitmap
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
+    public Uri getImageUri(Context inContext, Bitmap inImage)
+    {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
@@ -269,8 +293,10 @@ public class SendNotice extends Fragment {
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
-
-    //Codes to rotate the photo
+    /**
+     * Rotates the photo by 90 degrees clockwise
+     * @param bitmap
+     */
     void rotatePhoto(Bitmap bitmap)
     {
         Matrix mMatrix = new Matrix();
@@ -282,7 +308,6 @@ public class SendNotice extends Fragment {
         myPhoto=bitmap;
         mImageView.setImageBitmap(bitmap);
     }
-
     // Function to call ImagePicker and Camera
     private void dispatchTakePictureIntent(int Code) {
         if (Code == 0) {
@@ -308,8 +333,8 @@ public class SendNotice extends Fragment {
                 }
             }
 
-
-        } else if (Code == 1) {
+        }
+        else if (Code == 1) {
 
             Intent intent = new Intent();
             intent.setType("image/*");// Show only images, no videos or anything else
@@ -336,15 +361,11 @@ public class SendNotice extends Fragment {
         return image;
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         //This is called when we select a photo or click a photo
-
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK)//Camera Intent Result
         {
-
             Uri mImageUri=thePhotoURI;
             getActivity().getContentResolver().notifyChange(mImageUri, null);
             ContentResolver cr = getActivity().getContentResolver();
@@ -356,27 +377,24 @@ public class SendNotice extends Fragment {
                 removePhoto.setVisibility(View.VISIBLE);
                 rootView.findViewById(R.id.photo_hint).setVisibility(View.GONE);
                 mImageView.setImageBitmap(myPhoto);
+                mImageView.setOnClickListener(null);
                 mImageView.setAlpha(1f);
 
             } catch (Exception e) {
                 Toast.makeText(getContext(), "Failed to load", Toast.LENGTH_SHORT).show();
 
             }
-
-
-
         }
         else if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)//The Result given by Phot Picker
         {
-
             Uri uri = data.getData();
-
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                 rootView.findViewById(R.id.photo_hint).setVisibility(View.GONE);
                 removePhoto.setVisibility(View.VISIBLE);
                 mImageView.setAlpha(1f);
                 mImageView.setImageBitmap(bitmap);
+                mImageView.setOnClickListener(null);
                 myPhoto=bitmap;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -386,8 +404,6 @@ public class SendNotice extends Fragment {
     //To Check Permissions
     @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean isPermissionGranted() {
-
-
         boolean okay = true;
 
         if (getActivity().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

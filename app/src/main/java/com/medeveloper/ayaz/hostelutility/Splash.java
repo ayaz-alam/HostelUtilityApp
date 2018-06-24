@@ -29,7 +29,7 @@ import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Splash extends AppCompatActivity {
 
-    private static final long SPLASH_DISPLAY_LENGTH = 1500;
+    private static final long SPLASH_DISPLAY_LENGTH = 1000;
     private static final int REQUEST_CODE = 222;
 
 
@@ -51,9 +51,9 @@ public class Splash extends AppCompatActivity {
        //startActivity(new Intent(this,Registration.class));
 
         Animation animation1= AnimationUtils.makeInChildBottomAnimation(this);
-        animation1.setDuration(400);
+        animation1.setDuration(500);
         TextView t=findViewById(R.id.splash_text);
-        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/designer_blocks.TTF");
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Aller_Rg.ttf");
         t.setTypeface(custom_font);
         t.setAnimation(animation1);
 
@@ -185,6 +185,7 @@ public class Splash extends AppCompatActivity {
             else
             {
              startActivity(new Intent(this,LoginAcitivity.class));
+             finish();
             }
         }
 
