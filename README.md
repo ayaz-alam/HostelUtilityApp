@@ -12,7 +12,7 @@ We were asked to design an **Android App** that would allow college students and
 
 ## Addtional guidance and help
 * Dr. Sudha Srinivasan **IDC IIT Bombay** [UI]
-* Miss Vinaya Tavde **IDC IIIT Bombay** [UI]
+* Miss Vinaya Tavde **IDC IIT Bombay** [UI]
 * Mr. Rahul Jigde **IDC IIT Bombay** [Programming Style]
 
 Project made under guidance of
