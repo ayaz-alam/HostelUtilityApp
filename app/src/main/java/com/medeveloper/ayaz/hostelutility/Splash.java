@@ -48,16 +48,6 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
-       //startActivity(new Intent(this,Registration.class));
-
-        Animation animation1= AnimationUtils.makeInChildBottomAnimation(this);
-        animation1.setDuration(400);
-        TextView t=findViewById(R.id.splash_text);
-        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/designer_blocks.TTF");
-        t.setTypeface(custom_font);
-        t.setAnimation(animation1);
-
-
         final String [] permissions=new String []
                 {
                         Manifest.permission.SEND_SMS,
@@ -144,12 +134,6 @@ public class Splash extends AppCompatActivity {
         if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             okay = false;
         }
-
-
-
-
-
-
 
         return okay;
     }

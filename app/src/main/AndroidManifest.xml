@@ -49,30 +49,38 @@
         <activity
             android:name=".student.Home"
             android:label="@string/title_activity_home"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".officials.OfficialsHome"
             android:label="@string/title_activity_officials_home"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginAcitivity"
+            android:screenOrientation="portrait"
             android:label="Login" />
         <activity
             android:name=".student.StudentForm"
+            android:screenOrientation="portrait"
             android:label="Register" />
         <activity
             android:name=".officials.OfficialsForm"
+            android:screenOrientation="portrait"
             android:label="Register" />
         <activity
             android:name=".ChangePassword"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Translucent" />
         <activity
             android:name=".student.PhotoViewer"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Translucent" />
         <activity android:name=".Noticaiton" />
 
         <service
             android:name=".MyNotificationService"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <service
             android:name=".MyService"

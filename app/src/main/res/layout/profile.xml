@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/sub_container"
+        android:layout_marginBottom="-6dp"
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:id="@+id/photo_container"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="-100dp"
+            android:layout_marginTop="-100dp"
+            android:background="@drawable/circle"
+            android:paddingTop="80dp">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="60dp"
+                android:padding="8dp"
+                android:id="@+id/display_image"
+                android:layout_marginBottom="60dp"
+                android:layout_centerInParent="true"
+                android:foregroundGravity="top"
+                android:src="@drawable/man" />
+
+            <ImageView
+                android:id="@+id/edit_photo"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="8dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/solid_circle"
+                android:src="@drawable/ic_mode_edit" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/hostel_name"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/extra_large_margin"
+            android:text="Ayaz Alam"
+            android:textColor="@color/PrimaryText"
+            android:textSize="@dimen/extra_large_heading" />
+
+        <TextView
+            android:id="@+id/hostel_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/extra_large_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="Hostel Name"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/sub_heading_text_size"
+
+            />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/sub_container"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/outline"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_margin"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/profile_icons_size"
+                android:layout_height="@dimen/profile_icons_size"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/default_margin"
+                android:src="@drawable/home"
+                />
+
+            <TextView
+                android:id="@+id/room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="Room Number"
+                android:textSize="@dimen/sub_heading_text_size" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/outline"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_margin"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/profile_icons_size"
+                android:layout_height="@dimen/profile_icons_size"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/default_margin"
+                android:src="@drawable/phone_call"
+                />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="Phone"
+                android:textSize="@dimen/sub_heading_text_size" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/outline"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_margin"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_height="@dimen/profile_icons_size"
+                android:layout_width="@dimen/profile_icons_size"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/default_margin"
+                android:src="@drawable/color_mail"
+                />
+            <TextView
+                android:id="@+id/mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="Mail"
+                android:textSize="@dimen/sub_heading_text_size" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/outline"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_margin"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/profile_icons_size"
+                android:layout_height="@dimen/profile_icons_size"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/default_margin"
+                android:src="@drawable/books"
+                />
+
+            <TextView
+                android:id="@+id/year_and_branch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="Year and Branch"
+                android:textSize="@dimen/sub_heading_text_size" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/outline"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_margin"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/profile_icons_size"
+                android:layout_height="@dimen/profile_icons_size"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/default_margin"
+                android:src="@drawable/location"
+                />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="Address"
+                android:textSize="@dimen/sub_heading_text_size" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/outline"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_margin"
+            android:id="@+id/change_password"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/profile_icons_size"
+                android:layout_height="@dimen/profile_icons_size"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:clickable="false"
+                android:layout_margin="@dimen/default_margin"
+                android:src="@drawable/password_lock"
+                />
+
+            <TextView
+                android:clickable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:text="Change Password"
+                android:textSize="@dimen/sub_heading_text_size" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

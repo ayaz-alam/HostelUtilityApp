@@ -33,4 +33,5 @@
     <dimen name="date_size_small">10dp</dimen>
     <dimen name="notice_title_padding">6dp</dimen>
     <dimen name="card_body_12sp">12sp</dimen>
+    <dimen name="profile_icons_size">36dp</dimen>
 </resources>

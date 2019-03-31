@@ -64,33 +64,18 @@ public class NoticeClassAdapter extends RecyclerView.Adapter<NoticeClassAdapter.
         public void onClick(View view) {
 
             if(view==expand_colapse) {
-                Log.d("Notice Adapter","Come in expand_colapse");
-                expand_colapse.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
                         if (expanded) {
-
                             noticeBody.setMaxLines(2);
                             expand_colapse.setText("Read more..");
-
                         } else {
                             noticeBody.setMaxLines(100);
                             expand_colapse.setText("Read less..");
-
-
                         }
-
                         expanded = !expanded;
-                    }
-                });
-
             }
-
-
-            if(view==noticeImage) {
+            else if(view==noticeImage) {
 
                 Intent in1 = new Intent(mContext, PhotoViewer.class);
-
                 in1.putExtra("NoticeTitle",mDataSource.get(getAdapterPosition()).noticeTitle);
                 in1.putExtra("NoticeBody",mDataSource.get(getAdapterPosition()).noticeBody);
                 in1.setData(Uri.parse(mDataSource.get(getAdapterPosition()).photoUrl));
@@ -114,8 +99,6 @@ public class NoticeClassAdapter extends RecyclerView.Adapter<NoticeClassAdapter.
     public NoticeClassAdapter(Context context, ArrayList<NoticeClass> items) {
         mContext = context;
         mDataSource = items;
-
-
     }
 
 

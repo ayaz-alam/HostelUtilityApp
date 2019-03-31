@@ -23,7 +23,7 @@ public class PhotoViewer extends AppCompatActivity {
     ImageView image;
     ImageView backButton;
     SweetAlertDialog pDialog;
-    boolean expanded=true;
+    boolean expanded=false;
     TextView expand_colapse;
     ViewGroup.LayoutParams viewParams;
 
@@ -51,6 +51,7 @@ public class PhotoViewer extends AppCompatActivity {
         if(NoticeBody.length()>100)
             expand_colapse.setVisibility(View.VISIBLE);
         else expand_colapse.setVisibility(View.GONE);
+
         expand_colapse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

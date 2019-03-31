@@ -41,6 +41,13 @@ public class ChangePassword extends AppCompatActivity {
         pDialog=new SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE);
         pDialog.setTitleText("Please wait...");
 
+        findViewById(R.id.outer_area).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         mAuth=FirebaseAuth.getInstance();
 
         changePass.setOnClickListener(new View.OnClickListener() {

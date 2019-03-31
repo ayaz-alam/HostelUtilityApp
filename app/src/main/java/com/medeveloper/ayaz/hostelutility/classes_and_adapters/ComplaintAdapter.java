@@ -35,23 +35,22 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
     public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView complaintTitle;
-        public TextView complaintDetails;
-        public TextView complaintDate;
-        public ImageView resolvedImage;
-        public ImageView callButton;
+        TextView complaintTitle;
+        TextView complaintDetails;
+        TextView complaintDate;
+        ImageView resolvedImage;
+        ImageView callButton;
         private TextView studentName,roomNo,staffName,staffContact;
         private TextView resolvedButton;
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
 
-            complaintDetails = (TextView) v.findViewById(R.id.card_text);
-            complaintTitle = (TextView) v.findViewById(R.id.card_title);
-            resolvedImage = (ImageView) v.findViewById(R.id.resolve_image);
-            complaintDate = (TextView) v.findViewById(R.id.card_date);
-            callButton=v.findViewById(R.id.phone_the_staff);
-            if(code==0)
-            {
+            complaintDetails = v.findViewById(R.id.card_text);
+            complaintTitle = v.findViewById(R.id.card_title);
+            resolvedImage = v.findViewById(R.id.resolve_image);
+            complaintDate = v.findViewById(R.id.card_date);
+            callButton= v.findViewById(R.id.phone_the_staff);
+            if(code==0) {
                 resolvedButton=v.findViewById(R.id.resolved_button);
                 resolvedButton.setOnClickListener(this);
             }

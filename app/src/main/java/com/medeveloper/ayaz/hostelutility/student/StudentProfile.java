@@ -32,8 +32,11 @@ import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CameraUtitlity;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CircularTransform;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
+import com.medeveloper.ayaz.hostelutility.interfaces.photoChangeListener;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -69,11 +72,13 @@ StudentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView=inflater.inflate(R.layout.student_your_profile, container, false);
+        rootView=inflater.inflate(R.layout.profile, container, false);
+
+
         setUpDialogForImageChange();
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         displayImage=(ImageView)rootView.findViewById(R.id.display_image);
-        final TextView changePhoto=(TextView)rootView.findViewById(R.id.edit_photo);
+        final ImageView changePhoto=rootView.findViewById(R.id.edit_photo);
         cameraUtitlity=new CameraUtitlity(getActivity());
         changePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,21 +118,14 @@ StudentProfile extends Fragment {
                         if(dataSnapshot.exists())
                         {
                             myDetails=dataSnapshot.getValue(StudentDetailsClass.class);
-                            ((TextView)rootView.findViewById(R.id.display_name)).setText(myDetails.Name);
-                            ((TextView)rootView.findViewById(R.id.student_hostel)).setText(getString(R.string.hostel_id));
-                            ((TextView)rootView.findViewById(R.id.student_room_no)).setText(myDetails.RoomNo);
-                            ((TextView)rootView.findViewById(R.id.student_branch)).setText(myDetails.Branch);
-                            ((TextView)rootView.findViewById(R.id.enroll_no)).setText(myDetails.EnrollNo);
-                            ((TextView)rootView.findViewById(R.id.student_adhar_no)).setText(myDetails.AdhaarNo);
-                            ((TextView)rootView.findViewById(R.id.student_phone)).setText(myDetails.MobileNo);
-                            ((TextView)rootView.findViewById(R.id.student_email)).setText(myDetails.Email);
-                            ((TextView)rootView.findViewById(R.id.father_name)).setText(myDetails.FatherName);
-                            ((TextView)rootView.findViewById(R.id.father_contact)).setText(myDetails.FatherContact);
-                            ((TextView)rootView.findViewById(R.id.student_category)).setText(myDetails.Category);
-                            ((TextView)rootView.findViewById(R.id.student_blood_group)).setText(myDetails.BloodGroup);
-                            ((TextView)rootView.findViewById(R.id.student_address)).setText(myDetails.Address);
-                            ((TextView)rootView.findViewById(R.id.local_guardian_no)).setText(myDetails.LocalGuardianNo);
-                            ((Button)rootView.findViewById(R.id.change_password)).setOnClickListener(new View.OnClickListener() {
+                            ((TextView)rootView.findViewById(R.id.name)).setText(myDetails.Name);
+                            ((TextView)rootView.findViewById(R.id.hostel_name)).setText(getString(R.string.hostel_id));
+                            ((TextView)rootView.findViewById(R.id.room)).setText("Room No: "+myDetails.RoomNo);
+                            ((TextView)rootView.findViewById(R.id.year_and_branch)).setText("Class: "+myDetails.Branch +" "+ myDetails.Year);
+                            ((TextView)rootView.findViewById(R.id.phone)).setText(myDetails.MobileNo);
+                            ((TextView)rootView.findViewById(R.id.mail)).setText(myDetails.Email);
+                            ((TextView)rootView.findViewById(R.id.address)).setText(myDetails.Address);
+                            (rootView.findViewById(R.id.change_password)).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(getContext(),ChangePassword.class));
@@ -190,14 +188,6 @@ StudentProfile extends Fragment {
             try {
                 bitmap = android.provider.MediaStore.Images.Media.getBitmap(cr, mImageUri);
                 myPhoto=cameraUtitlity.getResizedBitmap(bitmap,500);
-                myPhoto=cameraUtitlity.rotatePhoto(myPhoto,displayImage);
-
-                Picasso.get().
-                        load(cameraUtitlity.getImageUri(getActivity(),myPhoto))
-                        .centerCrop()
-                        .transform(new CircularTransform())
-                        .fit()
-                        .into(displayImage);
                 UpdateUserPhoto();
 
             } catch (Exception e) {
@@ -212,12 +202,12 @@ StudentProfile extends Fragment {
         {
 
             Uri uri = data.getData();
-            Picasso.get().
-                    load(uri)
-                    .centerCrop()
-                    .transform(new CircularTransform())
-                    .fit()
-                    .into(displayImage);
+            try {
+                myPhoto = CameraUtitlity.getThumbnail(uri,getActivity());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             UpdateUserPhoto();
 
         }
@@ -234,9 +224,22 @@ StudentProfile extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                if(task.isSuccessful())
+               {
                    Toast.makeText(getContext(),"Successfull",Toast.LENGTH_SHORT).show();
+                   Home.photoListener.onPhotoChanged();
+                   Picasso.get().
+                           load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
+                           .memoryPolicy(MemoryPolicy.NO_CACHE)
+                           .networkPolicy(NetworkPolicy.NO_CACHE)
+                           .centerCrop()
+                           .transform(new CircularTransform())
+                           .fit()
+                           .into(displayImage);
+               }
                else
+               {
                    Toast.makeText(getContext(),"Unsuccessful : "+task.getException(),Toast.LENGTH_SHORT).show();
+               }
 
                 }
             });

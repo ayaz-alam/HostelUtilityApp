@@ -93,17 +93,6 @@ public class Notice extends Fragment {
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
         return rootView;
     }
 
