@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:src="@drawable/ic_main_logo"
+        android:src="@drawable/logo_large"
         android:layout_centerHorizontal="true"
         android:id="@+id/logo"
         android:layout_above="@+id/container"
@@ -48,7 +48,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_white"
+            android:background="@drawable/round_white"
             android:hint="Enter Your Email"
             android:id="@+id/email_login"
             android:padding="4dp"
@@ -69,7 +69,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_white"
+            android:background="@drawable/round_white"
             android:hint="Enter Password"
             android:id="@+id/password_login"
             android:minHeight="30dp"
@@ -89,7 +89,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_white"
+            android:background="@drawable/round_white"
             android:hint="Enter Employee ID"
             android:id="@+id/employee_id"
             android:visibility="gone"

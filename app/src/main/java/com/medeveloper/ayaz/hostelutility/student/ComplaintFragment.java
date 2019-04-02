@@ -63,7 +63,7 @@ public class ComplaintFragment extends Fragment {
         final EditText complaintDetails=rootView.findViewById(R.id.complaint_details);
 
         //On Click on submit button
-        ((Button)rootView.findViewById(R.id.submit_complaint)).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.submit_complaint).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

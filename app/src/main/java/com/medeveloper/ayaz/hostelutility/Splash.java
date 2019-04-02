@@ -29,7 +29,7 @@ import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Splash extends AppCompatActivity {
 
-    private static final long SPLASH_DISPLAY_LENGTH = 1500;
+    private static final long SPLASH_DISPLAY_LENGTH = 00;
     private static final int REQUEST_CODE = 222;
 
 
@@ -46,7 +46,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        //setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
         final String [] permissions=new String []
                 {

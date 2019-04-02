@@ -10,6 +10,7 @@ import com.medeveloper.ayaz.hostelutility.R;
 public class MyData {
 
 
+    public static final String ADHAAR = "pref_adhaar";
     Context context;
     static public String NAME;
     static public String HOSTELID;
@@ -19,6 +20,7 @@ public class MyData {
     static public String EMPLOYEE_ID;
     static public String POST;
     static public String MOBILE;
+    static public String MAIL;
 
     public MyData(Context context) {
         this.context=context;
@@ -30,6 +32,7 @@ public class MyData {
         EMPLOYEE_ID=context.getString(R.string.pref_employee_id);
         POST=context.getString(R.string.pref_post);
         MOBILE=context.getString(R.string.pref_mobile_no);
+        MAIL =context.getString(R.string.pref_mail);
 
 
     }

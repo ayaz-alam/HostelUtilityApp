@@ -135,5 +135,6 @@
     <string name="enroll_hint">Enrollment number</string>
     <string name="empId_hint">Employee Id</string>
     <string name="fragment_tag">currentFrag</string>
+    <string name="pref_mail">pref_mail</string>
 
 </resources>

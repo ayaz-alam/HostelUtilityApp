@@ -13,21 +13,10 @@ import com.medeveloper.ayaz.hostelutility.R;
 
 public class Second extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
-
     public Second() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Second.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Second newInstance(String param1, String param2) {
         Second fragment = new Second();
         Bundle args = new Bundle();
@@ -38,11 +27,6 @@ public class Second extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       /* if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        */
     }
 
     @Override
@@ -61,10 +45,10 @@ public class Second extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+    public boolean canProceed() {
+        return false;
     }
 }

@@ -8,7 +8,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/def_16dp"
         tools:ignore="UselessParent">
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +43,6 @@
                     android:paddingBottom="4dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
                     android:minHeight="30dp"
                     android:paddingLeft="12dp"
                     android:drawablePadding="4dp"
@@ -56,8 +54,6 @@
                     android:id="@+id/mobile_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
                     android:background="@drawable/rounded_white"
                     android:drawableLeft="@drawable/ic_mobile"
                     android:drawablePadding="4dp"
@@ -81,8 +77,6 @@
                     android:id="@+id/student_category"
                     android:background="@drawable/rounded_white"
                     android:padding="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
                     />
                 <Spinner
                     android:layout_width="match_parent"
@@ -90,8 +84,6 @@
                     android:entries="@array/blood_group"
                     android:id="@+id/student_blood_group"
                     android:padding="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
                     android:background="@drawable/rounded_white"
                     />
                 <EditText
@@ -106,8 +98,6 @@
                     android:inputType="textPersonName"
                     android:paddingBottom="4dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
                     android:minHeight="30dp"
                     android:paddingLeft="12dp"
                     android:drawablePadding="4dp"
@@ -120,8 +110,6 @@
                     android:id="@+id/father_contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
                     android:background="@drawable/rounded_white"
                     android:drawableLeft="@drawable/ic_mobile"
                     android:drawablePadding="4dp"
@@ -139,8 +127,6 @@
                     />
 
                 <LinearLayout
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
                     android:layout_width="match_parent"
                     android:background="@drawable/rounded_white"
                     android:padding="4dp"
@@ -185,8 +171,6 @@
                     android:maxLength="3"
                     android:paddingBottom="4dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
                     android:minHeight="30dp"
                     android:paddingLeft="12dp"
                     android:drawablePadding="4dp"
@@ -202,8 +186,6 @@
                     android:id="@+id/local_guardian_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
                     android:background="@drawable/rounded_white"
                     android:drawableLeft="@drawable/ic_mobile"
                     android:drawablePadding="4dp"
@@ -221,8 +203,6 @@
                     android:id="@+id/whatsapp_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
                     android:background="@drawable/rounded_white"
                     android:drawableLeft="@drawable/ic_whatsapp"
                     android:drawablePadding="4dp"
@@ -244,8 +224,6 @@
                     android:id="@+id/permanent_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
                     android:background="@drawable/rounded_white"
                     android:drawableLeft="@drawable/ic_address"
                     android:drawablePadding="4dp"
@@ -264,6 +242,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/default_margin"
+                    android:textAlignment="center"
                     android:text="@string/warning_student_form"
                     android:textColor="@color/warning_red"
                     />

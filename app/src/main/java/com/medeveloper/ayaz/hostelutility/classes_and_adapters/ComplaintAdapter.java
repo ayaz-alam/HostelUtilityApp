@@ -202,6 +202,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 holder.resolvedImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_done));
                 holder.resolvedButton.setEnabled(false);
                 holder.resolvedButton.setText("Resolved");
+                holder.resolvedButton.setClickable(false);
                 holder.resolvedButton.setBackground(mContext.getDrawable(R.drawable.success_green_button));
 
             }
