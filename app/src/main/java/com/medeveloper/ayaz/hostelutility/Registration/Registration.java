@@ -21,6 +21,9 @@ public class Registration extends AppCompatActivity {
     int FLAG_STEP_NUMBER=0;
     MyData prefs;
     First first;
+    private Second second;
+    private Third third;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,8 @@ public class Registration extends AppCompatActivity {
         prefs=new MyData(this);
         prefs.clearPreferences();
         first=new First();
+        second = new Second();
+        third = new Third();
         initRegistrationButton();
         FLAG_STEP_NUMBER++;
         FragmentManager fn=getSupportFragmentManager();
@@ -61,14 +66,26 @@ public class Registration extends AppCompatActivity {
             if(first.canProceed()) {
                 FLAG_STEP_NUMBER++;
                 FragmentManager fn = getSupportFragmentManager();
-                fn.beginTransaction().replace(R.id.fragment_layout, new Second(), "Second").commit();
+                fn.beginTransaction().replace(R.id.fragment_layout, second, "Second").commit();
             }
             else Toast.makeText(this,"Error: "+first.canProceed(),Toast.LENGTH_SHORT).show();
         }
         else if(FLAG_STEP_NUMBER==2)
         {
-            FragmentManager fn=getSupportFragmentManager();
-            fn.beginTransaction().replace(R.id.fragment_layout, new Third(), "Third").commit();
+            if(second.canProceed()) {
+                FLAG_STEP_NUMBER++;
+                FragmentManager fn = getSupportFragmentManager();
+                fn.beginTransaction().replace(R.id.fragment_layout, third, "Third").commit();
+            }
+        }
+        else if(FLAG_STEP_NUMBER==3)
+        {
+            if(third.canProceed())
+            {
+
+
+            }
+
         }
 
     }
