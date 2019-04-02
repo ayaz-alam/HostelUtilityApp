@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.interfaces.onCompletionListener;
 
 
 public class Second extends Fragment {
@@ -48,7 +49,7 @@ public class Second extends Fragment {
 
     }
 
-    public boolean canProceed() {
+    public boolean canProceed(onCompletionListener third) {
         return false;
     }
 }

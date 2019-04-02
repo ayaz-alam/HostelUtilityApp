@@ -22,7 +22,6 @@ public class ChangePassword extends AppCompatActivity {
 
     EditText oldPass,newPass,confirmPass;
     Button changePass;
-    TextInputLayout oldPL,newPL,confirmPL;//PL=Password TextInputLayout
     FirebaseAuth mAuth;
     SweetAlertDialog pDialog;
     @Override
@@ -34,10 +33,6 @@ public class ChangePassword extends AppCompatActivity {
         newPass=findViewById(R.id.new_password);
         confirmPass=findViewById(R.id.confirm_password);
         changePass=findViewById(R.id.change_password);
-        //TextInput Layout reference
-        oldPL=findViewById(R.id.old_pl);
-        newPL=findViewById(R.id.new_pl);
-        confirmPL=findViewById(R.id.confirm_pl);
         pDialog=new SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE);
         pDialog.setTitleText("Please wait...");
 
@@ -153,26 +148,26 @@ public class ChangePassword extends AppCompatActivity {
     private boolean isOkay() {
 
         boolean isOkay=true;
-        oldPL.setError(null);
-        newPL.setError(null);
-        confirmPL.setError(null);
+        oldPass.setError(null);
+        newPass.setError(null);
+        confirmPass.setError(null);
 
         if(oldPass.getText().toString().equals(""))
         {
-            oldPL.setError("Please enter your old password");
+            oldPass.setError("Please enter your old password");
             oldPass.requestFocus();
             isOkay=false;
 
         }
         else if(newPass.getText().toString().equals(""))
         {
-            newPL.setError("Please enter your new password");
+            newPass.setError("Please enter your new password");
             newPass.requestFocus();
             isOkay=false;
         }
         else if(confirmPass.getText().toString().equals(""))
         {
-            confirmPL.setError("Please confirm your password");
+            confirmPass.setError("Please confirm your password");
             confirmPass.requestFocus();
             isOkay=false;
         }

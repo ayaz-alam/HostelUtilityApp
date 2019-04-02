@@ -1,18 +1,16 @@
 package com.medeveloper.ayaz.hostelutility.Registration;
 
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
-import com.medeveloper.ayaz.hostelutility.student.Notice;
-import com.medeveloper.ayaz.hostelutility.student.StudentProfile;
+import com.medeveloper.ayaz.hostelutility.interfaces.onCompletionListener;
+import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Registration extends AppCompatActivity {
 
@@ -45,9 +43,11 @@ public class Registration extends AppCompatActivity {
     /**
      * This function is to initialize the register button of the container activity
      */
+    Button mRegistrationButton;
     private void initRegistrationButton() {
-        (findViewById(R.id.reg_button))
-                .setOnClickListener(new View.OnClickListener() {
+        mRegistrationButton = (findViewById(R.id.reg_button))
+                ;
+        mRegistrationButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         setUpButton();
@@ -60,23 +60,53 @@ public class Registration extends AppCompatActivity {
      */
     private void setUpButton() {
 
+        final SweetAlertDialog pDialog = new SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.setTitleText("Please wait..");
 
         if(FLAG_STEP_NUMBER==1)
         {
-            if(first.canProceed()) {
-                FLAG_STEP_NUMBER++;
-                FragmentManager fn = getSupportFragmentManager();
-                fn.beginTransaction().replace(R.id.fragment_layout, second, "Second").commit();
-            }
-            else Toast.makeText(this,"Error: "+first.canProceed(),Toast.LENGTH_SHORT).show();
+            pDialog.show();
+            mRegistrationButton.setEnabled(false);
+            first.canProceed(new onCompletionListener(){
+
+                @Override
+                public void onComplete(boolean complete) {
+                    mRegistrationButton.setEnabled(true);
+                    pDialog.dismiss();
+                    if(complete) {
+                        FLAG_STEP_NUMBER++;
+                        FragmentManager fn = getSupportFragmentManager();
+                        fn.beginTransaction().replace(R.id.fragment_layout, second, "Second").commit();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),"Error: "+complete,Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
         }
         else if(FLAG_STEP_NUMBER==2)
         {
-            if(second.canProceed()) {
-                FLAG_STEP_NUMBER++;
-                FragmentManager fn = getSupportFragmentManager();
-                fn.beginTransaction().replace(R.id.fragment_layout, third, "Third").commit();
-            }
+            pDialog.show();
+            mRegistrationButton.setEnabled(false);
+            second.canProceed(new onCompletionListener(){
+
+                @Override
+                public void onComplete(boolean complete) {
+                    if(complete) {
+                        mRegistrationButton.setEnabled(true);
+                        pDialog.dismiss();
+                        FLAG_STEP_NUMBER++;
+                        FragmentManager fn = getSupportFragmentManager();
+                        fn.beginTransaction().replace(R.id.fragment_layout, third, "Third").commit();
+                    }
+                    else
+                        {
+                        pDialog.dismissWithAnimation();
+                        Toast.makeText(getApplicationContext(),"Error: "+complete,Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
         else if(FLAG_STEP_NUMBER==3)
         {

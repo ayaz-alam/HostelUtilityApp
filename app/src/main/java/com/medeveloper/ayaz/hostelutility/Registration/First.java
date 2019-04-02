@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
+import com.medeveloper.ayaz.hostelutility.interfaces.onCompletionListener;
 
 public class First extends Fragment {
 
@@ -91,23 +92,16 @@ public class First extends Fragment {
      * This function is triggered by button on the parent activity
      * which communicate with the fragment
      * @return
+     * @param onCompletionListener
      */
-    public boolean canProceed()
+    onCompletionListener backListener;
+    public void canProceed(onCompletionListener onCompletionListener)
     {
-        boolean okay=false;
+        backListener =onCompletionListener;
         if(fieldOkay())
-        {
-            if(tryTOAuthenticate(User))// if user exists in database
-            {
-                okay=true;
-            }
-            else // if user is not present in the database
-            {
-
-            }
-        }
-
-        return okay;
+            tryTOAuthenticate(User);
+        else
+        backListener.onComplete(false);
     }
 
     boolean validUser=false;
@@ -131,15 +125,25 @@ public class First extends Fragment {
                 {
                     if(Code==Registration.STUDENT)
                     {
-                        if(ID_2.equals(dataSnapshot.getKey()))
-                        if(ID_1.equals(dataSnapshot.child("AdhaarNo").getValue()))
-                        {
-                            MyData data = new MyData(getActivity());
-                            data.savePrefs(MyData.MAIL,ID_3);
-                            data.savePrefs(MyData.ADHAAR,ID_2);
-                            data.savePrefs(MyData.ENROLLMENT_NO,ID_1);
-                            validUser=true;
+                        if(ID_2.equals(dataSnapshot.getKey())) {
 
+                            if (ID_1.equals(dataSnapshot.child("AdhaarNo").getValue())) {
+                                MyData data = new MyData(getActivity());
+                                data.savePrefs(MyData.MAIL, ID_3);
+                                data.savePrefs(MyData.ADHAAR, ID_2);
+                                data.savePrefs(MyData.ENROLLMENT_NO, ID_1);
+                                backListener.onComplete(true);
+
+                            }
+                            else
+                            {
+                                Toast.makeText(getActivity(),"No Record found",Toast.LENGTH_LONG).show();
+                                backListener.onComplete(false);
+                            }
+                        }
+                        else {
+                            Toast.makeText(getActivity(),"No Record found",Toast.LENGTH_LONG).show();
+                            backListener.onComplete(false);
                         }
                     }
                     else if(Code==Registration.EMPLOYEE)
@@ -153,7 +157,8 @@ public class First extends Fragment {
                                 data.savePrefs(MyData.MAIL,ID_3);
                                 data.savePrefs(MyData.ADHAAR,ID_2);
                                 data.savePrefs(MyData.EMPLOYEE_ID,ID_1);*/
-                                validUser=true;
+
+                                backListener.onComplete(true);
                             }
                     }
 
@@ -168,7 +173,7 @@ public class First extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                    backListener.onComplete(false);
             }
         });
 

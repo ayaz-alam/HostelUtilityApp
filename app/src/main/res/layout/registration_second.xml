@@ -29,34 +29,13 @@
                 android:layout_marginLeft="@dimen/default_margin"
                 />
 
-
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_white"
-                    android:hint="Enter your name"
-                    android:id="@+id/your_name"
-                    android:padding="4dp"
-                    android:maxLines="1"
-                    android:maxEms="1"
-                    android:inputType="textPersonName"
-                    android:paddingBottom="4dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_marginTop="12dp"
-                    android:minHeight="30dp"
-                    android:paddingLeft="12dp"
-                    android:drawablePadding="4dp"
-                    android:drawableLeft="@drawable/ic_name"
-
-                    />
-
                 <EditText
                     android:id="@+id/mobile_no"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/reg_et_height"
+                    android:drawablePadding="8dp"
                     android:background="@drawable/rounded_white"
-                    android:drawableLeft="@drawable/ic_mobile"
-                    android:drawablePadding="4dp"
+                    android:drawableLeft="@drawable/ic_phone"
                     android:hint="@string/mobile_no"
                     android:maxLength="10"
                     android:inputType="number"
@@ -72,7 +51,7 @@
 
                 <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/reg_et_height"
                     android:entries="@array/categories"
                     android:id="@+id/student_category"
                     android:background="@drawable/rounded_white"
@@ -80,7 +59,7 @@
                     />
                 <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/reg_et_height"
                     android:entries="@array/blood_group"
                     android:id="@+id/student_blood_group"
                     android:padding="4dp"
@@ -88,7 +67,8 @@
                     />
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/reg_et_height"
+                    android:drawablePadding="8dp"
                     android:background="@drawable/rounded_white"
                     android:hint="@string/enter_your_father_name"
                     android:id="@+id/student_father"
@@ -100,7 +80,6 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:minHeight="30dp"
                     android:paddingLeft="12dp"
-                    android:drawablePadding="4dp"
                     android:drawableLeft="@drawable/ic_name"
 
                     />
@@ -109,10 +88,10 @@
                 <EditText
                     android:id="@+id/father_contact"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/reg_et_height"
+                    android:drawablePadding="8dp"
                     android:background="@drawable/rounded_white"
-                    android:drawableLeft="@drawable/ic_mobile"
-                    android:drawablePadding="4dp"
+                    android:drawableLeft="@drawable/ic_phone"
                     android:hint="@string/father_contact"
                     android:inputType="number"
                     android:maxLength="10"
@@ -129,14 +108,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:background="@drawable/rounded_white"
-                    android:padding="4dp"
                     android:layout_height="wrap_content">
                     <Spinner
                         android:layout_width="wrap_content"
                         android:entries="@array/stream"
                         android:layout_marginEnd="4dp"
                         android:id="@+id/class_"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/reg_et_height">
 
                     </Spinner>
                     <Spinner
@@ -160,7 +138,8 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/reg_et_height"
+                    android:drawablePadding="8dp"
                     android:background="@drawable/rounded_white"
                     android:hint="@string/enter_your_room_number"
                     android:id="@+id/room_no"
@@ -173,8 +152,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:minHeight="30dp"
                     android:paddingLeft="12dp"
-                    android:drawablePadding="4dp"
-                    android:drawableLeft="@drawable/ic_room_no"
+                    android:drawableLeft="@drawable/ic_home"
 
                     />
 
@@ -185,10 +163,10 @@
                     android:maxLength="10"
                     android:id="@+id/local_guardian_no"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/reg_et_height"
+                    android:drawablePadding="8dp"
                     android:background="@drawable/rounded_white"
-                    android:drawableLeft="@drawable/ic_mobile"
-                    android:drawablePadding="4dp"
+                    android:drawableLeft="@drawable/ic_phone"
                     android:maxEms="1"
                     android:maxLines="1"
                     android:minHeight="30dp"
@@ -202,10 +180,10 @@
                 <EditText
                     android:id="@+id/whatsapp_no"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/reg_et_height"
+                    android:drawablePadding="8dp"
                     android:background="@drawable/rounded_white"
                     android:drawableLeft="@drawable/ic_whatsapp"
-                    android:drawablePadding="4dp"
                     android:hint="@string/whatsapp_no_if_any"
                     android:inputType="number"
                     android:maxEms="1"
@@ -223,10 +201,10 @@
                     android:hint="@string/permanent_address"
                     android:id="@+id/permanent_address"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/reg_et_height"
+                    android:drawablePadding="8dp"
                     android:background="@drawable/rounded_white"
-                    android:drawableLeft="@drawable/ic_address"
-                    android:drawablePadding="4dp"
+                    android:drawableLeft="@drawable/ic_location"
                     android:inputType="text"
                     android:maxEms="1"
                     android:maxLines="1"

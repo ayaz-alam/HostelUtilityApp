@@ -62,7 +62,7 @@
             android:minHeight="30dp"
             android:paddingLeft="12dp"
             android:drawablePadding="4dp"
-            android:drawableLeft="@drawable/ic_person_pin"
+            android:drawableLeft="@drawable/ic_mail"
 
             />
 
@@ -74,7 +74,7 @@
             android:id="@+id/password_login"
             android:minHeight="30dp"
             android:maxLength="6"
-            android:drawableLeft="@drawable/ic_vpn_key"
+            android:drawableLeft="@drawable/ic_password_lock"
             android:paddingLeft="4dp"
             android:padding="4dp"
             android:drawablePadding="4dp"
@@ -94,7 +94,7 @@
             android:id="@+id/employee_id"
             android:visibility="gone"
             android:minHeight="30dp"
-            android:drawableLeft="@drawable/ic_vpn_key"
+            android:drawableLeft="@drawable/ic_id_icon"
             android:paddingLeft="4dp"
             android:padding="4dp"
             android:drawablePadding="4dp"
