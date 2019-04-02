@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 
 public class First extends Fragment {
 
@@ -104,7 +105,6 @@ public class First extends Fragment {
             {
 
             }
-
         }
 
         return okay;
@@ -121,7 +121,7 @@ public class First extends Fragment {
 
         final String ID_1=adhaarNumber.getText().toString();
         final String ID_2=uniqueId.getText().toString();
-        String ID_3=email.getText().toString();
+        final String ID_3=email.getText().toString();
         //TODO remove when database rule is set
        // FirebaseAuth.getInstance().signInAnonymously();
         mRef.addValueEventListener(new ValueEventListener() {
@@ -133,20 +133,33 @@ public class First extends Fragment {
                     {
                         if(ID_2.equals(dataSnapshot.getKey()))
                         if(ID_1.equals(dataSnapshot.child("AdhaarNo").getValue()))
+                        {
+                            MyData data = new MyData(getActivity());
+                            data.savePrefs(MyData.MAIL,ID_3);
+                            data.savePrefs(MyData.ADHAAR,ID_2);
+                            data.savePrefs(MyData.ENROLLMENT_NO,ID_1);
                             validUser=true;
+
+                        }
                     }
                     else if(Code==Registration.EMPLOYEE)
                     {
                         //TODO generate a base ref for the employee
                         if(ID_2.equals(dataSnapshot.getKey()))
                             if(ID_1.equals(dataSnapshot.child("AdhaarNo").getValue()))
+                            {
+                                //TODO save the instance of data
+                            /*    MyData data = new MyData(getActivity());
+                                data.savePrefs(MyData.MAIL,ID_3);
+                                data.savePrefs(MyData.ADHAAR,ID_2);
+                                data.savePrefs(MyData.EMPLOYEE_ID,ID_1);*/
                                 validUser=true;
+                            }
                     }
 
                 }
                 else
                 {
-                    //Cannot find student
                     showDialog(0);
                 }
 

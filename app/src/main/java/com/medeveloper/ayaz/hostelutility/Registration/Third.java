@@ -32,6 +32,7 @@ public class Third extends Fragment {
         rootView=inflater.inflate(R.layout.registration_third, container, false);
 
 
+
         return rootView;
     }
 
@@ -41,6 +42,10 @@ public class Third extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+    }
+
+    public boolean canProceed() {
+        return false;
     }
 
 
