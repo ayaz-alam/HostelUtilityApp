@@ -7,6 +7,7 @@
 
 
         <LinearLayout
+            android:background="@drawable/trans_white_rectangle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -21,14 +22,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/extra_large_heading"
                 android:text="Register"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginLeft="@dimen/default_margin"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/reg_first_war_text"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginLeft="@dimen/default_margin"
                 />
 
@@ -91,6 +92,7 @@
                 />
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView

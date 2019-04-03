@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#a8e6cf</color>
-    <color name="colorPrimaryDark">#78b49e</color>
+    <color name="colorPrimary">#FFE082</color>
+    <color name="colorPrimaryDark">#FFCC80</color>
     <color name="PrimaryText">#dd0b3846</color>
     <color name="colorAccent">#099b6f</color>
     <color name="warning_red">#dbfd2200</color>
@@ -12,8 +12,8 @@
     <color name="menu_item_selected">#1d566e</color>
     <color name="translucent">#ef000000</color>
     <color name="translucent_1">#ae000000</color>
-    <color name="log_reg_back">#6ba791</color>
-    <color name="login_dark_back">#6ba791</color>
+    <color name="log_reg_back">#FFFFFF</color>
+    <color name="login_dark_back">#FFCC80</color>
 </resources>
 <!--
 Set 1

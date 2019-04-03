@@ -27,10 +27,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.medeveloper.ayaz.hostelutility.ChangePassword;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CameraUtitlity;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CircularTransform;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.medeveloper.ayaz.hostelutility.interfaces.photoChangeListener;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
@@ -97,6 +99,7 @@ StudentProfile extends Fragment {
 
         Picasso.get().
                 load(user.getPhotoUrl())
+                .placeholder(getContext().getDrawable(R.drawable.man))
                 .centerCrop()
                 .transform(new CircularTransform())
                 .fit()
@@ -107,41 +110,23 @@ StudentProfile extends Fragment {
 
     private void setUpUserData() {
 
-
-        FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id)).
-                child(getString(R.string.student_list_ref)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        //If user has details in the firebase, then proceed.
-                        if(dataSnapshot.exists())
-                        {
-                            myDetails=dataSnapshot.getValue(StudentDetailsClass.class);
-                            ((TextView)rootView.findViewById(R.id.name)).setText(myDetails.Name);
-                            ((TextView)rootView.findViewById(R.id.hostel_name)).setText(getString(R.string.hostel_id));
-                            ((TextView)rootView.findViewById(R.id.room)).setText("Room No: "+myDetails.RoomNo);
-                            ((TextView)rootView.findViewById(R.id.year_and_branch)).setText("Class: "+myDetails.Branch +" "+ myDetails.Year);
-                            ((TextView)rootView.findViewById(R.id.phone)).setText(myDetails.MobileNo);
-                            ((TextView)rootView.findViewById(R.id.mail)).setText(myDetails.Email);
-                            ((TextView)rootView.findViewById(R.id.address)).setText(myDetails.Address);
-                            (rootView.findViewById(R.id.change_password)).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(getContext(),ChangePassword.class));
-                                }
-                            });
-
-                        }
-                        else new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).
-                                setTitleText("Can't show your profile\nTry again").show();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+        myDetails = new Gson().fromJson(new MyData(getContext()).getData(MyData.CURRENT_STUDENT),StudentDetailsClass.class);
+        if(myDetails!=null) {
+            ((TextView) rootView.findViewById(R.id.name)).setText(myDetails.Name);
+            ((TextView) rootView.findViewById(R.id.hostel_name)).setText(getString(R.string.hostel_id));
+            ((TextView) rootView.findViewById(R.id.room)).setText("Room No: " + myDetails.RoomNo);
+            ((TextView) rootView.findViewById(R.id.year_and_branch)).setText("Class: " + myDetails.Branch + " " + myDetails.Year);
+            ((TextView) rootView.findViewById(R.id.phone)).setText(myDetails.MobileNo);
+            ((TextView) rootView.findViewById(R.id.mail)).setText(myDetails.Email);
+            ((TextView) rootView.findViewById(R.id.address)).setText(myDetails.Address);
+            (rootView.findViewById(R.id.change_password)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getContext(), ChangePassword.class));
+                }
+            });
+        }else new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE).
+                setTitleText("Can't show your profile\nTry again").show();
     }
 
     private void setUpDialogForImageChange() {

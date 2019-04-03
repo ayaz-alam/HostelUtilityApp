@@ -112,7 +112,6 @@ public class ChangePassword extends AppCompatActivity {
                             @Override
                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                 sDialog.dismiss();
-                                finish();
                             }
                         });
                         sDialog.show();
@@ -124,24 +123,19 @@ public class ChangePassword extends AppCompatActivity {
 
 
         }
-        else
-            {
-                pDialog.dismiss();
-            SweetAlertDialog sDialog=new SweetAlertDialog(getApplicationContext(),SweetAlertDialog.ERROR_TYPE);
+        else{
+            pDialog.dismiss();
+            final SweetAlertDialog sDialog=new SweetAlertDialog(ChangePassword.this,SweetAlertDialog.ERROR_TYPE);
             sDialog.setCancelable(false);
             sDialog.setTitleText("Password doesn't match").setContentText("Please input the new password and confirm it,").
                     setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            finish();
+                            sDialog.dismissWithAnimation();
                         }
                     });
                     sDialog.show();
-
-
         }
-
-
     }
 
 

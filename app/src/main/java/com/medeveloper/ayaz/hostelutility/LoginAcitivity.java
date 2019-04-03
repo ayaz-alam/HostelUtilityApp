@@ -436,8 +436,25 @@ public class LoginAcitivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
                 {
+                 /*   StudentDetailsClass demo = new StudentDetailsClass("2016CTAE082",
+                            "123456789001",
+                            "Ayaz Alam",
+                            "General",
+                            "O+",
+                            "Nazeer Alam",
+                            "","IV",
+                            "IT",
+                            "222",
+                            "9509126582","ayazalam922@gmail.com",
+                            "9509123456",
+                            "9509123456",
+                            "Allahabad");
+                    FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id))
+                            .child(getString(R.string.student_list_ref)).child(mAuth.getCurrentUser().getUid()).setValue(demo);
+                    */
                     StudentDetailsClass student=dataSnapshot.getValue(StudentDetailsClass.class);
                     MyData prefs=new MyData(getApplicationContext());
+
                     prefs.saveStudentPrefs(student);
                     pDialog.dismiss();
                     startActivity(new Intent(LoginAcitivity.this,Home.class));
@@ -446,6 +463,7 @@ public class LoginAcitivity extends AppCompatActivity {
 
 
                 }
+
                 else
                     {
                     {

@@ -6,6 +6,8 @@
     tools:context=".Registration.Second">
 
     <ScrollView
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="UselessParent">
@@ -18,14 +20,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/extra_large_heading"
                 android:text="Fill your detail"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginLeft="@dimen/default_margin"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Complete this form to proceed"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginLeft="@dimen/default_margin"
                 />
 
@@ -80,7 +82,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:minHeight="30dp"
                     android:paddingLeft="12dp"
-                    android:drawableLeft="@drawable/ic_name"
+                    android:drawableLeft="@drawable/ic_id_icon"
 
                     />
 
@@ -183,7 +185,7 @@
                     android:layout_height="@dimen/reg_et_height"
                     android:drawablePadding="8dp"
                     android:background="@drawable/rounded_white"
-                    android:drawableLeft="@drawable/ic_whatsapp"
+                    android:drawableLeft="@drawable/ic_phone"
                     android:hint="@string/whatsapp_no_if_any"
                     android:inputType="number"
                     android:maxEms="1"

@@ -11,6 +11,7 @@ public class MyData {
 
 
     public static final String ADHAAR = "pref_adhaar";
+    public static final String CURRENT_STUDENT = "current_student";
     Context context;
     static public String NAME;
     static public String HOSTELID;

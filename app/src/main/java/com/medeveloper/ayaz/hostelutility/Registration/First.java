@@ -70,6 +70,7 @@ public class First extends Fragment {
         uniqueId=rootView.findViewById(R.id.unique_id);
         email=rootView.findViewById(R.id.email_address);
         regRadioGroup=rootView.findViewById(R.id.signup_radio);
+        User = Registration.STUDENT;
 
         regRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -130,8 +131,8 @@ public class First extends Fragment {
                             if (ID_1.equals(dataSnapshot.child("AdhaarNo").getValue())) {
                                 MyData data = new MyData(getActivity());
                                 data.savePrefs(MyData.MAIL, ID_3);
-                                data.savePrefs(MyData.ADHAAR, ID_2);
-                                data.savePrefs(MyData.ENROLLMENT_NO, ID_1);
+                                data.savePrefs(MyData.ADHAAR, ID_1);
+                                data.savePrefs(MyData.ENROLLMENT_NO, ID_2);
                                 backListener.onComplete(true);
 
                             }

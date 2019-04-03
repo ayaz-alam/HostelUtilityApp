@@ -27,6 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
+        <activity android:name=".MobileNumberVerification"></activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.medeveloper.ayaz.hostelutility"
@@ -58,16 +60,16 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginAcitivity"
-            android:screenOrientation="portrait"
-            android:label="Login" />
+            android:label="Login"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".student.StudentForm"
-            android:screenOrientation="portrait"
-            android:label="Register" />
+            android:label="Register"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".officials.OfficialsForm"
-            android:screenOrientation="portrait"
-            android:label="Register" />
+            android:label="Register"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChangePassword"
             android:screenOrientation="portrait"
@@ -80,8 +82,8 @@
 
         <service
             android:name=".MyNotificationService"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <service
             android:name=".MyService"
             android:enabled="true"
@@ -94,11 +96,11 @@
 
         <receiver android:name=".StartFirebaseAtBoot">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Registration.Registration"></activity>
+        <activity android:name=".Registration.Registration" />
     </application>
 
 </manifest>

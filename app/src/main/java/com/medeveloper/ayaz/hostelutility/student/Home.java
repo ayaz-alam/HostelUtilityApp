@@ -118,6 +118,7 @@ public class Home extends AppCompatActivity
                 load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
                 .centerCrop()
                 .transform(new CircularTransform())
+                .placeholder(getDrawable(R.drawable.man))
                 .fit()
                 .into(imageView);
 

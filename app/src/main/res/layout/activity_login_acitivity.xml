@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/login_2_layout"
-    android:background="@color/log_reg_back"
+    android:background="@color/white"
     >
 
     <ImageView
@@ -33,14 +33,14 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/extra_large_heading"
             android:text="Get Started"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="@dimen/default_margin"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login to proceed or view as guest"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="@dimen/default_margin"
             />
 
@@ -117,7 +117,7 @@
                 android:textSize="@dimen/text_normal"
                 android:id="@+id/someId"
                 android:layout_margin="@dimen/default_margin"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryDark"
                 />
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/student_radio"
                     android:text="Student"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_margin="@dimen/default_margin"
                     android:layout_alignParentRight="true"
                     />
@@ -143,7 +143,7 @@
                android:layout_height="wrap_content"
                android:id="@+id/teacher_radio"
                android:text="Teacher"
-               android:textColor="@color/white"
+               android:textColor="@color/colorPrimaryDark"
                    android:layout_margin="@dimen/default_margin"
                android:layout_alignParentLeft="true"
 
@@ -156,7 +156,7 @@
                     android:id="@+id/guest_radio"
                     android:text="Guest"
                     android:layout_margin="@dimen/default_margin"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_alignParentLeft="true"
 
 
@@ -169,7 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/default_small_text_size"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryDark"
             android:text="By Clicking Login you Accept Terms and Conditions"
             android:layout_marginTop="4dp"
             android:textAlignment="center"

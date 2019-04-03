@@ -1,5 +1,6 @@
 package com.medeveloper.ayaz.hostelutility.Registration;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.interfaces.onCompletionListener;
+import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Registration extends AppCompatActivity {
@@ -79,7 +81,7 @@ public class Registration extends AppCompatActivity {
                         fn.beginTransaction().replace(R.id.fragment_layout, second, "Second").commit();
                     }
                     else {
-                        Toast.makeText(getApplicationContext(),"Error: "+complete,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Can't Proceed",Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -102,17 +104,45 @@ public class Registration extends AppCompatActivity {
                     }
                     else
                         {
-                        pDialog.dismissWithAnimation();
-                        Toast.makeText(getApplicationContext(),"Error: "+complete,Toast.LENGTH_SHORT).show();
+                         mRegistrationButton.setEnabled(true);
+                         pDialog.dismissWithAnimation();
+                       // Toast.makeText(getApplicationContext(),"Can't Proceed",Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
         else if(FLAG_STEP_NUMBER==3)
         {
-            if(third.canProceed())
-            {
+            pDialog.show();
+            mRegistrationButton.setEnabled(false);
+            if(third.canProceed(new onCompletionListener() {
+                @Override
+                public void onComplete(boolean complete) {
 
+                    if(complete) {
+                        final SweetAlertDialog d = new SweetAlertDialog(Registration.this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("Successfully Registered").
+                                setContentText("Please add profile photo once you hop in");
+                        d.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                d.dismiss();
+                                sweetAlertDialog.dismiss();
+                                startActivity(new Intent(Registration.this, Home.class));
+                                finish();
+                            }
+                        });
+                        d.show();
+                    }else
+                    {
+                        pDialog.dismissWithAnimation();
+                        mRegistrationButton.setEnabled(true);
+                    }
+                }
+            }))
+            {
+                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
+                pDialog.dismissWithAnimation();
+                mRegistrationButton.setEnabled(true);
 
             }
 

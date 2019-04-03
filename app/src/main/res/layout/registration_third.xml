@@ -7,6 +7,7 @@
 
         <LinearLayout
             android:id="@+id/container"
+            android:background="@drawable/trans_white_rectangle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -18,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:text="Passkey"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/extra_large_heading" />
 
             <TextView
@@ -26,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:text="Generate a passkey, Easy for you to remember and hard for other to guess"
-                android:textColor="@color/white" />
+                android:textColor="@color/colorPrimaryDark" />
 
 
             <EditText
@@ -52,7 +53,7 @@
                 />
 
             <EditText
-                android:id="@+id/password_login"
+                android:id="@+id/confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/reg_et_height"
                 android:drawablePadding="8dp"
