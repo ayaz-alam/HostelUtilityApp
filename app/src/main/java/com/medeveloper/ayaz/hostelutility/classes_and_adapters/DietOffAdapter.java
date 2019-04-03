@@ -59,6 +59,7 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
             {
                 buttonHolderForOfficials.setVisibility(View.GONE);
                 StudentAccepted.setVisibility(View.VISIBLE);
+                StudentAccepted.setClickable(false);
             }
            else {
                 buttonHolderForOfficials.setVisibility(View.VISIBLE);

@@ -99,7 +99,7 @@ StudentProfile extends Fragment {
 
         Picasso.get().
                 load(user.getPhotoUrl())
-                .placeholder(getContext().getDrawable(R.drawable.man))
+                .placeholder(getContext().getDrawable(R.drawable.ic_boy))
                 .centerCrop()
                 .transform(new CircularTransform())
                 .fit()

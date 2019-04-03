@@ -19,11 +19,13 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.gson.Gson;
 import com.medeveloper.ayaz.hostelutility.About;
 import com.medeveloper.ayaz.hostelutility.LoginAcitivity;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CircularTransform;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialsDetailsClass;
 import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.medeveloper.ayaz.hostelutility.student.Notice;
 import com.medeveloper.ayaz.hostelutility.student.StudentProfile;
@@ -71,6 +73,7 @@ public class OfficialsHome extends AppCompatActivity
 
     private void setUpUser() {
         final MyData prefs=new MyData(this);
+        OfficialsDetailsClass thisUser = new Gson().fromJson(prefs.getData(MyData.OFFICIAL_DETAILS),OfficialsDetailsClass.class);
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         if(user==null)
         {
@@ -108,12 +111,13 @@ public class OfficialsHome extends AppCompatActivity
                 load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
                 .centerCrop()
                 .transform(new CircularTransform())
+                .placeholder(getResources().getDrawable(R.drawable.ic_boy))
                 .fit()
                 .into(imageView);
 
-        ((TextView)headerLayout.findViewById(R.id.display_name)).setText(prefs.getName());
-        ((TextView)headerLayout.findViewById(R.id.display_email)).setText(user.getEmail());
-        ((TextView)headerLayout.findViewById(R.id.display_department)).setText(prefs.getData(MyData.DEPARTMENT));
+        ((TextView)headerLayout.findViewById(R.id.display_name)).setText(thisUser.mName);
+        ((TextView)headerLayout.findViewById(R.id.display_email)).setText(thisUser.mEmail);
+        ((TextView)headerLayout.findViewById(R.id.display_department)).setText(thisUser.mDepartment);
 
     }
 

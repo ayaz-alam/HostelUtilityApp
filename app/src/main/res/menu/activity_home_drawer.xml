@@ -24,11 +24,6 @@
             android:title="Mess Diet Off" />
 
         <item
-            android:id="@+id/nav_net_refill"
-            android:icon="@drawable/ic_internet_refill"
-            android:title="Net Refill Request" />
-
-        <item
             android:id="@+id/nav_your_complaints"
             android:icon="@drawable/ic_complaint_list"
             android:title="Your Complaints" />

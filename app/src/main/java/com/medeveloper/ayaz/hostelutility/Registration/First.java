@@ -128,8 +128,8 @@ public class First extends Fragment {
 
                             if (ID_1.equals(dataSnapshot.child("AdhaarNo").getValue())) {
                                 MyData data = new MyData(getActivity());
-                                String ID_3 = dataSnapshot.child("Email").getValue().toString();
-                                if(ID_3!=email.getText().toString())
+                                String ID_3 = dataSnapshot.child("EmailAddress").getValue().toString();
+                                if(!ID_3.equals(email.getText().toString()))
                                 {
                                     new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE).setTitleText("Wrong Email")
                                             .setContentText("Email doesn't match to Hostel Database")
@@ -140,7 +140,7 @@ public class First extends Fragment {
                                     data.savePrefs(MyData.MAIL, ID_3);
                                     data.savePrefs(MyData.ADHAAR, ID_1);
                                     data.savePrefs(MyData.ENROLLMENT_NO, ID_2);
-                                    data.savePrefs(MyData.NAME, dataSnapshot.child("Name").toString());
+                                    data.savePrefs(MyData.NAME, dataSnapshot.child("Name").getValue().toString());
                                     backListener.onComplete(true);
                                 }
 

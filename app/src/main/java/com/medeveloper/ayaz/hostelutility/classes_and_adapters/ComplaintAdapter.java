@@ -88,28 +88,17 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
             else if(view==resolvedButton)
             {
 
-                new SweetAlertDialog(mContext,SweetAlertDialog.WARNING_TYPE).setTitleText("Are you sure?")
+               SweetAlertDialog alrt= new SweetAlertDialog(mContext,SweetAlertDialog.WARNING_TYPE).setTitleText("Are you sure?")
                         .setContentText("Are you sure that you want to mark this complaint as 'Resolved'")
                         .setConfirmText("Confirm").setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(final SweetAlertDialog sweetAlertDialog) {
-                        Complaint complaint=mDataSource.get(getAdapterPosition());
-                        FirebaseDatabase.getInstance().getReference(mContext.getString(R.string.college_id))
-                                .child(mContext.getString(R.string.hostel_id)).child(mContext.getString(R.string.complaint_ref))
-                                .child(complaint.studentEnrollNo).child(complaint.complaintUID)
-                                .child("Resolved").setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful())
-                                {
-                                    resolveComplaint();
-                                    sweetAlertDialog.dismiss();
-                                    new SweetAlertDialog(mContext,SweetAlertDialog.SUCCESS_TYPE).setTitleText("Successfull").show();
-                                }
-                            }
-                        });
+                        sweetAlertDialog.dismiss();
+                         resolveComplaint();
                     }
-                }).show();
+                });
+               alrt.setCancelable(true);
+               alrt.show();
 
 
             }
@@ -128,7 +117,8 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
         private void resolveComplaint() {
             String complaintID=mDataSource.get(getAdapterPosition()).complaintUID;
-            FirebaseDatabase.getInstance(mContext.getString(R.string.college_id)).getReference(mContext.getString(R.string.hostel_id))
+            FirebaseDatabase.getInstance().getReference(mContext.getString(R.string.college_id))
+                    .child(mContext.getString(R.string.hostel_id))
                     .child(mContext.getString(R.string.complaint_ref))
                     .child(new MyData(mContext).getData(MyData.ENROLLMENT_NO))
                     .child(complaintID)
@@ -208,6 +198,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
             }
             else
             {
+
                 holder.resolvedButton.setText("Resolve ? ");
                 holder.resolvedButton.setBackground(mContext.getDrawable(R.drawable.pending_button));
             }

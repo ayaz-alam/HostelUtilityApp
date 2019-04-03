@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
-    <dimen name="nav_header_height">140dp</dimen>
+    <dimen name="nav_header_height">180dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="heading_text_size">22sp</dimen>
     <dimen name="default_padding">4sp</dimen>
@@ -33,6 +33,6 @@
     <dimen name="date_size_small">10dp</dimen>
     <dimen name="notice_title_padding">6dp</dimen>
     <dimen name="card_body_12sp">12sp</dimen>
-    <dimen name="profile_icons_size">36dp</dimen>
+    <dimen name="profile_icons_size">32dp</dimen>
     <dimen name="reg_et_height">60dp</dimen>
 </resources>

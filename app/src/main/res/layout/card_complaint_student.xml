@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:id="@+id/card_title"
-        android:textColor="@color/white"
+        android:textColor="@color/PrimaryText"
         android:text="Title of Problem"
         android:layout_margin="@dimen/small_margin"
         android:textSize="@dimen/cardview_title"
@@ -55,7 +55,7 @@
         android:layout_marginRight="@dimen/small_margin"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="@dimen/default_small_margin"
-        android:textColor="@color/white"
+        android:textColor="@color/PrimaryText"
         />
 </RelativeLayout>
 

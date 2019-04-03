@@ -28,19 +28,16 @@ public class NoticeClassAdapter extends RecyclerView.Adapter<NoticeClassAdapter.
     private Context mContext;
     // private LayoutInflater mInflater;
     private ArrayList<NoticeClass> mDataSource;
-    NoticeClassAdapter.OnItemClickListener mItemClickListener;
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //each data item is just a string in this case
-        public TextView noticeTitle;
-        public TextView noticeBody;
-        public TextView noticeDate;
-        public TextView noticeGenerator;
-        public ImageView noticeImage;
-        public ProgressBar mProgressBar;
-        public TextView expand_colapse;
+        TextView noticeTitle;
+        TextView noticeBody;
+        TextView noticeDate;
+        TextView noticeGenerator;
+        ImageView noticeImage;
+        ProgressBar mProgressBar;
+        TextView expand_colapse;
         private boolean expanded=false;
 
         public ViewHolder(View v) {
@@ -88,14 +85,6 @@ public class NoticeClassAdapter extends RecyclerView.Adapter<NoticeClassAdapter.
 
     }
 
-    public interface OnItemClickListener {
-        public void onItemClick(View view, int Position);
-    }
-
-    public void SetOnItemClickListner(final NoticeClassAdapter.OnItemClickListener mItemClickListener) {
-        this.mItemClickListener = mItemClickListener;
-    }
-
     public NoticeClassAdapter(Context context, ArrayList<NoticeClass> items) {
         mContext = context;
         mDataSource = items;
@@ -140,7 +129,7 @@ public class NoticeClassAdapter extends RecyclerView.Adapter<NoticeClassAdapter.
             Picasso.get().
                     load(notice.photoUrl)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_face_white_24dp)
+                    .placeholder(R.drawable.ic_notdatafound)
                     .fit()
                     .into(holder.noticeImage, new Callback() {
                         @Override

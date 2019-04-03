@@ -59,6 +59,7 @@ public class Notice extends Fragment {
 
                 if(dataSnapshot.exists())
                 {
+                    noticeList.clear();
                     for(DataSnapshot d:dataSnapshot.getChildren())
                         noticeList.add(d.getValue(NoticeClass.class));
                     {
@@ -82,7 +83,6 @@ public class Notice extends Fragment {
                     (rootView.findViewById(R.id.no_data_found)).setVisibility(View.VISIBLE);
                     (rootView.findViewById(R.id.no_data_found_text)).setVisibility(View.VISIBLE);
                     ((TextView)rootView.findViewById(R.id.no_data_found_text)).setText("It seems that there's no notice yet");
-
                     pDialog.dismiss();
 
                 }

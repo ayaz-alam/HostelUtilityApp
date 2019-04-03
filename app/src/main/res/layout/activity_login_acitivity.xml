@@ -2,12 +2,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/login_2_layout"
-    android:background="@color/white"
+    android:background="@drawable/pattern"
     >
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/logo_large"
         android:layout_centerHorizontal="true"
@@ -33,14 +33,14 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/extra_large_heading"
             android:text="Get Started"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/PrimaryText"
             android:layout_marginLeft="@dimen/default_margin"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login to proceed or view as guest"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/PrimaryText"
             android:layout_marginLeft="@dimen/default_margin"
             />
 
@@ -117,7 +117,20 @@
                 android:textSize="@dimen/text_normal"
                 android:id="@+id/someId"
                 android:layout_margin="@dimen/default_margin"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/PrimaryText"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password ?"
+                android:drawableLeft="@drawable/ic_password_lock"
+                android:drawablePadding="4dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/def_16dp"
+                android:textSize="@dimen/text_normal"
+                android:id="@+id/forgot_password"
+                android:layout_margin="@dimen/default_margin"
+                android:textColor="@color/red_btn_bg_color"
                 />
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -133,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/student_radio"
                     android:text="Student"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/PrimaryText"
                     android:layout_margin="@dimen/default_margin"
                     android:layout_alignParentRight="true"
                     />
@@ -143,7 +156,7 @@
                android:layout_height="wrap_content"
                android:id="@+id/teacher_radio"
                android:text="Teacher"
-               android:textColor="@color/colorPrimaryDark"
+               android:textColor="@color/PrimaryText"
                    android:layout_margin="@dimen/default_margin"
                android:layout_alignParentLeft="true"
 
@@ -156,7 +169,7 @@
                     android:id="@+id/guest_radio"
                     android:text="Guest"
                     android:layout_margin="@dimen/default_margin"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/PrimaryText"
                     android:layout_alignParentLeft="true"
 
 
@@ -169,7 +182,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/default_small_text_size"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/PrimaryText"
             android:text="By Clicking Login you Accept Terms and Conditions"
             android:layout_marginTop="4dp"
             android:textAlignment="center"

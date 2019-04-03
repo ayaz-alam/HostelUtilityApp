@@ -1,11 +1,14 @@
 package com.medeveloper.ayaz.hostelutility;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -43,26 +46,25 @@ public class LoginAcitivity extends AppCompatActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
     EditText employeeID;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_acitivity);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        employeeID=findViewById(R.id.employee_id);
+        employeeID = findViewById(R.id.employee_id);
 
-        Email=findViewById(R.id.email_login);
-        Password=findViewById(R.id.password_login);
-        Login=findViewById(R.id.login_button);
-        Register=findViewById(R.id.login_signup);
+        Email = findViewById(R.id.email_login);
+        Password = findViewById(R.id.password_login);
+        Login = findViewById(R.id.login_button);
+        Register = findViewById(R.id.login_signup);
 
-        ActionBar bar=getSupportActionBar();
+        ActionBar bar = getSupportActionBar();
         bar.hide();
-        pDialog=new SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loging in").setContentText("Please wait while we log you in");
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        final RadioGroup loginAs=findViewById(R.id.signin_radio);
-        RadioButton Official=findViewById(R.id.teacher_radio);
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loging in").setContentText("Please wait while we log you in");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        final RadioGroup loginAs = findViewById(R.id.signin_radio);
+        RadioButton Official = findViewById(R.id.teacher_radio);
         Official.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,11 +77,11 @@ public class LoginAcitivity extends AppCompatActivity {
                 Email.setVisibility(View.VISIBLE);
                 Password.setVisibility(View.VISIBLE);
                 Login.setText("Login");
-                Log.d("Ayaz","Official Login");
+                Log.d("Ayaz", "Official Login");
             }
         });
 
-        RadioButton Student=findViewById(R.id.student_radio);
+        RadioButton Student = findViewById(R.id.student_radio);
         Student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,11 +95,11 @@ public class LoginAcitivity extends AppCompatActivity {
                 Email.setVisibility(View.VISIBLE);
                 Password.setVisibility(View.VISIBLE);
                 Login.setText("Login");
-                Log.d("Ayaz","Student Login");
+                Log.d("Ayaz", "Student Login");
             }
         });
 
-        RadioButton Guest=findViewById(R.id.guest_radio);
+        RadioButton Guest = findViewById(R.id.guest_radio);
         Guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,12 +111,12 @@ public class LoginAcitivity extends AppCompatActivity {
                 Email.setVisibility(View.GONE);
                 Password.setVisibility(View.GONE);
                 Login.setText("View as Guest");
-                Log.d("Ayaz","Guest Login");
+                Log.d("Ayaz", "Guest Login");
             }
         });
 
 
-        mAuth= FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         /*
         if(mAuth.getCurrentUser()!=null)
@@ -125,21 +127,18 @@ public class LoginAcitivity extends AppCompatActivity {
         */
 
 
-
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pDialog.show();
-                String email=Email.getText().toString();
-                String pass=Password.getText().toString();
-                int id=loginAs.getCheckedRadioButtonId();
-               // tempLogIn(id);
+                String email = Email.getText().toString();
+                String pass = Password.getText().toString();
+                int id = loginAs.getCheckedRadioButtonId();
+                // tempLogIn(id);
 
-               if (isOkay(email,pass,id))
-                   authenticate(email,pass,id);//
+                if (isOkay(email, pass, id))
+                    authenticate(email, pass, id);//
                 else pDialog.dismiss();
-
-
 
 
             }
@@ -148,16 +147,91 @@ public class LoginAcitivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pDialog.dismiss();
-                startActivity(new Intent(LoginAcitivity.this,Registration.class));
+                startActivity(new Intent(LoginAcitivity.this, Registration.class));
                 finish();
             }
         });
+        findViewById(R.id.forgot_password).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initForgotPassword();
+            }
+        });
+    }
 
+    private void initForgotPassword() {
+        // get prompts.xml view
+        LayoutInflater li = LayoutInflater.from(this);
+        View promptsView = li.inflate(R.layout.forgot_pass_dialog, null);
+        final SweetAlertDialog progressBar=new SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Please wait..");
+        progressBar.setCancelable(true);
 
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
 
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
 
+        final EditText userInput = (EditText) promptsView
+                .findViewById(R.id.forgot_password_email);
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Send email",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                String email=userInput.getText().toString();
+                                if(email.equals("")||(!email.contains("@"))||(!email.contains(".com")))
+                                {
+                                    userInput.setError("Invalid email");
+                                }
+                                else
+                                {
+                                    progressBar.show();
+                                    sendResetEmail(email,progressBar);
+                                    dialog.dismiss();
+                                }
+
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
 
     }
+
+    private void sendResetEmail(final String email, final SweetAlertDialog progressBar) {
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            progressBar.dismiss();
+                            new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Email sent")
+                                    .setContentText("An email has been sent to your email id: "+email+"\n " +
+                                            "Goto to your mailbox and re-authenticate yourself")
+                                    .show();
+                        }
+                        else
+                        {
+                            progressBar.dismiss();
+                            Toast.makeText(LoginAcitivity.this,"Cannot send the email \nError: "+task.getException(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
     String TAG="OPENED_AS";
     private void tempLogIn(int id)
     {
@@ -329,12 +403,11 @@ public class LoginAcitivity extends AppCompatActivity {
                     pDialog.dismiss();
                     final SweetAlertDialog sDialog=new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE);
                     sDialog.setCancelable(false);
-                    sDialog.setTitleText("Can't log you in").setContentText("Email: "+email+"\nPass: "+pass+"\nError: "+task.getException()).
+                    sDialog.setTitleText("Can't log you in").setContentText(task.getException().getLocalizedMessage()).
                             setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sDialog.dismiss();
-                                    finish();
                                 }
                             });
                     sDialog.show();
@@ -359,7 +432,6 @@ public class LoginAcitivity extends AppCompatActivity {
                                     .addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
-                                            Toast.makeText(LoginAcitivity.this,"DataSnapshot "+dataSnapshot.exists(),Toast.LENGTH_SHORT).show();
 
                                             if(dataSnapshot.exists())
                                             {
@@ -413,12 +485,11 @@ public class LoginAcitivity extends AppCompatActivity {
                             pDialog.dismiss();
                             final SweetAlertDialog sDialog=new SweetAlertDialog(LoginAcitivity.this,SweetAlertDialog.ERROR_TYPE);
                             sDialog.setCancelable(false);
-                            sDialog.setTitleText("Can't log you in").setContentText("Please check Email: "+email+"\n and Password \nError is: "+task.getException()).
+                            sDialog.setTitleText("Can't log you in").setContentText(task.getException().getLocalizedMessage()).
                                     setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sweetAlertDialog) {
                                             sDialog.dismiss();
-                                            // finish();
                                         }
                                     });
                             sDialog.show();
@@ -431,7 +502,7 @@ public class LoginAcitivity extends AppCompatActivity {
     private void saveStudentPrefs()
     {
         FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id))
-                .child(getString(R.string.student_list_ref)).child(mAuth.getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
+                .child(getString(R.string.student_list_ref)).child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())

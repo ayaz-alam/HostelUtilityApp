@@ -20,14 +20,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/extra_large_heading"
                 android:text="Fill your detail"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/PrimaryText"
                 android:layout_marginLeft="@dimen/default_margin"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Complete this form to proceed"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/PrimaryText"
                 android:layout_marginLeft="@dimen/default_margin"
                 />
 

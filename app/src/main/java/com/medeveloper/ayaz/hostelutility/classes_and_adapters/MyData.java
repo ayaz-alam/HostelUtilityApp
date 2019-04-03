@@ -4,6 +4,7 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.medeveloper.ayaz.hostelutility.R;
 
 
@@ -12,6 +13,7 @@ public class MyData {
 
     public static final String ADHAAR = "pref_adhaar";
     public static final String CURRENT_STUDENT = "current_student";
+    public static final String OFFICIAL_DETAILS = "current_officials";
     Context context;
     static public String NAME;
     static public String HOSTELID;
@@ -22,6 +24,9 @@ public class MyData {
     static public String POST;
     static public String MOBILE;
     static public String MAIL;
+    static public String CURRENT_USER = "current_user";
+    static public String isStudent = "is_student";
+    static public String isOfficial ="is_official";
 
     public MyData(Context context) {
         this.context=context;
@@ -49,21 +54,12 @@ public class MyData {
                     savePrefs(context.getString(R.string.pref_name),Student.Name);
                     savePrefs(context.getString(R.string.pref_room),Student.RoomNo);
                     savePrefs(context.getString(R.string.pref_mobile_no),Student.MobileNo);
+                    savePrefs(CURRENT_STUDENT,new Gson().toJson(Student));
 
     }
     public void saveTeacherPrefs(OfficialsDetailsClass id)
     {
-        /**
-         * Saving some data in the SharedPrefrences so that they can Accessed easily
-         * For now, saving only HostelID,EmployeeID,mDepartment and RoomNo
-         * */
-        Log.d("Ayaz /"+"LoginAct.","Creating MyData and opening Home Page");
-        savePrefs(context.getString(R.string.pref_hostel_id),context.getString(R.string.hostel_id));
-        savePrefs(context.getString(R.string.pref_employee_id),id.mEmployeeID);
-        savePrefs(context.getString(R.string.pref_name),id.mName);
-        savePrefs(context.getString(R.string.pref_department),id.mDepartment);
-        savePrefs(context.getString(R.string.pref_post),id.mPost);
-        savePrefs(context.getString(R.string.pref_mobile_no),id.mPhone);
+        savePrefs(OFFICIAL_DETAILS,new Gson().toJson(id));
 
 
     }
@@ -79,6 +75,8 @@ public class MyData {
         savePrefs(context.getString(R.string.pref_enroll),null);
         savePrefs(context.getString(R.string.pref_room),null);
         savePrefs(MOBILE,null);
+        savePrefs(CURRENT_STUDENT,null);
+        savePrefs(OFFICIAL_DETAILS,null);
 
     }
 
@@ -117,6 +115,15 @@ public class MyData {
     public String getData(String Key)
     {
         return getPrefs(Key,"NULL");
+    }
+
+    public void setCurrentUser(String currentUser)
+    {
+            savePrefs(CURRENT_USER,currentUser);
+    }
+    public boolean isCurrentUserIsStudent()
+    {
+        return getData(CURRENT_USER).equals(isStudent);
     }
 
 

@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:text="Passkey"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/PrimaryText"
                 android:textSize="@dimen/extra_large_heading" />
 
             <TextView
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:text="Generate a passkey, Easy for you to remember and hard for other to guess"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/PrimaryText" />
 
 
             <EditText

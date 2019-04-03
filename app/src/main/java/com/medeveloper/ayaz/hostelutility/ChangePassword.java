@@ -107,7 +107,7 @@ public class ChangePassword extends AppCompatActivity {
                         pDialog.dismiss();
                         final SweetAlertDialog sDialog=new SweetAlertDialog(ChangePassword.this,SweetAlertDialog.ERROR_TYPE);
                         sDialog.setCancelable(false);
-                        sDialog.setTitleText("Can't change password").setContentText("Email: "+Email+"\nPass: "+currentPassword+"\nError: "+task.getException()).
+                        sDialog.setTitleText("Can't change password").setContentText(task.getException().getLocalizedMessage()).
                                 setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sweetAlertDialog) {

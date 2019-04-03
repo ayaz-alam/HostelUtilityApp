@@ -22,14 +22,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/extra_large_heading"
                 android:text="Register"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/PrimaryText"
                 android:layout_marginLeft="@dimen/default_margin"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/reg_first_war_text"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/PrimaryText"
                 android:layout_marginLeft="@dimen/default_margin"
                 />
 

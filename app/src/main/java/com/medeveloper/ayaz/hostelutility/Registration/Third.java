@@ -102,7 +102,7 @@ public class Third extends Fragment {
         FirebaseDatabase.getInstance().getReference(getContext().getString(R.string.college_id))
                 .child(getContext().getString(R.string.hostel_id))
                 .child(getContext().getString(R.string.student_list_ref))
-                .child(student.Email)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .setValue(student)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -117,10 +117,6 @@ public class Third extends Fragment {
                    }
                     }
                 });
-
-
-
-
     }
 
     /**
