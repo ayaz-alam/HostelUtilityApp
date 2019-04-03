@@ -1,7 +1,6 @@
 package com.medeveloper.ayaz.hostelutility.Registration;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,8 +20,6 @@ import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.interfaces.onCompletionListener;
 
 public class First extends Fragment {
-
-    private OnFragmentInteractionListener mListener;
 
     public First() {
         // Required empty public constructor
@@ -230,17 +227,6 @@ public class First extends Fragment {
         }
         return isOkay;
     }
-
-
-
-
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -250,10 +236,7 @@ public class First extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
+        backListener = null;
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 }

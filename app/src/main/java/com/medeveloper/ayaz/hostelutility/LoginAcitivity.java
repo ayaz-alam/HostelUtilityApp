@@ -431,13 +431,13 @@ public class LoginAcitivity extends AppCompatActivity {
     private void saveStudentPrefs()
     {
         FirebaseDatabase.getInstance().getReference(getString(R.string.college_id)).child(getString(R.string.hostel_id))
-                .child(getString(R.string.student_list_ref)).child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                .child(getString(R.string.student_list_ref)).child(mAuth.getCurrentUser().getEmail()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists())
                 {
                  /*   StudentDetailsClass demo = new StudentDetailsClass("2016CTAE082",
-                            "123456789001",
+                            "123456789001",m
                             "Ayaz Alam",
                             "General",
                             "O+",
