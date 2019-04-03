@@ -80,7 +80,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:minHeight="30dp"
                     android:paddingLeft="12dp"
-                    android:drawableLeft="@drawable/ic_name"
+                    android:drawableLeft="@drawable/ic_id_icon"
 
                     />
 
@@ -183,7 +183,7 @@
                     android:layout_height="@dimen/reg_et_height"
                     android:drawablePadding="8dp"
                     android:background="@drawable/rounded_white"
-                    android:drawableLeft="@drawable/ic_whatsapp"
+                    android:drawableLeft="@drawable/ic_phone"
                     android:hint="@string/whatsapp_no_if_any"
                     android:inputType="number"
                     android:maxEms="1"
