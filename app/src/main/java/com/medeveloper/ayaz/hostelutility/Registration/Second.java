@@ -32,10 +32,6 @@ import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Second extends Fragment {
 
-    private static final String EMAIL = "EMAIL";
-    private static final String ADHAAR = "ADHAAR_NO";
-    private static final String UID = "USER_ID";
-    private static final String USER_CODE = "USER_SEG";
     private onCompletionListener callBack;
     private String Uid="null";
 
@@ -43,26 +39,6 @@ public class Second extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param adhaar Parameter 1.
-     * @param User_ID Parameter 2.
-     * @param email Parameter 3.
-     * @return A new instance of fragment Second.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Second newInstance(String adhaar, String User_ID,String email,int userCode) {
-        Second fragment = new Second();
-        Bundle args = new Bundle();
-        args.putString(ADHAAR,adhaar);
-        args.putString(UID,User_ID);
-        args.putString(EMAIL,email);
-        args.putInt(USER_CODE,userCode);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
 
     @Override
@@ -71,7 +47,7 @@ public class Second extends Fragment {
             MyData data = new MyData(getActivity());
             Email = data.getData(MyData.MAIL);
             Adhaar = data.getData(MyData.ADHAAR);
-             mAuth= FirebaseAuth.getInstance();
+            mAuth= FirebaseAuth.getInstance();
     }
 
     private String Email,Adhaar;
@@ -115,7 +91,7 @@ public class Second extends Fragment {
     }
     void getData()
     {
-        Name="Name to be Fetched";
+        Name=new MyData(getActivity()).getName();
         Category=category.getSelectedItem().toString();
         BloodGroup=bloodGroup.getSelectedItem().toString();
         FatherName=fatherName.getText().toString();

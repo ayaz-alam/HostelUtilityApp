@@ -190,9 +190,4 @@ public class Third extends Fragment {
         registerUser();
         return false;
     }
-
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }
