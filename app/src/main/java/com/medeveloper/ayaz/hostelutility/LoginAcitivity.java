@@ -300,9 +300,7 @@ public class LoginAcitivity extends AppCompatActivity {
         else if(id==R.id.guest_radio)
         {
             pDialog.dismiss();
-            new SweetAlertDialog(this,SweetAlertDialog.NORMAL_TYPE).
-                    setTitleText("In progress").
-                    setContentText("Guest login is in development process").show();
+            startActivity(new Intent(this,HostelIntro.class));
            //mAuth.signInAnonymously();
         }
 

@@ -1,9 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HostelIntro">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:padding="12dp"
+            android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/outline"
+            android:layout_marginBottom="8dp"
+            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_Left="true"
+                android:background="#00ff00"
+                android:id="@+id/dave_sir"
+                android:layout_marginRight="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dr. Vikramaditya Dave"
+                android:textSize="20sp"
+                android:layout_toRightOf="@id/dave_sir"
+                android:id="@+id/w_name"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Assistant Professor (Senior Scale) \nWarden MV  New Boys Hostel"
+                android:layout_toRightOf="@id/dave_sir"
+                android:layout_below="@+id/w_name"
+                />
+
+            <TextView
+                android:layout_below="@id/dave_sir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mobile_no"
+                android:drawableLeft="@drawable/ic_phone"
+                android:drawablePadding="4dp"
+                android:layout_margin="6dp"
+                android:text="9414737956"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_below="@id/dave_sir"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_mail"
+                android:drawablePadding="4dp"
+                android:layout_margin="6dp"
+                android:text="vdaditya1000@yahoo.co.in"
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_centerHorizontal="true"
+                android:background="#000000"
+                android:layout_marginBottom="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MV BOYS HOSTEL"
+                android:layout_gravity="center"
+                android:textSize="24dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:layout_gravity="center"
+
+                />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000000"
+            android:layout_marginBottom="12dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ROOMS"
+            android:layout_gravity="center"
+            android:textSize="24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="73 rooms"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Double seated"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000000"
+            android:layout_marginBottom="12dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RO purifier with water cooler"
+            android:layout_gravity="center"
+            android:textSize="24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000000"
+            android:layout_marginBottom="12dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="wi-fi"
+            android:layout_gravity="center"
+            android:textSize="24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000000"
+            android:layout_marginBottom="12dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="volleyball gound"
+            android:layout_gravity="center"
+            android:textSize="24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000000"
+            android:layout_marginBottom="12dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mess hall"
+            android:layout_gravity="center"
+            android:textSize="24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:background="#000000"
+            android:layout_marginBottom="12dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Common room"
+            android:layout_gravity="center"
+            android:textSize="24dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:layout_gravity="center"
+            />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
