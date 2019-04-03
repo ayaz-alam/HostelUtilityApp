@@ -301,6 +301,7 @@ public class LoginAcitivity extends AppCompatActivity {
         {
             pDialog.dismiss();
             startActivity(new Intent(this,HostelIntro.class));
+            finish();
            //mAuth.signInAnonymously();
         }
 
