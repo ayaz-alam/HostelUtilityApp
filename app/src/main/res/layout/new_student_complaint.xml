@@ -59,34 +59,16 @@
             tools:itemCount="5"
             tools:listitem="@layout/new_complaint_card" />
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/new_spinner_bg"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Type details about your complaint"
-            android:inputType="textMultiLine"
-            android:minHeight="150dp"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.82"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="You're facing problem with"
             android:textColor="#000"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView2"
