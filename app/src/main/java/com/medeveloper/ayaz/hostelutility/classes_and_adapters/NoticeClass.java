@@ -1,7 +1,6 @@
 package com.medeveloper.ayaz.hostelutility.classes_and_adapters;
 
-import android.net.Uri;
-import android.support.annotation.Keep;
+import androidx.annotation.Keep;
 
 import java.util.Date;
 

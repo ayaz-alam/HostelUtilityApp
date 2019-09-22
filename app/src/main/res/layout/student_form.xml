@@ -29,7 +29,7 @@
         android:textColor="@color/colorPrimaryDark"
         />
 
-<android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_margin="@dimen/default_margin"
             android:layout_height="wrap_content">
@@ -41,9 +41,9 @@
                 android:maxLength="11"
                 />
 
-        </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
                 android:layout_height="wrap_content">
@@ -56,14 +56,15 @@
                     android:id="@+id/adhaar_no"
                     />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:id="@+id/form_container"
                 android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputLayout
+
+                <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
                 android:layout_height="wrap_content">
@@ -74,7 +75,7 @@
                     android:id="@+id/your_name"
                     />
 
-            </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +90,8 @@
                 android:id="@+id/student_blood_group"
                 android:layout_margin="@dimen/default_margin"
                 />
-            <android.support.design.widget.TextInputLayout
+
+                <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
                 android:layout_height="wrap_content">
@@ -100,7 +102,7 @@
                     android:id="@+id/student_father"
                     />
 
-            </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -137,7 +139,8 @@
                 </Spinner>
 
             </LinearLayout>
-            <android.support.design.widget.TextInputLayout
+
+                <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
 
@@ -149,8 +152,9 @@
                     android:id="@+id/room_no"
                     />
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
                 android:layout_height="wrap_content">
@@ -163,8 +167,9 @@
                     android:maxLength="10"
                     />
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
                 android:layout_height="wrap_content">
@@ -177,8 +182,9 @@
                     android:maxLength="10"
                     />
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
                 android:layout_height="wrap_content">
@@ -189,7 +195,8 @@
                     android:inputType="textEmailAddress"
                     android:id="@+id/email_address"
                     />
-                <android.support.design.widget.TextInputLayout
+
+                    <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_margin="@dimen/default_margin"
                     android:layout_height="wrap_content">
@@ -203,10 +210,11 @@
 
                         />
 
-                </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
                 android:layout_height="wrap_content">
@@ -219,9 +227,9 @@
                     android:id="@+id/local_guardian_no"
                     />
 
-            </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/default_margin"
                 android:layout_height="wrap_content">
@@ -232,7 +240,7 @@
                     android:id="@+id/permanent_address"
                     />
 
-            </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"

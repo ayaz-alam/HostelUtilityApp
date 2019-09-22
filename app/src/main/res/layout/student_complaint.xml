@@ -24,7 +24,7 @@
         >
     </Spinner>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_below="@+id/complaint_spinner"
         android:layout_margin="@dimen/default_margin"
@@ -42,7 +42,7 @@
             android:inputType="text|textMultiLine"
             android:gravity="top"/>
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:layout_width="match_parent"

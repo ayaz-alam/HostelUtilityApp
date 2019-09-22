@@ -1,14 +1,6 @@
 package com.medeveloper.ayaz.hostelutility.classes_and_adapters;
 
-import android.support.annotation.Keep;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.medeveloper.ayaz.hostelutility.R;
-
-import static com.medeveloper.ayaz.hostelutility.R.*;
+import androidx.annotation.Keep;
 
 /**
  * Created by Ayaz on 5/1/2018.

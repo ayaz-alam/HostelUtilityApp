@@ -2,8 +2,9 @@ package com.medeveloper.ayaz.hostelutility.classes_and_adapters;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;

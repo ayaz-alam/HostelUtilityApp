@@ -1,6 +1,6 @@
 package com.medeveloper.ayaz.hostelutility.classes_and_adapters;
 
-import android.support.annotation.Keep;
+import androidx.annotation.Keep;
 
 /**
  * Created by Ayaz on 5/20/2018.

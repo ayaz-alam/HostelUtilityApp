@@ -2,10 +2,11 @@ package com.medeveloper.ayaz.hostelutility;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +34,6 @@ import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialsDetailsC
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
 import com.medeveloper.ayaz.hostelutility.student.Home;
-import com.medeveloper.ayaz.hostelutility.student.StudentForm;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LoginAcitivity extends AppCompatActivity {
