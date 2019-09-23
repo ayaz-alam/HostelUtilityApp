@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="30dp"
+        android:id="@+id/card_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,6 +21,7 @@
             android:padding="8dp">
             <TextView
                 android:layout_width="match_parent"
+                android:id="@+id/tv_problem_title"
                 android:layout_height="match_parent"
                 android:text="Problem title" />
         </androidx.constraintlayout.widget.ConstraintLayout>

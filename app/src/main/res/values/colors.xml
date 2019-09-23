@@ -14,6 +14,9 @@
     <color name="translucent_1">#ae000000</color>
     <color name="log_reg_back">#FFFFFF</color>
     <color name="login_dark_back">#FFCC80</color>
+    <color name="card_grey_background">#E4E4E4</color>
+    <color name="card_default_text_color">#696969</color>
+    <color name="light_green">#8D28BD06</color>
 </resources>
 <!--
 Set 1

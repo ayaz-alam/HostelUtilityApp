@@ -8,6 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/parent"
         android:layout_height="match_parent"
         android:padding="25dp">
 
@@ -21,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/sp_domain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/complaint_array"
@@ -35,7 +36,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_problem_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -47,20 +48,20 @@
             app:layout_constraintTop_toBottomOf="@+id/SpinnerCont" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rv_subdomain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/tv_problem_text"
             app:spanCount="3"
             tools:itemCount="5"
             tools:listitem="@layout/new_complaint_card" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_description_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="You're facing problem with"
@@ -68,23 +69,23 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_subdomain" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView2"
+            android:id="@+id/rv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description_title"
             app:spanCount="3"
             tools:itemCount="5"
             tools:listitem="@layout/new_complaint_card" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/et_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -97,7 +98,7 @@
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_description" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -105,11 +106,11 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/ic_camera_24"
-            app:layout_constraintBottom_toBottomOf="@+id/editText2"
-            app:layout_constraintEnd_toEndOf="@+id/editText2" />
+            app:layout_constraintBottom_toBottomOf="@+id/et_description"
+            app:layout_constraintEnd_toEndOf="@+id/et_description" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_register_button"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -123,7 +124,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+            app:layout_constraintTop_toBottomOf="@+id/et_description" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
