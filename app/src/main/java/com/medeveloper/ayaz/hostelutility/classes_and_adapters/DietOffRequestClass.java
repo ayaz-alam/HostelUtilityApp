@@ -1,8 +1,7 @@
 package com.medeveloper.ayaz.hostelutility.classes_and_adapters;
 
-import android.support.annotation.Keep;
+import androidx.annotation.Keep;
 
-import java.sql.Time;
 import java.util.Date;
 
 /**

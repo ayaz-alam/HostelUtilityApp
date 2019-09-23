@@ -3,13 +3,12 @@ package com.medeveloper.ayaz.hostelutility;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.icu.text.UnicodeSetSpanner;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;

@@ -103,7 +103,8 @@
              />
 
      </LinearLayout>
-     <android.support.design.widget.TextInputLayout
+
+     <com.google.android.material.textfield.TextInputLayout
          android:layout_width="match_parent"
          android:layout_below="@+id/date_layout"
          android:layout_margin="@dimen/default_margin"
@@ -121,7 +122,7 @@
              android:inputType="text|textMultiLine"
              android:gravity="top"/>
 
-     </android.support.design.widget.TextInputLayout>
+     </com.google.android.material.textfield.TextInputLayout>
      <TextView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"

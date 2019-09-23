@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "591907589623",
+    "firebase_url": "https://hostelutilityproject.firebaseio.com",
+    "project_id": "hostelutilityproject",
+    "storage_bucket": "hostelutilityproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591907589623:android:a7536f973af3210f",
+        "android_client_info": {
+          "package_name": "com.medeveloper.ayaz.hostelutility"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591907589623-94pd1ska7t2ses7djf5vc9j0euleksqn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.medeveloper.ayaz.hostelutility",
+            "certificate_hash": "edc450a8e88f7e62bef00ccbd053ab03ac2ff97b"
+          }
+        },
+        {
+          "client_id": "591907589623-uiaqhkkikc4hqrk18ed8mbp6i0pnsufc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjbopeRdFLdEXVBAcxfD1gSbAkcrdu0yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591907589623-uiaqhkkikc4hqrk18ed8mbp6i0pnsufc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

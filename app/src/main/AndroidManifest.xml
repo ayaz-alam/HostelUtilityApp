@@ -30,7 +30,7 @@
         <activity android:name=".MobileNumberVerification"></activity>
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.medeveloper.ayaz.hostelutility"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -42,11 +42,7 @@
         <activity
             android:name=".Splash"
             android:theme="@style/Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".student.Home"
@@ -101,6 +97,15 @@
         </receiver>
 
         <activity android:name=".Registration.Registration" />
+        <activity android:name="com.code_base_update.view.BaseActivity"/>
+        <activity android:name="com.code_base_update.view.ComplaintActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

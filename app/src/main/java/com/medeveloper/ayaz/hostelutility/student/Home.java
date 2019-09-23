@@ -3,14 +3,17 @@ package com.medeveloper.ayaz.hostelutility.student;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,8 +30,6 @@ import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
 import com.medeveloper.ayaz.hostelutility.interfaces.photoChangeListener;
 import com.medeveloper.ayaz.hostelutility.officials.GeneralNotice;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class Home extends AppCompatActivity
@@ -252,7 +253,7 @@ public class Home extends AppCompatActivity
             // Insert the fragment by replacing any existing fragment
             getSupportActionBar().setTitle(title);
             FragmentManager fragmentManager = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction F = fragmentManager.beginTransaction();
+            FragmentTransaction F = fragmentManager.beginTransaction();
             F.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
             F.replace(R.id.fragment_layout, fragment, title).commit();
         }
