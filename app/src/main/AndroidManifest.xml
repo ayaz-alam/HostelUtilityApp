@@ -98,7 +98,8 @@
 
         <activity android:name=".Registration.Registration" />
         <activity android:name="com.code_base_update.view.BaseActivity"/>
-        <activity android:name="com.code_base_update.view.ComplaintActivity" >
+        <activity android:name="com.code_base_update.view.ComplaintActivity"
+                  android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

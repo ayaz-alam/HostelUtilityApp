@@ -27,7 +27,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements ICheckBox
     public BaseViewHolder(Context context, View itemView) {
         super(itemView);
         this.context = context;
-        this.views = new SparseArray<View>();
+        this.views = new SparseArray<>();
         convertView = itemView;
     }
 

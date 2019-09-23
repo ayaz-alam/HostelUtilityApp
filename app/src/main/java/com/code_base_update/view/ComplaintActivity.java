@@ -94,11 +94,12 @@ public class ComplaintActivity extends BaseActivity implements IComplaintView, I
     @Override
     public ComplaintBean getComplaint() {
 
+        //TODO fetch these details from parent
         ComplaintBean thisComplaint = new ComplaintBean();
         thisComplaint.setComplaintId("1234");
         thisComplaint.setStudentId("abc");
 
-        //Fetch data from the view and prepare for the object
+        //TODO implement Fetch data from the view and prepare for the object
         thisComplaint.setComplaintDomainId(getDomainID());
         thisComplaint.setComplaintDescription(getDescription());
         thisComplaint.setComplaintSubDomain(getSubDomain());
@@ -114,6 +115,7 @@ public class ComplaintActivity extends BaseActivity implements IComplaintView, I
     public void onSubDomainLoaded(final ArrayList<String> subDomain) {
         //If sub domain is present then update the new UI
         if (subDomain.size() > 0) {
+            setVisible(R.id.tv_problem_text,true);
             RecyclerView rvSubDomain = findViewById(R.id.rv_subdomain);
             rvSubDomain.setVisibility(View.VISIBLE);
             //rvSubDomain.setLayoutManager(new GridLayoutManager(this, 2));
@@ -135,6 +137,7 @@ public class ComplaintActivity extends BaseActivity implements IComplaintView, I
     public void onDescriptionLoaded(ArrayList<String> descriptions) {
         RecyclerView rvDescription = findViewById(R.id.rv_description);
         rvDescription.setVisibility(View.VISIBLE);
+        setVisible(R.id.tv_description_title,true);
         //rvSubDomain.setLayoutManager(new GridLayoutManager(this, 2));
         SingleCheckBoxAdapter subDomainAdapter = new SingleCheckBoxAdapter(this, R.layout.new_complaint_card, descriptions);
         subDomainAdapter.setOnItemClickListener(new OnItemClickListener() {

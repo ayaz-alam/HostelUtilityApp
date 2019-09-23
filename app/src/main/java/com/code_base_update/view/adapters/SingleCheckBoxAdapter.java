@@ -20,15 +20,14 @@ public class SingleCheckBoxAdapter extends BaseRecyclerAdapter<String> {
     void bindData(BaseViewHolder viewHolder, String item, int position) {
         viewHolder.setText(R.id.tv_problem_title, item);
         CardView cardView = viewHolder.itemView.findViewById(R.id.card_background);
-
-        if(getSelectedPosition()==position){
+        viewHolder.setTextColor(R.id.tv_problem_title,R.color.white);
+       /* if(getSelectedPosition()==position){
             viewHolder.setTextColor(R.id.tv_problem_title,R.color.white);
-            cardView.setCardBackgroundColor(context.getResources().getColor(R.color.light_green));
+            cardView.setBackground(context.getResources().getDrawable(R.drawable.new_card_bg_selected));
         }else{
             viewHolder.setTextColor(R.id.tv_problem_title,R.color.card_default_text_color);
-            //viewHolder.setBackgroundColor(R.id.card_background,R.color.card_grey_background);
-            cardView.setCardBackgroundColor(context.getResources().getColor(R.color.card_grey_background));
-        }
+            cardView.setBackground(context.getResources().getDrawable(R.drawable.new_card_background));
+        }*/
     }
 
     @Override
