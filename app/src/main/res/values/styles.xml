@@ -44,6 +44,10 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/new_spinner_bg</item>
+        <item name="android:padding">5dp</item>
+    </style>
 
 
     <color name="trans">#00000000</color>
