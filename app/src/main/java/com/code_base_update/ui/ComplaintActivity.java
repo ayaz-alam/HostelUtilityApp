@@ -1,4 +1,4 @@
-package com.code_base_update.view;
+package com.code_base_update.ui;
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -7,33 +7,29 @@ import android.widget.Spinner;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.code_base_update.view.adapters.SingleCheckBoxAdapter;
+import com.code_base_update.presenters.IComplaintPresenter;
+import com.code_base_update.ui.adapters.SingleCheckBoxAdapter;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
 
 import com.code_base_update.beans.ComplaintBean;
-import com.code_base_update.interfaces.IComplaintView;
+import com.code_base_update.view.IComplaintView;
 import com.code_base_update.interfaces.OnItemClickListener;
 import com.code_base_update.models.ComplaintModel;
-import com.code_base_update.presenters.IBasePresenter;
-import com.code_base_update.presenters.IModelToComplaintPresenter;
 
-public class ComplaintActivity extends BaseActivity implements IComplaintView, IModelToComplaintPresenter {
+public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPresenter> implements IComplaintView {
 
-    private ComplaintModel model;
+    private ArrayList<String> subdomains;
+    private ArrayList<String> descriptions;
 
     @Override
-    protected IBasePresenter createPresenter() {
-        return null;
+    protected IComplaintPresenter createPresenter() {
+        return new ComplaintModel();
     }
 
     @Override
     protected void initViewsAndEvents() {
-        //Instantiate model for the activity
-        model = new ComplaintModel();
-        model.setPresenter(this);
-
         Spinner spDomain = findViewById(R.id.sp_domain);
         spDomain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -67,31 +63,39 @@ public class ComplaintActivity extends BaseActivity implements IComplaintView, I
 
 
     private void onDomainSpinnerClicked(int i) {
-        model.onDomainSelected(i);
+        mPresenter.onDomainSelected(i);
     }
 
-    @Override
     public String getDomainID() {
-
+        int position = ((Spinner)getView(R.id.sp_domain)).getSelectedItemPosition();
+        if(position==0){
+            showError();
+        }else{
+            return getDomainIdFromPosition(position);
+        }
         return null;
     }
 
-    @Override
+    private String getDomainIdFromPosition(int position) {
+        return "TODO";
+    }
+
+    private void showError() {
+
+    }
+
     public String getSubDomain() {
         return null;
     }
 
-    @Override
     public String getDescription() {
         return null;
     }
 
-    @Override
     public long getProblemFromDate() {
         return 0;
     }
 
-    @Override
     public ComplaintBean getComplaint() {
 
         //TODO fetch these details from parent
@@ -108,7 +112,7 @@ public class ComplaintActivity extends BaseActivity implements IComplaintView, I
     }
 
     public void registerComplaint() {
-        model.registerComplaint(getComplaint());
+        mPresenter.registerComplaint(getComplaint());
     }
 
     @Override
@@ -123,13 +127,13 @@ public class ComplaintActivity extends BaseActivity implements IComplaintView, I
             subDomainAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    model.onSubDomainSelected(subDomain.get(position));
+                    mPresenter.onSubDomainSelected(subDomain.get(position));
                 }
             });
             rvSubDomain.setAdapter(subDomainAdapter);
         } else {
             setVisible(R.id.rv_subdomain, false);
-            model.onSubDomainSelected(null);
+            mPresenter.onSubDomainSelected(null);
         }
     }
 
@@ -149,7 +153,6 @@ public class ComplaintActivity extends BaseActivity implements IComplaintView, I
         rvDescription.setAdapter(subDomainAdapter);
     }
 
-    @Override
     public void registrationStatus(int code) {
         //TODO show information to the user using some method list toast, snack bar etc.
     }

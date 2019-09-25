@@ -1,4 +1,4 @@
-package com.code_base_update.view.adapters;
+package com.code_base_update.ui.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
-import com.code_base_update.view.view_managers.ICheckBoxManager;
 
-public class BaseViewHolder extends RecyclerView.ViewHolder implements ICheckBoxManager {
+public class BaseViewHolder extends RecyclerView.ViewHolder  {
 
     private final SparseArray<View> views;
 
@@ -47,14 +46,12 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements ICheckBox
         return this;
     }
 
-    @Override
     public View setBackgroundColor(int viewId, int color) {
         View view = getView(viewId);
         view.setBackgroundColor(color);
         return view;
     }
 
-    @Override
     public View setBackgroundRes(int viewId, int backgroundRes) {
         View view = getView(viewId);
         view.setBackgroundResource(backgroundRes);
@@ -104,7 +101,6 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements ICheckBox
         return this;
     }
 
-    @Override
     public void setCheckBoxText(int viewId, String text) {
         CheckBox checkBox = getView(viewId);
         checkBox.setText(text);

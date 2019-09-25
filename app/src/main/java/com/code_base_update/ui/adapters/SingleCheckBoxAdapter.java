@@ -1,4 +1,4 @@
-package com.code_base_update.view.adapters;
+package com.code_base_update.ui.adapters;
 
 import android.content.Context;
 

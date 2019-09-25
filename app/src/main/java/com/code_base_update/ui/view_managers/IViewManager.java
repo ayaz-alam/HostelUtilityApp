@@ -1,7 +1,6 @@
-package com.code_base_update.view.view_managers;
+package com.code_base_update.ui.view_managers;
 
 import android.view.View;
-import android.widget.TextView;
 
 public interface IViewManager {
 

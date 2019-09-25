@@ -54,21 +54,23 @@
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/rg_loginAs"
                     android:layout_marginStart="24dp"
+                    android:checkedButton="@id/rb_student"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="@+id/textView3"
                     app:layout_constraintStart_toEndOf="@+id/textView3"
                     app:layout_constraintTop_toBottomOf="@+id/textView2">
 
                     <RadioButton
-                        android:id="@+id/radioButton"
+                        android:id="@+id/rb_student"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="30dp"
                         android:text="Student" />
 
                     <RadioButton
-                        android:id="@+id/radioButton2"
+                        android:id="@+id/rb_teacher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -76,7 +78,7 @@
                 </RadioGroup>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
+                    android:id="@+id/txtInputUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -86,25 +88,27 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/et_user_name"
                         android:hint="Enter Email address" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout2"
+                    android:id="@+id/txtInputPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+                    app:layout_constraintTop_toBottomOf="@+id/txtInputUsername">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/et_password"
                         android:hint="Enter Password" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/btn_forgot_password"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -112,7 +116,7 @@
                     android:drawablePadding="5dp"
                     android:text="Forgot Password"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtInputPassword" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -121,10 +125,10 @@
                     android:text="By Clicking Sign In you Accept our term And Condition"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button5" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_forgot_password" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/btn_login"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -146,10 +150,10 @@
                     android:text="Don't have an account? Create One."
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button2" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/btn_register"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

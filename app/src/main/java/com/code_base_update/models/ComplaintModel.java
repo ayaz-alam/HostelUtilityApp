@@ -3,14 +3,14 @@ package com.code_base_update.models;
 import java.util.ArrayList;
 
 import com.code_base_update.beans.ComplaintBean;
-import com.code_base_update.presenters.IComplaintToModelPresenter;
-import com.code_base_update.presenters.IModelToComplaintPresenter;
+import com.code_base_update.view.IComplaintView;
+import com.code_base_update.presenters.IComplaintPresenter;
 
-public class ComplaintModel implements IComplaintToModelPresenter {
-    private IModelToComplaintPresenter presenter;
+public class ComplaintModel implements IComplaintPresenter {
 
-    public void setPresenter(IModelToComplaintPresenter presenter) {
-        this.presenter = presenter;
+    private IComplaintView complaintView;
+
+    public ComplaintModel(){
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ComplaintModel implements IComplaintToModelPresenter {
             subDomainList.add("Sub Domain " + (i + 1));
         }
         //TODO fetch SubDomain list
-        presenter.onSubDomainLoaded(subDomainList);
+        complaintView.onSubDomainLoaded(subDomainList);
     }
 
     @Override
@@ -30,13 +30,23 @@ public class ComplaintModel implements IComplaintToModelPresenter {
             descriptionList.add("Description " + (i + 1));
         }
         //TODO fetch Description list
-        presenter.onDescriptionLoaded(descriptionList);
+        complaintView.onDescriptionLoaded(descriptionList);
     }
 
     @Override
     public void registerComplaint(ComplaintBean complaintToRegister) {
         int statusCode = -1;
         //TODO Register complaint to database and store result in status code
-        presenter.registrationStatus(statusCode);
+        complaintView.registrationStatus(statusCode);
+    }
+
+    @Override
+    public void attachView(IComplaintView view) {
+        this.complaintView = view;
+    }
+
+    @Override
+    public void detachView() {
+        this.complaintView = null;
     }
 }

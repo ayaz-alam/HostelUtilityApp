@@ -1,8 +1,9 @@
-package com.code_base_update.view;
+package com.code_base_update.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,18 +11,20 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
-import com.code_base_update.view.view_managers.IImageManager;
-import com.code_base_update.view.view_managers.ITextManager;
-import com.code_base_update.view.view_managers.ViewManager;
+import com.code_base_update.ui.view_managers.IImageManager;
+import com.code_base_update.ui.view_managers.ITextManager;
+import com.code_base_update.ui.view_managers.ViewManager;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import com.code_base_update.presenters.IBasePresenter;
-import com.code_base_update.presenters.IBaseView;
+import com.code_base_update.view.IBaseView;
+
 public abstract class BaseActivity<V extends IBaseView, P extends
         IBasePresenter<V>> extends AppCompatActivity implements IImageManager, ITextManager {
 
     private ViewManager viewManager;
-    private IBasePresenter<V> presenter;
+    public P mPresenter;
+    private SparseArray<View> viewHashMap;
 
     protected abstract P createPresenter();
 
@@ -33,8 +36,13 @@ public abstract class BaseActivity<V extends IBaseView, P extends
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        presenter = createPresenter();
+        mPresenter = createPresenter();
         viewManager = new ViewManager(getParentView(), this);
+        viewHashMap = new SparseArray<>();
+
+        if(mPresenter != null){
+            mPresenter.attachView((V) this);
+        }
         initViewsAndEvents();
     }
 
@@ -100,5 +108,12 @@ public abstract class BaseActivity<V extends IBaseView, P extends
     @Override
     public View setVisible(int viewId, boolean visible) {
         return viewManager.setVisible(viewId, visible);
+    }
+
+    public View getView(int resId){
+        if(viewHashMap.get(resId)==null){
+            viewHashMap.append(resId,findViewById(resId));
+        }
+        return  viewHashMap.get(resId);
     }
 }

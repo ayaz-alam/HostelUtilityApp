@@ -1,6 +1,8 @@
 package com.code_base_update.presenters;
 
-public interface IBasePresenter<V> {
+import com.code_base_update.view.IBaseView;
+
+public interface IBasePresenter<V extends IBaseView> {
     void attachView(V view);
 
     void detachView();

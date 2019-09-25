@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login to proceed or view as guest"
+            android:text="Login to proceed or loginView as guest"
             android:textColor="@color/PrimaryText"
             android:layout_marginLeft="@dimen/default_margin"
             />
