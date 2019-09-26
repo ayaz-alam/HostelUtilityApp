@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:elevation="22dp"
+            android:elevation="20dp"
             android:text="Welcome"
             android:textColor="#fff"
             android:textSize="30sp"
@@ -37,9 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:elevation="22dp"
-            android:text="User"
-            android:textColor="#fff"
+            android:elevation="20dp"
+            android:text="Username"
+            android:textColor="#B2FFFFFF"
             android:textSize="23sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
@@ -51,7 +51,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/new_circle"
-            android:elevation="22dp"
+            android:elevation="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

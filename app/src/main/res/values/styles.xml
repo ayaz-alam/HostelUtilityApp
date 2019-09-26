@@ -49,6 +49,9 @@
         <item name="android:padding">5dp</item>
     </style>
 
+    <style name="radiobutton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:checkedTextViewStyle">@color/white</item>
+    </style>
 
     <color name="trans">#00000000</color>
 </resources>

@@ -66,6 +66,13 @@
                         android:id="@+id/rb_student"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/new_radio_button"
+                        android:button="@null"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/radio_txt"
                         android:layout_marginRight="30dp"
                         android:text="Student" />
 
@@ -73,6 +80,13 @@
                         android:id="@+id/rb_teacher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/new_radio_button"
+                        android:button="@null"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/radio_txt"
                         android:layout_weight="1"
                         android:text="Teacher" />
                 </RadioGroup>
@@ -81,33 +95,39 @@
                     android:id="@+id/txtInputUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView3">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_user_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/et_user_name"
+                        android:hint="Enter Email address"
                         android:inputType="textEmailAddress"
-                        android:hint="Enter Email address" />
+                        android:padding="10dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtInputPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:hintEnabled="false"
                     app:passwordToggleEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtInputUsername">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
                         android:id="@+id/et_password"
-                        android:inputType="textPassword"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter Password" />
+                        android:hint="Enter Password"
+                        android:inputType="textPassword"
+                        android:padding="10dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
