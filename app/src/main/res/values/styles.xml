@@ -14,10 +14,13 @@
         <item name="android:windowBackground">@drawable/pre_splash</item>
     </style>
 
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Login" parent="AppTheme.NoActionBar">
+
     </style>
 
     <style name="Theme.Transparent" parent="Theme.AppCompat.Light">

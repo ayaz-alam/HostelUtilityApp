@@ -26,6 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity android:name=".MobileNumberVerification"></activity>
 
@@ -101,9 +102,8 @@
         <activity android:name="com.code_base_update.ui.ComplaintActivity"
                   android:windowSoftInputMode="adjustNothing">
 
-
         </activity>
-        <activity android:name="com.code_base_update.ui.NewLogin" >
+        <activity android:name="com.code_base_update.ui.NewLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
