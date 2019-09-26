@@ -111,6 +111,7 @@
             </intent-filter>
 
         </activity>
+        <activity android:name="com.code_base_update.ui.ComplaintListActivity" />
     </application>
 
 </manifest>

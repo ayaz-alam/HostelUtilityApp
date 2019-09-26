@@ -7,11 +7,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.code_base_update.interfaces.OnItemClickListener;
 
-public abstract class BaseRecyclerAdapter<T extends Comparable<? super T>>
+public abstract class BaseRecyclerAdapter<T>
         extends RecyclerView.Adapter<BaseViewHolder> {
 
     private Context mContext;
@@ -80,6 +81,11 @@ public abstract class BaseRecyclerAdapter<T extends Comparable<? super T>>
     public void add(T item) {
         mData.add(item);
         notifyItemInserted(mData.size() - 1);
+    }
+
+    public void update(ArrayList<T> items){
+        mData = items;
+        notifyDataSetChanged();
     }
 
 

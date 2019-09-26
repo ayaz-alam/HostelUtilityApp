@@ -23,8 +23,6 @@ import static com.code_base_update.Constants.TEACHER;
 
 public class NewLogin extends BaseActivity<ILoginView, ILoginPresenter> implements ILoginView{
 
-    private static final int BAD_USERNAME_FORMAT = 1232;
-    private static final int PASSWORD_LENGTH = 3242;
     private ProgressDialog mProgressDialog;
     private EditText mUsername,mPassword;
     private Context mCtx;

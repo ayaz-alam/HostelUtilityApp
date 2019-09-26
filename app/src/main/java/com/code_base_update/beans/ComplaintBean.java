@@ -1,6 +1,6 @@
 package com.code_base_update.beans;
 
-public class ComplaintBean {
+public class ComplaintBean{
 
     private String studentId, complaintId, complaintDomainId, complaintSubDomain, complaintDescription;
     private long timeStamp;
@@ -83,4 +83,5 @@ public class ComplaintBean {
     public void setResolvedOnDate(long resolvedOnDate) {
         this.resolvedOnDate = resolvedOnDate;
     }
+
 }
