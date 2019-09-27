@@ -103,7 +103,8 @@
                   android:windowSoftInputMode="adjustNothing">
 
         </activity>
-        <activity android:name="com.code_base_update.ui.NewLogin">
+        <activity android:name="com.code_base_update.ui.NewLogin"
+                  android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -112,6 +113,7 @@
 
         </activity>
         <activity android:name="com.code_base_update.ui.ComplaintListActivity" />
+        <activity android:name="com.code_base_update.ui.RegisterApplicationActivity" />
     </application>
 
 </manifest>
