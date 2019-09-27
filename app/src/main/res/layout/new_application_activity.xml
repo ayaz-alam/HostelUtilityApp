@@ -19,7 +19,7 @@
             android:id="@+id/sp_application"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/Application_type"
+            android:entries="@array/application_type"
             android:padding="8dp"
             android:spinnerMode="dropdown"
             app:layout_constraintBottom_toBottomOf="parent"

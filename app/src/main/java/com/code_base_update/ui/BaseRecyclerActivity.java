@@ -22,8 +22,8 @@ public abstract class BaseRecyclerActivity <V extends IBaseView,P extends IBaseP
 
     @Override
     protected void initViewsAndEvents() {
-        initViews();
         adapter = getAdapter();
+        initViews();
         recyclerView = getRecyclerView();
     }
 }

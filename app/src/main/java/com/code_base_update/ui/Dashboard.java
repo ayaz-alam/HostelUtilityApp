@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.code_base_update.beans.DashBoardBean;
+import com.code_base_update.models.DashboardModel;
 import com.code_base_update.presenters.IDashPresenter;
 import com.code_base_update.ui.adapters.DashboardRecyclerAdapter;
 import com.code_base_update.view.IDashView;

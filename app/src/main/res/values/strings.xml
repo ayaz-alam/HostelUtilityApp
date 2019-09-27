@@ -75,7 +75,7 @@
         <item>O-</item>
     </string-array>
 
-    <string-array name="Application_type">
+    <string-array name="application_type">
         <item>Select Application Subject</item>
         <item>Diet-Off</item>
         <item>Leave</item>

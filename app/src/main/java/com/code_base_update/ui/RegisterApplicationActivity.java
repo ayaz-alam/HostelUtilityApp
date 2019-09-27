@@ -54,7 +54,7 @@ public class RegisterApplicationActivity extends BaseActivity<IApplicationView, 
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.new_application_activity;
     }
 
 
