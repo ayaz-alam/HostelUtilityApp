@@ -25,4 +25,8 @@ public class DatabaseManager {
         else callback.onFailure("Failed");
 
     }
+
+    public ArrayList<ApplicationBean> loadAllApplication() {
+        return new ArrayList<>();
+    }
 }

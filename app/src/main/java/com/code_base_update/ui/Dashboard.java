@@ -31,7 +31,7 @@ public class Dashboard extends BaseActivity<IDashView,IBasePresenter<IDashView>>
 
     @Override
     public void openRegisterComplaintList() {
-        startActivity(new Intent(this,ComplaintListActivity.class));
+        startActivity(new Intent(this, ComplaintComplaintListActivity.class));
     }
 
     @Override
