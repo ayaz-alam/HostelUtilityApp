@@ -10,7 +10,7 @@ import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
 
-public class ComplaintListActivity extends BaseRecyclerActivity<IComplaintListView, IComplaintListPresenter,NewComplaintAdapter> implements IComplaintListView{
+public class ComplaintComplaintListActivity extends BaseRecyclerActivity<IComplaintListView, IComplaintListPresenter,NewComplaintAdapter> implements IComplaintListView {
 
     private ArrayList<ComplaintBean> list;
 
