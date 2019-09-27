@@ -114,6 +114,8 @@
         </activity>
         <activity android:name="com.code_base_update.ui.ComplaintListActivity" />
         <activity android:name="com.code_base_update.ui.RegisterApplicationActivity" />
+        <activity android:name="com.code_base_update.ui.Dashboard" />
+        <activity android:name="com.code_base_update.ui.ApplicationListActivity" />
     </application>
 
 </manifest>

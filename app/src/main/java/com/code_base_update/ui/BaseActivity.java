@@ -19,8 +19,7 @@ import com.medeveloper.ayaz.hostelutility.R;
 import com.code_base_update.presenters.IBasePresenter;
 import com.code_base_update.view.IBaseView;
 
-public abstract class BaseActivity<V extends IBaseView, P extends
-        IBasePresenter<V>> extends AppCompatActivity implements IImageManager, ITextManager {
+public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter<V>> extends AppCompatActivity implements IImageManager, ITextManager {
 
     private ViewManager viewManager;
     public P mPresenter;
