@@ -15,17 +15,17 @@ public class ComplaintComplaintListActivity extends BaseRecyclerActivity<ICompla
     private ArrayList<ComplaintBean> list;
 
     @Override
-    RecyclerView getRecyclerView() {
+    public RecyclerView getRecyclerView() {
         return (RecyclerView)getView(R.id.recycler_view);
     }
 
     @Override
-    NewComplaintAdapter getAdapter() {
+    public NewComplaintAdapter getAdapter() {
         return new NewComplaintAdapter(this,R.layout.card_complaint_student,list);
     }
 
     @Override
-    void initViews() {
+    public void initViews() {
         list = new ArrayList<>();
         mPresenter.loadData(this);
         enableNavigation();

@@ -12,26 +12,27 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.code_base_update.presenters.IBasePresenter;
+import com.code_base_update.ui.BaseActivity;
 import com.medeveloper.ayaz.hostelutility.R;
 
 
-public class GeneralNotice extends Fragment {
+public class GeneralNotice extends BaseActivity {
 
-    public GeneralNotice() {
-        // Required empty public constructor
+    ProgressBar mProgressBar;
+
+    @Override
+    protected IBasePresenter createPresenter() {
+        return null;
     }
 
-    View rootView;
-    ProgressBar mProgressBar;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        rootView=inflater.inflate(R.layout.fragment_general_notice, container, false);
+    protected void initViewsAndEvents() {
 
-        WebView myWebView = rootView.findViewById(R.id.general_notice);
+        enableNavigation();
+        WebView myWebView = findViewById(R.id.general_notice);
 
-        mProgressBar=rootView.findViewById(R.id.progress_bar);
+        mProgressBar=findViewById(R.id.progress_bar);
 
 
         myWebView.getSettings().setLoadsImagesAutomatically(true);
@@ -40,9 +41,11 @@ public class GeneralNotice extends Fragment {
         myWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         myWebView.loadUrl("https://ctae.ac.in");
         mProgressBar.setVisibility(View.VISIBLE);
+    }
 
-
-        return rootView;
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_general_notice;
     }
 
 

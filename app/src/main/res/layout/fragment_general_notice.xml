@@ -1,27 +1,17 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.medeveloper.ayaz.hostelutility.officials.GeneralNotice">
 
-    <!-- TODO: Update blank fragment layout -->
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
-       <ProgressBar
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:id="@+id/progress_bar"
-           style="?android:attr/progressBarStyleHorizontal"
-           android:visibility="invisible"
-           android:indeterminate="true"
-           />
-       <WebView
-           android:layout_width="match_parent"
-           android:id="@+id/general_notice"
-           android:layout_height="match_parent">
-
-       </WebView>
-
-   </RelativeLayout>
-</FrameLayout>
+<RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:visibility="invisible"
+        android:indeterminate="true"
+        />
+    <WebView
+        android:layout_width="match_parent"
+        android:id="@+id/general_notice"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

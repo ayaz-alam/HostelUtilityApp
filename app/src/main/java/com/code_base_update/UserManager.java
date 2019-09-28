@@ -1,4 +1,4 @@
-package com;
+package com.code_base_update;
 
 import android.net.Uri;
 

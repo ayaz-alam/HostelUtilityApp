@@ -113,7 +113,7 @@ public class NoticeClassAdapter extends RecyclerView.Adapter<NoticeClassAdapter.
 
         holder.noticeBody.setText(notice.noticeBody);
         holder.noticeGenerator.setText("by: "+notice.noticeGenerator);
-        holder.noticeDate.setText((""+CustomDateClass.getDate(notice.noticeDate)));
+        holder.noticeDate.setText((""+ DateUtils.getDate(notice.noticeDate)));
         if(notice.noticeBody.length()>80)
         holder.expand_colapse.setVisibility(View.VISIBLE);
         else holder.expand_colapse.setVisibility(View.GONE);

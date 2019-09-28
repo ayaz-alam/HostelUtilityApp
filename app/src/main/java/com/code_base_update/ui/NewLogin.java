@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.UserManager;
+import com.code_base_update.UserManager;
 import com.code_base_update.InputHelper;
 import com.code_base_update.models.LoginModel;
 import com.code_base_update.presenters.ILoginPresenter;

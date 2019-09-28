@@ -257,7 +257,7 @@ public class DietOffAdapter extends RecyclerView.Adapter<DietOffAdapter.ViewHold
         holder.studentName.setText(""+notice.Name);
         holder.RoomNo.setText("Room: "+notice.RoomNo);
         holder.EnrollmentNo.setText("En. no: "+notice.EnrollmentNo);
-        CustomDateClass date=new CustomDateClass();
+        DateUtils date=new DateUtils();
         date.getDate(notice.time);
         holder.Time.setText((""+date.getDate(notice.time)));
         holder.From.setText("From date:   "+notice.From);

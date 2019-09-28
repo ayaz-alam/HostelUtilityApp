@@ -121,4 +121,8 @@ public abstract class BaseRecyclerAdapter<T>
     public int getSelectedPosition() {
         return selectedPosition;
     }
+
+    public T getItem(int position){
+        return mData.get(position);
+    }
 }

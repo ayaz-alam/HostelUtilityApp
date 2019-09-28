@@ -1,8 +1,6 @@
 package com.code_base_update.models;
 
-import android.net.Uri;
-
-import com.UserManager;
+import com.code_base_update.UserManager;
 import com.code_base_update.beans.DashBoardBean;
 import com.code_base_update.presenters.IDashPresenter;
 import com.code_base_update.view.IDashView;

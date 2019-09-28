@@ -16,17 +16,17 @@ public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationLi
 
     ArrayList<ApplicationBean> list;
     @Override
-    RecyclerView getRecyclerView() {
+    public RecyclerView getRecyclerView() {
         return (RecyclerView)getView(R.id.recycler_view);
     }
 
     @Override
-    ApplicationListAdapter getAdapter() {
+    public ApplicationListAdapter getAdapter() {
         return new ApplicationListAdapter(this, R.layout.card_diet_off,list);
     }
 
     @Override
-    void initViews() {
+    public void initViews() {
         list = new ArrayList<>();
         mPresenter.loadData(this);
         enableNavigation();
@@ -39,7 +39,6 @@ public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationLi
 
     @Override
     protected int getLayoutId() {
-        //TODO give real id
         return R.layout.simple_recycler_activity;
     }
 

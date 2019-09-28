@@ -14,11 +14,11 @@ public abstract class BaseRecyclerActivity <V extends IBaseView,P extends IBaseP
     public A adapter;
     public RecyclerView recyclerView;
 
-    abstract RecyclerView getRecyclerView();
+    public abstract RecyclerView getRecyclerView();
 
-    abstract A getAdapter();
+    public abstract A getAdapter();
 
-    abstract void initViews();
+    public abstract void initViews();
 
     @Override
     protected void initViewsAndEvents() {

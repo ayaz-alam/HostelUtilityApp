@@ -119,6 +119,8 @@
         </activity>
         <activity android:name="com.code_base_update.ui.ApplicationListActivity" />
         <activity android:name=".AboutSection" />
+        <activity android:name="com.code_base_update.ui.HostelNoticeActivity" />
+        <activity android:name=".officials.GeneralNotice" />
     </application>
 
 </manifest>

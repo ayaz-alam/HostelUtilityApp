@@ -45,7 +45,6 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
         viewHashMap = new SparseArray<>();
 
         if(mPresenter != null){
-
             mPresenter.attachView((V) this);
         }
         initViewsAndEvents();

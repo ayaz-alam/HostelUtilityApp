@@ -5,9 +5,11 @@ import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.TransitionOptions;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.code_base_update.beans.DashBoardBean;
 import com.code_base_update.interfaces.OnItemClickListener;
@@ -17,6 +19,7 @@ import com.code_base_update.ui.adapters.DashboardRecyclerAdapter;
 import com.code_base_update.view.IDashView;
 import com.medeveloper.ayaz.hostelutility.AboutSection;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.officials.GeneralNotice;
 
 import java.util.ArrayList;
 
@@ -30,36 +33,49 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     }
 
     @Override
-    RecyclerView getRecyclerView() {
+    public RecyclerView getRecyclerView() {
         return (RecyclerView)getView(R.id.recycler_view);
     }
 
     @Override
-    DashboardRecyclerAdapter getAdapter() {
+    public DashboardRecyclerAdapter getAdapter() {
         return new DashboardRecyclerAdapter(this,R.layout.new_dashboard_cardui,list);
     }
 
     @Override
-    void initViews() {
+    public void initViews() {
         list = new ArrayList<>();
         mPresenter.loadData();
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 switch (position){
-                    case 0:openRegisterComplaint();break;
 
-                    case 1:openRegisterComplaintList();break;
+                    case 0:openCollegeNotice();break;
 
-                    case 2:openRegisterApplication();break;
+                    case 1:openHostelNotice();break;
 
-                    case 3:openRegisterApplicationList();break;
+                    case 2:openRegisterComplaint();break;
+
+                    case 3:openRegisterComplaintList();break;
+
+                    case 4:openRegisterApplication();break;
+
+                    case 5:openRegisterApplicationList();break;
                 }
 
             }
         });
         mPresenter.loadUserImageUrl();
         mPresenter.loadUserName();
+    }
+
+    private void openHostelNotice() {
+        startActivity(new Intent(this,HostelNoticeActivity.class));
+    }
+
+    private void openCollegeNotice() {
+        startActivity(new Intent(this, GeneralNotice.class));
     }
 
     @Override
