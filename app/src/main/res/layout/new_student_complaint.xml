@@ -59,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_problem_text"
             app:spanCount="3"
             tools:itemCount="5"
-            tools:listitem="@layout/new_complaint_card" />
+            tools:listitem="@layout/new_complaint_chips" />
 
         <TextView
             android:id="@+id/tv_description_title"
@@ -84,7 +84,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_description_title"
             app:spanCount="3"
             tools:itemCount="5"
-            tools:listitem="@layout/new_complaint_card" />
+            tools:listitem="@layout/new_complaint_chips" />
 
         <EditText
             android:id="@+id/et_description"

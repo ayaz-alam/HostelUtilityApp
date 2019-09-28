@@ -123,7 +123,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
             RecyclerView rvSubDomain = findViewById(R.id.rv_subdomain);
             rvSubDomain.setVisibility(View.VISIBLE);
             //rvSubDomain.setLayoutManager(new GridLayoutManager(this, 2));
-            SingleCheckBoxAdapter subDomainAdapter = new SingleCheckBoxAdapter(this, R.layout.new_complaint_card, subDomain);
+            SingleCheckBoxAdapter subDomainAdapter = new SingleCheckBoxAdapter(this, R.layout.new_complaint_chips, subDomain);
             subDomainAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
@@ -143,7 +143,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
         rvDescription.setVisibility(View.VISIBLE);
         setVisible(R.id.tv_description_title,true);
         //rvSubDomain.setLayoutManager(new GridLayoutManager(this, 2));
-        SingleCheckBoxAdapter subDomainAdapter = new SingleCheckBoxAdapter(this, R.layout.new_complaint_card, descriptions);
+        SingleCheckBoxAdapter subDomainAdapter = new SingleCheckBoxAdapter(this, R.layout.new_complaint_chips, descriptions);
         subDomainAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
