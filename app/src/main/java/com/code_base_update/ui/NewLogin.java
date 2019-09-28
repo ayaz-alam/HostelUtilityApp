@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.UserManager;
 import com.code_base_update.InputHelper;
 import com.code_base_update.models.LoginModel;
 import com.code_base_update.presenters.ILoginPresenter;
@@ -16,7 +17,6 @@ import com.code_base_update.view.ILoginView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.medeveloper.ayaz.hostelutility.R;
-import com.medeveloper.ayaz.hostelutility.student.Home;
 
 import static com.code_base_update.Constants.STUDENT;
 import static com.code_base_update.Constants.TEACHER;
@@ -43,6 +43,11 @@ public class NewLogin extends BaseActivity<ILoginView, ILoginPresenter> implemen
         final RadioGroup rgLoginAs = (RadioGroup)getView(R.id.rg_loginAs);
         final TextInputLayout mUsernameLayout = (TextInputLayout)getView(R.id.txtInputUsername);
         final TextInputLayout mPasswordLayout = (TextInputLayout)getView(R.id.txtInputPassword);
+
+        if(new UserManager().isUserLoggedIn()){
+            onLoginSuccess();
+            return;
+        }
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,20 +99,20 @@ public class NewLogin extends BaseActivity<ILoginView, ILoginPresenter> implemen
     @Override
     public void onLoginSuccess() {
         mProgressDialog.dismiss();
-        startActivity(new Intent(this, Home.class));
+        startActivity(new Intent(this, Dashboard.class));
         finish();
     }
 
     @Override
-    public void onLoginFailure(int errorCode) {
+    public void onLoginFailure(String error) {
         mProgressDialog.dismiss();
-        Toast.makeText(this,"Bad credentials",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Error: "+error,Toast.LENGTH_LONG).show();
 
     }
 
     @Override
-    public void onBadCredential(int errorCode) {
+    public void onBadCredential(int error) {
         mProgressDialog.dismiss();
-
+        Toast.makeText(this,"Error: "+error,Toast.LENGTH_LONG).show();
     }
 }

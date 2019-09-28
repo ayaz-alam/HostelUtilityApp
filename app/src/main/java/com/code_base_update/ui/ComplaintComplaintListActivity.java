@@ -28,6 +28,7 @@ public class ComplaintComplaintListActivity extends BaseRecyclerActivity<ICompla
     void initViews() {
         list = new ArrayList<>();
         mPresenter.loadData(this);
+        enableNavigation();
     }
 
     @Override

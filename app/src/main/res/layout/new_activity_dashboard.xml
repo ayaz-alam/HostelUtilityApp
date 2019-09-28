@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,7 +13,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="411dp"
-            android:layout_height="198dp"
+            android:layout_height="200dp"
             android:background="@drawable/new_dashboard_bg"
             android:elevation="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_user"
+            android:id="@+id/tv_display_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -45,8 +46,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
 
-        <View
-            android:id="@+id/circle_profile"
+        <ImageView
+            android:id="@+id/iv_display_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginTop="32dp"
@@ -60,13 +61,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:id="@+id/recycler_view"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
-            app:spanCount="3"
+            app:spanCount="2"
             tools:itemCount="9"
             tools:listitem="@layout/new_dashboard_cardui" />
 

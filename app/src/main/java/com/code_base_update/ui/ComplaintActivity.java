@@ -52,6 +52,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
                 registerComplaint();
             }
         });
+        enableNavigation();
 
 
     }

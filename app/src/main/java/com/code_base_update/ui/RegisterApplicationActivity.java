@@ -23,13 +23,14 @@ public class RegisterApplicationActivity extends BaseActivity<IApplicationView, 
     protected void initViewsAndEvents() {
 
         mProgressDialog = new MyDialog().getProgressDialog("Sending..",this);
-        getView(R.id.btn_register_button).setOnClickListener(new View.OnClickListener() {
+        getView(R.id.btn_register_application).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(validateInput())
                     mPresenter.saveApplication(getApplicationObject());
             }
         });
+        enableNavigation();
     }
 
     private boolean validateInput() {

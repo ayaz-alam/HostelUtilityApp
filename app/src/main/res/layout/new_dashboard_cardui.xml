@@ -22,20 +22,22 @@
             android:padding="10dp">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/iv_dashboard_icon"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintBottom_toTopOf="@+id/tv_dashboard_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_complaint_list" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/tv_dashboard_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:text="menu"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

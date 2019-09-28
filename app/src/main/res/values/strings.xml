@@ -152,4 +152,5 @@
     <string name="forgot_pass_hint">Forgot Password</string>
     <string name="reset_pass_number_hint">An Email would be sent to your registered email Id for resetting the Password</string>
 
+
 </resources>
