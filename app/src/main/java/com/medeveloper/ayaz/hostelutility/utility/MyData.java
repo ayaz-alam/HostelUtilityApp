@@ -1,4 +1,4 @@
-package com.medeveloper.ayaz.hostelutility.classes_and_adapters;
+package com.medeveloper.ayaz.hostelutility.utility;
 
 import android.content.Context;
 import android.preference.PreferenceManager;
@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.medeveloper.ayaz.hostelutility.R;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialsDetailsClass;
+import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 
 
 public class MyData {

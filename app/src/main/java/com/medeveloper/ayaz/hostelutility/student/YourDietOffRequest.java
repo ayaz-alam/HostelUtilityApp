@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.DietOffAdapter;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.DietOffRequestClass;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
+import com.medeveloper.ayaz.hostelutility.utility.MyData;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import java.util.ArrayList;

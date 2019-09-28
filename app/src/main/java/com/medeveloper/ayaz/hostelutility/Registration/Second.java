@@ -3,7 +3,6 @@ package com.medeveloper.ayaz.hostelutility.Registration;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.medeveloper.ayaz.hostelutility.R;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
+import com.medeveloper.ayaz.hostelutility.utility.MyData;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.medeveloper.ayaz.hostelutility.interfaces.onCompletionListener;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;

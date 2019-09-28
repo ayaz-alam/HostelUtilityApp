@@ -39,7 +39,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.medeveloper.ayaz.hostelutility.R;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CameraUtitlity;
+import com.medeveloper.ayaz.hostelutility.utility.CameraUtitlity;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.NoticeClass;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 

@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.medeveloper.ayaz.hostelutility.R;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
+import com.medeveloper.ayaz.hostelutility.utility.MyData;
 import com.medeveloper.ayaz.hostelutility.interfaces.onCompletionListener;
 import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;

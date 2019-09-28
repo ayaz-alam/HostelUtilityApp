@@ -17,7 +17,7 @@ import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
+import com.medeveloper.ayaz.hostelutility.utility.MyData;
 import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
 import com.medeveloper.ayaz.hostelutility.student.Home;
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;

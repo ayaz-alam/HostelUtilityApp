@@ -29,7 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.medeveloper.ayaz.hostelutility.Registration.Registration;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.MyData;
+import com.medeveloper.ayaz.hostelutility.utility.MyData;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.OfficialsDetailsClass;
 import com.medeveloper.ayaz.hostelutility.classes_and_adapters.StudentDetailsClass;
 import com.medeveloper.ayaz.hostelutility.officials.OfficialsHome;
@@ -117,14 +117,6 @@ public class LoginAcitivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-
-        /*
-        if(mAuth.getCurrentUser()!=null)
-        {
-            startActivity(new Intent(this,Home.class));
-            finish();
-        }
-        */
 
 
         Login.setOnClickListener(new View.OnClickListener() {

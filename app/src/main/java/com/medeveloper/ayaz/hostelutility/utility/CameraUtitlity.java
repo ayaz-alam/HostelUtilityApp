@@ -1,4 +1,4 @@
-package com.medeveloper.ayaz.hostelutility.classes_and_adapters;
+package com.medeveloper.ayaz.hostelutility.utility;
 
 import android.content.Context;
 import android.content.Intent;

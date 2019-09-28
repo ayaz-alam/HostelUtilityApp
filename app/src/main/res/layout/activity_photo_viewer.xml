@@ -30,7 +30,7 @@
         android:layout_height="wrap_content" />
 
 </LinearLayout>
-    <com.medeveloper.ayaz.hostelutility.classes_and_adapters.TouchImageView
+    <com.medeveloper.ayaz.hostelutility.utility.TouchImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

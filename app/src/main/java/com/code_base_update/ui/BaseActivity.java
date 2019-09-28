@@ -2,7 +2,6 @@ package com.code_base_update.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.MenuItem;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.code_base_update.ui.view_managers.IImageManager;
 import com.code_base_update.ui.view_managers.ITextManager;
@@ -22,7 +20,6 @@ import com.medeveloper.ayaz.hostelutility.R;
 
 import com.code_base_update.presenters.IBasePresenter;
 import com.code_base_update.view.IBaseView;
-import com.medeveloper.ayaz.hostelutility.classes_and_adapters.CircularTransform;
 
 public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter<V>> extends AppCompatActivity implements IImageManager, ITextManager {
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.medeveloper.ayaz.hostelutility.R;
 import com.medeveloper.ayaz.hostelutility.student.PhotoViewer;
+import com.medeveloper.ayaz.hostelutility.utility.DateUtils;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
