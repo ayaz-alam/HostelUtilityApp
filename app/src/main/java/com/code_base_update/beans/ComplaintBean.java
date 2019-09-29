@@ -1,12 +1,16 @@
 package com.code_base_update.beans;
 
+import java.util.ArrayList;
+
 public class ComplaintBean{
 
-    private String studentId, complaintId, complaintDomainId, complaintSubDomain, complaintDescription;
+    private String studentId, complaintId, complaintDomainId;
+    private ArrayList<String> descriptions;
     private long timeStamp;
     private long problemFacingFromDate;
     private boolean complaintStatus;
     private long resolvedOnDate;
+    private String optionalDescription;
 
     public ComplaintBean() {
 
@@ -34,22 +38,6 @@ public class ComplaintBean{
 
     public void setComplaintDomainId(String complaintDomainId) {
         this.complaintDomainId = complaintDomainId;
-    }
-
-    public String getComplaintSubDomain() {
-        return complaintSubDomain;
-    }
-
-    public void setComplaintSubDomain(String complaintSubDomain) {
-        this.complaintSubDomain = complaintSubDomain;
-    }
-
-    public String getComplaintDescription() {
-        return complaintDescription;
-    }
-
-    public void setComplaintDescription(String complaintDescription) {
-        this.complaintDescription = complaintDescription;
     }
 
     public long getTimeStamp() {
@@ -84,4 +72,19 @@ public class ComplaintBean{
         this.resolvedOnDate = resolvedOnDate;
     }
 
+    public ArrayList<String> getDescriptions() {
+        return descriptions;
+    }
+
+    public void setDescriptions(ArrayList<String> descriptions) {
+        this.descriptions = descriptions;
+    }
+
+    public void setOptionalDescription(String optionalDescription) {
+        this.optionalDescription = optionalDescription;
+    }
+
+    public String getOptionalDescription() {
+        return optionalDescription;
+    }
 }

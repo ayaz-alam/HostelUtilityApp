@@ -1,13 +1,9 @@
-package com.medeveloper.ayaz.hostelutility;
-
-
-import android.view.MenuItem;
+package com.code_base_update.ui;
 
 import com.code_base_update.presenters.IBasePresenter;
-import com.code_base_update.ui.BaseActivity;
+import com.medeveloper.ayaz.hostelutility.R;
 
-public class AboutSection extends BaseActivity {
-
+public class AboutSection extends BaseActivity{
     @Override
     protected IBasePresenter createPresenter() {
         return null;
@@ -15,7 +11,7 @@ public class AboutSection extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        enableNavigation();
+
     }
 
     @Override

@@ -12,9 +12,9 @@ import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
 
-public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationListView, IApplicationListPresenter, ApplicationListAdapter> implements IApplicationView {
+public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationListView, IApplicationListPresenter, ApplicationListAdapter> implements IApplicationListView {
 
-    ArrayList<ApplicationBean> list;
+    private ArrayList<ApplicationBean> list;
     @Override
     public RecyclerView getRecyclerView() {
         return (RecyclerView)getView(R.id.recycler_view);
@@ -43,22 +43,7 @@ public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationLi
     }
 
     @Override
-    public void clearView() {
-
-    }
-
-    @Override
-    public void onInitiated() {
-
-    }
-
-    @Override
-    public void onSuccess() {
-
-    }
-
-    @Override
-    public void onFailure(String msg) {
-
+    public void onListLoaded(ArrayList<ApplicationBean> complaintBean) {
+        adapter.update(complaintBean);
     }
 }

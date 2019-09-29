@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -57,4 +57,11 @@
     </style>
 
     <color name="trans">#00000000</color>
+
+    <style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+    <item name="chipBackgroundColor">@color/card_grey_background</item>
+    <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+
 </resources>

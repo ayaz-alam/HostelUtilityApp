@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +18,7 @@ import com.code_base_update.models.DashboardModel;
 import com.code_base_update.presenters.IDashPresenter;
 import com.code_base_update.ui.adapters.DashboardRecyclerAdapter;
 import com.code_base_update.view.IDashView;
-import com.medeveloper.ayaz.hostelutility.AboutSection;
 import com.medeveloper.ayaz.hostelutility.R;
-import com.medeveloper.ayaz.hostelutility.officials.GeneralNotice;
 
 import java.util.ArrayList;
 
@@ -123,6 +122,7 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
             setText(R.id.tv_welcome,name);
         else
             setText(R.id.tv_welcome,"No name");
+
     }
 
     @Override

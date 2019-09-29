@@ -27,7 +27,7 @@ public class RegisterApplicationActivity extends BaseActivity<IApplicationView, 
             @Override
             public void onClick(View v) {
                 if(validateInput())
-                    mPresenter.saveApplication(getApplicationObject());
+                    mPresenter.saveApplication(getApplicationObject(),getApplicationContext());
             }
         });
         enableNavigation();

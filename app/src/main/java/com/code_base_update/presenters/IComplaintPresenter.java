@@ -1,13 +1,14 @@
 package com.code_base_update.presenters;
 
 
+import android.content.Context;
+
 import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.view.IComplaintView;
 
 public interface IComplaintPresenter extends IBasePresenter<IComplaintView>{
-    void onDomainSelected(int id);
-
-    void onSubDomainSelected(String subDomain);
+    void loadDomain();
+    void onDomainSelected(String domain);
 
     void registerComplaint(ComplaintBean complaintToRegister);
 }

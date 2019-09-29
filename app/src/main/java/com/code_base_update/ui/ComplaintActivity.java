@@ -1,41 +1,54 @@
 package com.code_base_update.ui;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.code_base_update.SessionManager;
 import com.code_base_update.presenters.IComplaintPresenter;
-import com.code_base_update.ui.adapters.SingleCheckBoxAdapter;
+import com.google.android.material.chip.ChipGroup;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.view.IComplaintView;
-import com.code_base_update.interfaces.OnItemClickListener;
 import com.code_base_update.models.ComplaintModel;
+import com.robertlevonyan.views.chip.Chip;
 
 public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPresenter> implements IComplaintView {
 
-    private ArrayList<String> subdomains;
-    private ArrayList<String> descriptions;
+    private ChipGroup cgDescription;
+    private SessionManager session;
+    private Spinner spDomain;
+
 
     @Override
     protected IComplaintPresenter createPresenter() {
-        return new ComplaintModel();
+        return new ComplaintModel(this);
     }
 
     @Override
     protected void initViewsAndEvents() {
-        Spinner spDomain = findViewById(R.id.sp_domain);
+
+        session = new SessionManager(this);
+
+        spDomain = findViewById(R.id.sp_domain);
+        spDomain.setEnabled(false);
+        mPresenter.loadDomain();
+
+
         spDomain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0)
-                    onDomainSpinnerClicked(position);
+                    onDomainSpinnerClicked(spDomain.getSelectedItem().toString());
             }
 
             @Override
@@ -44,14 +57,14 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
             }
         });
 
-        Button registrationButton = findViewById(R.id.btn_register_button);
 
-        registrationButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_register_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registerComplaint();
             }
         });
+
         enableNavigation();
 
 
@@ -62,9 +75,43 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
         return R.layout.new_student_complaint;
     }
 
+    @Override
+    public void onDomainLoaded(ArrayList<String> domain) {
+        spDomain.setEnabled(true);
+        ArrayAdapter adapter= new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,domain);
+        spDomain.setAdapter(adapter);
+    }
 
-    private void onDomainSpinnerClicked(int i) {
-        mPresenter.onDomainSelected(i);
+    @Override
+    public void domainLoadError(String msg) {
+        Toast.makeText(this,"Error: "+msg,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSubDomainLoaded(final ArrayList<String> subDomain) {
+
+        //TODO This chip thing is not working
+        cgDescription = findViewById(R.id.cg_subdomain);
+        cgDescription.setSingleSelection(true);
+        int i=10001;
+        cgDescription.clearCheck();
+        setVisible(R.id.tv_problem_text,true);
+        for(String description: subDomain){
+            Chip chip = (Chip)LayoutInflater.from(this).inflate(R.layout.chip,null);
+            chip.setText(description);
+            chip.setId(i++);
+            chip.setClickable(true);
+            cgDescription.addView(chip);
+        }
+
+    }
+    @Override
+    public void subdomainLoadError(String msg) {
+        Toast.makeText(this,"Error: "+msg,Toast.LENGTH_LONG).show();
+    }
+
+    private void onDomainSpinnerClicked(String domain) {
+        mPresenter.onDomainSelected(domain);
     }
 
     public String getDomainID() {
@@ -72,91 +119,64 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
         if(position==0){
             showError();
         }else{
-            return getDomainIdFromPosition(position);
+            return ((Spinner)getView(R.id.sp_domain)).getSelectedItem().toString();
         }
         return null;
     }
 
-    private String getDomainIdFromPosition(int position) {
-        return "TODO";
-    }
-
     private void showError() {
-
+        Toast.makeText(this,"Please select a problem",Toast.LENGTH_LONG).show();
     }
 
-    public String getSubDomain() {
-        return null;
-    }
-
-    public String getDescription() {
-        return null;
-    }
-
-    public long getProblemFromDate() {
-        return 0;
+    public ArrayList<String> getDescription() {
+        ArrayList<String> list =new ArrayList<>();
+        for(int i=0;i<cgDescription.getChildCount();i++){
+            Chip chip =(Chip)cgDescription.getChildAt(i);
+            if(chip!=null&&chip.isSelected())
+                list.add(chip.getText().toString());
+        }
+        return list;
     }
 
     public ComplaintBean getComplaint() {
 
-        //TODO fetch these details from parent
         ComplaintBean thisComplaint = new ComplaintBean();
-        thisComplaint.setComplaintId("1234");
-        thisComplaint.setStudentId("abc");
-
-        //TODO implement Fetch data from the view and prepare for the object
+        thisComplaint.setComplaintId("complaint_no_"+Calendar.getInstance().getTime().getTime());
+        thisComplaint.setStudentId(session.getStudentId());
+        thisComplaint.setTimeStamp(Calendar.getInstance().getTime().getTime());
         thisComplaint.setComplaintDomainId(getDomainID());
-        thisComplaint.setComplaintDescription(getDescription());
-        thisComplaint.setComplaintSubDomain(getSubDomain());
-        thisComplaint.setProblemFacingFromDate(getProblemFromDate());
+        thisComplaint.setDescriptions(getDescription());
+        thisComplaint.setOptionalDescription(getOptionalDescription());
         return thisComplaint;
+    }
+
+    private String getOptionalDescription() {
+        return ((EditText)getView(R.id.et_description)).getText().toString();
     }
 
     public void registerComplaint() {
         mPresenter.registerComplaint(getComplaint());
     }
 
+
+
+
     @Override
-    public void onSubDomainLoaded(final ArrayList<String> subDomain) {
-        //If sub domain is present then update the new UI
-        if (subDomain.size() > 0) {
-            setVisible(R.id.tv_problem_text,true);
-            RecyclerView rvSubDomain = findViewById(R.id.rv_subdomain);
-            rvSubDomain.setVisibility(View.VISIBLE);
-            //rvSubDomain.setLayoutManager(new GridLayoutManager(this, 2));
-            SingleCheckBoxAdapter subDomainAdapter = new SingleCheckBoxAdapter(this, R.layout.new_complaint_card, subDomain);
-            subDomainAdapter.setOnItemClickListener(new OnItemClickListener() {
-                @Override
-                public void onItemClick(int position) {
-                    mPresenter.onSubDomainSelected(subDomain.get(position));
-                }
-            });
-            rvSubDomain.setAdapter(subDomainAdapter);
-        } else {
-            setVisible(R.id.rv_subdomain, false);
-            mPresenter.onSubDomainSelected(null);
-        }
+    public void registrationStarted() {
+        Toast.makeText(this,"Please wait..",Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onDescriptionLoaded(ArrayList<String> descriptions) {
-        RecyclerView rvDescription = findViewById(R.id.rv_description);
-        rvDescription.setVisibility(View.VISIBLE);
-        setVisible(R.id.tv_description_title,true);
-        //rvSubDomain.setLayoutManager(new GridLayoutManager(this, 2));
-        SingleCheckBoxAdapter subDomainAdapter = new SingleCheckBoxAdapter(this, R.layout.new_complaint_card, descriptions);
-        subDomainAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                setVisible(R.id.et_description, true);
-            }
-        });
-        rvDescription.setAdapter(subDomainAdapter);
+    public void registrationFailed(String msg) {
+        Toast.makeText(this,"Failed: "+msg,Toast.LENGTH_LONG).show();
     }
 
-    public void registrationStatus(int code) {
-        //TODO show information to the user using some method list toast, snack bar etc.
+    @Override
+    public void registeredSuccessfully() {
+        Toast.makeText(this,"Registered successfully",Toast.LENGTH_LONG).show();
     }
+
+
 
 }
 

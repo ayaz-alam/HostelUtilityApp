@@ -121,6 +121,8 @@
         <activity android:name=".AboutSection" />
         <activity android:name="com.code_base_update.ui.HostelNoticeActivity" />
         <activity android:name=".officials.GeneralNotice" />
+        <activity android:name="com.code_base_update.ui.AboutSection" />
+        <activity android:name="com.code_base_update.ui.GeneralNotice" />
     </application>
 
 </manifest>

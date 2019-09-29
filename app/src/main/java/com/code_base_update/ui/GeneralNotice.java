@@ -1,13 +1,7 @@
-package com.medeveloper.ayaz.hostelutility.officials;
+package com.code_base_update.ui;
 
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -31,10 +25,7 @@ public class GeneralNotice extends BaseActivity {
 
         enableNavigation();
         WebView myWebView = findViewById(R.id.general_notice);
-
         mProgressBar=findViewById(R.id.progress_bar);
-
-
         myWebView.getSettings().setLoadsImagesAutomatically(true);
         myWebView.setWebViewClient(new MyBrowser());
         myWebView.getSettings().setJavaScriptEnabled(true);
@@ -45,7 +36,7 @@ public class GeneralNotice extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_general_notice;
+        return R.layout.activity_general_notice;
     }
 
 

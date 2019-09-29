@@ -21,7 +21,7 @@ public class ComplaintComplaintListActivity extends BaseRecyclerActivity<ICompla
 
     @Override
     public NewComplaintAdapter getAdapter() {
-        return new NewComplaintAdapter(this,R.layout.card_complaint_student,list);
+        return new NewComplaintAdapter(this,R.layout.new_card_diet_off,list);
     }
 
     @Override

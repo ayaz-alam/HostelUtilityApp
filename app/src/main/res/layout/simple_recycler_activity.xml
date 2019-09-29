@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/card_grey_background"
     android:padding="8dp"
     android:layout_height="match_parent">
 
@@ -10,9 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recycler_view"
-        tools:listitem="@layout/card_complaint_student"
+        tools:listitem="@layout/new_card_notice"
         tools:itemCount="10"
-
         />
 
 </LinearLayout>

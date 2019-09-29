@@ -1,6 +1,7 @@
 package com.code_base_update.models;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.code_base_update.DatabaseManager;
 import com.code_base_update.beans.ApplicationBean;
@@ -22,7 +23,7 @@ public class AddApplicatoinModel implements IApplicationPresenter{
     }
 
     @Override
-    public void saveApplication(ApplicationBean application) {
-        new DatabaseManager().saveApplication(iApplicationView,application);
+    public void saveApplication(ApplicationBean application, Context context) {
+        new DatabaseManager(context).saveApplication(iApplicationView,application);
     }
 }

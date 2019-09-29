@@ -28,13 +28,13 @@ public class ComplaintListModel implements IComplaintListPresenter {
     }
 
     @Override
-    public void loadData(Context context) {
+    public void loadData(final Context context) {
         new AsyncTaskLoader<ArrayList<ComplaintBean>>(context){
 
             @Nullable
             @Override
             public ArrayList<ComplaintBean> loadInBackground() {
-              ArrayList<ComplaintBean> list  = new DatabaseManager().loadAllComplaint();
+              ArrayList<ComplaintBean> list  = new DatabaseManager(context).loadAllComplaint();
               iComplaintListView.onListLoaded(list);
               return list;
             }

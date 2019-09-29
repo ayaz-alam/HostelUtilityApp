@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/complaint_array"
-                android:padding="8dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -48,18 +47,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SpinnerCont" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_subdomain"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_subdomain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:chipSpacing="12dp"
             android:layout_marginTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:singleSelection="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_problem_text"
-            app:spanCount="3"
-            tools:itemCount="5"
-            tools:listitem="@layout/new_complaint_card" />
+            />
 
         <TextView
             android:id="@+id/tv_description_title"
@@ -71,20 +69,19 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_subdomain" />
+            app:layout_constraintTop_toBottomOf="@+id/cg_subdomain" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_description"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:singleSelection="true"
             app:layout_constraintTop_toBottomOf="@+id/tv_description_title"
-            app:spanCount="3"
-            tools:itemCount="5"
-            tools:listitem="@layout/new_complaint_card" />
+            />
 
         <EditText
             android:id="@+id/et_description"
@@ -100,7 +97,7 @@
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_description" />
+            app:layout_constraintTop_toBottomOf="@+id/cg_description" />
 
         <ImageView
             android:layout_width="wrap_content"

@@ -11,8 +11,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.medeveloper.ayaz.hostelutility.ChangePassword;
-import com.medeveloper.ayaz.hostelutility.Registration.Registration;
 
 public class LoginModel implements ILoginPresenter {
 
@@ -39,12 +37,12 @@ public class LoginModel implements ILoginPresenter {
 
     @Override
     public void startSignUpActivity(Context mCtx) {
-        mCtx.startActivity(new Intent(mCtx, Registration.class));
+        //TODO mCtx.startActivity(new Intent(mCtx, Registration.class));
     }
 
     @Override
     public void startForgotPassWordActivity(Context mCtx) {
-        mCtx.startActivity(new Intent(mCtx, ChangePassword.class));
+        //TODO mCtx.startActivity(new Intent(mCtx, ChangePassword.class));
     }
 
     @Override

@@ -31,13 +31,13 @@ public class ApplicationListModel implements IApplicationListPresenter {
     }
 
     @Override
-    public void loadData(Context context) {
+    public void loadData(final Context context) {
         new AsyncTaskLoader<ArrayList<ApplicationBean>>(context){
 
             @Nullable
             @Override
             public ArrayList<ApplicationBean> loadInBackground() {
-              ArrayList<ApplicationBean> list  = new DatabaseManager().loadAllApplication();
+              ArrayList<ApplicationBean> list  = new DatabaseManager(context).loadAllApplication();
               iApplicationView.onListLoaded(list);
               return list;
             }
