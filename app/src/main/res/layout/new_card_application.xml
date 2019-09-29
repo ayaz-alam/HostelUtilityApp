@@ -23,11 +23,12 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/tv_heading"
+                    android:id="@+id/tv_head"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:text="Heading"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -38,9 +39,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:text="Date: 1/1/1"
-                    app:layout_constraintBottom_toBottomOf="tv_heading"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_head"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_heading" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_head" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -101,7 +102,7 @@
                 android:paddingRight="30dp"
                 android:text="Withdraw"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="btn_remind"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_remind"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/btn_remind" />
         </androidx.constraintlayout.widget.ConstraintLayout>

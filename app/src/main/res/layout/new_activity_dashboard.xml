@@ -11,7 +11,7 @@
 
         <View
             android:id="@+id/view"
-            android:layout_width="411dp"
+            android:layout_width="match_parent"
             android:layout_height="198dp"
             android:background="@drawable/new_dashboard_bg"
             android:elevation="20dp"
