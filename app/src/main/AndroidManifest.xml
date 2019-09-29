@@ -103,8 +103,7 @@
                   android:windowSoftInputMode="adjustNothing">
 
         </activity>
-        <activity android:name="com.code_base_update.ui.NewLogin"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name="com.code_base_update.ui.NewLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
