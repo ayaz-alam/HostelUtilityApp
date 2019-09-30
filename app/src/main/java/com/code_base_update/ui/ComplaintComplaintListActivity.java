@@ -1,5 +1,6 @@
 package com.code_base_update.ui;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.code_base_update.beans.ComplaintBean;
@@ -29,6 +30,14 @@ public class ComplaintComplaintListActivity extends BaseRecyclerActivity<ICompla
 
     @Override
     public void initViews() {
+        //kamal's code
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        //
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            getSupportActionBar().hide();
         list = new ArrayList<>();
         mPresenter.loadData(this);
         enableNavigation();

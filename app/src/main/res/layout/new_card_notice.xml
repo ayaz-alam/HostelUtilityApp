@@ -19,12 +19,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="6dp">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="match_parent"
+                android:background="@drawable/new_notice_card_title_bg"
                 android:layout_height="match_parent">
 
                 <TextView
@@ -32,8 +32,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
                     android:text="Notice Heading"
+                    android:textColor="#000"
                     android:textStyle="bold"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +44,11 @@
                     android:id="@+id/tv_faculty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:text="by: Faculty"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_notice_title"
                     app:layout_constraintTop_toBottomOf="@+id/tv_notice_title" />
 
@@ -51,6 +58,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:text="Date : 1/1/1"
+                    android:textColor="#000"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_faculty"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_faculty" />
@@ -79,7 +88,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
+                android:padding="15dp"
                 android:text="Body of the Notice Body of the Notice Body of the Notice Body of the Notice Body of the Notice Body of the Notice Body of the Notice Body of the Notice Body of the Notice Body of the Notice"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_notice" />
 
@@ -88,8 +99,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
                 android:text="Read more . . ."
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_notice_body" />
 

@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.code_base_update.SessionManager;
 import com.code_base_update.presenters.IComplaintPresenter;
 import com.google.android.material.chip.ChipGroup;
@@ -36,7 +38,14 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
 
     @Override
     protected void initViewsAndEvents() {
-
+        //kamal's code
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        //
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            getSupportActionBar().hide();
         session = new SessionManager(this);
 
         spDomain = findViewById(R.id.sp_domain);

@@ -24,7 +24,14 @@ public class RegisterApplicationActivity extends BaseActivity<IApplicationView, 
 
     @Override
     protected void initViewsAndEvents() {
-
+        //kamal's code
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        //
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            getSupportActionBar().hide();
         mProgressDialog = new MyDialog().getProgressDialog("Sending..",this);
         getView(R.id.btn_register_application).setOnClickListener(new View.OnClickListener() {
             @Override

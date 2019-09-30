@@ -146,7 +146,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_close_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_call_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -156,9 +156,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_close_back" />
-                            <entry key="sourceFile" value="C:\Users\kamal\Downloads\boy.svg" />
+                            <entry key="outputName" value="ic_new_call" />
+                            <entry key="sourceFile" value="D:\backPc\Downloads\no-food.svg" />
                           </map>
                         </option>
                       </PersistentState>

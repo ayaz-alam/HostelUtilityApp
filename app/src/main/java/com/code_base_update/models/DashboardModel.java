@@ -27,32 +27,32 @@ public class DashboardModel implements IDashPresenter {
 
         DashBoardBean collegeNotice = new DashBoardBean();
         collegeNotice.setTitle("College Notice");
-        collegeNotice.setDrawableId(R.drawable.ic_general_notice);
+        collegeNotice.setDrawableId(R.drawable.ic_new_college_notice);
         list.add(collegeNotice);
 
         DashBoardBean hostelNotice = new DashBoardBean();
         hostelNotice.setTitle("Hostel Notice");
-        hostelNotice.setDrawableId(R.drawable.ic_notice);
+        hostelNotice.setDrawableId(R.drawable.ic_new_notice);
         list.add(hostelNotice);
 
         DashBoardBean complaintActivity = new DashBoardBean();
         complaintActivity.setTitle("Register Complaint");
-        complaintActivity.setDrawableId(R.drawable.ic_complaint);
+        complaintActivity.setDrawableId(R.drawable.ic_new_complaint);
         list.add(complaintActivity);
 
         DashBoardBean complaintListActivity = new DashBoardBean();
-        complaintListActivity.setTitle("Your Complaints");
-        complaintListActivity.setDrawableId(R.drawable.ic_complaint_list);
+        complaintListActivity.setTitle("Your\nComplaints");
+        complaintListActivity.setDrawableId(R.drawable.ic_new_complaint_list);
         list.add(complaintListActivity);
 
         DashBoardBean registerApplication = new DashBoardBean();
         registerApplication.setTitle("Register Application");
-        registerApplication.setDrawableId(R.drawable.ic_diet_off);
+        registerApplication.setDrawableId(R.drawable.ic_new_diet_off);
         list.add(registerApplication);
 
         DashBoardBean applicationList = new DashBoardBean();
-        applicationList.setTitle("Your applications");
-        applicationList.setDrawableId(R.drawable.ic_complaint_list);
+        applicationList.setTitle("Your\napplications");
+        applicationList.setDrawableId(R.drawable.ic_new_application);
         list.add(applicationList);
 
 
