@@ -2,6 +2,7 @@ package com.code_base_update.ui;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.transition.TransitionManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -9,6 +10,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.TransitionOptions;
@@ -69,11 +74,23 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
 
             }
         });
+
         getView(R.id.iv_display_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO @Kamal, make the transition from here
-                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+
+                Intent profileActivity = new Intent(Dashboard.this, ProfileActivity.class);
+
+                Pair[] pairs = new Pair[2];
+                pairs[0] = new Pair<View, String>(getView(R.id.view), "bg_anim");
+                pairs[1] = new Pair<View, String>(getView(R.id.iv_display_image), "profile_anim");
+
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Dashboard.this, pairs);
+                startActivity(profileActivity, optionsCompat.toBundle());
+
+
+//                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
             }
         });
 
@@ -116,6 +133,12 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
 
     @Override
     public void openRegisterApplication() {
+//        Intent applicationActivity = new Intent(Dashboard.this, RegisterApplicationActivity.class);
+//        Pair[] pairs = new Pair[1];
+//        pairs[0] = new Pair<View, String>(getView(R.id.view),"bg_anim");
+//
+//        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Dashboard.this,pairs);
+//        startActivity(applicationActivity, optionsCompat.toBundle());
         startActivity(new Intent(this,RegisterApplicationActivity.class));
     }
 
@@ -135,9 +158,9 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     @Override
     public void userNameLoaded(String name) {
         if(name!=null&&name.length()>0)
-            setText(R.id.tv_welcome,name);
+            setText(R.id.tv_username, name);
         else
-            setText(R.id.tv_welcome,"No name");
+            setText(R.id.tv_username, "Username");
 
     }
 

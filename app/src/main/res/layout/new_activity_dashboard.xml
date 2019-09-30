@@ -13,11 +13,21 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="198dp"
+            android:layout_height="160dp"
             android:background="@drawable/new_dashboard_bg"
-            android:elevation="20dp"
+            android:elevation="6dp"
+            android:transitionName="bg_anim"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,24 +37,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:elevation="20dp"
-            android:text="Welcome"
+            android:elevation="6dp"
+            android:text="Hello,"
             android:textColor="#fff"
             android:textSize="35sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_display_name"
+            android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:elevation="20dp"
+            android:elevation="6dp"
+            android:textSize="22sp"
             android:text="Username"
             android:textColor="#B2FFFFFF"
-            android:textSize="23sp"
+            android:transitionName="user_anim"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <ImageView
             android:id="@+id/iv_display_image"
@@ -53,15 +64,17 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/new_circle"
-            android:elevation="20dp"
+            android:elevation="6dp"
+            android:transitionName="profile_anim"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/tv_dashboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
             android:text="Your Dashboard"
             android:textColor="#000"
             android:textSize="20sp"
@@ -69,16 +82,16 @@
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/recycler_view"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dashboard"
             app:spanCount="2"
             tools:itemCount="9"
             tools:listitem="@layout/new_dashboard_cardui" />

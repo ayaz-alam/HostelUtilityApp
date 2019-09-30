@@ -9,17 +9,44 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:id="@+id/parent"
-        android:layout_height="match_parent"
-        android:padding="25dp">
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/new_dashboard_bg"
+            android:elevation="6dp"
+            android:transitionName="bg_anim"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_complaint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:text="Register complaint"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/SpinnerCont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="25dp"
             android:background="@drawable/new_spinner_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/view">
 
             <Spinner
                 android:id="@+id/sp_domain"
@@ -27,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/complaint_array"
                 android:spinnerMode="dropdown"
+                android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,11 +66,13 @@
             android:id="@+id/tv_problem_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="16dp"
-            android:visibility="invisible"
+            android:layout_marginEnd="25dp"
             android:text="You're facing problem with"
             android:textColor="#000"
             android:textSize="18sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SpinnerCont" />
@@ -51,22 +81,25 @@
             android:id="@+id/cg_subdomain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:chipSpacing="12dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="8dp"
-            app:singleSelection="true"
+            android:layout_marginEnd="25dp"
+            app:chipSpacing="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_problem_text"
-            />
+            app:singleSelection="true" />
 
         <TextView
             android:id="@+id/tv_description_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
             android:text="You're facing problem with"
             android:textColor="#000"
             android:textSize="18sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cg_subdomain" />
@@ -75,19 +108,22 @@
             android:id="@+id/cg_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="25dp"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:singleSelection="true"
             app:layout_constraintTop_toBottomOf="@+id/tv_description_title"
-            />
+            app:singleSelection="true" />
 
         <EditText
             android:id="@+id/et_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="25dp"
             android:background="@drawable/new_spinner_bg"
             android:ems="10"
             android:gravity="start|top"
