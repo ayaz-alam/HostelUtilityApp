@@ -1,9 +1,11 @@
 package com.code_base_update.ui;
 
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.code_base_update.UserManager;
 import com.code_base_update.presenters.IBasePresenter;
 import com.medeveloper.ayaz.hostelutility.R;
 
@@ -24,6 +26,13 @@ public class ProfileActivity extends BaseActivity {
         if(getSupportActionBar()!=null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //            getSupportActionBar().hide();
+
+        getView(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new UserManager().logout();
+            }
+        });
     }
 
     @Override

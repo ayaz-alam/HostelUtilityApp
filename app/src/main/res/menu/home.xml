@@ -2,13 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/about"
-        android:title="About"/>
-    <item android:id="@+id/profile"
-        android:title="Profile"/>
-    <item android:id="@+id/setting"
-        android:title="Setting"/>
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:title="About"
+        app:showAsAction="always" />
+    <!--    <item android:id="@+id/profile"-->
+    <!--        android:title="Profile"/>-->
+    <!--    <item android:id="@+id/setting"-->
+    <!--        android:title="Setting"/>-->
     <item android:id="@+id/logout"
-        android:title="Logout"/>
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="Logout"
+        app:showAsAction="always" />
 
 
 </menu>

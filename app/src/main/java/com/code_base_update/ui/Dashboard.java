@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.app.ActivityOptionsCompat;
@@ -50,6 +51,13 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
 
     @Override
     public void initViews() {
+
+        //kamal's code
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        //
+
         list = new ArrayList<>();
         mPresenter.loadData();
         adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -161,7 +169,6 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
             setText(R.id.tv_username, name);
         else
             setText(R.id.tv_username, "Username");
-
     }
 
     @Override
@@ -175,8 +182,8 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.about:startActivity(new Intent(this, AboutSection.class));break;
-            case R.id.profile:startActivity(new Intent(this,ProfileActivity.class));
-            case R.id.setting:/*TODO implement setting option*/break;
+//            case R.id.profile:startActivity(new Intent(this,ProfileActivity.class));
+//            case R.id.setting:/*TODO implement setting option*/break;
             case R.id.logout:new UserManager().logout();
 
         }

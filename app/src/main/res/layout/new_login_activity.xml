@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
-            app:srcCompat="@drawable/logo_large" />
+            app:srcCompat="@drawable/hostelutilityapp_main_logo" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
