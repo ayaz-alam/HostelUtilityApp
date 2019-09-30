@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,12 +63,26 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
                     case 4:openRegisterApplication();break;
 
                     case 5:openRegisterApplicationList();break;
+                    //TODO implement it in adapter
+                    case 6:openAboutSection();break;
                 }
 
             }
         });
+        getView(R.id.iv_display_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO @Kamal, make the transition from here
+                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+            }
+        });
+
         mPresenter.loadUserImageUrl();
         mPresenter.loadUserName();
+    }
+
+    private void openAboutSection() {
+        startActivity(new Intent(this,AboutSection.class));
     }
 
     private void openHostelNotice() {
