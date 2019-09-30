@@ -1,5 +1,6 @@
 package com.code_base_update.ui;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
 
     @Override
     public void initViews() {
+
         mPresenter.loadNotice();
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

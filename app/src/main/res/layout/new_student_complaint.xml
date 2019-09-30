@@ -14,7 +14,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:background="@drawable/new_dashboard_bg"
             android:elevation="6dp"
             android:transitionName="bg_anim"
