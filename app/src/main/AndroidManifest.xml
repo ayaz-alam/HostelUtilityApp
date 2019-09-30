@@ -60,6 +60,7 @@
         <activity android:name="com.code_base_update.ui.ProfileActivity" />
         <activity android:name="com.code_base_update.ui.AboutSection" />
         <activity android:name="com.code_base_update.ui.HostelNoticeActivity" />
+        <activity android:name="com.code_base_update.ui.GeneralNotice" />
     </application>
 
 </manifest>
