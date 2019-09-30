@@ -67,4 +67,8 @@ public class UserManager {
 
 
     }
+
+    public void logout() {
+        //TODO codes for logging the user out
+    }
 }

@@ -12,7 +12,7 @@
 
         <View
             android:id="@+id/view"
-            android:layout_width="411dp"
+            android:layout_width="match_parent"
             android:layout_height="198dp"
             android:background="@drawable/new_dashboard_bg"
             android:elevation="20dp"
@@ -71,14 +71,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/recycler_view"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintEnd_toEndOf="@id/textView20"
-            app:layout_constraintStart_toStartOf="@id/textView20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView20"
-            app:spanCount="3"
+            app:spanCount="2"
             tools:itemCount="9"
             tools:listitem="@layout/new_dashboard_cardui" />
 

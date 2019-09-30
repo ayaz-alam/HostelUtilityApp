@@ -18,13 +18,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
+        <ImageView
             android:id="@+id/circle_profile"
             android:layout_width="140dp"
             android:layout_height="140dp"
+            android:padding="12dp"
             android:layout_marginTop="100dp"
             android:background="@drawable/new_circle"
             android:elevation="20dp"
+            android:src="@drawable/man"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent" />
@@ -104,6 +106,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:textStyle="bold"
                         android:text="Contact Information"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -171,6 +174,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:textStyle="bold"
                         android:text="Personal Information"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -241,6 +245,7 @@
                     <TextView
                         android:id="@+id/tv_college"
                         android:layout_width="wrap_content"
+                        android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="College Information"
@@ -304,9 +309,9 @@
                     android:id="@+id/tv_guardian"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Local Guardian Name "
-                    app:layout_constraintStart_toStartOf="@+id/tv_address"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+                    android:text="Local Guardian Name"
+                    app:layout_constraintStart_toStartOf="@+id/tv_perma_address"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_perma_address" />
 
                 <TextView
                     android:id="@+id/tv_guardian_name"

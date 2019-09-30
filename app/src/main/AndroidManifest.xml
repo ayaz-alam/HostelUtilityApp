@@ -28,7 +28,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
-        <activity android:name=".MobileNumberVerification"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -40,64 +39,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity
-            android:name=".Splash"
-            android:theme="@style/Splash">
-
-        </activity>
-        <activity
-            android:name=".student.Home"
-            android:label="@string/title_activity_home"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".officials.OfficialsHome"
-            android:label="@string/title_activity_officials_home"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".LoginAcitivity"
-            android:label="Login"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".student.StudentForm"
-            android:label="Register"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".officials.OfficialsForm"
-            android:label="Register"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ChangePassword"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Translucent" />
-        <activity
-            android:name=".student.PhotoViewer"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Translucent" />
-        <activity android:name=".Noticaiton" />
-
-        <service
-            android:name=".MyNotificationService"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <service
-            android:name=".MyService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":romote">
-            <intent-filter>
-                <action android:name="com.medeveloper.ayaz.hostelutility.MyService" />
-            </intent-filter>
-        </service>
-
-        <receiver android:name=".StartFirebaseAtBoot">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <activity android:name=".Registration.Registration" />
         <activity android:name="com.code_base_update.ui.BaseActivity"/>
         <activity android:name="com.code_base_update.ui.ComplaintActivity"
                   android:windowSoftInputMode="adjustNothing">
@@ -116,6 +57,9 @@
         <activity android:name="com.code_base_update.ui.RegisterApplicationActivity" />
         <activity android:name="com.code_base_update.ui.Dashboard" />
         <activity android:name="com.code_base_update.ui.ApplicationListActivity" />
+        <activity android:name="com.code_base_update.ui.ProfileActivity" />
+        <activity android:name="com.code_base_update.ui.AboutSection" />
+        <activity android:name="com.code_base_update.ui.HostelNoticeActivity" />
     </application>
 
 </manifest>

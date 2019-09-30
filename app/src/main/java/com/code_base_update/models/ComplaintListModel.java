@@ -29,8 +29,7 @@ public class ComplaintListModel implements IComplaintListPresenter {
 
     @Override
     public void loadData(final Context context) {
-        new AsyncTaskLoader<ArrayList<ComplaintBean>>(context){
-
+        AsyncTaskLoader<ArrayList<ComplaintBean>> loader = new AsyncTaskLoader<ArrayList<ComplaintBean>>(context){
             @Nullable
             @Override
             public ArrayList<ComplaintBean> loadInBackground() {
@@ -40,6 +39,7 @@ public class ComplaintListModel implements IComplaintListPresenter {
             }
 
         };
+        loader.loadInBackground();
 
     }
 }

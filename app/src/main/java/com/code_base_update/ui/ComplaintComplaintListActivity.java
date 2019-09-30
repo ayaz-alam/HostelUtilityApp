@@ -1,5 +1,6 @@
 package com.code_base_update.ui;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.models.ComplaintListModel;
@@ -12,16 +13,18 @@ import java.util.ArrayList;
 
 public class ComplaintComplaintListActivity extends BaseRecyclerActivity<IComplaintListView, IComplaintListPresenter,NewComplaintAdapter> implements IComplaintListView {
 
-    private ArrayList<ComplaintBean> list;
+    private ArrayList<ComplaintBean> list=new ArrayList<>();
 
     @Override
     public RecyclerView getRecyclerView() {
-        return (RecyclerView)getView(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        return recyclerView;
     }
 
     @Override
     public NewComplaintAdapter getAdapter() {
-        return new NewComplaintAdapter(this,R.layout.new_card_diet_off,list);
+        return new NewComplaintAdapter(this,R.layout.new_complaint_card,list);
     }
 
     @Override

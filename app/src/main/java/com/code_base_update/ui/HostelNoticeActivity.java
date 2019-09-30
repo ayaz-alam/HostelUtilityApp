@@ -1,5 +1,6 @@
 package com.code_base_update.ui;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.code_base_update.beans.HostelNoticeBean;
@@ -16,7 +17,7 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
 
     @Override
     public HostelNoticeAdapter getAdapter(){
-        return new HostelNoticeAdapter(this, R.layout.card_notice,new ArrayList<HostelNoticeBean>());
+        return new HostelNoticeAdapter(this, R.layout.new_card_notice,new ArrayList<HostelNoticeBean>());
     }
 
     @Override
@@ -39,7 +40,9 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
 
     @Override
     public RecyclerView getRecyclerView() {
-        return (RecyclerView)findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        return recyclerView;
     }
 
 

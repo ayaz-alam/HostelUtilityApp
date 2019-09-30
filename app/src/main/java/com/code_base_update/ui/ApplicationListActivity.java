@@ -1,5 +1,6 @@
 package com.code_base_update.ui;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.code_base_update.beans.ApplicationBean;
@@ -17,12 +18,14 @@ public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationLi
     private ArrayList<ApplicationBean> list;
     @Override
     public RecyclerView getRecyclerView() {
-        return (RecyclerView)getView(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        return recyclerView;
     }
 
     @Override
     public ApplicationListAdapter getAdapter() {
-        return new ApplicationListAdapter(this, R.layout.card_diet_off,list);
+        return new ApplicationListAdapter(this, R.layout.new_card_application,list);
     }
 
     @Override

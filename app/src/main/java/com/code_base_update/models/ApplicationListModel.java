@@ -42,7 +42,7 @@ public class ApplicationListModel implements IApplicationListPresenter {
               return list;
             }
 
-        };
+        }.loadInBackground();
 
     }
 

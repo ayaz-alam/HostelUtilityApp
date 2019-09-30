@@ -36,9 +36,14 @@ public class DatabaseManager {
     }
 
     public ArrayList<ComplaintBean> loadAllComplaint() {
-
+        ArrayList<ComplaintBean> list =new ArrayList<>();
+        for(int i=0;i<10;i++){
+            ComplaintBean comp = new ComplaintBean();
+            comp.setComplaintId("id_"+i);
+            list.add(comp);
+        }
         //TODO how to fetch data from mDatabase
-        return new ArrayList<>();
+        return list;
 
     }
 
@@ -53,7 +58,11 @@ public class DatabaseManager {
     }
 
     public ArrayList<ApplicationBean> loadAllApplication() {
-        return new ArrayList<>();
+        ArrayList<ApplicationBean> list = new ArrayList<>();
+        for(int i=0;i<10;i++){
+            list.add(new ApplicationBean(i));
+        }
+        return list;
     }
 
     public void registerComplaint(final SuccessCallback successCallback, ComplaintBean complaintToRegister) {

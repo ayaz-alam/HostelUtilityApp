@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.TransitionOptions;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.code_base_update.UserManager;
 import com.code_base_update.beans.DashBoardBean;
 import com.code_base_update.interfaces.OnItemClickListener;
 import com.code_base_update.models.DashboardModel;
@@ -136,7 +137,9 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.about:startActivity(new Intent(this, AboutSection.class));break;
-            case R.id.setting:break;
+            case R.id.profile:startActivity(new Intent(this,ProfileActivity.class));
+            case R.id.setting:/*TODO implement setting option*/break;
+            case R.id.logout:new UserManager().logout();
 
         }
         return super.onOptionsItemSelected(item);

@@ -12,8 +12,11 @@ public class HostelNoticeModel implements IHostelNoticePresenter {
 
     @Override
     public void loadNotice() {
-        //TODO load notice from the database and return to the view
-        view.onNoticeLoaded(new ArrayList<HostelNoticeBean>());
+        ArrayList<HostelNoticeBean> list = new ArrayList<>();
+        for(int i=0;i<20;i++){
+            list.add(new HostelNoticeBean("Notice_no_"+i));
+        }
+        view.onNoticeLoaded(list);
     }
 
     @Override
