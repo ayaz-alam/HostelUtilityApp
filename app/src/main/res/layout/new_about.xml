@@ -139,7 +139,7 @@
                         android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="10dp"
                         android:text="Project Supervissor"
                         android:textColor="@color/white"
@@ -151,27 +151,32 @@
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
                         android:alpha="0.8"
                         android:text="Dr. Vikramaditya Dave"
                         android:textColor="@color/white"
                         android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView10"
                         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
                     <TextView
                         android:id="@+id/textView12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
                         android:layout_marginBottom="10dp"
                         android:alpha="0.8"
                         android:text="(Asst. Professor, EE, CTAE )"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                        app:layout_constraintStart_toStartOf="@+id/textView10"
+                        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_begin="67dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

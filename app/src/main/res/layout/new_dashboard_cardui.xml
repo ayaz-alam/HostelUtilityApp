@@ -53,7 +53,7 @@
                     android:lineHeight="18sp"
                     android:text="menu\nkamal"
                     android:textAlignment="center"
-                    android:textColor="#000"
+                    android:textColor="@color/black_dark"
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

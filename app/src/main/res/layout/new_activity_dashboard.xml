@@ -48,13 +48,12 @@
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:elevation="6dp"
-            android:textSize="22sp"
             android:text="Username"
             android:textColor="#B2FFFFFF"
+            android:textSize="22sp"
             android:transitionName="user_anim"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_welcome"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <ImageView
@@ -76,7 +75,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
             android:text="Your Dashboard"
-            android:textColor="#000"
+            android:textColor="@color/black_dark"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -89,11 +88,13 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:overScrollMode="never"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_dashboard"
             app:spanCount="2"
-            tools:itemCount="9"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:itemCount="4"
             tools:listitem="@layout/new_dashboard_cardui" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -101,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="97dp" />
+            app:layout_constraintGuide_begin="100dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
