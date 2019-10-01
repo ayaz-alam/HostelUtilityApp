@@ -49,7 +49,7 @@ public class ForgotPasswordDialog extends Dialog implements IForgotPasswordView 
                 else if (!InputHelper.verifyEMail(email))
                     ((TextInputLayout) findViewById(R.id.textInputLayout)).setError("Invalid email");
                 else
-                    mPresenter.instantiateProcess(etEmailText.getText().toString());
+                    mPresenter.instantiateProcess(email);
             }
         });
     }

@@ -4,14 +4,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import androidx.appcompat.widget.Toolbar;
-
-import com.code_base_update.SessionManager;
 import com.code_base_update.presenters.IComplaintPresenter;
 import com.google.android.material.chip.ChipGroup;
 import com.medeveloper.ayaz.hostelutility.R;
@@ -24,7 +19,7 @@ import com.code_base_update.view.IComplaintView;
 import com.code_base_update.models.ComplaintModel;
 import com.robertlevonyan.views.chip.Chip;
 
-public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPresenter> implements IComplaintView {
+public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPresenter> implements IComplaintView {
 
     private ChipGroup cgSubdomain;
     private Spinner spDomain;
@@ -78,13 +73,13 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
     @Override
     public void onDomainLoaded(ArrayList<String> domain) {
         spDomain.setEnabled(true);
-        ArrayAdapter adapter= new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,domain);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, domain);
         spDomain.setAdapter(adapter);
     }
 
     @Override
     public void domainLoadError(String msg) {
-        Toast.makeText(this,"Error: "+msg,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Error: " + msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -93,11 +88,11 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
         //TODO This chip thing is not working
         cgSubdomain = findViewById(R.id.cg_subdomain);
         cgSubdomain.setSingleSelection(true);
-        int i=10001;
+        int i = 10001;
         cgSubdomain.clearCheck();
-        setVisible(R.id.tv_problem_text,true);
-        for(String description: subDomain){
-            Chip chip = (Chip)LayoutInflater.from(this).inflate(R.layout.chip,null);
+        setVisible(R.id.tv_problem_text, true);
+        for (String description : subDomain) {
+            Chip chip = (Chip) LayoutInflater.from(this).inflate(R.layout.chip, null);
             chip.setText(description);
             chip.setId(i++);
             chip.setClickable(true);
@@ -105,9 +100,10 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
         }
 
     }
+
     @Override
     public void subdomainLoadError(String msg) {
-        Toast.makeText(this,"Error: "+msg,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Error: " + msg, Toast.LENGTH_LONG).show();
     }
 
     private void onDomainSpinnerClicked(String domain) {
@@ -115,24 +111,24 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
     }
 
     public String getDomainID() {
-        int position = ((Spinner)getView(R.id.sp_domain)).getSelectedItemPosition();
-        if(position==0){
+        int position = ((Spinner) getView(R.id.sp_domain)).getSelectedItemPosition();
+        if (position == 0) {
             showError();
-        }else{
-            return ((Spinner)getView(R.id.sp_domain)).getSelectedItem().toString();
+        } else {
+            return ((Spinner) getView(R.id.sp_domain)).getSelectedItem().toString();
         }
         return null;
     }
 
     private void showError() {
-        Toast.makeText(this,"Please select a problem",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Please select a problem", Toast.LENGTH_LONG).show();
     }
 
     public ArrayList<String> getDescription() {
-        ArrayList<String> list =new ArrayList<>();
-        for(int i = 0; i< cgSubdomain.getChildCount(); i++){
-            Chip chip =(Chip) cgSubdomain.getChildAt(i);
-            if(chip!=null&&chip.isSelected())
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < cgSubdomain.getChildCount(); i++) {
+            Chip chip = (Chip) cgSubdomain.getChildAt(i);
+            if (chip != null && chip.isSelected())
                 list.add(chip.getText().toString());
         }
         return list;
@@ -141,7 +137,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
     public ComplaintBean getComplaint() {
 
         ComplaintBean thisComplaint = new ComplaintBean();
-        thisComplaint.setComplaintId("complaint_no_"+Calendar.getInstance().getTime().getTime());
+        thisComplaint.setComplaintId("complaint_no_" + Calendar.getInstance().getTime().getTime());
         thisComplaint.setStudentId(getSession().getStudentId());
         thisComplaint.setTimeStamp(Calendar.getInstance().getTime().getTime());
         thisComplaint.setComplaintDomainId(getDomainID());
@@ -151,7 +147,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
     }
 
     private String getOptionalDescription() {
-        return ((EditText)getView(R.id.et_description)).getText().toString();
+        return ((EditText) getView(R.id.et_description)).getText().toString();
     }
 
     public void registerComplaint() {
@@ -159,23 +155,20 @@ public class ComplaintActivity extends BaseActivity<IComplaintView,IComplaintPre
     }
 
 
-
-
     @Override
     public void registrationStarted() {
-        Toast.makeText(this,"Please wait..",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Please wait..", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void registrationFailed(String msg) {
-        Toast.makeText(this,"Failed: "+msg,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Failed: " + msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void registeredSuccessfully() {
-        Toast.makeText(this,"Registered successfully",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Registered successfully", Toast.LENGTH_LONG).show();
     }
-
 
 
 }
