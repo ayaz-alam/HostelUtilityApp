@@ -14,6 +14,8 @@ public class AboutSection extends BaseActivity{
 
         setupToolbar("");
         enableNavigation();
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_back);
     }
 
     @Override

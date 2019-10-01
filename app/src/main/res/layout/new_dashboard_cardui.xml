@@ -34,7 +34,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_complaint_list" />
+                app:srcCompat="@drawable/ic_new_complaint_list" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/c1"

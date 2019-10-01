@@ -44,7 +44,6 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     public void initViews() {
 
         setupToolbar("");
-        enableNavigation();
         list = new ArrayList<>();
         mPresenter.loadData();
         adapter.setOnItemClickListener(new OnItemClickListener() {
