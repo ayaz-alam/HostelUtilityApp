@@ -23,14 +23,8 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
 
     @Override
     public void initViews() {
-        //kamal's code
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        //
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            getSupportActionBar().hide();
+        setupToolbar("");
+        enableNavigation();
         mPresenter.loadNotice();
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

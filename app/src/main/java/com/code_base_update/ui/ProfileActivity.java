@@ -20,15 +20,10 @@ public class ProfileActivity extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
 
-        //kamal's code
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        //
+        setupToolbar("");
+        enableNavigation();
         if(getSupportActionBar()!=null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            getSupportActionBar().hide();
-
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_back);
         getView(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

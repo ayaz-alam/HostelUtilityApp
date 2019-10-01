@@ -2,22 +2,13 @@ package com.code_base_update.ui;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.transition.TransitionManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.TransitionOptions;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.code_base_update.UserManager;
 import com.code_base_update.beans.DashBoardBean;
@@ -52,12 +43,8 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     @Override
     public void initViews() {
 
-        //kamal's code
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        //
-
+        setupToolbar("");
+        enableNavigation();
         list = new ArrayList<>();
         mPresenter.loadData();
         adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -76,8 +63,6 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
                     case 4:openRegisterApplication();break;
 
                     case 5:openRegisterApplicationList();break;
-                    //TODO implement it in adapter
-                    case 6:openAboutSection();break;
                 }
 
             }
@@ -86,19 +71,13 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
         getView(R.id.iv_display_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO @Kamal, make the transition from here
 
                 Intent profileActivity = new Intent(Dashboard.this, ProfileActivity.class);
-
                 Pair[] pairs = new Pair[2];
-                pairs[0] = new Pair<View, String>(getView(R.id.view), "bg_anim");
-                pairs[1] = new Pair<View, String>(getView(R.id.iv_display_image), "profile_anim");
-
+                pairs[0] = new Pair<>(getView(R.id.view), "bg_anim");
+                pairs[1] = new Pair<>(getView(R.id.iv_display_image), "profile_anim");
                 ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Dashboard.this, pairs);
                 startActivity(profileActivity, optionsCompat.toBundle());
-
-
-//                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
             }
         });
 
@@ -141,12 +120,6 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
 
     @Override
     public void openRegisterApplication() {
-//        Intent applicationActivity = new Intent(Dashboard.this, RegisterApplicationActivity.class);
-//        Pair[] pairs = new Pair[1];
-//        pairs[0] = new Pair<View, String>(getView(R.id.view),"bg_anim");
-//
-//        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Dashboard.this,pairs);
-//        startActivity(applicationActivity, optionsCompat.toBundle());
         startActivity(new Intent(this,RegisterApplicationActivity.class));
     }
 
@@ -181,9 +154,7 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.about:startActivity(new Intent(this, AboutSection.class));break;
-//            case R.id.profile:startActivity(new Intent(this,ProfileActivity.class));
-//            case R.id.setting:/*TODO implement setting option*/break;
+            case R.id.about:openAboutSection();break;
             case R.id.logout:new UserManager().logout();
 
         }

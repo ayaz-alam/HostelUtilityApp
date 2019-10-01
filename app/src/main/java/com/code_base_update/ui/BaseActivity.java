@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.code_base_update.SessionManager;
 import com.code_base_update.ui.view_managers.IImageManager;
 import com.code_base_update.ui.view_managers.ITextManager;
 import com.code_base_update.ui.view_managers.ViewManager;
@@ -26,6 +29,7 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
     private ViewManager viewManager;
     public P mPresenter;
     private SparseArray<View> viewHashMap;
+    private SessionManager session;
 
     protected abstract P createPresenter();
 
@@ -45,6 +49,21 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
             mPresenter.attachView((V) this);
         }
         initViewsAndEvents();
+    }
+
+    public SessionManager getSession(){
+        if(session==null){
+            session =new SessionManager(this);
+        }
+        return session;
+    }
+
+    public void setupToolbar(String title){
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        if(toolbar!=null) {
+            toolbar.setTitle("");
+            setSupportActionBar(toolbar);
+        }
     }
 
     private View getParentView() {
@@ -128,6 +147,11 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==android.R.id.home) finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setError(int resId,String error){
+        ((EditText)getView(resId)).setError(error);
+        getView(resId).requestFocus();
     }
 
 }

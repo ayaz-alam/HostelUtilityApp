@@ -3,7 +3,7 @@ package com.code_base_update.ui;
 import com.code_base_update.presenters.IBasePresenter;
 import com.medeveloper.ayaz.hostelutility.R;
 
-public class AboutSection extends BaseActivity{
+public class RegistrationActivity extends BaseActivity {
     @Override
     protected IBasePresenter createPresenter() {
         return null;
@@ -12,13 +12,10 @@ public class AboutSection extends BaseActivity{
     @Override
     protected void initViewsAndEvents() {
 
-        setupToolbar("");
-        enableNavigation();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.new_about;
+        return R.layout.new_registration_activity;
     }
-
 }

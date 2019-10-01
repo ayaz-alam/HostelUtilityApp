@@ -14,7 +14,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="@dimen/action_bar_width"
             android:background="@drawable/new_dashboard_bg"
             android:elevation="6dp"
             android:transitionName="bg_anim"
@@ -41,7 +41,7 @@
             android:elevation="6dp"
             android:text="Register complaint"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textSize="@dimen/action_bar_text_size"
             app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="25dp"
             android:text="You're facing problem with"
             android:textColor="#000"
@@ -93,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="25dp"
             app:chipSpacing="12dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,39 +101,13 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_problem_text"
             app:singleSelection="true" />
 
-        <TextView
-            android:id="@+id/tv_description_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:text="You're facing problem with"
-            android:textColor="#000"
-            android:textSize="18sp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cg_subdomain" />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/cg_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="25dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description_title"
-            app:singleSelection="true" />
 
         <EditText
             android:id="@+id/et_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="25dp"
             android:background="@drawable/new_spinner_bg"
             android:ems="10"
@@ -144,7 +118,7 @@
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cg_description" />
+            app:layout_constraintTop_toBottomOf="@+id/cg_subdomain" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -160,7 +134,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/new_submit_btn"
             android:paddingLeft="100dp"
             android:paddingRight="100dp"

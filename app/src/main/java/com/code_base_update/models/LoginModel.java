@@ -6,6 +6,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 
 import com.code_base_update.presenters.ILoginPresenter;
+import com.code_base_update.ui.RegistrationActivity;
 import com.code_base_update.view.ILoginView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,7 +38,7 @@ public class LoginModel implements ILoginPresenter {
 
     @Override
     public void startSignUpActivity(Context mCtx) {
-        //TODO mCtx.startActivity(new Intent(mCtx, Registration.class));
+        mCtx.startActivity(new Intent(mCtx, RegistrationActivity.class));
     }
 
     @Override

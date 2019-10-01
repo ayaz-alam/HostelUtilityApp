@@ -2,7 +2,7 @@ package com.code_base_update.beans;
 
 public class ApplicationBean {
 
-    private int applicationId;
+    private long applicationId;
     private String applicationDomain;
     private String subject;
     private String description;
@@ -10,8 +10,9 @@ public class ApplicationBean {
     private boolean isAccepted;
     private long acceptedOn;
     private String optionalDescription;
+    private String studentId;
 
-    public ApplicationBean(int applicationId) {
+    public ApplicationBean(long applicationId) {
         this.applicationId = applicationId;
     }
 
@@ -69,5 +70,21 @@ public class ApplicationBean {
 
     public void setOptionalDescription(String optionalDescription) {
         this.optionalDescription = optionalDescription;
+    }
+
+    public long getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(long applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 }

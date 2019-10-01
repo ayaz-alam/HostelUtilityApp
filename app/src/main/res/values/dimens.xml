@@ -35,4 +35,6 @@
     <dimen name="card_body_12sp">12sp</dimen>
     <dimen name="profile_icons_size">32dp</dimen>
     <dimen name="reg_et_height">60dp</dimen>
+    <dimen name="action_bar_width">60dp</dimen>
+    <dimen name="action_bar_text_size">22sp</dimen>
 </resources>

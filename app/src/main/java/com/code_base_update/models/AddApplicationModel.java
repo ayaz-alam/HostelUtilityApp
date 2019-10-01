@@ -8,7 +8,7 @@ import com.code_base_update.beans.ApplicationBean;
 import com.code_base_update.presenters.IApplicationPresenter;
 import com.code_base_update.view.IApplicationView;
 
-public class AddApplicatoinModel implements IApplicationPresenter{
+public class AddApplicationModel implements IApplicationPresenter{
 
     private IApplicationView iApplicationView;
 

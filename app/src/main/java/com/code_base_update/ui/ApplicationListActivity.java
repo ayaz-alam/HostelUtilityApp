@@ -9,7 +9,6 @@ import com.code_base_update.models.ApplicationListModel;
 import com.code_base_update.presenters.IApplicationListPresenter;
 import com.code_base_update.ui.adapters.ApplicationListAdapter;
 import com.code_base_update.view.IApplicationListView;
-import com.code_base_update.view.IApplicationView;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
@@ -31,14 +30,8 @@ public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationLi
 
     @Override
     public void initViews() {
-        //kamal's code
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        //
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            getSupportActionBar().hide();
+        setupToolbar("");
+        enableNavigation();
         list = new ArrayList<>();
         mPresenter.loadData(this);
         enableNavigation();

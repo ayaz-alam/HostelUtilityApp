@@ -9,10 +9,10 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="@drawable/new_dashboard_bg"
         android:elevation="6dp"
-        android:transitionName="bg_anim"
+        android:transitionName="bgq_anim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
         android:elevation="6dp"
         android:text="Notice"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="@dimen/action_bar_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

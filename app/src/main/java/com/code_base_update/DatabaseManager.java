@@ -22,6 +22,7 @@ public class DatabaseManager {
 
     private static final String COMPLAINT_FOLDER = "Complaints";
     private static final String COMPLAINT_TYPES = "ComplaintList";
+    private static final String APPLICATION_FOLDER = "Applications";
     private DatabaseReference mDatabase;
     private SessionManager session;
 
@@ -33,6 +34,8 @@ public class DatabaseManager {
 
     private void prepareOfflineAccessLocations(){
         getBaseRef().child(COMPLAINT_TYPES).keepSynced(true);
+        mDatabase.child(DatabaseManager.APPLICATION_FOLDER).keepSynced(true);
+        mDatabase.child(DatabaseManager.COMPLAINT_FOLDER).keepSynced(true);
     }
 
     public ArrayList<ComplaintBean> loadAllComplaint() {
@@ -47,14 +50,17 @@ public class DatabaseManager {
 
     }
 
-    public void saveApplication(SuccessCallback callback, ApplicationBean applicationToSave) {
+    public void saveApplication(final SuccessCallback callback, ApplicationBean applicationToSave) {
         callback.onInitiated();
-        boolean success =true;
-        //TODO save to mDatabase
-        if(success)
-            callback.onSuccess();
-        else callback.onFailure("Failed");
+        mDatabase.child(DatabaseManager.APPLICATION_FOLDER).child(applicationToSave.getApplicationId()+"").
+                setValue(applicationToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) callback.onSuccess();
+                else callback.onFailure(task.getException().getLocalizedMessage());
 
+            }
+        });
     }
 
     public ArrayList<ApplicationBean> loadAllApplication() {
