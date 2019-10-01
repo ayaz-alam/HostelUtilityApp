@@ -51,7 +51,6 @@ public class ProfileActivity extends BaseActivity {
                 onBackPressed();
                 return true;
             case android.R.id.edit:
-                //TODO add function to this menu button
                 return true;
         }
 

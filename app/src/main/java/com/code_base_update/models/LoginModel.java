@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.code_base_update.presenters.ILoginPresenter;
 import com.code_base_update.ui.RegistrationActivity;
+import com.code_base_update.ui.dialogs.ForgotPasswordDialog;
 import com.code_base_update.view.ILoginView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,8 +43,9 @@ public class LoginModel implements ILoginPresenter {
     }
 
     @Override
-    public void startForgotPassWordActivity(Context mCtx) {
-        //TODO mCtx.startActivity(new Intent(mCtx, ChangePassword.class));
+    public void startForgotPassWordDialog(Context mCtx) {
+        ForgotPasswordDialog dialog = new ForgotPasswordDialog(mCtx);
+        dialog.show();
     }
 
     @Override

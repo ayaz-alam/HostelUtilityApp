@@ -79,7 +79,7 @@ public class NewLogin extends BaseActivity<ILoginView, ILoginPresenter> implemen
         getView(R.id.btn_forgot_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.startForgotPassWordActivity(mCtx);
+                mPresenter.startForgotPassWordDialog(mCtx);
             }
         });
 
