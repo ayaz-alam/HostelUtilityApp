@@ -45,7 +45,7 @@
 
         </activity>
         <activity android:name="com.code_base_update.ui.NewLogin"
-                  android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

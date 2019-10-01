@@ -20,8 +20,9 @@
 
     </style>
 
-    <style name="Login" parent="AppTheme.NoActionBar">
-
+    <style name="Login" parent="AppTheme">
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:navigationBarColor">@color/colorAccent</item>
     </style>
 
     <style name="Theme.Transparent" parent="Theme.AppCompat.Light">
