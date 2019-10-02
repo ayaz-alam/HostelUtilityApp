@@ -34,13 +34,39 @@
             android:layout_height="140dp"
             android:layout_marginTop="100dp"
             android:background="@drawable/new_circle"
-            android:elevation="20dp"
             android:padding="8dp"
-            android:src="@drawable/ic_undraw_male_avatar"
             android:transitionName="profile_anim"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_undraw_male_avatar" />
+
+        <ImageView
+            android:id="@+id/iv_edit_photo"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            android:background="@drawable/new_circle_bg"
+            android:padding="10dp"
+            android:tint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_display_image"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintStart_toStartOf="@+id/edit_pencil_guide_vert"
+            app:layout_constraintTop_toTopOf="@+id/edit_pencil_guide_horizon"
+            app:srcCompat="@drawable/ic_edit" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/edit_pencil_guide_vert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="232dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/edit_pencil_guide_horizon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="202dp" />
 
         <TextView
             android:id="@+id/tv_username"
@@ -441,10 +467,10 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
             android:drawableLeft="@drawable/ic_exit_to_app"
             android:drawablePadding="5dp"
             android:drawableTint="@color/grey"
+            android:text="Logout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

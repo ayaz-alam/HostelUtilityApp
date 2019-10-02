@@ -65,12 +65,12 @@
             android:background="@drawable/new_circle"
             android:elevation="6dp"
             android:padding="8dp"
-            android:src="@drawable/ic_undraw_male_avatar"
             android:transitionName="profile_anim"
             app:layout_constraintBottom_toBottomOf="@+id/tv_username"
             app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:srcCompat="@drawable/ic_undraw_male_avatar" />
 
         <TextView
             android:id="@+id/tv_dashboard"
@@ -91,13 +91,13 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_dashboard"
             app:spanCount="2"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:itemCount="4"
             tools:listitem="@layout/new_dashboard_cardui" />
 
