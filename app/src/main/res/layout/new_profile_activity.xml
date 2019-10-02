@@ -16,6 +16,7 @@
             android:background="@drawable/new_dashboard_bg"
             android:transitionName="bg_anim"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,14 +60,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="232dp" />
+            app:layout_constraintGuide_percent="0.57" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/edit_pencil_guide_horizon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="202dp" />
+            app:layout_constraintGuide_percent="0.168" />
 
         <TextView
             android:id="@+id/tv_username"

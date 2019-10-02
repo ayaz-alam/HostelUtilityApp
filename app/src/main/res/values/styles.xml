@@ -10,8 +10,9 @@
     </style>
 
     <style name="Splash" parent="AppTheme" >
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:windowBackground">@drawable/pre_splash</item>
+        <item name="android:windowBackground">@drawable/new_splash</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:navigationBarColor">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
