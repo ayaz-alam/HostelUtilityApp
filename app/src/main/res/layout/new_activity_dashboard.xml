@@ -36,7 +36,7 @@
             android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="32dp"
             android:elevation="6dp"
             android:text="Hello,"
             android:textColor="#fff"
@@ -58,13 +58,17 @@
 
         <ImageView
             android:id="@+id/iv_display_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="75dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/new_circle"
             android:elevation="6dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_undraw_male_avatar"
             android:transitionName="profile_anim"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_username"
+            app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 

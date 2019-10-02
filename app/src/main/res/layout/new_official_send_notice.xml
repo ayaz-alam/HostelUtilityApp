@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:padding="50dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_undraw_uploading" />
+
+    <TextView
+        android:id="@+id/tv_upload_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:alpha="0.5"
+        android:gravity="center"
+        android:text="You can send text notice and can also click a photo or select from gallery"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="321dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/et_notice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Type notice/subject/title here"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_notice_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Type title description"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/et_notice"
+                app:layout_constraintStart_toStartOf="@+id/et_notice"
+                app:layout_constraintTop_toBottomOf="@+id/et_notice" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Upload Photo/Image"
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/et_notice_desc"
+                app:layout_constraintTop_toBottomOf="@+id/et_notice_desc" />
+
+            <ImageView
+                android:id="@+id/img_rotate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="55dp"
+                android:tint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="@+id/textView24"
+                app:layout_constraintEnd_toStartOf="@+id/img_gallery"
+                app:layout_constraintTop_toTopOf="@+id/textView24"
+                app:srcCompat="@drawable/ic_rotate_right" />
+
+            <ImageView
+                android:id="@+id/img_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:tint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="@+id/img_rotate"
+                app:layout_constraintEnd_toStartOf="@+id/img_gallery"
+                app:layout_constraintTop_toTopOf="@+id/img_rotate"
+                app:srcCompat="@drawable/ic_add_a_photo" />
+
+            <ImageView
+                android:id="@+id/img_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="@+id/img_camera"
+                app:layout_constraintEnd_toEndOf="@+id/et_notice_desc"
+                app:layout_constraintTop_toTopOf="@+id/img_camera"
+                app:srcCompat="@drawable/ic_photo_library" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/new_submit_btn"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="Send Notice"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

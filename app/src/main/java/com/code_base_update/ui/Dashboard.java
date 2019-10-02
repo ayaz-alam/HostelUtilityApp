@@ -130,9 +130,9 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     @Override
     public void  onDisplayImageLoaded(Uri imageUrl) {
         if(imageUrl!=null)
-            setImageUrl(R.id.iv_display_image,imageUrl.toString(),R.drawable.man,new CircleCrop());
+            setImageUrl(R.id.iv_display_image, imageUrl.toString(), R.drawable.ic_undraw_male_avatar, new CircleCrop());
         else
-            setImageUrl(R.id.iv_display_image,"",R.drawable.man,new CircleCrop());
+            setImageUrl(R.id.iv_display_image, "", R.drawable.ic_undraw_male_avatar, new CircleCrop());
     }
 
     @Override
