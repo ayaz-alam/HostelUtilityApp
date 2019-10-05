@@ -2,6 +2,7 @@ package com.code_base_update.ui;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.CalendarContract;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -171,7 +172,9 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
         for(int i = 0 ;i<50;i++){
             ComplaintBean complaintBean = new ComplaintBean();
             complaintBean.setComplaintDomainId("ID: "+i*100);
-            complaintBean.setComplaintId(Calendar.getInstance().getTime().getTime()+"");
+            long id = Calendar.getInstance().getTime().getTime()*-1;
+            complaintBean.setTimeStamp(id);
+            complaintBean.setComplaintId(id+"");
             new DatabaseManager(this).registerComplaint(new SuccessCallback() {
                 @Override
                 public void onInitiated() {

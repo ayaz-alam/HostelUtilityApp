@@ -133,4 +133,8 @@ public abstract class BaseRecyclerAdapter<T extends BaseBean>
         return mData.get(position);
     }
 
+    public void clear(){
+        mData.clear();
+        notifyDataSetChanged();
+    }
 }

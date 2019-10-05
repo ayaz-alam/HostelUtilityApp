@@ -1,15 +1,10 @@
 package com.code_base_update.ui;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.code_base_update.presenters.IComplaintPresenter;
 import com.medeveloper.ayaz.hostelutility.R;
 
@@ -94,14 +89,11 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
 
     @Override
     public void domainLoadError(String msg) {
-        Toast.makeText(this, "Error: " + msg, Toast.LENGTH_LONG).show();
+        toastMsg("Error: " + msg);
     }
 
     @Override
     public void onSubDomainLoaded(final ArrayList<String> subDomain) {
-        getView(R.id.tv_problem_text).setVisibility(View.VISIBLE);
-        getView(R.id.cg_subdomain).setVisibility(View.VISIBLE);
-        getView(R.id.sp_subdomain).setVisibility(View.VISIBLE);
         subDomain.add(0,"Select problem");
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, subDomain);
         ((Spinner)getView(R.id.sp_subdomain)).setAdapter(adapter);
@@ -109,7 +101,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
 
     @Override
     public void subdomainLoadError(String msg) {
-        Toast.makeText(this, "Error: " + msg, Toast.LENGTH_LONG).show();
+        toastMsg("Error: " + msg);
     }
 
     private void onDomainSpinnerClicked(String domain) {
@@ -127,7 +119,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
     }
 
     private void showError() {
-        Toast.makeText(this, "Please select a problem", Toast.LENGTH_LONG).show();
+        toastMsg("Please select a problem");
     }
 
     public String getDescription() {
@@ -139,7 +131,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
         ComplaintBean thisComplaint = new ComplaintBean();
         thisComplaint.setComplaintId("complaint_no_" + Calendar.getInstance().getTime().getTime());
         thisComplaint.setStudentId(getSession().getStudentId());
-        thisComplaint.setTimeStamp(Calendar.getInstance().getTime().getTime());
+        thisComplaint.setTimeStamp(Calendar.getInstance().getTime().getTime()*-1);
         thisComplaint.setComplaintDomainId(getDomainID());
         thisComplaint.setDescriptions(getDescription());
         thisComplaint.setOptionalDescription(getOptionalDescription());
@@ -157,17 +149,17 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
 
     @Override
     public void registrationStarted() {
-        Toast.makeText(this, "Please wait..", Toast.LENGTH_LONG).show();
+        toastMsg("Please wait..");
     }
 
     @Override
     public void registrationFailed(String msg) {
-        Toast.makeText(this, "Failed: " + msg, Toast.LENGTH_LONG).show();
+        toastMsg("Failed: " + msg);
     }
 
     @Override
     public void registeredSuccessfully() {
-        Toast.makeText(this, "Registered successfully", Toast.LENGTH_LONG).show();
+        toastMsg("Complaint registered successfully");
     }
 
 

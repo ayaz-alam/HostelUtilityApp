@@ -5,13 +5,19 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        prepareOfflineMode();
         startActivity(new Intent(this, NewLogin.class));
         finish();
+    }
+
+    private void prepareOfflineMode() {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 }

@@ -40,7 +40,7 @@ public class ScrollerModel implements IScrollingPresenter{
     public void loadFirstBatch() {
         Query ref = DatabaseManager.getBaseRef(context)
                 .child(DatabaseManager.COMPLAINT_FOLDER)
-                .orderByKey()
+                .orderByChild("timeStamp")
                 .limitToFirst(pageSize);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {

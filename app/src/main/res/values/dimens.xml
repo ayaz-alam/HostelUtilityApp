@@ -37,4 +37,6 @@
     <dimen name="reg_et_height">60dp</dimen>
     <dimen name="action_bar_width">60dp</dimen>
     <dimen name="action_bar_text_size">22sp</dimen>
+    <dimen name="card_button_width">34dp</dimen>
+    <dimen name="card_btn_pad">20dp</dimen>
 </resources>

@@ -92,7 +92,6 @@
             android:text="You're facing problem with"
             android:textColor="#000"
             android:textSize="18sp"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SpinnerCont" />

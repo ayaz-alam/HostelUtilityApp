@@ -87,16 +87,17 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_card_body" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/btn_resolve"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/card_button_width"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/new_submit_btn"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:text="Resolve"
+                android:paddingLeft="@dimen/card_btn_pad"
+                android:paddingRight="@dimen/card_btn_pad"
+                android:textAllCaps="false"
+                android:text="Mark Resolved"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_guid"
@@ -108,18 +109,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="Call Staff"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_guid"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_guid" />
 
             <ImageView
                 android:id="@+id/imageView13"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/button6"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_resolve"
                 app:layout_constraintEnd_toEndOf="@+id/textView23"
                 app:layout_constraintStart_toStartOf="@+id/textView23"
-                app:layout_constraintTop_toTopOf="@+id/button6"
+                app:layout_constraintTop_toTopOf="@+id/btn_resolve"
                 app:srcCompat="@drawable/ic_new_call" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

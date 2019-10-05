@@ -89,7 +89,7 @@ public class DatabaseManager {
     public void loadComplaintTypes(final DataCallback<ArrayList<String>> dataCallback) {
 
         final ArrayList<String> types = new ArrayList<>();
-        types.add("Select problem type");
+        types.add("Select problem field");
         FirebaseDatabase.getInstance().getReference()
                 .child(COMPLAINT_TYPES).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
