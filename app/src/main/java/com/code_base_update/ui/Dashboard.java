@@ -10,9 +10,11 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.code_base_update.UserManager;
+import com.code_base_update.DatabaseManager;
+import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.beans.DashBoardBean;
 import com.code_base_update.interfaces.OnItemClickListener;
+import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.models.DashboardModel;
 import com.code_base_update.presenters.IDashPresenter;
 import com.code_base_update.ui.adapters.DashboardRecyclerAdapter;
@@ -20,6 +22,7 @@ import com.code_base_update.view.IDashView;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, DashboardRecyclerAdapter> implements IDashView{
 
@@ -114,7 +117,7 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
 
     @Override
     public void openRegisterComplaintList() {
-        startActivity(new Intent(this, ComplaintComplaintListActivity.class));
+        startActivity(new Intent(this, InfiniteScrollingActivity.class));
     }
 
     @Override
@@ -154,9 +157,38 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.about:openAboutSection();break;
-            case R.id.logout:new UserManager().logout();
-
+            case R.id.logout://TODO remove this/
+                push();
+                /*new UserManager().logout();
+                             startActivity(new Intent(this,NewLogin.class));
+                             finishAffinity();*/
+                             break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void push() {
+        for(int i = 0 ;i<50;i++){
+            ComplaintBean complaintBean = new ComplaintBean();
+            complaintBean.setComplaintDomainId("ID: "+i*100);
+            complaintBean.setComplaintId(Calendar.getInstance().getTime().getTime()+"");
+            new DatabaseManager(this).registerComplaint(new SuccessCallback() {
+                @Override
+                public void onInitiated() {
+
+                }
+
+                @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
+                public void onFailure(String msg) {
+
+                }
+            },complaintBean);
+
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.code_base_update.beans;
 
-public class ApplicationBean {
+public class ApplicationBean extends BaseBean{
 
     private long applicationId;
     private String applicationDomain;

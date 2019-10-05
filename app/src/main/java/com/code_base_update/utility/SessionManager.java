@@ -1,4 +1,4 @@
-package com.code_base_update;
+package com.code_base_update.utility;
 
 import android.content.Context;
 

@@ -1,8 +1,10 @@
 package com.code_base_update.beans;
 
+import com.code_base_update.Constants;
+
 import java.util.ArrayList;
 
-public class ComplaintBean{
+public class ComplaintBean extends BaseBean{
 
     private String studentId, complaintId, complaintDomainId;
     private ArrayList<String> descriptions;
@@ -14,6 +16,12 @@ public class ComplaintBean{
 
     public ComplaintBean() {
 
+    }
+
+    public static ComplaintBean getLoadingComponent() {
+        ComplaintBean complaintBean =new ComplaintBean();
+        complaintBean.setComplaintId(Constants.LOADING_ITEM);
+        return complaintBean;
     }
 
     public String getStudentId() {
@@ -75,6 +83,17 @@ public class ComplaintBean{
     public ArrayList<String> getDescriptions() {
         return descriptions;
     }
+
+    public String getDetails(){
+        if(descriptions==null) return "";
+        StringBuilder details = new StringBuilder("");
+        for(String s:descriptions){
+            details.append(s);
+            details.append(" ");
+        }
+        return details.toString();
+    }
+
 
     public void setDescriptions(ArrayList<String> descriptions) {
         this.descriptions = descriptions;

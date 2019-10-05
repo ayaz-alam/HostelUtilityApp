@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.code_base_update.InputHelper;
+import com.code_base_update.utility.InputHelper;
 import com.code_base_update.models.ForgotPasswordModel;
 import com.code_base_update.presenters.IForgotPasswordPresenter;
 import com.code_base_update.view.IForgotPasswordView;

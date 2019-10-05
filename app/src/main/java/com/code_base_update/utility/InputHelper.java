@@ -1,4 +1,4 @@
-package com.code_base_update;
+package com.code_base_update.utility;
 
 import android.text.TextUtils;
 
@@ -27,4 +27,7 @@ public class InputHelper {
         return Pattern.matches(MOBILE_PATTERN,mobileNumber);
     }
 
+    public static boolean checkPassword(String pass) {
+        return !TextUtils.isEmpty(pass)&&!(pass.length()<6);
+    }
 }

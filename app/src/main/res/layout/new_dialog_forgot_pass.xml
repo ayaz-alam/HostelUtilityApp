@@ -7,8 +7,8 @@
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:paddingLeft="12dp"
-    android:paddingRight="12dp">
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp">
 
     <ProgressBar
         android:id="@+id/pg_forgot_password"
@@ -92,18 +92,19 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/new_submit_btn"
         android:drawableLeft="@drawable/ic_mail"
         android:drawablePadding="5dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:text="Send Mail"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

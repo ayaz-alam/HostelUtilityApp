@@ -7,4 +7,7 @@ public interface IChangePasswordView extends IBaseView {
     void passwordChangedSuccessfully();
 
     void passwordNotChanged(String msg);
+
+    void processInitiated();
+
 }

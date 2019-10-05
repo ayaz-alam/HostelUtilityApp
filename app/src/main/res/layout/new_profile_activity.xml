@@ -196,7 +196,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_mobile" />
 
                 <Button
-                    android:id="@+id/button7"
+                    android:id="@+id/btn_change_password"
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"

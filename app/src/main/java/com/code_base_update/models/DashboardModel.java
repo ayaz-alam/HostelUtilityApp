@@ -1,6 +1,6 @@
 package com.code_base_update.models;
 
-import com.code_base_update.UserManager;
+import com.code_base_update.utility.UserManager;
 import com.code_base_update.beans.DashBoardBean;
 import com.code_base_update.presenters.IDashPresenter;
 import com.code_base_update.view.IDashView;

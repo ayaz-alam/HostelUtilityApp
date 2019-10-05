@@ -71,6 +71,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.code_base_update.ui.InfiniteScrollingActivity" />
     </application>
 
 </manifest>

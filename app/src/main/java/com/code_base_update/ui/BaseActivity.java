@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
-import com.code_base_update.SessionManager;
+import com.code_base_update.utility.SessionManager;
 import com.code_base_update.ui.view_managers.IImageManager;
 import com.code_base_update.ui.view_managers.ITextManager;
 import com.code_base_update.ui.view_managers.ViewManager;

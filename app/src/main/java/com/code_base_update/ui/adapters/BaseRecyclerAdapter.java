@@ -5,16 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.code_base_update.beans.BaseBean;
 import com.code_base_update.interfaces.OnItemClickListener;
+import com.medeveloper.ayaz.hostelutility.R;
 
-public abstract class BaseRecyclerAdapter<T>
+public abstract class BaseRecyclerAdapter<T extends BaseBean>
         extends RecyclerView.Adapter<BaseViewHolder> {
 
+    public static final int LOADING_VIEW_TYPE = 124;
     private Context mContext;
     private int mLayoutResId;
     private LayoutInflater mLayoutInflater;
@@ -41,7 +45,14 @@ public abstract class BaseRecyclerAdapter<T>
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         BaseViewHolder baseViewHolder = null;
+
+        int mLoadingResId = R.layout.loading_card;
         switch (viewType) {
+            case LOADING_VIEW_TYPE:
+                baseViewHolder = new BaseViewHolder(mContext,
+                        mLayoutInflater.inflate(mLoadingResId, parent, false));
+
+                break;
             default:
                 baseViewHolder = new BaseViewHolder(mContext,
                         mLayoutInflater.inflate(mLayoutResId, parent, false));
@@ -73,17 +84,12 @@ public abstract class BaseRecyclerAdapter<T>
         return super.getItemViewType(position);
     }
 
-    private void getViewByResId(int resId, ViewGroup parent) {
-        mLayoutInflater.inflate(resId, parent, false);
-    }
-
-
     public void add(T item) {
         mData.add(item);
         notifyItemInserted(mData.size() - 1);
     }
 
-    public void update(ArrayList<T> items){
+    public void update(ArrayList<T> items) {
         mData = items;
         notifyDataSetChanged();
     }
@@ -96,8 +102,9 @@ public abstract class BaseRecyclerAdapter<T>
 
 
     public void addAll(List<T> data) {
+        int start = mData.size() - 1;
         mData.addAll(data);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(start, mData.size() - 1);
     }
 
     public void setOnItemClickListener(OnItemClickListener itemClickListener) {
@@ -122,7 +129,8 @@ public abstract class BaseRecyclerAdapter<T>
         return selectedPosition;
     }
 
-    public T getItem(int position){
+    public T getItem(int position) {
         return mData.get(position);
     }
+
 }

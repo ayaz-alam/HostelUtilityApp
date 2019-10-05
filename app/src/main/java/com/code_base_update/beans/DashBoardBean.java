@@ -1,6 +1,6 @@
 package com.code_base_update.beans;
 
-public class DashBoardBean {
+public class DashBoardBean extends BaseBean{
     private String title;
     private int drawableId;
 

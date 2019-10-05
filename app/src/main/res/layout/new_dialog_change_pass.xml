@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Old Password"
+            android:id="@+id/et_old_password"
             android:padding="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter New Password"
+            android:id="@+id/et_new_password"
             android:padding="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,13 +75,14 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:id="@+id/et_confirm_password"
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
             android:padding="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_change_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"

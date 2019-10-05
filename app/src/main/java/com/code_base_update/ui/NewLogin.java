@@ -9,14 +9,13 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.code_base_update.UserManager;
-import com.code_base_update.InputHelper;
+import com.code_base_update.utility.UserManager;
+import com.code_base_update.utility.InputHelper;
 import com.code_base_update.models.LoginModel;
 import com.code_base_update.presenters.ILoginPresenter;
 import com.code_base_update.view.ILoginView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.database.FirebaseDatabase;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import static com.code_base_update.Constants.STUDENT;
@@ -35,7 +34,6 @@ public class NewLogin extends BaseActivity<ILoginView, ILoginPresenter> implemen
 
     @Override
     protected void initViewsAndEvents() {
-        setupFirebaseOfflineMode();
         mCtx =this;
         //TODO change progressDialog with custom dialog
         mProgressDialog = new MyDialog().getProgressDialog("Please wait..",mCtx);
@@ -86,10 +84,6 @@ public class NewLogin extends BaseActivity<ILoginView, ILoginPresenter> implemen
 
 
 
-    }
-
-    private void setupFirebaseOfflineMode() {
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 
     @Override

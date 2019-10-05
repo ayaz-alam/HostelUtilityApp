@@ -1,14 +1,14 @@
 package com.code_base_update.ui;
 
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.appcompat.widget.Toolbar;
-
-import com.code_base_update.UserManager;
+import com.code_base_update.utility.UserManager;
 import com.code_base_update.presenters.IBasePresenter;
+import com.code_base_update.ui.dialogs.ChangePasswordDialog;
 import com.medeveloper.ayaz.hostelutility.R;
 
 public class ProfileActivity extends BaseActivity {
@@ -26,6 +26,16 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 new UserManager().logout();
+                startActivity(new Intent(getApplicationContext(),NewLogin.class));
+                finishAffinity();
+
+            }
+        });
+        getView(R.id.btn_change_password).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChangePasswordDialog dialog = new ChangePasswordDialog(ProfileActivity.this);
+                dialog.show();
             }
         });
     }

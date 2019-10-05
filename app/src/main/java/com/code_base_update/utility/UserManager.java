@@ -1,5 +1,6 @@
-package com.code_base_update;
+package com.code_base_update.utility;
 
+import android.content.Context;
 import android.net.Uri;
 import android.widget.Toast;
 
@@ -69,6 +70,10 @@ public class UserManager {
     }
 
     public void logout() {
-        //TODO codes for logging the user out
+        mAuth.signOut();
+    }
+
+    public String getEmail() {
+        return mAuth.getCurrentUser().getEmail();
     }
 }
