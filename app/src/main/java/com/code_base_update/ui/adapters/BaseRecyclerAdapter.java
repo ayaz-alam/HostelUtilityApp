@@ -134,7 +134,7 @@ public abstract class BaseRecyclerAdapter<T extends BaseBean>
     }
 
     public void clear(){
-        mData.clear();
+        mData = new ArrayList<T>();
         notifyDataSetChanged();
     }
 }

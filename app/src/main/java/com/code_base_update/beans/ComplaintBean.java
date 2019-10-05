@@ -2,15 +2,13 @@ package com.code_base_update.beans;
 
 import com.code_base_update.Constants;
 
-import java.util.ArrayList;
-
-public class ComplaintBean extends BaseBean{
+public class ComplaintBean extends BaseBean {
 
     private String studentId, complaintId, complaintDomainId;
     private String descriptions;
     private long timeStamp;
     private long problemFacingFromDate;
-    private boolean complaintStatus;
+    private boolean resolved;
     private long resolvedOnDate;
     private String optionalDescription;
 
@@ -19,7 +17,7 @@ public class ComplaintBean extends BaseBean{
     }
 
     public static ComplaintBean getLoadingComponent() {
-        ComplaintBean complaintBean =new ComplaintBean();
+        ComplaintBean complaintBean = new ComplaintBean();
         complaintBean.setComplaintId(Constants.LOADING_ITEM);
         return complaintBean;
     }
@@ -65,11 +63,11 @@ public class ComplaintBean extends BaseBean{
     }
 
     public boolean isResolved() {
-        return complaintStatus;
+        return resolved;
     }
 
-    public void setComplaintStatus(boolean complaintStatus) {
-        this.complaintStatus = complaintStatus;
+    public void setResolved(boolean resolved) {
+        this.resolved = resolved;
     }
 
     public long getResolvedOnDate() {
@@ -84,7 +82,7 @@ public class ComplaintBean extends BaseBean{
         return descriptions;
     }
 
-    public String getDetails(){
+    public String getDetails() {
         return descriptions;
     }
 

@@ -42,9 +42,8 @@ public class ScrollerModel implements IScrollingPresenter{
     public void loadFirstBatch() {
         Query ref = DatabaseManager.getBaseRef(context)
                 .child(DatabaseManager.COMPLAINT_FOLDER)
-                .orderByChild("timeStamp")
-                .limitToFirst(pageSize);
-
+                .orderByChild("timeStamp");
+        ref.keepSynced(true);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -104,7 +103,7 @@ public class ScrollerModel implements IScrollingPresenter{
 
     @Override
     public void markResolved(ComplaintBean complaintId,SuccessCallback callback) {
-        complaintId.setComplaintStatus(true);
+        complaintId.setResolved(true);
         complaintId.setResolvedOnDate(Calendar.getInstance().getTime().getTime());
         new DatabaseManager(context).markComplaintAsResolved(complaintId,callback);
     }

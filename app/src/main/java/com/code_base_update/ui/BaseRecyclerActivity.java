@@ -36,7 +36,7 @@ public abstract class BaseRecyclerActivity<V extends IBaseView, P extends IBaseP
         recyclerView.setAdapter(adapter);
         progressBar = (ProgressBar) getView(R.id.pg_loading);
         swipeRefreshLayout = (SwipeRefreshLayout) getView(R.id.refresh_recycler_view);
-
+        showNoData(false);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

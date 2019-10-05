@@ -25,7 +25,10 @@ public class ComplaintListAdapter extends BaseRecyclerAdapter<ComplaintBean> {
             viewHolder.setText(R.id.tv_card_title, item.getComplaintDomainId());
             StringBuilder description = new StringBuilder("Problem facing with: " + item.getDetails());
             if(!TextUtils.isEmpty(item.getOptionalDescription()))
+            {
+                description.append("\n\n");
                 description.append(item.getOptionalDescription());
+            }
             viewHolder.setText(R.id.tv_card_body,description.toString());
             viewHolder.setText(R.id.tv_card_date, DateUtils.getTime(item.getTimeStamp()));
             if(callback!=null) viewHolder.setItemClickListener(R.id.btn_resolve,callback);

@@ -159,6 +159,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
 
     @Override
     public void registeredSuccessfully() {
+        clearViews();
         toastMsg("Complaint registered successfully");
     }
 

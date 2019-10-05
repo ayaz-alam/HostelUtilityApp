@@ -37,8 +37,8 @@ public class DatabaseManager {
 
     private void prepareOfflineAccessLocations() {
         FirebaseDatabase.getInstance().getReference().child(COMPLAINT_TYPES).keepSynced(true);
-        mDatabase.child(DatabaseManager.APPLICATION_FOLDER).keepSynced(false);
-        mDatabase.child(DatabaseManager.COMPLAINT_FOLDER).keepSynced(false);
+        mDatabase.child(DatabaseManager.APPLICATION_FOLDER).keepSynced(true);
+        mDatabase.child(DatabaseManager.COMPLAINT_FOLDER).keepSynced(true);
     }
 
     public ArrayList<ComplaintBean> loadAllComplaint() {

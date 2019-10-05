@@ -1,15 +1,12 @@
 package com.code_base_update.ui;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.interfaces.OnItemClickListener;
@@ -89,7 +86,7 @@ public class InfiniteScrollingActivity extends BaseRecyclerActivity<IScrollingVi
                     @Override
                     public void onSuccess() {
                         toastMsg("Successfully Resolved");
-                        adapter.getItem(position).setComplaintStatus(true);
+                        adapter.getItem(position).setResolved(true);
                         adapter.notifyItemChanged(position);
                     }
 
@@ -130,7 +127,7 @@ public class InfiniteScrollingActivity extends BaseRecyclerActivity<IScrollingVi
                 int lastVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
                 if (!isLoading && lastVisibleItem < totalItemCount + pageSize) {
                     isLoading = true;
-                    mPresenter.loadNextBatch();
+                   // mPresenter.loadNextBatch();
                 }
             }
         });
