@@ -272,7 +272,7 @@
                     app:layout_constraintTop_toTopOf="@+id/tv_blood" />
 
                 <TextView
-                    android:id="@+id/tv_category"
+                    android:id="@+id/category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -289,9 +289,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="ST"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_category"
-                    app:layout_constraintStart_toEndOf="@+id/tv_category"
-                    app:layout_constraintTop_toTopOf="@+id/tv_category" />
+                    app:layout_constraintBottom_toBottomOf="@+id/category"
+                    app:layout_constraintStart_toEndOf="@+id/category"
+                    app:layout_constraintTop_toTopOf="@+id/category" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

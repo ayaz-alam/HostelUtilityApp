@@ -20,10 +20,13 @@ import com.code_base_update.utility.SessionManager;
 import com.code_base_update.ui.view_managers.IImageManager;
 import com.code_base_update.ui.view_managers.ITextManager;
 import com.code_base_update.ui.view_managers.ViewManager;
+import com.google.android.material.textfield.TextInputLayout;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import com.code_base_update.presenters.IBasePresenter;
 import com.code_base_update.view.IBaseView;
+
+import org.w3c.dom.Text;
 
 public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter<V>> extends AppCompatActivity implements IImageManager, ITextManager {
 
@@ -154,9 +157,20 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
         return super.onOptionsItemSelected(item);
     }
 
-    public void setError(int resId,String error){
-        ((EditText)getView(resId)).setError(error);
-        getView(resId).requestFocus();
+    public void setError(int viewId,String error){
+        ((EditText)getView(viewId)).setError(error);
+        getView(viewId).requestFocus();
+    }
+    public void setILError(int viewId,String error){
+        TextInputLayout inputLayout = ((TextInputLayout)getView(viewId));
+        if(inputLayout!=null)
+            inputLayout.setError(error);
+    }
+
+    public String fetchText(int veiwId){
+        EditText editText = ((EditText)getView(veiwId));
+        if(editText!=null) return editText.getText().toString();
+        return "";
     }
 
 }

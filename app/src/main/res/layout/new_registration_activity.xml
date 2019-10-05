@@ -118,6 +118,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="eg: John"
+                            android:id="@+id/et_name"
                             android:padding="5dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -192,6 +193,7 @@
                     android:padding="15dp">
 
                     <TextView
+                        android:id="@+id/tv_general_info"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -210,7 +212,7 @@
                     android:padding="15dp">
 
                     <TextView
-                        android:id="@+id/tv_category"
+                        android:id="@+id/category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
@@ -224,9 +226,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:entries="@array/categories"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_category"
-                        app:layout_constraintStart_toEndOf="@+id/tv_category"
-                        app:layout_constraintTop_toTopOf="@+id/tv_category" />
+                        app:layout_constraintBottom_toBottomOf="@+id/category"
+                        app:layout_constraintStart_toEndOf="@+id/category"
+                        app:layout_constraintTop_toTopOf="@+id/category" />
 
                     <TextView
                         android:id="@+id/tv_email"
@@ -300,6 +302,7 @@
                     android:padding="15dp">
 
                     <TextView
+                        android:id="@+id/tv_college_info"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
