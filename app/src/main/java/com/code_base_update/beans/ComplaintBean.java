@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ComplaintBean extends BaseBean{
 
     private String studentId, complaintId, complaintDomainId;
-    private ArrayList<String> descriptions;
+    private String descriptions;
     private long timeStamp;
     private long problemFacingFromDate;
     private boolean complaintStatus;
@@ -80,22 +80,16 @@ public class ComplaintBean extends BaseBean{
         this.resolvedOnDate = resolvedOnDate;
     }
 
-    public ArrayList<String> getDescriptions() {
+    public String getDescriptions() {
         return descriptions;
     }
 
     public String getDetails(){
-        if(descriptions==null) return "";
-        StringBuilder details = new StringBuilder("");
-        for(String s:descriptions){
-            details.append(s);
-            details.append(" ");
-        }
-        return details.toString();
+        return descriptions;
     }
 
 
-    public void setDescriptions(ArrayList<String> descriptions) {
+    public void setDescriptions(String descriptions) {
         this.descriptions = descriptions;
     }
 

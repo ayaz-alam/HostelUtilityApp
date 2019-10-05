@@ -26,6 +26,9 @@
         <item>Water Supply</item>
 
     </string-array>
+    <string-array name="complaint_type">
+        <item>Select complaint type</item>
+    </string-array>
 
     <string-array name="categories">
         <item>Select Category</item>

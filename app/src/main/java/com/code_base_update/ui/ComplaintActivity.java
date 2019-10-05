@@ -7,8 +7,10 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.code_base_update.presenters.IComplaintPresenter;
-import com.google.android.material.chip.ChipGroup;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
@@ -17,11 +19,9 @@ import java.util.Calendar;
 import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.view.IComplaintView;
 import com.code_base_update.models.ComplaintModel;
-import com.robertlevonyan.views.chip.Chip;
 
 public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPresenter> implements IComplaintView {
 
-    private ChipGroup cgSubdomain;
     private Spinner spDomain;
 
 
@@ -56,13 +56,25 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
         findViewById(R.id.btn_register_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerComplaint();
+                if (validateInputs())
+                    registerComplaint();
             }
         });
 
         enableNavigation();
 
 
+    }
+
+    private boolean validateInputs() {
+        if(spDomain.getSelectedItemPosition()==0){
+            toastMsg("Please select a problem type");
+            return false;
+        }else if(((Spinner)getView(R.id.sp_subdomain)).getSelectedItemPosition()==0){
+            toastMsg("Please select the problem");
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -72,6 +84,9 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
 
     @Override
     public void onDomainLoaded(ArrayList<String> domain) {
+        getView(R.id.pg_problem_loading).setVisibility(View.GONE);
+        spDomain.setAlpha(1.0f);
+        getView(R.id.btn_register_button).setEnabled(true);
         spDomain.setEnabled(true);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, domain);
         spDomain.setAdapter(adapter);
@@ -84,21 +99,12 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
 
     @Override
     public void onSubDomainLoaded(final ArrayList<String> subDomain) {
-
-        //TODO This chip thing is not working
-        cgSubdomain = findViewById(R.id.cg_subdomain);
-        cgSubdomain.setSingleSelection(true);
-        int i = 10001;
-        cgSubdomain.clearCheck();
-        setVisible(R.id.tv_problem_text, true);
-        for (String description : subDomain) {
-            Chip chip = (Chip) LayoutInflater.from(this).inflate(R.layout.chip, null);
-            chip.setText(description);
-            chip.setId(i++);
-            chip.setClickable(true);
-            cgSubdomain.addView(chip);
-        }
-
+        getView(R.id.tv_problem_text).setVisibility(View.VISIBLE);
+        getView(R.id.cg_subdomain).setVisibility(View.VISIBLE);
+        getView(R.id.sp_subdomain).setVisibility(View.VISIBLE);
+        subDomain.add(0,"Select problem");
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, subDomain);
+        ((Spinner)getView(R.id.sp_subdomain)).setAdapter(adapter);
     }
 
     @Override
@@ -124,14 +130,8 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
         Toast.makeText(this, "Please select a problem", Toast.LENGTH_LONG).show();
     }
 
-    public ArrayList<String> getDescription() {
-        ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < cgSubdomain.getChildCount(); i++) {
-            Chip chip = (Chip) cgSubdomain.getChildAt(i);
-            if (chip != null && chip.isSelected())
-                list.add(chip.getText().toString());
-        }
-        return list;
+    public String getDescription() {
+        return ((Spinner)getView(R.id.sp_subdomain)).getSelectedItem().toString();
     }
 
     public ComplaintBean getComplaint() {

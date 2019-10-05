@@ -65,7 +65,16 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/complaint_array"
                 android:spinnerMode="dropdown"
-                android:padding="8dp"
+                android:padding="6dp"
+                android:alpha=".6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ProgressBar
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/pg_problem_loading"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,18 +97,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SpinnerCont" />
 
-        <com.google.android.material.chip.ChipGroup
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cg_subdomain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="25dp"
-            app:chipSpacing="12dp"
+            android:background="@drawable/new_spinner_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_problem_text"
-            app:singleSelection="true" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_problem_text">
+
+            <Spinner
+                android:id="@+id/sp_subdomain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/complaint_type"
+                android:spinnerMode="dropdown"
+                android:padding="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <EditText
@@ -125,6 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:visibility="invisible"
             android:src="@drawable/ic_camera_24"
             app:layout_constraintBottom_toBottomOf="@+id/et_description"
             app:layout_constraintEnd_toEndOf="@+id/et_description" />

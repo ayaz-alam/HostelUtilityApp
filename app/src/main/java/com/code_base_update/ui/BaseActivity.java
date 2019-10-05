@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +50,10 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
             mPresenter.attachView((V) this);
         }
         initViewsAndEvents();
+    }
+
+    public void toastMsg(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
     }
 
     public SessionManager getSession(){
