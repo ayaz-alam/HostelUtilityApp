@@ -38,6 +38,11 @@ public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationLi
     }
 
     @Override
+    public void refreshLayout() {
+
+    }
+
+    @Override
     protected IApplicationListPresenter createPresenter() {
         return new ApplicationListModel();
     }

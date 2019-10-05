@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.code_base_update.DatabaseManager;
 import com.code_base_update.beans.ComplaintBean;
+import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.presenters.IScrollingPresenter;
 import com.code_base_update.view.IScrollingView;
 import com.google.firebase.database.DataSnapshot;
@@ -12,6 +13,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ScrollerModel implements IScrollingPresenter{
 
@@ -54,7 +56,7 @@ public class ScrollerModel implements IScrollingPresenter{
                     lastLoadedKey = mList.get(mList.size() - 1).getComplaintId();
                     mView.firstPageReceived(mList);
                 } else
-                    mView.onEndOfListReached();
+                    mView.noDataFound();
             }
 
             @Override
@@ -98,6 +100,13 @@ public class ScrollerModel implements IScrollingPresenter{
                 mView.onErrorOccurred(databaseError.getMessage());
             }
         });
+    }
+
+    @Override
+    public void markResolved(ComplaintBean complaintId,SuccessCallback callback) {
+        complaintId.setComplaintStatus(true);
+        complaintId.setResolvedOnDate(Calendar.getInstance().getTime().getTime());
+        new DatabaseManager(context).markComplaintAsResolved(complaintId,callback);
     }
 
 }

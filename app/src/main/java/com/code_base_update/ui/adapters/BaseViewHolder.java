@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.code_base_update.interfaces.OnItemClickListener;
 
 public class BaseViewHolder extends RecyclerView.ViewHolder  {
 
@@ -134,4 +135,13 @@ public class BaseViewHolder extends RecyclerView.ViewHolder  {
     }
 
 
+    public void setItemClickListener(int resId, final OnItemClickListener listener) {
+        View view = getView(resId);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(getAdapterPosition());
+            }
+        });
+    }
 }

@@ -37,6 +37,11 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
     }
 
     @Override
+    public void refreshLayout() {
+
+    }
+
+    @Override
     protected IHostelNoticePresenter createPresenter() {
         return new HostelNoticeModel();
     }

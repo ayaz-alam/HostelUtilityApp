@@ -9,4 +9,5 @@ public interface IScrollingView<T extends BaseBean> extends IBaseView {
     void onNextPageReceived(ArrayList<T> list);
     void onEndOfListReached();
     void onErrorOccurred(String message);
+    void noDataFound();
 }

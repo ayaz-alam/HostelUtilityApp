@@ -64,7 +64,7 @@ public class ComplaintBean extends BaseBean{
         this.problemFacingFromDate = problemFacingFromDate;
     }
 
-    public boolean isComplaintStatus() {
+    public boolean isResolved() {
         return complaintStatus;
     }
 

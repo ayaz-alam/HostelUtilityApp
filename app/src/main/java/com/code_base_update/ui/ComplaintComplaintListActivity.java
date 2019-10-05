@@ -38,6 +38,11 @@ public class ComplaintComplaintListActivity extends BaseRecyclerActivity<ICompla
     }
 
     @Override
+    public void refreshLayout() {
+
+    }
+
+    @Override
     protected IComplaintListPresenter createPresenter() {
         return new ComplaintListModel();
     }

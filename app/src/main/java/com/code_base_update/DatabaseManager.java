@@ -1,6 +1,7 @@
 package com.code_base_update;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
 
@@ -24,6 +25,7 @@ public class DatabaseManager {
     public static final String COMPLAINT_FOLDER = "Complaints";
     private static final String COMPLAINT_TYPES = "ComplaintList";
     private static final String APPLICATION_FOLDER = "Applications";
+    private static final String COMPLAINT_STATUS = "complaintStatus";
     private DatabaseReference mDatabase;
     private SessionManager session;
 
@@ -35,8 +37,8 @@ public class DatabaseManager {
 
     private void prepareOfflineAccessLocations() {
         FirebaseDatabase.getInstance().getReference().child(COMPLAINT_TYPES).keepSynced(true);
-        mDatabase.child(DatabaseManager.APPLICATION_FOLDER).keepSynced(true);
-        mDatabase.child(DatabaseManager.COMPLAINT_FOLDER).keepSynced(true);
+        mDatabase.child(DatabaseManager.APPLICATION_FOLDER).keepSynced(false);
+        mDatabase.child(DatabaseManager.COMPLAINT_FOLDER).keepSynced(false);
     }
 
     public ArrayList<ComplaintBean> loadAllComplaint() {
@@ -133,5 +135,19 @@ public class DatabaseManager {
                 callback.onError(databaseError.getMessage());
             }
         });
+    }
+
+    public void markComplaintAsResolved(ComplaintBean complaintBean, final SuccessCallback successCallback) {
+        successCallback.onInitiated();
+        mDatabase.child(COMPLAINT_FOLDER).child(complaintBean.getComplaintId()).setValue(complaintBean).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task){
+                if(task.isSuccessful())
+                    successCallback.onSuccess();
+                else successCallback.onFailure(task.getException().getLocalizedMessage());
+            }
+        });
+
+
     }
 }

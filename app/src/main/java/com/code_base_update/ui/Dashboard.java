@@ -25,9 +25,11 @@ import com.medeveloper.ayaz.hostelutility.R;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, DashboardRecyclerAdapter> implements IDashView{
+public class Dashboard extends BaseActivity<IDashView,IDashPresenter> implements IDashView{
 
     private ArrayList<DashBoardBean> list;
+    private DashboardRecyclerAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected IDashPresenter createPresenter() {
@@ -35,16 +37,21 @@ public class Dashboard extends BaseRecyclerActivity<IDashView,IDashPresenter, Da
     }
 
     @Override
+    protected void initViewsAndEvents() {
+        adapter = getAdapter();
+        recyclerView = getRecyclerView();
+        recyclerView.setAdapter(adapter);
+        initViews();
+    }
+
     public RecyclerView getRecyclerView() {
         return (RecyclerView)getView(R.id.recycler_view);
     }
 
-    @Override
     public DashboardRecyclerAdapter getAdapter() {
         return new DashboardRecyclerAdapter(this,R.layout.new_dashboard_cardui,list);
     }
 
-    @Override
     public void initViews() {
 
         setupToolbar("");
