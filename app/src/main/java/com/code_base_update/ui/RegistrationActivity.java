@@ -1,16 +1,22 @@
 package com.code_base_update.ui;
 
-import com.code_base_update.presenters.IBasePresenter;
+import com.code_base_update.models.RegistrationModel;
+import com.code_base_update.presenters.IRegistratonPresenter;
+import com.code_base_update.view.IRegistrationView;
 import com.medeveloper.ayaz.hostelutility.R;
 
-public class RegistrationActivity extends BaseActivity {
+public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegistratonPresenter> implements IRegistrationView {
+
     @Override
-    protected IBasePresenter createPresenter() {
-        return null;
+    protected IRegistratonPresenter createPresenter() {
+        return new RegistrationModel();
     }
 
     @Override
     protected void initViewsAndEvents() {
+        //TODO @Kanika Use this in place of onCreate
+
+
 
     }
 
