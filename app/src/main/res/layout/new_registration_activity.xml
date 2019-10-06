@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_register"
+                android:id="@+id/tv_head"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:elevation="6dp"

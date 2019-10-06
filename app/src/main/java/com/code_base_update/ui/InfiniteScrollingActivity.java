@@ -60,7 +60,7 @@ public class InfiniteScrollingActivity extends BaseRecyclerActivity<IScrollingVi
             }
         });
         enableNavigation();
-        setupToolbar("");
+        setupToolbar("Your complaints");
         mPresenter.loadFirstBatch();
     }
 

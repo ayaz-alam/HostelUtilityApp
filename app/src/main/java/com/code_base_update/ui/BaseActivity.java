@@ -72,8 +72,13 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
         Toolbar toolbar = findViewById(R.id.toolbar);
         if(toolbar!=null) {
             toolbar.setTitle("");
+            TextView head = (TextView)getView(R.id.tv_head);
+            if(head!=null)
+                head.setText(title);
             setSupportActionBar(toolbar);
+            toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         }
+
     }
 
     private View getParentView() {

@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_application"
+        android:id="@+id/tv_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="6dp"
