@@ -22,6 +22,9 @@ public class RegistrationModel implements IRegistratonPresenter {
 
     @Override
     public void performRegistration(Student studentDetails) {
-        //TODO @AyAZz
+        //Todo
+        //Step 1: Check if user is authentic using email address and adhaar number
+        //Step 2: if step 1 successfull, generate Credentials using createUserUsingEmail
+        //Step 3: Open loginActivity
     }
 }

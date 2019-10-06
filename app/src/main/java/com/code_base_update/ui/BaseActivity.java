@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -171,6 +173,37 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
         EditText editText = ((EditText)getView(veiwId));
         if(editText!=null) return editText.getText().toString();
         return "";
+    }
+
+    public Spinner validateSpinner(int veiwId){
+        Spinner spinner = ((Spinner)getView(veiwId));
+        if(spinner.getSelectedItemPosition()==0) {
+            spinner.setFocusable(true);
+            spinner.setFocusableInTouchMode(true);
+            spinner.requestFocus();
+        }
+        return spinner;
+    }
+
+    public void clearAllErrors(){
+        clearError((ViewGroup)getView(R.id.parent));
+    }
+
+    private void clearError(ViewGroup viewGroup){
+        if(viewGroup==null|| viewGroup.getChildCount()==0) return;
+
+        for(int i=0;i<viewGroup.getChildCount();i++){
+            View view = viewGroup.getChildAt(i);
+            if(view instanceof TextInputLayout){
+                ((TextInputLayout)view).setError(null);
+            }else if(view instanceof EditText){
+                ((EditText)view).setError(null);
+            }else if(view instanceof ViewGroup){
+                clearError((ViewGroup)view);
+            }
+
+        }
+
     }
 
 }

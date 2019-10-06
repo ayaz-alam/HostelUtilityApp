@@ -155,5 +155,7 @@
     <string name="forgot_pass_hint">Forgot Password</string>
     <string name="reset_pass_number_hint">An reset link would be sent to your registered email</string>
 
+    <string name="all_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+
 
 </resources>
