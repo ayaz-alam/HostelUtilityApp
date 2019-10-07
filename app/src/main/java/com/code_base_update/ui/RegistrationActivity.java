@@ -22,7 +22,7 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         getView(R.id.signUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validateInputs()){
+                if (validateInputs()) {
                     mPresenter.performRegistration(getStudentDetails());
                 }
             }
@@ -50,49 +50,49 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
     //Checks all the input for validation
     private boolean validateInputs() {
         clearAllErrors();
-        if(TextUtils.isEmpty(fetchText(R.id.et_name))){
-            setILError(R.id.input_Sname,"Required");
+        if (TextUtils.isEmpty(fetchText(R.id.et_name))) {
+            setILError(R.id.input_Sname, "Required");
             getView(R.id.et_name).requestFocus();
-        }else if(TextUtils.isEmpty(fetchText(R.id.et_FatherName))){
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_FatherName))) {
             setILError(R.id.input_Fname, "Required");
             getView(R.id.et_FatherName).requestFocus();
-        }else if(validateSpinner(R.id.sp_blood).getSelectedItemPosition()==0){
+        } else if (validateSpinner(R.id.sp_blood).getSelectedItemPosition() == 0) {
             toastMsg("Please select blood group");
-        }else if(validateSpinner(R.id.sp_category).getSelectedItemPosition()==0){
+        } else if (validateSpinner(R.id.sp_category).getSelectedItemPosition() == 0) {
             toastMsg("Please select Category");
-        }else if(TextUtils.isEmpty(fetchText(R.id.et_email))){
-            setILError(R.id.input_email,"Required");
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_email))) {
+            setILError(R.id.input_email, "Required");
             getView(R.id.et_email).requestFocus();
-        }else if(!InputHelper.verifyEMail(fetchText(R.id.et_email))){
-           setILError(R.id.input_email,"Invalid");
-           toastMsg("Please Enter valid email");
-           getView(R.id.et_email).requestFocus();
-       }else if(!InputHelper.verifyMobileNumber(fetchText(R.id.et_mobileNo))){
+        } else if (!InputHelper.verifyEMail(fetchText(R.id.et_email))) {
+            setILError(R.id.input_email, "Invalid");
+            toastMsg("Please Enter valid email");
+            getView(R.id.et_email).requestFocus();
+        } else if (!InputHelper.verifyMobileNumber(fetchText(R.id.et_mobileNo))) {
             setILError(R.id.input_mobile, "Please enter 10 digit mobile No");
             getView(R.id.et_mobileNo).requestFocus();
-        }else if(TextUtils.isEmpty(fetchText(R.id.et_enrollNo))){
-            setILError(R.id.input_enroll,"Required");
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_enrollNo))) {
+            setILError(R.id.input_enroll, "Required");
             getView(R.id.et_enrollNo).requestFocus();
-        }else if(TextUtils.isEmpty(fetchText(R.id.et_adhar))) {
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_adhar))) {
             setILError(R.id.input_aadhar, "Please enter adhar No");
             getView(R.id.et_adhar).requestFocus();
-        }else if(!InputHelper.verifyMobileNumber(fetchText(R.id.et_whatsapp_no))){
+        } else if (!InputHelper.verifyMobileNumber(fetchText(R.id.et_whatsapp_no))) {
             setILError(R.id.input_whatsapp, "Please enter whatsapp No");
             getView(R.id.et_whatsapp_no).requestFocus();
-        } else if(TextUtils.isEmpty(fetchText(R.id.et_room))) {
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_room))) {
             setILError(R.id.input_room, "Required");
             getView(R.id.et_room).requestFocus();
-        }else if(TextUtils.isEmpty(fetchText(R.id.et_address))){
-            setILError(R.id.input_address,"Required");
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_address))) {
+            setILError(R.id.input_address, "Required");
             getView(R.id.et_address).requestFocus();
-        }else if(TextUtils.isEmpty(fetchText(R.id.et_guardian))) {
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_guardian))) {
             setILError(R.id.input_guardian, "Required");
             getView(R.id.et_guardian).requestFocus();
-        }else if(validateSpinner(R.id.sp_class).getSelectedItemPosition()==0){
+        } else if (validateSpinner(R.id.sp_class).getSelectedItemPosition() == 0) {
             toastMsg("Please select Class");
-        }else if(validateSpinner(R.id.sp_year).getSelectedItemPosition()==0){
+        } else if (validateSpinner(R.id.sp_year).getSelectedItemPosition() == 0) {
             toastMsg("Please select Year");
-        }else if(validateSpinner(R.id.sp_branch).getSelectedItemPosition()==0){
+        } else if (validateSpinner(R.id.sp_branch).getSelectedItemPosition() == 0) {
             toastMsg("Please select Branch");
         }
         return true;
