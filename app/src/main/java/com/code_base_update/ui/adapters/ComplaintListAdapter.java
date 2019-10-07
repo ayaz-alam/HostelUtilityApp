@@ -25,16 +25,21 @@ public class ComplaintListAdapter extends BaseRecyclerAdapter<ComplaintBean> {
             viewHolder.setText(R.id.tv_card_title, item.getComplaintDomainId());
             StringBuilder description = new StringBuilder("Problem facing with: " + item.getDetails());
             if(!TextUtils.isEmpty(item.getOptionalDescription()))
+            {
+                description.append("\n\n");
                 description.append(item.getOptionalDescription());
+            }
             viewHolder.setText(R.id.tv_card_body,description.toString());
             viewHolder.setText(R.id.tv_card_date, DateUtils.getTime(item.getTimeStamp()));
-            if(callback!=null) viewHolder.setItemClickListener(R.id.btn_resolve,callback);
             Button resolveButton = viewHolder.getView(R.id.btn_resolve);
             if(item.isResolved()){
                 resolveButton.setText("Resolved");
+                viewHolder.getView(R.id.btn_resolve).setClickable(false);
                 viewHolder.setBackgroundRes(R.id.btn_resolve,R.drawable.success_button_green);
                 viewHolder.setImageResource(R.id.iv_status_symbol,R.drawable.ic_success_icon);
             }else{
+                viewHolder.getView(R.id.btn_resolve).setClickable(true);
+                if(callback!=null) viewHolder.setItemClickListener(R.id.btn_resolve,callback);
                 viewHolder.setBackgroundRes(R.id.btn_resolve,R.drawable.new_submit_btn);
                 resolveButton.setText("Mark Resolved");
                 viewHolder.setImageResource(R.id.iv_status_symbol,R.drawable.ic_new_waiting);
