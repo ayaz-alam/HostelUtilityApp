@@ -3,6 +3,7 @@ package com.code_base_update.ui;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,7 +74,7 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
         if(toolbar!=null) {
             toolbar.setTitle("");
             TextView head = (TextView)getView(R.id.tv_head);
-            if(head!=null)
+            if(head!=null&& !TextUtils.isEmpty(title))
                 head.setText(title);
             setSupportActionBar(toolbar);
             toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

@@ -35,17 +35,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:11.0.4'
     implementation 'com.google.firebase:firebase-crash:11.0.4'
     testImplementation 'junit:junit:4.12'
-    implementation "com.github.thomper:sweet-alert-dialog:v1.4.0"
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.github.yesidlazaro:GmailBackground:1.2.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    implementation 'com.robertlevonyan.view:MaterialChipView:2.0.3'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

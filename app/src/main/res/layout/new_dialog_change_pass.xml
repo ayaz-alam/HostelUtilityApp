@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_baseView"
     style="@style/MyDialogBox"
     android:layout_width="350dp"
+    android:background="@color/white"
     android:layout_height="wrap_content"
     android:paddingLeft="12dp"
     android:paddingRight="12dp">
@@ -37,6 +37,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="Enter Old Password"
             android:id="@+id/et_old_password"
             android:padding="8dp" />
@@ -58,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter New Password"
+            android:inputType="textPassword"
             android:id="@+id/et_new_password"
             android:padding="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,22 +80,28 @@
             android:id="@+id/et_confirm_password"
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
+            android:inputType="textPassword"
             android:padding="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_change_password"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/new_submit_btn"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
+        android:background="@drawable/round_white"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:textAllCaps="false"
+        android:drawablePadding="4dp"
         android:text="Change Password"
-        android:textColor="@color/white"
+        android:drawableLeft="@drawable/ic_password_lock"
+        android:textColor="@color/black_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_new_pass2" />
+        app:layout_constraintTop_toBottomOf="@+id/input_new_pass2"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

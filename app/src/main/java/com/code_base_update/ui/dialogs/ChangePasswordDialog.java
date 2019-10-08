@@ -63,17 +63,17 @@ public class ChangePasswordDialog extends Dialog implements IChangePasswordView 
         String oldPass = getOldPass();
         String newPass = getNewPass();
         String confirm = getConfirmPass();
-        if (InputHelper.checkPassword(oldPass)) {
+        if (!InputHelper.checkPassword(oldPass)) {
             ((TextInputLayout) findViewById(R.id.input_old_pass)).setError("Invalid");
             return false;
         }
 
-        if (InputHelper.checkPassword(newPass)) {
+        if (!InputHelper.checkPassword(newPass)) {
             ((TextInputLayout) findViewById(R.id.input_new_pass)).setError("Invalid");
             return false;
         }
 
-        if (InputHelper.checkPassword(confirm)) {
+        if (!InputHelper.checkPassword(confirm)) {
             ((TextInputLayout) findViewById(R.id.input_new_pass2)).setError("Invalid");
             return false;
         }

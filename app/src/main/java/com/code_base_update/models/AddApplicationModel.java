@@ -1,6 +1,5 @@
 package com.code_base_update.models;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.code_base_update.DatabaseManager;

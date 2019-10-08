@@ -1,6 +1,5 @@
 package com.code_base_update.ui;
 
-import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,8 +9,6 @@ import com.code_base_update.presenters.IBasePresenter;
 import com.code_base_update.ui.adapters.BaseRecyclerAdapter;
 import com.code_base_update.view.IBaseView;
 import com.medeveloper.ayaz.hostelutility.R;
-
-import java.util.ArrayList;
 
 
 public abstract class BaseRecyclerActivity<V extends IBaseView, P extends IBasePresenter<V>, A extends BaseRecyclerAdapter> extends BaseActivity<V, P> {

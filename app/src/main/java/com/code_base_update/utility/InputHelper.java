@@ -28,6 +28,8 @@ public class InputHelper {
     }
 
     public static boolean checkPassword(String pass) {
-        return !TextUtils.isEmpty(pass)&&!(pass.length()<6);
+        //if empty return false; and if length is less than 6 return
+        // false
+        return (!TextUtils.isEmpty(pass))&&!(pass.length()<6);
     }
 }
