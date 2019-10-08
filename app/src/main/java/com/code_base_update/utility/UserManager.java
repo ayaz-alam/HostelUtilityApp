@@ -18,48 +18,49 @@ public class UserManager {
 
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    public UserManager(){
-        mAuth  = FirebaseAuth.getInstance();
+
+    public UserManager() {
+        mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
     }
 
-    public String getName(){
-        if(user!=null)
+    public String getName() {
+        if (user != null)
             return user.getDisplayName();
         else return "Null";
     }
 
 
-    public Uri getImageUrl() {
-        return user.getPhotoUrl();
+    public String getImageUrl() {
+        if (user.getPhotoUrl() != null)
+            return user.getPhotoUrl().toString();
+        else return "";
     }
 
     public boolean isUserLoggedIn() {
-        return user!=null;
+        return user != null;
     }
 
-    public void reAuthenticateUser(final SuccessCallback successCallback, String email, String oldPassword,final String newPassword) {
-        AuthCredential credential= EmailAuthProvider.getCredential(email,oldPassword);
+    public void reAuthenticateUser(final SuccessCallback successCallback, String email, String oldPassword, final String newPassword) {
+        AuthCredential credential = EmailAuthProvider.getCredential(email, oldPassword);
 
         mAuth.getCurrentUser().reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     mAuth.getCurrentUser().updatePassword(newPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()) {
+                            if (task.isSuccessful()) {
                                 successCallback.onSuccess();
-                            }
-                            else{
+                            } else {
                                 successCallback.onFailure(task.getException().getLocalizedMessage());
                             }
                         }
                     });
 
-                }
-                else{
+                } else {
                     successCallback.onFailure(task.getException().getLocalizedMessage());
                 }
 

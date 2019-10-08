@@ -2,9 +2,6 @@ package com.code_base_update.ui;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.code_base_update.beans.Student;
 import com.code_base_update.models.RegistrationModel;
@@ -22,49 +19,85 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
 
     @Override
     protected void initViewsAndEvents() {
-        //TODO @Kanika Use this in place of onCreate
-
         getView(R.id.signUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validateInputs()){
+                if (validateInputs()) {
                     mPresenter.performRegistration(getStudentDetails());
                 }
             }
         });
 
-
-
-
     }
 
     //Get object of student generated from input values
     private Student getStudentDetails() {
-
-        if(TextUtils.isEmpty(fetchText(R.id.et_name))){
-            setILError(R.id.input_Sname,"Required");
-            getView(R.id.et_name).requestFocus();
-        }
-
-        if(TextUtils.isEmpty(fetchText(R.id.et_email))){
-            setILError(R.id.input_Sname,"Required");
-            getView(R.id.et_name).requestFocus();
-        }else if(InputHelper.verifyEMail(fetchText(R.id.et_email))){
-            setILError(R.id.input_Sname,"Invalid");
-            getView(R.id.et_name).requestFocus();
-        }
-
-
+        Student student = new Student();
+        student.setStudentName(fetchText(R.id.et_name));
+        student.setFatherName(fetchText(R.id.et_FatherName));
+        student.setEmail(fetchText(R.id.et_email));
+        student.setMobileNo(fetchText(R.id.et_mobileNo));
+        student.setAdharNo(fetchText(R.id.et_adhar));
+        student.setEnrollNo(fetchText(R.id.et_enrollNo));
+        student.setWhatsappNo(fetchText(R.id.et_whatsapp_no));
+        student.setRoom(fetchText(R.id.et_room));
+        student.setAddress(fetchText(R.id.et_address));
+        student.setGuardiaName(fetchText(R.id.et_guardian));
 
         return null;
     }
 
     //Checks all the input for validation
     private boolean validateInputs() {
-
-
+        clearAllErrors();
+        if (TextUtils.isEmpty(fetchText(R.id.et_name))) {
+            setILError(R.id.input_Sname, "Required");
+            getView(R.id.et_name).requestFocus();
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_FatherName))) {
+            setILError(R.id.input_Fname, "Required");
+            getView(R.id.et_FatherName).requestFocus();
+        } else if (validateSpinner(R.id.sp_blood).getSelectedItemPosition() == 0) {
+            toastMsg("Please select blood group");
+        } else if (validateSpinner(R.id.sp_category).getSelectedItemPosition() == 0) {
+            toastMsg("Please select Category");
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_email))) {
+            setILError(R.id.input_email, "Required");
+            getView(R.id.et_email).requestFocus();
+        } else if (!InputHelper.verifyEMail(fetchText(R.id.et_email))) {
+            setILError(R.id.input_email, "Invalid");
+            toastMsg("Please Enter valid email");
+            getView(R.id.et_email).requestFocus();
+        } else if (!InputHelper.verifyMobileNumber(fetchText(R.id.et_mobileNo))) {
+            setILError(R.id.input_mobile, "Please enter 10 digit mobile No");
+            getView(R.id.et_mobileNo).requestFocus();
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_enrollNo))) {
+            setILError(R.id.input_enroll, "Required");
+            getView(R.id.et_enrollNo).requestFocus();
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_adhar))) {
+            setILError(R.id.input_aadhar, "Please enter adhar No");
+            getView(R.id.et_adhar).requestFocus();
+        } else if (!InputHelper.verifyMobileNumber(fetchText(R.id.et_whatsapp_no))) {
+            setILError(R.id.input_whatsapp, "Please enter whatsapp No");
+            getView(R.id.et_whatsapp_no).requestFocus();
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_room))) {
+            setILError(R.id.input_room, "Required");
+            getView(R.id.et_room).requestFocus();
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_address))) {
+            setILError(R.id.input_address, "Required");
+            getView(R.id.et_address).requestFocus();
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_guardian))) {
+            setILError(R.id.input_guardian, "Required");
+            getView(R.id.et_guardian).requestFocus();
+        } else if (validateSpinner(R.id.sp_class).getSelectedItemPosition() == 0) {
+            toastMsg("Please select Class");
+        } else if (validateSpinner(R.id.sp_year).getSelectedItemPosition() == 0) {
+            toastMsg("Please select Year");
+        } else if (validateSpinner(R.id.sp_branch).getSelectedItemPosition() == 0) {
+            toastMsg("Please select Branch");
+        }
         return true;
     }
+
 
     @Override
     protected int getLayoutId() {

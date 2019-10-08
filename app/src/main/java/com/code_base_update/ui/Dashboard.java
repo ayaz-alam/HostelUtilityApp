@@ -139,7 +139,7 @@ public class Dashboard extends BaseActivity<IDashView,IDashPresenter> implements
     }
 
     @Override
-    public void  onDisplayImageLoaded(Uri imageUrl) {
+    public void  onDisplayImageLoaded(String imageUrl) {
         if(imageUrl!=null)
             setImageUrl(R.id.iv_display_image, imageUrl.toString(), R.drawable.ic_undraw_male_avatar, new CircleCrop());
         else

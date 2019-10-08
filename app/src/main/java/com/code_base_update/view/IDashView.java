@@ -13,7 +13,7 @@ public interface IDashView extends IBaseView {
     void openRegisterApplication();
     void openRegisterApplicationList();
 
-    void onDisplayImageLoaded(Uri imageUrl);
+    void onDisplayImageLoaded(String imageUrl);
 
     void userNameLoaded(String name);
 }

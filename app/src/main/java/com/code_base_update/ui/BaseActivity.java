@@ -52,29 +52,29 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
         viewManager = new ViewManager(getParentView(), this);
         viewHashMap = new SparseArray<>();
 
-        if(mPresenter != null){
+        if (mPresenter != null) {
             mPresenter.attachView((V) this);
         }
         initViewsAndEvents();
     }
 
-    public void toastMsg(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
+    public void toastMsg(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
-    public SessionManager getSession(){
-        if(session==null){
-            session =new SessionManager(this);
+    public SessionManager getSession() {
+        if (session == null) {
+            session = new SessionManager(this);
         }
         return session;
     }
 
-    public void setupToolbar(String title){
+    public void setupToolbar(String title) {
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if(toolbar!=null) {
+        if (toolbar != null) {
             toolbar.setTitle("");
             TextView head = (TextView)getView(R.id.tv_head);
-            if(head!=null&& !TextUtils.isEmpty(title))
+            if(head!=null)
                 head.setText(title);
             setSupportActionBar(toolbar);
             toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -146,44 +146,77 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
         return viewManager.setVisible(viewId, visible);
     }
 
-    public View getView(int resId){
-        if(viewHashMap.get(resId)==null){
-            viewHashMap.append(resId,findViewById(resId));
+    public View getView(int resId) {
+        if (viewHashMap.get(resId) == null) {
+            viewHashMap.append(resId, findViewById(resId));
         }
-        return  viewHashMap.get(resId);
+        return viewHashMap.get(resId);
     }
 
-    public void enableNavigation(){
-        ActionBar actionBar =getSupportActionBar();
-        if(actionBar!=null){
+    public void enableNavigation() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home) finish();
+        if (item.getItemId() == android.R.id.home) finish();
         return super.onOptionsItemSelected(item);
     }
 
-    public void setError(int viewId,String error){
-        ((EditText)getView(viewId)).setError(error);
+    public void setError(int viewId, String error) {
+        ((EditText) getView(viewId)).setError(error);
         getView(viewId).requestFocus();
     }
-    public void setILError(int viewId,String error){
-        TextInputLayout inputLayout = ((TextInputLayout)getView(viewId));
-        if(inputLayout!=null)
+
+    public void setILError(int viewId, String error) {
+        TextInputLayout inputLayout = ((TextInputLayout) getView(viewId));
+        if (inputLayout != null)
             inputLayout.setError(error);
     }
 
-    public String fetchText(int veiwId){
-        EditText editText = ((EditText)getView(veiwId));
-        if(editText!=null) return editText.getText().toString();
+    public String fetchText(int veiwId) {
+        EditText editText = ((EditText) getView(veiwId));
+        if (editText != null) return editText.getText().toString();
         return "";
+    }
+
+    public Spinner validateSpinner(int veiwId) {
+        Spinner spinner = ((Spinner) getView(veiwId));
+        if (spinner.getSelectedItemPosition() == 0) {
+            spinner.setFocusable(true);
+            spinner.setFocusableInTouchMode(true);
+            spinner.requestFocus();
+        }
+        return spinner;
     }
 
     public void clearViews(){
         ViewGroup viewGroup = (ViewGroup)getView(R.id.parent);
         resetAllViews(viewGroup);
+    }
+
+    public void clearAllErrors() {
+        clearError((ViewGroup) getView(R.id.parent));
+    }
+
+    private void clearError(ViewGroup viewGroup) {
+        if (viewGroup == null || viewGroup.getChildCount() == 0) return;
+
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View view = viewGroup.getChildAt(i);
+            if (view instanceof TextInputLayout) {
+                ((TextInputLayout) view).setError(null);
+            } else if (view instanceof EditText) {
+                ((EditText) view).setError(null);
+            } else if (view instanceof ViewGroup) {
+                clearError((ViewGroup) view);
+            }
+
+        }
+
     }
 
     private void resetAllViews(ViewGroup parent){
