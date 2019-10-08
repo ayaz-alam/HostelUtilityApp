@@ -1,9 +1,62 @@
 package com.code_base_update.beans;
 
-public class Student {
+import com.code_base_update.Human;
 
-    private String studentName, FatherName, Email, mobileNo ;
+public class Student extends Human {
+
+    private String studentName;
+    private String FatherName;
+    private String Email;
+    private String mobileNo;
+    private String BloodGroup ;
+    private String Category;
+
+    public String getClassName() {
+        return ClassName;
+    }
+
+    public void setClassName(String className) {
+        ClassName = className;
+    }
+
+    public String getBranch() {
+        return Branch;
+    }
+
+    public void setBranch(String branch) {
+        Branch = branch;
+    }
+
+    public String getYear() {
+        return Year;
+    }
+
+    public void setYear(String year) {
+        Year = year;
+    }
+
+    private String ClassName;
+    private String Branch;
+    private String Year;
+
+    public String getCategory() {
+        return Category;
+    }
+
+    public void setCategory(String category) {
+        Category = category;
+    }
+
     private String enrollNo, adharNo, whatsappNo, room, address, guardiaName;
+
+
+    public String getBloodGroup() {
+        return BloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        BloodGroup = bloodGroup;
+    }
 
 
     public String getStudentName() {
