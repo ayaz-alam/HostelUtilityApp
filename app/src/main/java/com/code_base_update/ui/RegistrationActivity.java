@@ -2,15 +2,22 @@ package com.code_base_update.ui;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
+import com.code_base_update.beans.CollegeBean;
+import com.code_base_update.beans.HostelBean;
 import com.code_base_update.beans.Student;
+import com.code_base_update.interfaces.IChooseCollegeCallback;
 import com.code_base_update.models.RegistrationModel;
 import com.code_base_update.presenters.IRegistratonPresenter;
+import com.code_base_update.ui.dialogs.ChooseCollegeDialog;
 import com.code_base_update.utility.InputHelper;
 import com.code_base_update.view.IRegistrationView;
 import com.medeveloper.ayaz.hostelutility.R;
 
-public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegistratonPresenter> implements IRegistrationView {
+public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegistratonPresenter> implements IRegistrationView, IChooseCollegeCallback {
+
+    private ChooseCollegeDialog dialog;
 
     @Override
     protected IRegistratonPresenter createPresenter() {
@@ -19,6 +26,9 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
 
     @Override
     protected void initViewsAndEvents() {
+
+        dialog = new ChooseCollegeDialog(this,this);
+
         getView(R.id.signUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,6 +38,7 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
             }
         });
 
+        dialog.show();
     }
 
     //Get object of student generated from input values
@@ -43,13 +54,19 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         student.setRoom(fetchText(R.id.et_room));
         student.setAddress(fetchText(R.id.et_address));
         student.setGuardiaName(fetchText(R.id.et_guardian));
-
-        return null;
+        student.setBloodGroup(validateSpinner(R.id.sp_blood).getSelectedItem().toString());
+        student.setCategory(validateSpinner(R.id.sp_category).getSelectedItem().toString());
+        student.setBranch(validateSpinner(R.id.sp_branch).getSelectedItem().toString());
+        student.setClassName(validateSpinner(R.id.sp_class).getSelectedItem().toString());
+        student.setYear(validateSpinner(R.id.sp_year).getSelectedItem().toString());
+        return student;
     }
 
     //Checks all the input for validation
     private boolean validateInputs() {
+
         clearAllErrors();
+
         if (TextUtils.isEmpty(fetchText(R.id.et_name))) {
             setILError(R.id.input_Sname, "Required");
             getView(R.id.et_name).requestFocus();
@@ -117,5 +134,20 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
     @Override
     public void badCredentials() {
 
+    }
+
+    @Override
+    public void initiated() {
+
+    }
+
+    @Override
+    public void onSuccess(CollegeBean collegeBean, HostelBean hostelBean) {
+
+    }
+
+    @Override
+    public void onFailure(String msg) {
+        toastMsg("Error: "+msg);
     }
 }

@@ -3,6 +3,7 @@ package com.code_base_update.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CalendarContract;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,7 +12,9 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.code_base_update.Constants;
 import com.code_base_update.DatabaseManager;
+import com.code_base_update.beans.CollegeBean;
 import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.beans.DashBoardBean;
 import com.code_base_update.interfaces.OnItemClickListener;
@@ -19,7 +22,11 @@ import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.models.DashboardModel;
 import com.code_base_update.presenters.IDashPresenter;
 import com.code_base_update.ui.adapters.DashboardRecyclerAdapter;
+import com.code_base_update.utility.UserManager;
 import com.code_base_update.view.IDashView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
@@ -165,40 +172,16 @@ public class Dashboard extends BaseActivity<IDashView,IDashPresenter> implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.about:openAboutSection();break;
-            case R.id.logout://TODO remove this/
-                push();
-                /*new UserManager().logout();
+            case R.id.logout:
+                new UserManager().logout();
                              startActivity(new Intent(this,NewLogin.class));
-                             finishAffinity();*/
+                             finishAffinity();
                              break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void push() {
-        for(int i = 0 ;i<50;i++){
-            ComplaintBean complaintBean = new ComplaintBean();
-            complaintBean.setComplaintDomainId("ID: "+i*100);
-            long id = Calendar.getInstance().getTime().getTime()*-1;
-            complaintBean.setTimeStamp(id);
-            complaintBean.setComplaintId(id+"");
-            new DatabaseManager(this).registerComplaint(new SuccessCallback() {
-                @Override
-                public void onInitiated() {
 
-                }
-
-                @Override
-                public void onSuccess() {
-
-                }
-
-                @Override
-                public void onFailure(String msg) {
-
-                }
-            },complaintBean);
-
-        }
     }
 }

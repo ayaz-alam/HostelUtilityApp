@@ -1,13 +1,14 @@
 package com.code_base_update.models;
 
 import com.code_base_update.beans.Student;
+import com.code_base_update.interfaces.SimpleCallback;
+import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.presenters.IRegistratonPresenter;
+import com.code_base_update.utility.UserManager;
 import com.code_base_update.view.IRegistrationView;
 
 public class RegistrationModel implements IRegistratonPresenter {
     private IRegistrationView view;
-
-
 
 
     @Override
@@ -22,9 +23,35 @@ public class RegistrationModel implements IRegistratonPresenter {
 
     @Override
     public void performRegistration(Student studentDetails) {
-        //Todo
-        //Step 1: Check if user is authentic using email address and adhaar number
-        //Step 2: if step 1 successfull, generate Credentials using createUserUsingEmail
-        //Step 3: Open loginActivity
+        view.initiated();
+        UserManager userManager = new UserManager();
+       isUserPresentInDatabase(studentDetails, new SuccessCallback() {
+
+            @Override
+            public void onInitiated() {
+
+            }
+
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
+            }
+        });
+
+
+    }
+
+
+    private boolean isUserPresentInDatabase(Student studentDetails,SuccessCallback callback) {
+
+
+
+
+        return true;
     }
 }

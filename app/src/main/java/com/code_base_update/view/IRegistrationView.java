@@ -5,4 +5,5 @@ public interface IRegistrationView extends IBaseView {
     void registrationSuccess();
     void registrationUnsuccess();
     void badCredentials();
+    void initiated();
 }

@@ -1,11 +1,11 @@
 package com.code_base_update;
 
 import android.content.Context;
-import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
 
 import com.code_base_update.beans.ApplicationBean;
+import com.code_base_update.beans.CollegeBean;
 import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.interfaces.DataCallback;
 import com.code_base_update.interfaces.SuccessCallback;
@@ -141,13 +141,35 @@ public class DatabaseManager {
         successCallback.onInitiated();
         mDatabase.child(COMPLAINT_FOLDER).child(complaintBean.getComplaintId()).setValue(complaintBean).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task){
-                if(task.isSuccessful())
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful())
                     successCallback.onSuccess();
                 else successCallback.onFailure(task.getException().getLocalizedMessage());
             }
         });
 
+
+    }
+
+    public void loadAllColleges(final DataCallback<ArrayList<CollegeBean>> callback) {
+        FirebaseDatabase.getInstance().getReference().child(Constants.COLLEGE_LIST)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        ArrayList<CollegeBean> collegeBeans = new ArrayList<>();
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                collegeBeans.add(d.getValue(CollegeBean.class));
+                            }
+                            callback.onSuccess(collegeBeans);
+                        } else callback.onFailure("No data found");
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        callback.onFailure(databaseError.getMessage());
+                    }
+                });
 
     }
 }

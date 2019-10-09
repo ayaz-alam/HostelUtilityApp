@@ -103,23 +103,15 @@ public class ProfileActivity extends BaseActivity {
         setText(R.id.sp_class, student.getClassName());
         setText(R.id.sp_year, student.getYear());
         setText(R.id.sp_branch, student.getBranch());
-        setImageUrl(R.id.iv_display_image, new UserManager().getImageUrl().toString(),
+        setImageUrl(R.id.iv_display_image, new UserManager().getImageUrl(),
                 student.getSex().equals(Human.FEMALE) ? R.drawable.ic_undraw_female_avatar : R.drawable.ic_undraw_male_avatar, new CircleCrop());
 
 
     }
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.new_profile_activity;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.profile, menu);
-        return true;
     }
 
     @Override
@@ -153,11 +145,7 @@ public class ProfileActivity extends BaseActivity {
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED&&grantResults[1]== PackageManager.PERMISSION_GRANTED) {
-                CropImage.activity()
-                        .setAspectRatio(1,1)
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .setFixAspectRatio(true)
-                        .start(this);
+                firePhotoIntent();
             } else {
 
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
