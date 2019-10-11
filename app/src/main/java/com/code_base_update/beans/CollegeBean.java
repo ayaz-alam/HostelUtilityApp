@@ -1,37 +1,39 @@
 package com.code_base_update.beans;
 
+import androidx.annotation.Keep;
+
 import java.util.ArrayList;
 
-public class CollegeBean {
+@Keep public class CollegeBean {
 
-    private String collegeName;
-    private String collegeId;
-    private ArrayList<HostelBean> hostels;
+    @Keep private String collegeName;
+    @Keep private String collegeId;
+    @Keep private ArrayList<HostelBean> hostels;
 
-    public ArrayList<HostelBean> getHostels() {
+    @Keep public CollegeBean() {
+    }
+
+    @Keep public ArrayList<HostelBean> getHostels() {
         return hostels;
     }
 
-    public void setHostels(ArrayList<HostelBean> hostels) {
+    @Keep public void setHostels(ArrayList<HostelBean> hostels) {
         this.hostels = hostels;
     }
 
-    public CollegeBean() {
-    }
-
-    public String getCollegeName() {
+    @Keep public String getCollegeName() {
         return collegeName;
     }
 
-    public void setCollegeName(String collegeName) {
+    @Keep public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
     }
 
-    public String getCollegeId() {
+    @Keep public String getCollegeId() {
         return collegeId;
     }
 
-    public void setCollegeId(String collegeId) {
+    @Keep public void setCollegeId(String collegeId) {
         this.collegeId = collegeId;
     }
 }

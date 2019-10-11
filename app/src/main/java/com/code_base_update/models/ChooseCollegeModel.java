@@ -58,8 +58,10 @@ public class ChooseCollegeModel implements IChooseCollegePresenter {
     public void fetchHostelList(String collegeId) {
 
         for(CollegeBean thisCollege: collegeList){
-            if(thisCollege.getCollegeId().equals(collegeId))
+            if(thisCollege.getCollegeId().equals(collegeId)&&thisCollege.getHostels()!=null) {
                 mView.hostelListFetched(thisCollege.getHostels(),thisCollege);
+                return;
+            }
         }
         mView.couldNotFetchHostels();
     }

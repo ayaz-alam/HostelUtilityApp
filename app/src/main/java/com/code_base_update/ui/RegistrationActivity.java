@@ -18,10 +18,12 @@ import com.medeveloper.ayaz.hostelutility.R;
 public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegistratonPresenter> implements IRegistrationView, IChooseCollegeCallback {
 
     private ChooseCollegeDialog dialog;
+    private CollegeBean collegeBean;
+    private HostelBean hostelBean;
 
     @Override
     protected IRegistratonPresenter createPresenter() {
-        return new RegistrationModel();
+        return new RegistrationModel(this);
     }
 
     @Override
@@ -33,11 +35,11 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
             @Override
             public void onClick(View view) {
                 if (validateInputs()) {
-                    mPresenter.performRegistration(getStudentDetails());
+                    mPresenter.performRegistration(getStudentDetails(),collegeBean,hostelBean);
                 }
             }
         });
-
+        dialog.setCancelable(false);
         dialog.show();
     }
 
@@ -143,7 +145,9 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
 
     @Override
     public void onSuccess(CollegeBean collegeBean, HostelBean hostelBean) {
-
+        this.collegeBean = collegeBean;
+        this.hostelBean = hostelBean;
+        setupToolbar(hostelBean.getHostelName()+" Registration");
     }
 
     @Override

@@ -12,12 +12,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.code_base_update.Constants;
 import com.code_base_update.beans.CollegeBean;
 import com.code_base_update.beans.HostelBean;
 import com.code_base_update.interfaces.IChooseCollegeCallback;
 import com.code_base_update.models.ChooseCollegeModel;
 import com.code_base_update.presenters.IChooseCollegePresenter;
 import com.code_base_update.view.IChooseCollegeView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.FirebaseDatabase;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
@@ -77,8 +81,8 @@ public class ChooseCollegeDialog extends Dialog implements IChooseCollegeView {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
-                    mPresenter.fetchHostelList(collegeList.get(position-1).getCollegeId());
                     pgHostel.setVisibility(View.VISIBLE);
+                    mPresenter.fetchHostelList(collegeList.get(position-1).getCollegeId());
                 }
             }
 
@@ -136,6 +140,7 @@ public class ChooseCollegeDialog extends Dialog implements IChooseCollegeView {
             public void onClick(View v) {
                 if(validate()){
                     callback.onSuccess(myCollege,myHostel);
+                    dismiss();
                 }else{
                     Toast.makeText(getContext(),"Please select college and hostel properly",
                             Toast.LENGTH_LONG).show();

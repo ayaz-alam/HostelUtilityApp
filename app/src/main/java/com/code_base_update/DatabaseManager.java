@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.code_base_update.beans.ApplicationBean;
 import com.code_base_update.beans.CollegeBean;
 import com.code_base_update.beans.ComplaintBean;
+import com.code_base_update.beans.Student;
 import com.code_base_update.interfaces.DataCallback;
 import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.utility.SessionManager;
@@ -144,7 +145,8 @@ public class DatabaseManager {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful())
                     successCallback.onSuccess();
-                else successCallback.onFailure(task.getException().getLocalizedMessage());
+                else
+                    successCallback.onFailure(task.getException().getLocalizedMessage());
             }
         });
 
@@ -153,6 +155,7 @@ public class DatabaseManager {
 
     public void loadAllColleges(final DataCallback<ArrayList<CollegeBean>> callback) {
         FirebaseDatabase.getInstance().getReference().child(Constants.COLLEGE_LIST)
+                .orderByChild("collegeName")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -171,5 +174,9 @@ public class DatabaseManager {
                     }
                 });
 
+    }
+
+    public void registerStudent(Student studentDetails) {
+        mDatabase.child(Constants.STUDENT_LIST).child(studentDetails.getEmail()).setValue(studentDetails);
     }
 }
