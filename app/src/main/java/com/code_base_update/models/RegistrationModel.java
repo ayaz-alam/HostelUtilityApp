@@ -2,7 +2,6 @@ package com.code_base_update.models;
 
 import android.content.Context;
 
-import com.code_base_update.Constants;
 import com.code_base_update.DatabaseManager;
 import com.code_base_update.beans.CollegeBean;
 import com.code_base_update.beans.HostelBean;
@@ -15,10 +14,15 @@ import com.code_base_update.view.IRegistrationView;
 public class RegistrationModel implements IRegistratonPresenter {
     private IRegistrationView view;
     private DatabaseManager databaseManager;
+    private UserManager userManager;
+    private Context mContext;
+
 
 
     public RegistrationModel(Context context) {
         databaseManager = new DatabaseManager(context);
+        userManager = new UserManager();
+        mContext = context;
     }
 
     @Override
@@ -32,35 +36,74 @@ public class RegistrationModel implements IRegistratonPresenter {
     }
 
     @Override
-    public void performRegistration(final Student studentDetails, CollegeBean collegeBean, HostelBean hostelBean) {
+    public void performRegistration(final Student studentDetails) {
         view.initiated();
-        UserManager userManager = new UserManager();
        isUserPresentInDatabase(studentDetails, new SuccessCallback() {
 
             @Override
             public void onInitiated() {
-
+                //Set the UI to initiated state
+                view.initiated();
             }
 
             @Override
             public void onSuccess() {
-                //TODO create authentication then proceed
-                databaseManager.registerStudent(studentDetails);
+                createUser(studentDetails);
             }
 
             @Override
             public void onFailure(String msg) {
-
+                view.registrationFailed(msg);
             }
         });
 
 
     }
 
+    private void createUser(final Student studentDetails) {
+
+        userManager.createUser(studentDetails, new SuccessCallback() {
+            @Override
+            public void onInitiated() {
+                //Don't do anything, UI already in initiated state
+            }
+
+            @Override
+            public void onSuccess() {
+                registerStudent(studentDetails);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                view.registrationFailed(msg);
+            }
+        });
+    }
+
+    private void registerStudent(final Student studentDetails) {
+
+        databaseManager.registerStudent(studentDetails, new SuccessCallback(){
+            @Override
+            public void onInitiated() {
+                //Don't do anything, UI already in initiated state
+            }
+
+            @Override
+            public void onSuccess() {
+                view.registrationSuccess();
+                userManager.setStudent(studentDetails,mContext);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                view.registrationFailed(msg);
+            }
+        });
+
+    }
+
 
     private void isUserPresentInDatabase(Student studentDetails,SuccessCallback callback) {
-        callback.onInitiated();
-        callback.onSuccess();
-        callback.onFailure("");
+        databaseManager.isStudentEnrolled(studentDetails,callback);
     }
 }

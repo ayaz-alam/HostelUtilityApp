@@ -22,6 +22,7 @@ import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.models.DashboardModel;
 import com.code_base_update.presenters.IDashPresenter;
 import com.code_base_update.ui.adapters.DashboardRecyclerAdapter;
+import com.code_base_update.utility.UserManager;
 import com.code_base_update.view.IDashView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -171,30 +172,13 @@ public class Dashboard extends BaseActivity<IDashView,IDashPresenter> implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.about:openAboutSection();break;
-            case R.id.logout://TODO remove this/
-                push();
-                /*new UserManager().logout();
-                             startActivity(new Intent(this,NewLogin.class));
-                             finishAffinity();*/
-                             break;
+            case R.id.logout:logout();break;
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private void push() {
-
-        for(int i = 1 ;i<=10;i++){
-
-            CollegeBean collegeBean = new CollegeBean();
-            collegeBean.setCollegeId("college_id_"+i);
-            collegeBean.setCollegeName("College "+i);
-
-            FirebaseDatabase
-                    .getInstance()
-                    .getReference()
-                    .child(Constants.COLLEGE_LIST)
-                    .child(collegeBean.getCollegeId())
-                    .setValue(collegeBean);
-        }
+    @Override
+    public void onResume(){
+        super.onResume();
+        mPresenter.loadUserImageUrl();
     }
 }

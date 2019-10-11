@@ -1,5 +1,6 @@
 package com.code_base_update.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.code_base_update.utility.SessionManager;
 import com.code_base_update.ui.view_managers.IImageManager;
 import com.code_base_update.ui.view_managers.ITextManager;
 import com.code_base_update.ui.view_managers.ViewManager;
+import com.code_base_update.utility.UserManager;
 import com.google.android.material.textfield.TextInputLayout;
 import com.medeveloper.ayaz.hostelutility.R;
 
@@ -37,6 +39,7 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
     public P mPresenter;
     private SparseArray<View> viewHashMap;
     private SessionManager session;
+    private UserManager userManager;
 
     protected abstract P createPresenter();
 
@@ -238,6 +241,17 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
 
         }
 
+    }
+
+    public void logout(){
+        getUserManager().logout();
+        startActivity(new Intent(this,NewLogin.class));
+        finishAffinity();
+    }
+
+    public UserManager getUserManager(){
+        if(userManager ==null) userManager = new UserManager();
+        return userManager;
     }
 
 }

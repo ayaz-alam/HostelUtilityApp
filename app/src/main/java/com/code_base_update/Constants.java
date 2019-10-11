@@ -7,4 +7,5 @@ public class Constants {
     public static final String LOADING_ITEM = "Loading";
     public static final String COLLEGE_LIST = "CollegeList";
     public static final String STUDENT_LIST = "Student_List";
+    public static final String ENROLLED_STUDENT_LIST = "EnrolledStudents";
 }

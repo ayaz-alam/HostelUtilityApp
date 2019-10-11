@@ -1,8 +1,9 @@
 package com.code_base_update.ui;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import com.code_base_update.beans.CollegeBean;
 import com.code_base_update.beans.HostelBean;
@@ -20,6 +21,7 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
     private ChooseCollegeDialog dialog;
     private CollegeBean collegeBean;
     private HostelBean hostelBean;
+    private ProgressDialog progressDialog;
 
     @Override
     protected IRegistratonPresenter createPresenter() {
@@ -31,11 +33,16 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
 
         dialog = new ChooseCollegeDialog(this,this);
 
+        progressDialog = new MyDialog().getProgressDialog("Please wait...",this);
+
         getView(R.id.signUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validateInputs()) {
-                    mPresenter.performRegistration(getStudentDetails(),collegeBean,hostelBean);
+                    Student student = getStudentDetails();
+                    student.setHostelId(hostelBean.getHostelId());
+                    student.setCollegeId(collegeBean.getCollegeId());
+                    mPresenter.performRegistration(student);
                 }
             }
         });
@@ -46,7 +53,7 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
     //Get object of student generated from input values
     private Student getStudentDetails() {
         Student student = new Student();
-        student.setStudentName(fetchText(R.id.et_name));
+        student.setName(fetchText(R.id.et_name));
         student.setFatherName(fetchText(R.id.et_FatherName));
         student.setEmail(fetchText(R.id.et_email));
         student.setMobileNo(fetchText(R.id.et_mobileNo));
@@ -125,22 +132,28 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
 
     @Override
     public void registrationSuccess() {
-
+        toastMsg("Successfully completed");
+        getSession().setCollege(collegeBean);
+        getSession().setHostel(hostelBean);
+        startActivity(new Intent(this,Dashboard.class));
+        finishAffinity();
     }
 
     @Override
-    public void registrationUnsuccess() {
+    public void registrationFailed(String msg) {
 
+        toastMsg("Incomplete: "+msg);
     }
 
     @Override
     public void badCredentials() {
-
+        progressDialog.dismiss();
+        toastMsg("Bad credentials");
     }
 
     @Override
     public void initiated() {
-
+        progressDialog.show();
     }
 
     @Override
@@ -152,6 +165,7 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
 
     @Override
     public void onFailure(String msg) {
+        progressDialog.dismiss();
         toastMsg("Error: "+msg);
     }
 }

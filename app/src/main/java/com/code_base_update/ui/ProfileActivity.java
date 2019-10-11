@@ -8,8 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -23,6 +21,10 @@ import com.code_base_update.beans.Student;
 import com.code_base_update.utility.UserManager;
 import com.code_base_update.presenters.IBasePresenter;
 import com.code_base_update.ui.dialogs.ChangePasswordDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -66,33 +68,17 @@ public class ProfileActivity extends BaseActivity {
             }
         });
 
-        UserManager userManager = new UserManager();
-        Student student = new Student();
-
-        userManager.getImageUrl();
-        student.setStudentName("Ayaz Alam");
-        student.setEmail(userManager.getEmail());
-        student.setRoom("125");
-        student.setMobileNo("9079935675");
-        student.setBloodGroup("O+");
-        student.setCategory("General");
-        student.setEnrollNo("2016/CTAE/062");
-        student.setAdharNo("014785236901");
-        student.setAddress("Allahabad");
-        student.setGuardiaName("Kanika");
-        student.setClassName("B.Tech");
-        student.setYear("IV");
-        student.setBranch("IT");
-        setUpUser(student);
+        setUpUser(getSession().getStudent());
 
 
     }
 
 
     public void setUpUser(Student student) {
-        setText(R.id.tv_username, student.getStudentName());
+        setText(R.id.tv_username, student.getName());
         setText(R.id.tv_emailaddress, student.getEmail());
-        setText(R.id.tv_user_location, student.getRoom());
+        setText(R.id.tv_room_no, "Room no: " + student.getRoom());
+        setText(R.id.tv_user_location, getSession().getHostelName() + "\n" + getSession().getCollege().getCollegeName());
         setText(R.id.tv_mobile_umber, student.getMobileNo());
         setText(R.id.tv_blood_group, student.getBloodGroup());
         setText(R.id.tv_cast, student.getCategory());
@@ -141,10 +127,10 @@ public class ProfileActivity extends BaseActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
 
-        if(requestCode==CAMERA_REQUEST)
+        if (requestCode == CAMERA_REQUEST)
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED&&grantResults[1]== PackageManager.PERMISSION_GRANTED) {
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 firePhotoIntent();
             } else {
 
@@ -154,18 +140,16 @@ public class ProfileActivity extends BaseActivity {
 
     public void firePhotoIntent() {
 
-            if(checkPermissionForCamera()&&checkPermissionForStorageRead()) {
-                CropImage.activity()
-                        .setAspectRatio(1,1)
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .setFixAspectRatio(true)
-                        .start(this);
-            }
-            else
-            {
-                final String [] permissions=new String []{ Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE};
-                ActivityCompat.requestPermissions(this, permissions, CAMERA_REQUEST);
-            }
+        if (checkPermissionForCamera() && checkPermissionForStorageRead()) {
+            CropImage.activity()
+                    .setAspectRatio(1, 1)
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setFixAspectRatio(true)
+                    .start(this);
+        } else {
+            final String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(this, permissions, CAMERA_REQUEST);
+        }
 
     }
 
@@ -177,24 +161,30 @@ public class ProfileActivity extends BaseActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
-                Bitmap bitmap1 = result.getBitmap();
-                if (bitmap1 != null) {
-                    //Setup Listener
-                    //mPhotoIntentResult.onPhotoIntentResult(result.getBitmap(), requestCode,null);
-                } else {
-                    try {
-                        //SetupListener
-                        bitmap1 = MediaStore.Images.Media.getBitmap(getContentResolver(), resultUri);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                setImageUrl(
+                        R.id.iv_display_image,//View id
+                        resultUri.toString(),//URL
+                        getSession().getStudent().getSex().equals(Human.MALE) ? R.drawable.ic_undraw_male_avatar : R.drawable.ic_undraw_female_avatar, //Place holder
+                        new CircleCrop()//Crop options
+                );
+                updateUserImage(resultUri);
+
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
                 Log.d("CROP_IMAGE_ERROR", error.getMessage());
             }
         }
 
+    }
+
+    private void updateUserImage(Uri resultUri) {
+        getUserManager().changeImage(resultUri, new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) toastMsg("Profile photo changed");
+                else toastMsg("Error: " + task.getException().getLocalizedMessage());
+            }
+        });
     }
 
 }

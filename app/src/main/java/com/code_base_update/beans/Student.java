@@ -4,12 +4,30 @@ import com.code_base_update.Human;
 
 public class Student extends Human {
 
-    private String studentName;
+    private String name;
     private String FatherName;
     private String Email;
     private String mobileNo;
     private String BloodGroup ;
     private String Category;
+    private String hostelId;
+    private String collegeId;
+
+    public String getHostelId() {
+        return hostelId;
+    }
+
+    public void setHostelId(String hostelId) {
+        this.hostelId = hostelId;
+    }
+
+    public String getCollegeId() {
+        return collegeId;
+    }
+
+    public void setCollegeId(String collegeId) {
+        this.collegeId = collegeId;
+    }
 
     public String getClassName() {
         return ClassName;
@@ -59,12 +77,12 @@ public class Student extends Human {
     }
 
 
-    public String getStudentName() {
-        return studentName;
+    public String getName() {
+        return name;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getFatherName() {

@@ -1,6 +1,7 @@
 package com.code_base_update;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
@@ -13,6 +14,7 @@ import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.utility.SessionManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,10 +31,12 @@ public class DatabaseManager {
     private static final String COMPLAINT_STATUS = "complaintStatus";
     private DatabaseReference mDatabase;
     private SessionManager session;
+    private Context context;
 
     public DatabaseManager(Context context) {
         session = new SessionManager(context);
         mDatabase = getBaseRef(context);
+        this.context = context;
         prepareOfflineAccessLocations();
     }
 
@@ -156,7 +160,7 @@ public class DatabaseManager {
     public void loadAllColleges(final DataCallback<ArrayList<CollegeBean>> callback) {
         FirebaseDatabase.getInstance().getReference().child(Constants.COLLEGE_LIST)
                 .orderByChild("collegeName")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         ArrayList<CollegeBean> collegeBeans = new ArrayList<>();
@@ -176,7 +180,59 @@ public class DatabaseManager {
 
     }
 
-    public void registerStudent(Student studentDetails) {
-        mDatabase.child(Constants.STUDENT_LIST).child(studentDetails.getEmail()).setValue(studentDetails);
+    public void registerStudent(Student studentDetails, final SuccessCallback callback) {
+        callback.onInitiated();
+        mDatabase = getBaseRef(context);
+        mDatabase.child(Constants.STUDENT_LIST).child(studentDetails.getEmail().replace(".","dot")).setValue(studentDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                    callback.onSuccess();
+                else callback.onFailure(task.getException().getLocalizedMessage());
+
+            }
+        });
+    }
+
+    public void isStudentEnrolled(final Student studentDetails, final SuccessCallback callback) {
+        callback.onInitiated();
+        //Double check college and hostel id
+        if(TextUtils.isEmpty(studentDetails.getCollegeId())||TextUtils.isEmpty(studentDetails.getHostelId())){
+            callback.onFailure("Incorrect college and hostel");
+            return;
+        }
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child(studentDetails.getCollegeId()).child(studentDetails.getHostelId()).child(Constants.ENROLLED_STUDENT_LIST);
+        mRef.child(studentDetails.getAdharNo()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    if(dataSnapshot.child("email").getValue().toString().equals(studentDetails.getEmail())
+                    &&dataSnapshot.child("mobile").getValue().toString().equals(studentDetails.getMobileNo())){
+                        callback.onSuccess();
+                        saveCollegeAndHostelIds(studentDetails.getCollegeId(),studentDetails.getHostelId());
+                    }
+                    else callback.onFailure("Credentials don't match with database, please contact warden");
+
+                }else callback.onFailure("Student doesn't exists, please contact your warden");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callback.onFailure(databaseError.getMessage());
+            }
+        });
+
+
+    }
+
+    private void saveCollegeAndHostelIds(String collegeId, String hostelId) {
+        session.setCollegeId(collegeId);
+        session.setHostelId(hostelId);
+    }
+
+    public void fetchStudent(String email, SuccessCallback callback) {
+
+
+
     }
 }

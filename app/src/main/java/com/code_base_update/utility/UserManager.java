@@ -6,13 +6,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.code_base_update.beans.Student;
 import com.code_base_update.interfaces.SuccessCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class UserManager {
 
@@ -76,5 +79,33 @@ public class UserManager {
 
     public String getEmail() {
         return mAuth.getCurrentUser().getEmail();
+    }
+
+    public void createUser(final Student studentDetails, final SuccessCallback callback) {
+        callback.onInitiated();
+
+        mAuth.createUserWithEmailAndPassword(studentDetails.getEmail(), studentDetails.getMobileNo()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()) {
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(studentDetails.getName())
+                            .build();
+                    mAuth.getCurrentUser().updateProfile(profileUpdates);
+                    callback.onSuccess();
+                }
+                else callback.onFailure(task.getException().getLocalizedMessage());
+
+            }
+        });
+    }
+
+    public void setStudent(Student student,Context context) {
+        new SessionManager(context).saveStudent(student);
+    }
+
+    public void changeImage(Uri resultUri, OnCompleteListener<Void> callback) {
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setPhotoUri(resultUri).build();
+        user.updateProfile(profileUpdates).addOnCompleteListener(callback);
     }
 }

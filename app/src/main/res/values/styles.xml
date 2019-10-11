@@ -8,6 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/mukta_regular</item>
     </style>
+    <style name="ActionBar" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/mukta_regular</item>
+    </style>
+
 
     <style name="Splash" parent="AppTheme" >
         <item name="android:windowBackground">@drawable/new_splash</item>
