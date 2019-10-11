@@ -4,5 +4,5 @@ public interface ILoginView extends IBaseView {
     void onLoginInitiated();
     void onLoginSuccess();
     void onLoginFailure(String error);
-    void onBadCredential(int errorCode);
+    void onBadCredential(String errorCode);
 }

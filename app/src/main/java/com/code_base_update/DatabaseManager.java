@@ -11,6 +11,7 @@ import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.beans.Student;
 import com.code_base_update.interfaces.DataCallback;
 import com.code_base_update.interfaces.SuccessCallback;
+import com.code_base_update.utility.InputHelper;
 import com.code_base_update.utility.SessionManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -230,9 +231,76 @@ public class DatabaseManager {
         session.setHostelId(hostelId);
     }
 
-    public void fetchStudent(String email, SuccessCallback callback) {
+    public void fetchStudent(String email, final DataCallback<Student> callback) {
+        email = InputHelper.removeDot(email);
+        final String finalEmail = email;
+        FirebaseDatabase.getInstance().getReference().child(Constants.USER_LIST).child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    try {
+                        session.setCollegeId(dataSnapshot.child(Constants.COLLEGE_ID).getValue().toString());
+                        session.setHostelId(dataSnapshot.child(Constants.HOSTEL_ID).getValue().toString());
+                        mDatabase = getBaseRef(context);
+                        mDatabase.child(Constants.STUDENT_LIST).child(finalEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists()){
+                                    Student student = dataSnapshot.getValue(Student.class);
+                                    callback.onSuccess(student);
+
+                                }else
+                                    callback.onFailure("Data missing in college database, contact warden");
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                callback.onError(databaseError.getMessage());
+                            }
+                        });
+
+                    }catch (Exception e){
+                        callback.onFailure(e.getLocalizedMessage());
+                    }
+                }else callback.onFailure("User not exists");
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callback.onError(databaseError.getMessage());
+            }
+        });
 
 
+    }
+
+    public void saveStudent(Student studentDetails) {
+        //TODO make it more reliable
+        String formattedEmail = InputHelper.removeDot(studentDetails.getEmail());
+        FirebaseDatabase.getInstance().getReference().child(Constants.USER_LIST).child(formattedEmail)
+                .child(Constants.COLLEGE_ID).setValue(studentDetails.getCollegeId());
+        FirebaseDatabase.getInstance().getReference().child(Constants.USER_LIST).child(formattedEmail)
+                .child(Constants.HOSTEL_ID).setValue(studentDetails.getHostelId());
+
+
+    }
+
+    public void getCollege(String collegeId, final DataCallback<CollegeBean> callback) {
+        FirebaseDatabase.getInstance().getReference().child(Constants.COLLEGE_LIST)
+                .child(collegeId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    callback.onSuccess(dataSnapshot.getValue(CollegeBean.class));
+                }else callback.onFailure("College not found");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callback.onFailure(databaseError.getMessage());
+            }
+        });
 
     }
 }

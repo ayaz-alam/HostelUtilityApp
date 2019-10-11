@@ -32,4 +32,9 @@ public class InputHelper {
         // false
         return (!TextUtils.isEmpty(pass))&&!(pass.length()<6);
     }
+
+    public static String removeDot(String email) {
+        return email.replace(".","dot");
+
+    }
 }

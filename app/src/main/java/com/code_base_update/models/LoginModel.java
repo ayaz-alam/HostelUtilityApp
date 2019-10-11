@@ -5,9 +5,16 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
+import com.code_base_update.DatabaseManager;
+import com.code_base_update.beans.CollegeBean;
+import com.code_base_update.beans.HostelBean;
+import com.code_base_update.beans.Student;
+import com.code_base_update.interfaces.DataCallback;
+import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.presenters.ILoginPresenter;
 import com.code_base_update.ui.RegistrationActivity;
 import com.code_base_update.ui.dialogs.ForgotPasswordDialog;
+import com.code_base_update.utility.SessionManager;
 import com.code_base_update.view.ILoginView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,8 +25,10 @@ public class LoginModel implements ILoginPresenter {
 
     private ILoginView loginView;
     private FirebaseAuth mAuth;
+    private Context context;
 
-    public LoginModel(){
+    public LoginModel(Context context){
+        this.context = context;
         mAuth =FirebaseAuth.getInstance();
     }
 
@@ -30,12 +39,63 @@ public class LoginModel implements ILoginPresenter {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
-                    loginView.onLoginSuccess();
-                else loginView.onLoginFailure(task.getException().getMessage());
+                    fetchDetails(context);
+                else
+                    loginView.onBadCredential(task.getException().getMessage());
             }
         });
 
     }
+
+    private void fetchDetails(final Context context){
+        String email = mAuth.getCurrentUser().getEmail();
+
+        final DatabaseManager database = new DatabaseManager(context);
+        database.fetchStudent(email, new DataCallback<Student>() {
+            @Override
+            public void onSuccess(Student student) {
+                SessionManager sessionManager = new SessionManager(context);
+                saveHostelAndCollege(student,database,sessionManager);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                loginView.onLoginFailure(msg);
+            }
+
+            @Override
+            public void onError(String msg) {
+                loginView.onLoginFailure(msg);
+            }
+        });
+
+    }
+
+    private void saveHostelAndCollege(final Student student, DatabaseManager database, final SessionManager sessionManager) {
+        database.getCollege(student.getCollegeId(),new DataCallback<CollegeBean>(){
+            @Override
+            public void onSuccess(CollegeBean collegeBean) {
+                sessionManager.saveStudent(student);
+                sessionManager.setCollege(collegeBean);
+                for(HostelBean hostel: collegeBean.getHostels()){
+                    sessionManager.setHostel(hostel);
+                }
+                loginView.onLoginSuccess();
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                loginView.onLoginFailure(msg);
+            }
+
+            @Override
+            public void onError(String msg) {
+                loginView.onLoginFailure(msg);
+            }
+        });
+
+    }
+
 
     @Override
     public void startSignUpActivity(Context mCtx) {

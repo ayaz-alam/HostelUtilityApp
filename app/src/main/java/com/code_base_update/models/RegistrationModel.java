@@ -90,6 +90,7 @@ public class RegistrationModel implements IRegistratonPresenter {
 
             @Override
             public void onSuccess() {
+                databaseManager.saveStudent(studentDetails);
                 view.registrationSuccess();
                 userManager.setStudent(studentDetails,mContext);
             }

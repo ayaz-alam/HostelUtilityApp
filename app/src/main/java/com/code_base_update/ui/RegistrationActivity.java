@@ -79,38 +79,50 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         if (TextUtils.isEmpty(fetchText(R.id.et_name))) {
             setILError(R.id.input_Sname, "Required");
             getView(R.id.et_name).requestFocus();
+            return false;
         } else if (TextUtils.isEmpty(fetchText(R.id.et_FatherName))) {
             setILError(R.id.input_Fname, "Required");
             getView(R.id.et_FatherName).requestFocus();
+            return false;
         } else if (validateSpinner(R.id.sp_blood).getSelectedItemPosition() == 0) {
             toastMsg("Please select blood group");
+            return false;
         } else if (validateSpinner(R.id.sp_category).getSelectedItemPosition() == 0) {
             toastMsg("Please select Category");
+            return false;
         } else if (TextUtils.isEmpty(fetchText(R.id.et_email))) {
             setILError(R.id.input_email, "Required");
             getView(R.id.et_email).requestFocus();
+            return false;
         } else if (!InputHelper.verifyEMail(fetchText(R.id.et_email))) {
             setILError(R.id.input_email, "Invalid");
             toastMsg("Please Enter valid email");
             getView(R.id.et_email).requestFocus();
+            return false;
         } else if (!InputHelper.verifyMobileNumber(fetchText(R.id.et_mobileNo))) {
             setILError(R.id.input_mobile, "Please enter 10 digit mobile No");
             getView(R.id.et_mobileNo).requestFocus();
+            return false;
         } else if (TextUtils.isEmpty(fetchText(R.id.et_enrollNo))) {
             setILError(R.id.input_enroll, "Required");
             getView(R.id.et_enrollNo).requestFocus();
+            return false;
         } else if (TextUtils.isEmpty(fetchText(R.id.et_adhar))) {
             setILError(R.id.input_aadhar, "Please enter adhar No");
             getView(R.id.et_adhar).requestFocus();
+            return false;
         } else if (!InputHelper.verifyMobileNumber(fetchText(R.id.et_whatsapp_no))) {
             setILError(R.id.input_whatsapp, "Please enter whatsapp No");
             getView(R.id.et_whatsapp_no).requestFocus();
+            return false;
         } else if (TextUtils.isEmpty(fetchText(R.id.et_room))) {
             setILError(R.id.input_room, "Required");
             getView(R.id.et_room).requestFocus();
+            return false;
         } else if (TextUtils.isEmpty(fetchText(R.id.et_address))) {
             setILError(R.id.input_address, "Required");
             getView(R.id.et_address).requestFocus();
+            return false;
         } else if (TextUtils.isEmpty(fetchText(R.id.et_guardian))) {
             setILError(R.id.input_guardian, "Required");
             getView(R.id.et_guardian).requestFocus();
@@ -118,8 +130,10 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
             toastMsg("Please select Class");
         } else if (validateSpinner(R.id.sp_year).getSelectedItemPosition() == 0) {
             toastMsg("Please select Year");
+            return false;
         } else if (validateSpinner(R.id.sp_branch).getSelectedItemPosition() == 0) {
             toastMsg("Please select Branch");
+            return false;
         }
         return true;
     }
@@ -141,13 +155,15 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
 
     @Override
     public void registrationFailed(String msg) {
-
         toastMsg("Incomplete: "+msg);
+        progressDialog.dismiss();
+        getUserManager().logout();
     }
 
     @Override
     public void badCredentials() {
         progressDialog.dismiss();
+        getUserManager().logout();
         toastMsg("Bad credentials");
     }
 
@@ -161,11 +177,13 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         this.collegeBean = collegeBean;
         this.hostelBean = hostelBean;
         setupToolbar(hostelBean.getHostelName()+" Registration");
+        getView(R.id.et_name).requestFocus();
     }
 
     @Override
     public void onFailure(String msg) {
         progressDialog.dismiss();
         toastMsg("Error: "+msg);
+        getUserManager().logout();
     }
 }

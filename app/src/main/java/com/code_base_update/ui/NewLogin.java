@@ -29,7 +29,7 @@ public class NewLogin extends BaseActivity<ILoginView, ILoginPresenter> implemen
 
     @Override
     protected ILoginPresenter createPresenter() {
-        return new LoginModel();
+        return new LoginModel(this);
     }
 
     @Override
@@ -107,12 +107,14 @@ public class NewLogin extends BaseActivity<ILoginView, ILoginPresenter> implemen
     public void onLoginFailure(String error) {
         mProgressDialog.dismiss();
         Toast.makeText(this,"Error: "+error,Toast.LENGTH_LONG).show();
+        getUserManager().logout();
 
     }
 
     @Override
-    public void onBadCredential(int error) {
+    public void onBadCredential(String error) {
         mProgressDialog.dismiss();
         Toast.makeText(this,"Error: "+error,Toast.LENGTH_LONG).show();
+        getUserManager().logout();
     }
 }
