@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <View
@@ -16,48 +16,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_head"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:elevation="6dp"
+        android:text="Register Now"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_head">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_head"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:elevation="6dp"
-                android:text="Register Now"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/tv_reg_intro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
                 android:gravity="center"
                 android:text="To Register in this App please fill this form and fill each and every detail"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!--        Personal Information -->
 
@@ -74,53 +79,51 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_reg_intro">
 
+
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/title_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/new_card_title_bg"
-                    android:padding="15dp">
+                    android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/textView28"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/new_card_title_bg"
+                        android:padding="15dp"
                         android:text="Personal Information"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="15dp">
-
                     <TextView
                         android:id="@+id/tv_Sname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="8dp"
                         android:text="Student Name"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/textView28" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_Sname"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_Sname">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="eg: John"
-                            android:id="@+id/et_name"
                             android:digits="@string/all_char"
+                            android:hint="eg: John"
                             android:padding="5dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -131,24 +134,27 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Father's Name"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_Sname"
                         app:layout_constraintTop_toBottomOf="@+id/input_Sname" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_Fname"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_Fname">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_FatherName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/et_FatherName"
-                            android:inputType="textPersonName"
                             android:digits="@string/all_char"
-                            android:hint="eg: Max" />
+                            android:hint="eg: Max"
+                            android:inputType="textPersonName" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,8 +163,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
                         android:text="Blood Group"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_Fname"
                         app:layout_constraintTop_toBottomOf="@+id/input_Fname" />
 
                     <Spinner
@@ -191,39 +199,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardView1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/title_container2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/new_card_title_bg"
-                    android:padding="15dp">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/tv_general_info"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/new_card_title_bg"
+                        android:padding="15dp"
                         android:text="General Information"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="15dp">
-
                     <TextView
                         android:id="@+id/category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="8dp"
                         android:text="Category"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_general_info" />
 
                     <Spinner
                         android:id="@+id/sp_category"
@@ -240,14 +240,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Email Address"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/category"
                         app:layout_constraintTop_toBottomOf="@+id/sp_category" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_email"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_email">
 
@@ -264,14 +267,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mobile Number"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/category"
                         app:layout_constraintTop_toBottomOf="@+id/input_email" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_mobile"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="16dp"
                         app:hintEnabled="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_mobile">
 
@@ -281,7 +289,7 @@
                             android:layout_height="wrap_content"
                             android:hint="0123456789"
                             android:inputType="phone"
-                            android:maxLength="10"/>
+                            android:maxLength="10" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -303,44 +311,40 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/title_container3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/new_card_title_bg"
-                    android:padding="15dp">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/tv_college_info"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/new_card_title_bg"
+                        android:padding="15dp"
                         android:text="College Information"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="15dp">
-
                     <TextView
                         android:id="@+id/tv_enroll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="8dp"
                         android:text="Enrollment Number"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_college_info" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_enroll"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_enroll">
 
@@ -348,8 +352,7 @@
                             android:id="@+id/et_enrollNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="eg: 2018/CTAE/123"
-                            />
+                            android:hint="eg: 2018/CTAE/123" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -357,14 +360,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Adhaar Number"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_enroll"
                         app:layout_constraintTop_toBottomOf="@+id/input_enroll" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_aadhar"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_aadhar">
 
@@ -374,7 +380,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Enter here"
                             android:inputType="number"
-                            android:maxLength="12"/>
+                            android:maxLength="12" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -382,14 +388,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="WhatsApp Number"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_enroll"
                         app:layout_constraintTop_toBottomOf="@+id/input_aadhar" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_whatsapp"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_whatsapp">
 
@@ -399,7 +408,7 @@
                             android:layout_height="wrap_content"
                             android:hint="0123456789"
                             android:inputType="phone"
-                            android:maxLength="10"/>
+                            android:maxLength="10" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -407,14 +416,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Room Number"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_enroll"
                         app:layout_constraintTop_toBottomOf="@+id/input_whatsapp" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_room"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_room">
 
@@ -424,7 +436,7 @@
                             android:layout_height="wrap_content"
                             android:hint="eg: 213"
                             android:inputType="text"
-                            android:maxLength="5"/>
+                            android:maxLength="5" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -432,14 +444,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Permanent Address"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_enroll"
                         app:layout_constraintTop_toBottomOf="@+id/input_room" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_address"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_address">
 
@@ -455,14 +470,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Local Guardian Name"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_enroll"
                         app:layout_constraintTop_toBottomOf="@+id/input_address" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/input_guardian"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_guardian">
 
@@ -470,9 +488,9 @@
                             android:id="@+id/et_guardian"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="eg: Mark"
                             android:digits="@string/all_char"
-                            android:inputType="textPersonName"/>
+                            android:hint="eg: Mark"
+                            android:inputType="textPersonName" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -480,40 +498,42 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Class/Year/Branch"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_enroll"
                         app:layout_constraintTop_toBottomOf="@+id/input_guardian" />
 
                     <Spinner
                         android:id="@+id/sp_class"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:entries="@array/stream"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_class"
-                        app:layout_constraintStart_toEndOf="@+id/tv_class"
-                        app:layout_constraintTop_toTopOf="@+id/tv_class" />
-
-                    <Spinner
-                        android:id="@+id/sp_branch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="2dp"
-                        android:entries="@array/branch"
-                        app:layout_constraintEnd_toStartOf="@+id/parent"
-                        app:layout_constraintStart_toStartOf="@+id/sp_class"
+                        android:layout_marginBottom="16dp"
+                        android:entries="@array/stream"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_class" />
 
                     <Spinner
                         android:id="@+id/sp_year"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
                         android:entries="@array/year"
                         app:layout_constraintBottom_toBottomOf="@+id/sp_class"
                         app:layout_constraintStart_toEndOf="@+id/sp_class"
                         app:layout_constraintTop_toTopOf="@+id/sp_class" />
-                    <requestFocus/>
+
+                    <Spinner
+                        android:id="@+id/sp_branch"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:entries="@array/branch"
+                        app:layout_constraintBottom_toBottomOf="@+id/sp_year"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/sp_year"
+                        app:layout_constraintTop_toTopOf="@+id/sp_year" />
+
+                    <!--                    <requestFocus android:id="@+id/requestFocus" />-->
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -550,6 +570,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="@string/warning_student_form"
                 android:textColor="@color/warning_red"

@@ -189,7 +189,7 @@
                     app:layout_constraintStart_toStartOf="@+id/tv_emailaddress"
                     app:layout_constraintTop_toBottomOf="@+id/tv_emailaddress" />
 
-                <TextView
+                <Textview
                     android:id="@+id/tv_mobile_umber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
