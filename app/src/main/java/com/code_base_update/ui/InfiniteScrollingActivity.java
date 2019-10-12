@@ -52,15 +52,14 @@ public class InfiniteScrollingActivity extends BaseRecyclerActivity<IScrollingVi
 
     @Override
     public void initViews() {
-
+        setupToolbar("Your complaints");
+        enableNavigation();
         adapter.setOnResolveLister(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 showResolveDialog(position);
             }
         });
-        enableNavigation();
-        setupToolbar("Your complaints");
         mPresenter.loadFirstBatch();
     }
 

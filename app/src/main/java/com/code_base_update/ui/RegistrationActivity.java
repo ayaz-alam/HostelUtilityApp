@@ -3,6 +3,7 @@ package com.code_base_update.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.code_base_update.beans.CollegeBean;
@@ -30,6 +31,11 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
 
     @Override
     protected void initViewsAndEvents() {
+
+        setupToolbar("Register Now");
+        enableNavigation();
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_back);
 
         dialog = new ChooseCollegeDialog(this,this);
 
@@ -186,4 +192,5 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         toastMsg("Error: "+msg);
         getUserManager().logout();
     }
+
 }

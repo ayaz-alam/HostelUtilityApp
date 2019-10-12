@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/mukta_regular</item>
     </style>
+
+    <style name="test" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+
     <style name="ActionBar" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>

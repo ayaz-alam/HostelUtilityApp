@@ -30,11 +30,10 @@ public class ComplaintComplaintListActivity extends BaseRecyclerActivity<ICompla
 
     @Override
     public void initViews() {
-        setupToolbar("");
+        setupToolbar("Your Complaint");
         enableNavigation();
         list = new ArrayList<>();
         mPresenter.loadData(this);
-        enableNavigation();
     }
 
     @Override

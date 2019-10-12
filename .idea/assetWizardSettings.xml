@@ -62,7 +62,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="scalingPercent" value="51" />
+                                                <entry key="scalingPercent" value="60" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -72,8 +72,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundImage" value="D:\AndroidStudio\logo\HostelUtilityApp_bg.png" />
-                                      <entry key="foregroundImage" value="D:\AndroidStudio\logo\HostelUtilityApp_logo.png" />
+                                      <entry key="backgroundImage" value="D:\AndroidStudio\logo\hostelUtitlity Logo\HostelUtilityApp_bg.png" />
+                                      <entry key="foregroundImage" value="D:\AndroidStudio\logo\hostelUtitlity Logo\HostelUtilityApp_2_trans.png" />
                                     </map>
                                   </option>
                                 </PersistentState>

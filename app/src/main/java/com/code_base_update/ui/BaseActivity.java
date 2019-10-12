@@ -80,7 +80,7 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
             if(head!=null)
                 head.setText(title);
             setSupportActionBar(toolbar);
-            toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//            toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         }
 
     }

@@ -23,7 +23,7 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
 
     @Override
     public void initViews() {
-        setupToolbar("");
+        setupToolbar("Hostel Notice");
         enableNavigation();
         mPresenter.loadNotice();
         adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -33,7 +33,6 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
                 mPresenter.openNoticeDetail(noticeId);
             }
         });
-        enableNavigation();
     }
 
     @Override

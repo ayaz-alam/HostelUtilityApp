@@ -23,6 +23,7 @@ public class GeneralNotice extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
 
+        setupToolbar("College Notice");
         enableNavigation();
         WebView myWebView = findViewById(R.id.general_notice);
         mProgressBar=findViewById(R.id.progress_bar);

@@ -27,7 +27,7 @@ public class RegisterApplicationActivity extends BaseActivity<IApplicationView, 
     @Override
     protected void initViewsAndEvents() {
 
-        setupToolbar("");
+        setupToolbar("Register Application");
         enableNavigation();
 
         mProgressDialog = new MyDialog().getProgressDialog("Sending..",this);
@@ -39,7 +39,6 @@ public class RegisterApplicationActivity extends BaseActivity<IApplicationView, 
                     mPresenter.saveApplication(application,getApplicationContext());
             }
         });
-        enableNavigation();
     }
 
     private boolean validateInput(ApplicationBean application) {

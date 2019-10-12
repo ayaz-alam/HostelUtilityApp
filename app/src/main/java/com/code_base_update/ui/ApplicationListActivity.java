@@ -30,11 +30,10 @@ public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationLi
 
     @Override
     public void initViews() {
-        setupToolbar("");
+        setupToolbar("Your Application");
         enableNavigation();
         list = new ArrayList<>();
         mPresenter.loadData(this);
-        enableNavigation();
     }
 
     @Override

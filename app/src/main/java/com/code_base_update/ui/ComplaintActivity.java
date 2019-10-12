@@ -27,7 +27,7 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
 
     @Override
     protected void initViewsAndEvents() {
-        setupToolbar("");
+        setupToolbar("Register Complaint");
         enableNavigation();
         spDomain = findViewById(R.id.sp_domain);
         spDomain.setEnabled(false);
@@ -55,10 +55,6 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
                     registerComplaint();
             }
         });
-
-        enableNavigation();
-
-
     }
 
     private boolean validateInputs() {
