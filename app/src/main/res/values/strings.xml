@@ -37,6 +37,13 @@
         <item>SC/ST</item>
     </string-array>
 
+    <string-array name="gender">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Others</item>
+    </string-array>
+
     <string-array name="year">
         <item>Year</item>
         <item>I</item>
