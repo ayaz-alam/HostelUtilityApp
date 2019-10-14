@@ -16,6 +16,7 @@ import com.code_base_update.Constants;
 import com.code_base_update.beans.CollegeBean;
 import com.code_base_update.beans.HostelBean;
 import com.code_base_update.interfaces.IChooseCollegeCallback;
+import com.code_base_update.interfaces.SimpleCallback;
 import com.code_base_update.models.ChooseCollegeModel;
 import com.code_base_update.presenters.IChooseCollegePresenter;
 import com.code_base_update.view.IChooseCollegeView;
@@ -37,10 +38,12 @@ public class ChooseCollegeDialog extends Dialog implements IChooseCollegeView {
     private IChooseCollegeCallback callback;
     private CollegeBean myCollege;
     private HostelBean myHostel;
+    private SimpleCallback backPressed;
 
-    public ChooseCollegeDialog(@NonNull Context context, IChooseCollegeCallback callback) {
+    public ChooseCollegeDialog(@NonNull Context context, IChooseCollegeCallback callback, SimpleCallback backPressed) {
         super(context);
         this.callback = callback;
+        this.backPressed = backPressed;
         setContentView(R.layout.dialog_choose_college);
         initViews();
         mPresenter = new ChooseCollegeModel(getContext());
@@ -147,6 +150,13 @@ public class ChooseCollegeDialog extends Dialog implements IChooseCollegeView {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(isShowing()){
+            backPressed.onCallback();
+        }
     }
 
     private boolean validate() {

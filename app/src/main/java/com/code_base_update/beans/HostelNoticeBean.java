@@ -8,6 +8,7 @@ public class HostelNoticeBean extends BaseBean{
     private String noticeAuthorId;
     private long date;
     private String imageUrl;
+    private String byFaculty;
 
     public HostelNoticeBean(String noticeId) {
         this.noticeId = noticeId;
@@ -62,6 +63,14 @@ public class HostelNoticeBean extends BaseBean{
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getByFaculty() {
+        return byFaculty;
+    }
+
+    public void setByFaculty(String byFaculty) {
+        this.byFaculty = byFaculty;
     }
 
 

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Group;
 
 import com.code_base_update.utility.InputHelper;
 import com.code_base_update.models.ForgotPasswordModel;
@@ -22,7 +23,7 @@ import com.medeveloper.ayaz.hostelutility.R;
 public class ForgotPasswordDialog extends Dialog implements IForgotPasswordView {
 
     private EditText etEmailText;
-    private ConstraintLayout baseView;
+    private Group baseView;
     private ProgressBar pgProgressbar;
     private TextView tvSuccessText;
     private IForgotPasswordPresenter mPresenter;
@@ -39,7 +40,9 @@ public class ForgotPasswordDialog extends Dialog implements IForgotPasswordView 
         etEmailText = findViewById(R.id.et_email);
         pgProgressbar = findViewById(R.id.pg_forgot_password);
         tvSuccessText = findViewById(R.id.pg_success_text);
-        baseView = findViewById(R.id.cl_baseView);
+        baseView = findViewById(R.id.editTextGroup);
+        pgProgressbar.setVisibility(View.GONE);
+        tvSuccessText.setVisibility(View.INVISIBLE);
         findViewById(R.id.btn_forgot_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

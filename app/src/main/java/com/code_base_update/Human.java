@@ -5,6 +5,16 @@ public class Human {
     public static final String FEMALE = "female" ;
     private String sex=MALE;
 
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getSex() {
         return sex;
     }

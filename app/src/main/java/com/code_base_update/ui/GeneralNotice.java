@@ -30,6 +30,7 @@ public class GeneralNotice extends BaseActivity {
         myWebView.getSettings().setLoadsImagesAutomatically(true);
         myWebView.setWebViewClient(new MyBrowser());
         myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.setHorizontalScrollBarEnabled(false);
         myWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         myWebView.loadUrl("https://ctae.ac.in");
         mProgressBar.setVisibility(View.VISIBLE);

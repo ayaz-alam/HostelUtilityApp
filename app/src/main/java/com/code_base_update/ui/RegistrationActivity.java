@@ -3,13 +3,13 @@ package com.code_base_update.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.code_base_update.beans.CollegeBean;
 import com.code_base_update.beans.HostelBean;
 import com.code_base_update.beans.Student;
 import com.code_base_update.interfaces.IChooseCollegeCallback;
+import com.code_base_update.interfaces.SimpleCallback;
 import com.code_base_update.models.RegistrationModel;
 import com.code_base_update.presenters.IRegistratonPresenter;
 import com.code_base_update.ui.dialogs.ChooseCollegeDialog;
@@ -19,10 +19,10 @@ import com.medeveloper.ayaz.hostelutility.R;
 
 public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegistratonPresenter> implements IRegistrationView, IChooseCollegeCallback {
 
-    private ChooseCollegeDialog dialog;
     private CollegeBean collegeBean;
     private HostelBean hostelBean;
     private ProgressDialog progressDialog;
+    private ChooseCollegeDialog dialog;
 
     @Override
     protected IRegistratonPresenter createPresenter() {
@@ -37,7 +37,12 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         if (getSupportActionBar() != null)
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_back);
 
-        dialog = new ChooseCollegeDialog(this,this);
+        dialog = new ChooseCollegeDialog(this, this, new SimpleCallback() {
+            @Override
+            public void onCallback() {
+                finish();
+            }
+        });
 
         progressDialog = new MyDialog().getProgressDialog("Please wait...",this);
 
@@ -69,11 +74,11 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         student.setRoom(fetchText(R.id.et_room));
         student.setAddress(fetchText(R.id.et_address));
         student.setGuardiaName(fetchText(R.id.et_guardian));
-        student.setBloodGroup(validateSpinner(R.id.sp_blood).getSelectedItem().toString());
-        student.setCategory(validateSpinner(R.id.sp_category).getSelectedItem().toString());
-        student.setBranch(validateSpinner(R.id.sp_branch).getSelectedItem().toString());
-        student.setClassName(validateSpinner(R.id.sp_class).getSelectedItem().toString());
-        student.setYear(validateSpinner(R.id.sp_year).getSelectedItem().toString());
+        student.setBloodGroup(getSpinner(R.id.sp_blood).getSelectedItem().toString());
+        student.setCategory(getSpinner(R.id.sp_category).getSelectedItem().toString());
+        student.setBranch(getSpinner(R.id.sp_branch).getSelectedItem().toString());
+        student.setClassName(getSpinner(R.id.sp_class).getSelectedItem().toString());
+        student.setYear(getSpinner(R.id.sp_year).getSelectedItem().toString());
         return student;
     }
 
@@ -90,10 +95,10 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
             setILError(R.id.input_Fname, "Required");
             getView(R.id.et_FatherName).requestFocus();
             return false;
-        } else if (validateSpinner(R.id.sp_blood).getSelectedItemPosition() == 0) {
+        } else if (getSpinner(R.id.sp_blood).getSelectedItemPosition() == 0) {
             toastMsg("Please select blood group");
             return false;
-        } else if (validateSpinner(R.id.sp_category).getSelectedItemPosition() == 0) {
+        } else if (getSpinner(R.id.sp_category).getSelectedItemPosition() == 0) {
             toastMsg("Please select Category");
             return false;
         } else if (TextUtils.isEmpty(fetchText(R.id.et_email))) {
@@ -113,8 +118,8 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
             setILError(R.id.input_enroll, "Required");
             getView(R.id.et_enrollNo).requestFocus();
             return false;
-        } else if (TextUtils.isEmpty(fetchText(R.id.et_adhar))) {
-            setILError(R.id.input_aadhar, "Please enter adhar No");
+        } else if (TextUtils.isEmpty(fetchText(R.id.et_adhar))||fetchText(R.id.et_adhar).length()!=12) {
+            setILError(R.id.input_aadhar, "Invalid adhaar number");
             getView(R.id.et_adhar).requestFocus();
             return false;
         } else if (!InputHelper.verifyMobileNumber(fetchText(R.id.et_whatsapp_no))) {
@@ -132,12 +137,12 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         } else if (TextUtils.isEmpty(fetchText(R.id.et_guardian))) {
             setILError(R.id.input_guardian, "Required");
             getView(R.id.et_guardian).requestFocus();
-        } else if (validateSpinner(R.id.sp_class).getSelectedItemPosition() == 0) {
+        } else if (getSpinner(R.id.sp_class).getSelectedItemPosition() == 0) {
             toastMsg("Please select Class");
-        } else if (validateSpinner(R.id.sp_year).getSelectedItemPosition() == 0) {
+        } else if (getSpinner(R.id.sp_year).getSelectedItemPosition() == 0) {
             toastMsg("Please select Year");
             return false;
-        } else if (validateSpinner(R.id.sp_branch).getSelectedItemPosition() == 0) {
+        } else if (getSpinner(R.id.sp_branch).getSelectedItemPosition() == 0) {
             toastMsg("Please select Branch");
             return false;
         }
@@ -193,4 +198,10 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         getUserManager().logout();
     }
 
+    @Override
+    public void onBackPressed() {
+        if(dialog.isShowing()){
+            finish();
+        }else super.onBackPressed();
+    }
 }

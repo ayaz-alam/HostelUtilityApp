@@ -186,7 +186,7 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
         return "";
     }
 
-    public Spinner validateSpinner(int veiwId) {
+    public Spinner getSpinner(int veiwId) {
         Spinner spinner = ((Spinner) getView(veiwId));
         if (spinner.getSelectedItemPosition() == 0) {
             spinner.setFocusable(true);
