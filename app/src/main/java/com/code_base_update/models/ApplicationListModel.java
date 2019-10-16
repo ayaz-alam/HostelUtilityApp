@@ -7,12 +7,9 @@ import androidx.loader.content.AsyncTaskLoader;
 
 import com.code_base_update.DatabaseManager;
 import com.code_base_update.beans.ApplicationBean;
-import com.code_base_update.beans.ComplaintBean;
+import com.code_base_update.interfaces.DataCallback;
 import com.code_base_update.presenters.IApplicationListPresenter;
-import com.code_base_update.presenters.IComplaintListPresenter;
 import com.code_base_update.view.IApplicationListView;
-import com.code_base_update.view.IApplicationView;
-import com.code_base_update.view.IComplaintListView;
 
 import java.util.ArrayList;
 
@@ -32,14 +29,28 @@ public class ApplicationListModel implements IApplicationListPresenter {
 
     @Override
     public void loadData(final Context context) {
-        new AsyncTaskLoader<ArrayList<ApplicationBean>>(context){
+        new AsyncTaskLoader(context) {
 
             @Nullable
             @Override
-            public ArrayList<ApplicationBean> loadInBackground() {
-              ArrayList<ApplicationBean> list  = new DatabaseManager(context).loadAllApplication();
-              iApplicationView.onListLoaded(list);
-              return list;
+            public Void loadInBackground() {
+                new DatabaseManager(context).loadAllApplication(new DataCallback<ArrayList<ApplicationBean>>() {
+                    @Override
+                    public void onSuccess(ArrayList<ApplicationBean> applicationBeans) {
+                        iApplicationView.onListLoaded(applicationBeans);
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+                        iApplicationView.onFailure(msg);
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+                        iApplicationView.onFailure(msg);
+                    }
+                });
+                return null;
             }
 
         }.loadInBackground();

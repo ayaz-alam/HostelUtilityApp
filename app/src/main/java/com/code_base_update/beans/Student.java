@@ -4,10 +4,7 @@ import com.code_base_update.Human;
 
 public class Student extends Human {
 
-    private String name;
     private String FatherName;
-    private String Email;
-    private String mobileNo;
     private String BloodGroup ;
     private String Category;
     private String hostelId;
@@ -76,37 +73,12 @@ public class Student extends Human {
         BloodGroup = bloodGroup;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getFatherName() {
         return FatherName;
     }
 
     public void setFatherName(String fatherName) {
         FatherName = fatherName;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    public String getMobileNo() {
-        return mobileNo;
-    }
-
-    public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
     }
 
     public String getEnrollNo() {

@@ -62,7 +62,7 @@ public class RegisterApplicationActivity extends BaseActivity<IApplicationView, 
         application.setApplicationDomain(getDomain());
         application.setSubject(getSubject());
         application.setDescription(getDescription());
-        application.setInitDate(Calendar.getInstance().getTime().getTime());
+        application.setTimeStamp(Calendar.getInstance().getTime().getTime());
         application.setStudentId(getSession().getStudentId());
         return application;
     }

@@ -6,6 +6,8 @@ import com.code_base_update.DatabaseManager;
 import com.code_base_update.beans.ComplaintBean;
 import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.presenters.IScrollingPresenter;
+import com.code_base_update.utility.InputHelper;
+import com.code_base_update.utility.UserManager;
 import com.code_base_update.view.IScrollingView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ScrollerModel implements IScrollingPresenter{
+public class ScrollerModel implements IScrollingPresenter {
 
     private IScrollingView<ComplaintBean> mView;
     private int pageSize;
@@ -42,6 +44,7 @@ public class ScrollerModel implements IScrollingPresenter{
     public void loadFirstBatch() {
         Query ref = DatabaseManager.getBaseRef(context)
                 .child(DatabaseManager.COMPLAINT_FOLDER)
+                .child(InputHelper.removeDot(new UserManager().getEmail()))
                 .orderByChild("timeStamp");
         ref.keepSynced(true);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -71,6 +74,7 @@ public class ScrollerModel implements IScrollingPresenter{
     public void loadNextBatch() {
         Query ref = DatabaseManager.getBaseRef(context)
                 .child(DatabaseManager.COMPLAINT_FOLDER)
+                .child(InputHelper.removeDot(new UserManager().getEmail()))
                 .startAt(lastLoadedKey)
                 .orderByKey()
                 .limitToFirst(pageSize);
@@ -102,10 +106,10 @@ public class ScrollerModel implements IScrollingPresenter{
     }
 
     @Override
-    public void markResolved(ComplaintBean complaintId,SuccessCallback callback) {
+    public void markResolved(ComplaintBean complaintId, SuccessCallback callback) {
         complaintId.setResolved(true);
         complaintId.setResolvedOnDate(Calendar.getInstance().getTime().getTime());
-        new DatabaseManager(context).markComplaintAsResolved(complaintId,callback);
+        new DatabaseManager(context).markComplaintAsResolved(complaintId, callback);
     }
 
 }

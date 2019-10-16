@@ -6,7 +6,7 @@ public class ApplicationBean extends BaseBean{
     private String applicationDomain;
     private String subject;
     private String description;
-    private long  initDate;
+    private long  timeStamp;
     private boolean isAccepted;
     private long acceptedOn;
     private String optionalDescription;
@@ -40,14 +40,6 @@ public class ApplicationBean extends BaseBean{
         this.description = description;
     }
 
-    public long getInitDate() {
-        return initDate;
-    }
-
-    public void setInitDate(long initDate) {
-        this.initDate = initDate;
-    }
-
     public boolean isAccepted() {
         return isAccepted;
     }
@@ -70,6 +62,14 @@ public class ApplicationBean extends BaseBean{
 
     public void setOptionalDescription(String optionalDescription) {
         this.optionalDescription = optionalDescription;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public long getApplicationId() {

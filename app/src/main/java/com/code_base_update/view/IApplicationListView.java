@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface IApplicationListView extends IBaseView{
     void onListLoaded(ArrayList<ApplicationBean> complaintBean);
+    void onFailure(String msg);
 }

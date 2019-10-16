@@ -1,5 +1,7 @@
 package com.code_base_update.ui;
 
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,5 +56,10 @@ public class ApplicationListActivity extends BaseRecyclerActivity<IApplicationLi
     @Override
     public void onListLoaded(ArrayList<ApplicationBean> complaintBean) {
         adapter.update(complaintBean);
+    }
+
+    @Override
+    public void onFailure(String msg) {
+        toastMsg(msg);
     }
 }

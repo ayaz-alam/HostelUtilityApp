@@ -13,6 +13,7 @@ import com.code_base_update.interfaces.DataCallback;
 import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.utility.InputHelper;
 import com.code_base_update.utility.SessionManager;
+import com.code_base_update.utility.UserManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,7 +62,7 @@ public class DatabaseManager {
 
     public void saveApplication(final SuccessCallback callback, ApplicationBean applicationToSave) {
         callback.onInitiated();
-        mDatabase.child(DatabaseManager.APPLICATION_FOLDER).child(applicationToSave.getApplicationId() + "").
+        mDatabase.child(DatabaseManager.APPLICATION_FOLDER).child(new UserManager().getUID()).child(applicationToSave.getApplicationId() + "").
                 setValue(applicationToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -72,17 +73,32 @@ public class DatabaseManager {
         });
     }
 
-    public ArrayList<ApplicationBean> loadAllApplication() {
-        ArrayList<ApplicationBean> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new ApplicationBean(i));
-        }
-        return list;
+    public void loadAllApplication(final DataCallback<ArrayList<ApplicationBean>> dataCallback) {
+        final ArrayList<ApplicationBean> list= new ArrayList<>();
+        mDatabase.child(DatabaseManager.APPLICATION_FOLDER).child(new UserManager().getUID()).
+                orderByChild("timeStamp").
+                addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()) {
+                            for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                list.add(d.getValue(ApplicationBean.class));
+                            }
+                            dataCallback.onSuccess(list);
+                        }else dataCallback.onFailure("No data found");
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        dataCallback.onError(databaseError.getMessage());
+                    }
+                });
     }
 
     public void registerComplaint(final SuccessCallback successCallback, ComplaintBean complaintToRegister) {
         successCallback.onInitiated();
-        mDatabase.child(DatabaseManager.COMPLAINT_FOLDER).child(complaintToRegister.getComplaintId()).
+        mDatabase.child(DatabaseManager.COMPLAINT_FOLDER).child(new UserManager().getUID()).child(complaintToRegister.getComplaintId()).
                 setValue(complaintToRegister).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -145,7 +161,7 @@ public class DatabaseManager {
 
     public void markComplaintAsResolved(ComplaintBean complaintBean, final SuccessCallback successCallback) {
         successCallback.onInitiated();
-        mDatabase.child(COMPLAINT_FOLDER).child(complaintBean.getComplaintId()).setValue(complaintBean).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mDatabase.child(COMPLAINT_FOLDER).child(new UserManager().getUID()).child(complaintBean.getComplaintId()).setValue(complaintBean).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful())

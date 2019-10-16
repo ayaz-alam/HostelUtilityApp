@@ -105,4 +105,8 @@ public class UserManager {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setPhotoUri(resultUri).build();
         user.updateProfile(profileUpdates).addOnCompleteListener(callback);
     }
+
+    public String getUID() {
+       return InputHelper.removeDot(getEmail());
+    }
 }
