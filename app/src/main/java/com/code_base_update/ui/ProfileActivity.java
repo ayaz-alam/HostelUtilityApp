@@ -1,12 +1,11 @@
 package com.code_base_update.ui;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,22 +16,30 @@ import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.code_base_update.Human;
+import com.code_base_update.ImageHelper;
 import com.code_base_update.beans.Student;
+import com.code_base_update.interfaces.ImageUploadCallback;
 import com.code_base_update.utility.UserManager;
 import com.code_base_update.presenters.IBasePresenter;
 import com.code_base_update.ui.dialogs.ChangePasswordDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.medeveloper.ayaz.hostelutility.R;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.io.IOException;
 
+import id.zelory.compressor.Compressor;
+
 public class ProfileActivity extends BaseActivity {
+
     private static final int CAMERA_REQUEST = 125;
+
+    private ProgressDialog profileUpdateDialog;
 
     @Override
     protected IBasePresenter createPresenter() {
@@ -70,7 +77,7 @@ public class ProfileActivity extends BaseActivity {
 
         setUpUser(getSession().getStudent());
 
-
+        profileUpdateDialog = new MyDialog().getProgressDialog("Please wait..",this);
     }
 
 
@@ -161,14 +168,7 @@ public class ProfileActivity extends BaseActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
-                setImageUrl(
-                        R.id.iv_display_image,//View id
-                        resultUri.toString(),//URL
-                        getSession().getStudent().getSex().equals(Human.MALE) ? R.drawable.ic_undraw_male_avatar : R.drawable.ic_undraw_female_avatar, //Place holder
-                        new CircleCrop()//Crop options
-                );
-                updateUserImage(resultUri);
-
+                saveImageToFirebase(resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
                 Log.d("CROP_IMAGE_ERROR", error.getMessage());
@@ -177,12 +177,54 @@ public class ProfileActivity extends BaseActivity {
 
     }
 
-    private void updateUserImage(Uri resultUri) {
+    private void saveImageToFirebase(Uri resultUri) {
+        try {
+            File currentFile =  new Compressor(this).compressToFile(new File(resultUri.getPath()));
+            Uri compressedUri = Uri.fromFile(currentFile);
+
+            StorageReference mProfileReference = FirebaseStorage.getInstance().getReference("profilePhotos/"+getUserManager().getEmail());
+            ImageHelper.saveImageToServer( compressedUri, mProfileReference, new ImageUploadCallback() {
+                @Override
+                public void initiated() {
+                    profileUpdateDialog.show();
+                }
+
+                @Override
+                public void success(Uri Url) {
+                    updateUserImage(Url);
+                }
+
+                @Override
+                public void failed(String message) {
+                    profileUpdateDialog.dismiss();
+                    toastMsg(message);
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateUserImage(final Uri resultUri) {
         getUserManager().changeImage(resultUri, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) toastMsg("Profile photo changed");
-                else toastMsg("Error: " + task.getException().getLocalizedMessage());
+                if (task.isSuccessful()) {
+                    profileUpdateDialog.dismiss();
+                    setImageUrl(
+                            R.id.iv_display_image,//View id
+                            resultUri.toString(),//URL
+                            getSession().getStudent().getSex().equals(Human.MALE) ? R.drawable.ic_undraw_male_avatar : R.drawable.ic_undraw_female_avatar, //Place holder
+                            new CircleCrop()//Crop options
+                    );
+
+                    toastMsg("Profile photo changed");
+                }
+                else {
+                    profileUpdateDialog.dismiss();
+                    toastMsg("Error: " + task.getException().getLocalizedMessage());
+                }
             }
         });
     }

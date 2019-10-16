@@ -1,5 +1,6 @@
 package com.code_base_update.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -40,6 +41,7 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
     private SparseArray<View> viewHashMap;
     private SessionManager session;
     private UserManager userManager;
+    public Context mContext;
 
     protected abstract P createPresenter();
 
@@ -54,6 +56,7 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
         mPresenter = createPresenter();
         viewManager = new ViewManager(getParentView(), this);
         viewHashMap = new SparseArray<>();
+        mContext = this;
 
         if (mPresenter != null) {
             mPresenter.attachView((V) this);

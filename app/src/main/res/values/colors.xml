@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#3D00E7</color>
     <color name="PrimaryText">#BF0B3846</color>
     <color name="colorAccent">#6200FF</color>
-    <color name="warning_red">#dbfd2200</color>
+    <color name="warning_red">#BFFD2200</color>
     <color name="white">#FFFFFF</color>
     <color name="lightbackground">#f4f9f4</color>
     <color name="light_grey">#e1bbbebb</color>
@@ -16,6 +16,8 @@
     <color name="log_reg_back">#FFFFFF</color>
     <color name="card_grey_background">#E4E4E4</color>
     <color name="card_default_text_color">#696969</color>
+    <color name="yellow">#BCFFB300</color>
+    <color name="success_green">#03AC03</color>
 </resources>
 <!--
 Set 1

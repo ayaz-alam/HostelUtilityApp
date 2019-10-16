@@ -19,7 +19,7 @@ public abstract class BaseRecyclerAdapter<T extends BaseBean>
         extends RecyclerView.Adapter<BaseViewHolder> {
 
     public static final int LOADING_VIEW_TYPE = 124;
-    private Context mContext;
+    public Context mContext;
     private int mLayoutResId;
     private LayoutInflater mLayoutInflater;
     private List<T> mData;

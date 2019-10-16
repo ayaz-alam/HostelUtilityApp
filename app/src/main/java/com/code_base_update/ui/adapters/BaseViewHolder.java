@@ -11,12 +11,11 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.code_base_update.interfaces.OnItemClickListener;
 
-public class BaseViewHolder extends RecyclerView.ViewHolder  {
+public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     private final SparseArray<View> views;
 
@@ -140,7 +139,8 @@ public class BaseViewHolder extends RecyclerView.ViewHolder  {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(getAdapterPosition());
+                if (listener != null)
+                    listener.onItemClick(getAdapterPosition());
             }
         });
     }

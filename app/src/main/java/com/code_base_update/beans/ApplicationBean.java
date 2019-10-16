@@ -1,16 +1,31 @@
 package com.code_base_update.beans;
 
+import java.util.Calendar;
+
 public class ApplicationBean extends BaseBean{
+
+    public static final int STATUS_WAITING = 0;
+    public static final int STATUS_SEEN = 1;
+    public static final int STATUS_ACCEPTED = 2;
+    public static final int STATUS_REJECTED = 3;
+    public static final int STATUS_WITHDRAWN = 4;
 
     private long applicationId;
     private String applicationDomain;
     private String subject;
     private String description;
     private long  timeStamp;
-    private boolean isAccepted;
-    private long acceptedOn;
     private String optionalDescription;
     private String studentId;
+    private int status  = STATUS_WAITING;
+    private long statusTime;
+    private String statusDescription = "Not seen";
+    private long revokedOn;
+    private boolean isActive = true;
+
+    //REQUIRED
+    public ApplicationBean() {
+    }
 
     public ApplicationBean(long applicationId) {
         this.applicationId = applicationId;
@@ -40,22 +55,6 @@ public class ApplicationBean extends BaseBean{
         this.description = description;
     }
 
-    public boolean isAccepted() {
-        return isAccepted;
-    }
-
-    public void setAccepted(boolean accepted) {
-        isAccepted = accepted;
-    }
-
-    public long getAcceptedOn() {
-        return acceptedOn;
-    }
-
-    public void setAcceptedOn(long acceptedOn) {
-        this.acceptedOn = acceptedOn;
-    }
-
     public String getOptionalDescription() {
         return optionalDescription;
     }
@@ -70,6 +69,7 @@ public class ApplicationBean extends BaseBean{
 
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
+        this.revokedOn = timeStamp;
     }
 
     public long getApplicationId() {
@@ -86,5 +86,56 @@ public class ApplicationBean extends BaseBean{
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
+    }
+
+    public void setAccepted(){
+        status = STATUS_ACCEPTED;
+        statusDescription =  "Accepted";
+        statusTime = Calendar.getInstance().getTimeInMillis();
+    }
+
+    public void setRejected(String reason){
+        status = STATUS_REJECTED;
+        statusDescription =  reason;
+        isActive =false;
+        statusTime = Calendar.getInstance().getTimeInMillis();
+    }
+
+    public void setWithdrawn(){
+        status = STATUS_WITHDRAWN;
+        statusDescription =  "Application withdrawn";
+        isActive = false;
+        statusTime = Calendar.getInstance().getTimeInMillis();
+    }
+
+    public void setSeen(){
+        status = STATUS_SEEN;
+        statusDescription =  "Application seen";
+        statusTime = Calendar.getInstance().getTimeInMillis();
+    }
+
+
+    public int getStatus() {
+        return status;
+    }
+
+    public long getStatusTime() {
+        return statusTime;
+    }
+
+    public String getStatusDescription() {
+        return statusDescription;
+    }
+
+    public long getRevokedOn() {
+        return revokedOn;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setReminder() {
+        revokedOn = Calendar.getInstance().getTimeInMillis();
     }
 }

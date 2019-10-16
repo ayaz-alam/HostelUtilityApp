@@ -8,6 +8,7 @@ import androidx.loader.content.AsyncTaskLoader;
 import com.code_base_update.DatabaseManager;
 import com.code_base_update.beans.ApplicationBean;
 import com.code_base_update.interfaces.DataCallback;
+import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.presenters.IApplicationListPresenter;
 import com.code_base_update.view.IApplicationListView;
 
@@ -54,6 +55,19 @@ public class ApplicationListModel implements IApplicationListPresenter {
             }
 
         }.loadInBackground();
+
+    }
+
+    @Override
+    public void sendReminder(Context context,ApplicationBean item, SuccessCallback callback) {
+        callback.onInitiated();
+        new DatabaseManager(context).sendApplicationReminder(item,callback);
+    }
+
+    @Override
+    public void withdrawApplication(Context context,ApplicationBean item, SuccessCallback callback) {
+        callback.onInitiated();
+        new DatabaseManager(context).withdrawApplication(item,callback);
 
     }
 

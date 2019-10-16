@@ -22,26 +22,33 @@ public class ComplaintListAdapter extends BaseRecyclerAdapter<ComplaintBean> {
     @Override
     void bindData(BaseViewHolder viewHolder, ComplaintBean item, int position) {
         if(!item.getComplaintId().equals(Constants.LOADING_ITEM)) {
+
             viewHolder.setText(R.id.tv_card_title, item.getComplaintDomainId());
             StringBuilder description = new StringBuilder("Problem facing with: " + item.getDetails());
-            if(!TextUtils.isEmpty(item.getOptionalDescription()))
-            {
+
+            if(!TextUtils.isEmpty(item.getOptionalDescription())){
                 description.append("\n\n");
                 description.append(item.getOptionalDescription());
             }
+
             viewHolder.setText(R.id.tv_card_body,description.toString());
             viewHolder.setText(R.id.tv_card_date, DateUtils.getTime(item.getTimeStamp()));
             Button resolveButton = viewHolder.getView(R.id.btn_resolve);
+
             if(item.isResolved()){
                 resolveButton.setText("Resolved");
                 viewHolder.getView(R.id.btn_resolve).setClickable(false);
+                resolveButton.setBackground(null);
                 viewHolder.setBackgroundRes(R.id.btn_resolve,R.drawable.success_button_green);
+                resolveButton.setTextColor(mContext.getResources().getColor(R.color.success_green));
                 viewHolder.setImageResource(R.id.iv_status_symbol,R.drawable.ic_success_icon);
-            }else{
+            }
+            else{
                 viewHolder.getView(R.id.btn_resolve).setClickable(true);
                 if(callback!=null) viewHolder.setItemClickListener(R.id.btn_resolve,callback);
-                viewHolder.setBackgroundRes(R.id.btn_resolve,R.drawable.new_submit_btn);
+                viewHolder.setBackgroundRes(R.id.btn_resolve,R.drawable.round_white);
                 resolveButton.setText("Mark Resolved");
+                resolveButton.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
                 viewHolder.setImageResource(R.id.iv_status_symbol,R.drawable.ic_new_waiting);
             }
         }

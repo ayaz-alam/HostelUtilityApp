@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DatabaseManager {
 
@@ -81,6 +82,7 @@ public class DatabaseManager {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()) {
+                            list.clear();
                             for (DataSnapshot d : dataSnapshot.getChildren()) {
                                 list.add(d.getValue(ApplicationBean.class));
                             }
@@ -315,6 +317,33 @@ public class DatabaseManager {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 callback.onFailure(databaseError.getMessage());
+            }
+        });
+
+    }
+
+    public void sendApplicationReminder(ApplicationBean item, final SuccessCallback callback) {
+        item.setReminder();
+        mDatabase.child(APPLICATION_FOLDER).child(new UserManager().getUID()).child(item.getApplicationId()+"")
+                .setValue(item).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) callback.onSuccess();
+                else callback.onFailure(task.getException().getLocalizedMessage());
+
+            }
+        });
+    }
+
+    public void withdrawApplication(ApplicationBean item, final SuccessCallback callback) {
+        item.setWithdrawn();
+        mDatabase.child(APPLICATION_FOLDER).child(new UserManager().getUID()).child(item.getApplicationId()+"")
+                .setValue(item).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) callback.onSuccess();
+                else callback.onFailure(task.getException().getLocalizedMessage());
+
             }
         });
 
