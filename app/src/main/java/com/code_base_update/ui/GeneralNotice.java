@@ -1,10 +1,12 @@
 package com.code_base_update.ui;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -31,6 +33,7 @@ public class GeneralNotice extends BaseActivity {
         return null;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initViewsAndEvents() {
 
@@ -42,6 +45,7 @@ public class GeneralNotice extends BaseActivity {
         myWebView = findViewById(R.id.general_notice);
         myWebView.getSettings().setLoadsImagesAutomatically(true);
         myWebView.setWebViewClient(new MyBrowser());
+        myWebView.setWebChromeClient(new MyChromeClient());
         myWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setHorizontalScrollBarEnabled(false);
@@ -95,6 +99,37 @@ public class GeneralNotice extends BaseActivity {
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
+    private class MyChromeClient extends WebChromeClient {
+        public void onProgressChanged(WebView view, int progress) {
+            mProgressBar.setProgress(progress);
+            if (progress == 100) {
+                mProgressBar.setVisibility(View.GONE);
+
+            } else {
+                mProgressBar.setVisibility(View.VISIBLE);
+
+            }
+        }
+    }
+
+    private class MyBrowser extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+//            mProgressBar.setVisibility(View.VISIBLE);
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            mProgressBar.setVisibility(View.GONE);
+        }
+
+
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_general_notice;
@@ -108,24 +143,5 @@ public class GeneralNotice extends BaseActivity {
             super.onBackPressed();
         }
     }
-
-    private class MyBrowser extends WebViewClient {
-
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            mProgressBar.setVisibility(View.VISIBLE);
-            return true;
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            super.onPageFinished(view, url);
-            mProgressBar.setVisibility(View.GONE);
-        }
-
-
-    }
-
 
 }
