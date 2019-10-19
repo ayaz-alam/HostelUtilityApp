@@ -138,6 +138,7 @@ public class GeneralNotice extends BaseActivity {
     @Override
     public void onBackPressed() {
         if (myWebView.canGoBack()) {
+            mProgressBar.setVisibility(View.VISIBLE);
             myWebView.goBack();
         } else {
             super.onBackPressed();

@@ -89,16 +89,16 @@ public class ProfileActivity extends BaseActivity {
         setText(R.id.tv_mobile_umber, student.getMobileNo());
         setText(R.id.tv_blood_group, student.getBloodGroup());
         setText(R.id.tv_cast, student.getCategory());
+        setText(R.id.tv_gender, student.getSex());
         setText(R.id.tv_enrollment_no, student.getEnrollNo());
         setText(R.id.tv_aadhar_no, student.getAdharNo());
         setText(R.id.tv_perma_address, student.getAddress());
         setText(R.id.tv_guardian_name, student.getGuardiaName());
-        setText(R.id.sp_class, student.getClassName());
-        setText(R.id.sp_year, student.getYear());
+        setText(R.id.sp_class, student.getClassName() + getString(R.string.space));
+        setText(R.id.sp_year, student.getYear() + getString(R.string.space));
         setText(R.id.sp_branch, student.getBranch());
         setImageUrl(R.id.iv_display_image, new UserManager().getImageUrl(),
                 student.getSex().equals(Human.FEMALE) ? R.drawable.ic_undraw_female_avatar : R.drawable.ic_undraw_male_avatar, new CircleCrop());
-
 
     }
 

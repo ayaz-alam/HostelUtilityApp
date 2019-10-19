@@ -163,6 +163,7 @@
     <string name="reset_pass_number_hint">An reset link would be sent to your registered email</string>
 
     <string name="all_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "</string>
+    <string name="space">&#160;|</string>
 
 
 </resources>
