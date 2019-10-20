@@ -10,6 +10,6 @@ We were asked to design an **Android App** that would allow college students and
 * [Kamal Kishor Meena](https://github.com/kamalkishormeena) - UI & UX developer
 * [Gopal Sharma](https://github.com/kamalkishormeena) - Researcher & Analyst
 
-Project made under guidance of
+## Project made under guidance of
 ### Dr. Vikramaditya Dave 
 (Assistant Professor at **Electrical Department, College of Technology and Engineering, Udaipur**).
