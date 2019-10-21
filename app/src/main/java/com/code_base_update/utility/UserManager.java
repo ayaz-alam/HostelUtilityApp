@@ -109,4 +109,12 @@ public class UserManager {
     public String getUID() {
        return InputHelper.removeDot(getEmail());
     }
+
+    public String getFacultyName() {
+        return "";
+    }
+
+    public String getFacultyId() {
+        return "";
+    }
 }

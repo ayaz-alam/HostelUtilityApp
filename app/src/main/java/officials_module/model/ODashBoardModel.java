@@ -1,25 +1,16 @@
-package com.code_base_update.models;
+package officials_module.model;
 
-import com.code_base_update.utility.UserManager;
 import com.code_base_update.beans.DashBoardBean;
-import com.code_base_update.presenters.IDashPresenter;
-import com.code_base_update.view.IDashView;
 import com.medeveloper.ayaz.hostelutility.R;
 
 import java.util.ArrayList;
 
-public class DashboardModel implements IDashPresenter {
-    private IDashView view;
+import officials_module.presenter.IODashboardPresenter;
+import officials_module.view.IODashboardView;
 
-    @Override
-    public void attachView(IDashView view) {
-        this.view =view;
-    }
+public class ODashBoardModel implements IODashboardPresenter {
 
-    @Override
-    public void detachView() {
-
-    }
+    private IODashboardView mView;
 
     @Override
     public void loadData() {
@@ -31,43 +22,46 @@ public class DashboardModel implements IDashPresenter {
         list.add(collegeNotice);
 
         DashBoardBean hostelNotice = new DashBoardBean();
-        hostelNotice.setTitle("Hostel Notice");
+        hostelNotice.setTitle("Hostel notice");
         hostelNotice.setDrawableId(R.drawable.ic_new_notice);
         list.add(hostelNotice);
 
         DashBoardBean complaintActivity = new DashBoardBean();
-        complaintActivity.setTitle("Register Complaint");
-        complaintActivity.setDrawableId(R.drawable.ic_new_complaint);
+        complaintActivity.setTitle("Send notice");
+        complaintActivity.setDrawableId(R.drawable.ic_send_notice);
         list.add(complaintActivity);
 
         DashBoardBean complaintListActivity = new DashBoardBean();
-        complaintListActivity.setTitle("Your Complaints");
+        complaintListActivity.setTitle("Complaints");
         complaintListActivity.setDrawableId(R.drawable.ic_new_complaint_list);
         list.add(complaintListActivity);
 
         DashBoardBean registerApplication = new DashBoardBean();
-        registerApplication.setTitle("Register Application");
-        registerApplication.setDrawableId(R.drawable.ic_new_diet_off);
+        registerApplication.setTitle("Applications");
+        registerApplication.setDrawableId(R.drawable.ic_new_application);
         list.add(registerApplication);
 
         DashBoardBean applicationList = new DashBoardBean();
-        applicationList.setTitle("Your applications");
+        applicationList.setTitle("Staffs and faculty");
         applicationList.setDrawableId(R.drawable.ic_new_application);
         list.add(applicationList);
 
-
-        view.onDataLoaded(list);
+        mView.onDataLoaded(list);
     }
 
     @Override
-    public void loadUserName() {
-        view.userNameLoaded(new UserManager().getName());
+    public void loadProfileImage() {
+
+        mView.onProfileImageLoaded();
     }
 
     @Override
-    public void loadUserImageUrl() {
-        view.onDisplayImageLoaded(new UserManager().getImageUrl());
+    public void attachView(IODashboardView view) {
+        mView = view;
     }
 
+    @Override
+    public void detachView() {
 
+    }
 }

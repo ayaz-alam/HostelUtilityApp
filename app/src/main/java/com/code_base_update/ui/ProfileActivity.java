@@ -55,7 +55,7 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 new UserManager().logout();
-                startActivity(new Intent(getApplicationContext(), NewLogin.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finishAffinity();
 
             }

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.code_base_update.beans.ApplicationBean;
 import com.code_base_update.beans.CollegeBean;
 import com.code_base_update.beans.ComplaintBean;
+import com.code_base_update.beans.HostelNoticeBean;
 import com.code_base_update.beans.Student;
 import com.code_base_update.interfaces.DataCallback;
 import com.code_base_update.interfaces.SuccessCallback;
@@ -31,7 +32,7 @@ public class DatabaseManager {
     public static final String COMPLAINT_FOLDER = "Complaints";
     private static final String COMPLAINT_TYPES = "ComplaintList";
     private static final String APPLICATION_FOLDER = "Applications";
-    private static final String COMPLAINT_STATUS = "complaintStatus";
+    private static final String NOTICE_FOLDER = "Notices";
     private DatabaseReference mDatabase;
     private SessionManager session;
     private Context context;
@@ -347,5 +348,16 @@ public class DatabaseManager {
             }
         });
 
+    }
+
+    public void saveNotice(HostelNoticeBean notice, final SuccessCallback callback) {
+        callback.onInitiated();
+        mDatabase.child(NOTICE_FOLDER).child(notice.getNoticeId()).setValue(notice).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) callback.onSuccess();
+                else callback.onFailure(task.getException().getLocalizedMessage());
+            }
+        });
     }
 }

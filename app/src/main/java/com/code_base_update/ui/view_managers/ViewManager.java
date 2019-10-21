@@ -37,6 +37,7 @@ public class ViewManager {
 
     public View setVisible(int viewId, boolean visible) {
         View view = getView(viewId);
+        if(view!=null)
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
         return view;
     }

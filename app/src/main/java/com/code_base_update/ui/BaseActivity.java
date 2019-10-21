@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,8 +30,6 @@ import com.medeveloper.ayaz.hostelutility.R;
 
 import com.code_base_update.presenters.IBasePresenter;
 import com.code_base_update.view.IBaseView;
-
-import org.w3c.dom.Text;
 
 public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter<V>> extends AppCompatActivity implements IImageManager, ITextManager {
 
@@ -248,7 +245,7 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
 
     public void logout(){
         getUserManager().logout();
-        startActivity(new Intent(this,NewLogin.class));
+        startActivity(new Intent(this, LoginActivity.class));
         finishAffinity();
     }
 

@@ -21,7 +21,7 @@ import com.medeveloper.ayaz.hostelutility.R;
 import static com.code_base_update.Constants.STUDENT;
 import static com.code_base_update.Constants.TEACHER;
 
-public class NewLogin extends BaseActivity<ILoginView, ILoginPresenter> implements ILoginView{
+public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> implements ILoginView{
 
     private ProgressDialog mProgressDialog;
     private EditText mUsername,mPassword;

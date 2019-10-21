@@ -44,7 +44,7 @@
                   android:windowSoftInputMode="adjustNothing">
 
         </activity>
-        <activity android:name="com.code_base_update.ui.NewLogin"
+        <activity android:name="com.code_base_update.ui.LoginActivity"
             android:theme="@style/Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -76,6 +76,9 @@
             </intent-filter>
         </activity>
         <activity android:name="com.code_base_update.ui.InfiniteScrollingActivity" />
+        <activity android:name="officials_module.ui.OfficialDashboard" />
+        <activity android:name="officials_module.ui.SendNoticeActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

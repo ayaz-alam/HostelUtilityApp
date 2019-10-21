@@ -5,10 +5,10 @@ public class HostelNoticeBean extends BaseBean{
     private String noticeId;
     private String noticeSubject;
     private String noticeBody;
-    private String noticeAuthorId;
+    private String noticeAuthorId = "";
     private long date;
-    private String imageUrl;
-    private String byFaculty;
+    private String imageUrl = "";
+    private String byFaculty = "";
 
     public HostelNoticeBean(String noticeId) {
         this.noticeId = noticeId;

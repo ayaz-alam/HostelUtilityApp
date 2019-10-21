@@ -7,13 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.FirebaseDatabase;
 
+import officials_module.ui.OfficialDashboard;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prepareOfflineMode();
-        startActivity(new Intent(this, NewLogin.class));
+        startActivity(new Intent(this, OfficialDashboard.class));
         finish();
     }
 
