@@ -28,7 +28,7 @@ public class ODashBoardModel implements IODashboardPresenter {
 
         DashBoardBean complaintActivity = new DashBoardBean();
         complaintActivity.setTitle("Send notice");
-        complaintActivity.setDrawableId(R.drawable.ic_send_notice);
+        complaintActivity.setDrawableId(R.drawable.new_send_notice);
         list.add(complaintActivity);
 
         DashBoardBean complaintListActivity = new DashBoardBean();
@@ -43,7 +43,7 @@ public class ODashBoardModel implements IODashboardPresenter {
 
         DashBoardBean applicationList = new DashBoardBean();
         applicationList.setTitle("Staffs and faculty");
-        applicationList.setDrawableId(R.drawable.ic_new_application);
+        applicationList.setDrawableId(R.drawable.new_staff);
         list.add(applicationList);
 
         mView.onDataLoaded(list);
