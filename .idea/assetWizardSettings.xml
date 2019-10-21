@@ -156,9 +156,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="008000" />
-                            <entry key="outputName" value="ic_success_icon" />
-                            <entry key="sourceFile" value="D:\backPc\Downloads\undraw_uploading_go67.svg" />
+                            <entry key="outputName" value="new_faculty" />
+                            <entry key="sourceFile" value="D:\backPc\Downloads\university-building.svg" />
                           </map>
                         </option>
                       </PersistentState>
