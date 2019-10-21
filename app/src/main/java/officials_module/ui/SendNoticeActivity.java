@@ -157,7 +157,6 @@ public class SendNoticeActivity extends BaseActivity<ISendNoticeView, ISendNotic
         if (checkPermissionForCamera() && checkPermissionForStorageRead()) {
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
-                    .setFixAspectRatio(true)
                     .start(this);
         } else {
             final String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE};
