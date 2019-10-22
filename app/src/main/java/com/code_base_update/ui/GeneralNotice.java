@@ -2,6 +2,8 @@ package com.code_base_update.ui;
 
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -53,8 +55,9 @@ public class GeneralNotice extends BaseActivity {
         myWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         if (!isConnected(this)) {
-
-            final Handler handler = new Handler();
+            mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.setIndeterminate(true);
+            Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -62,7 +65,7 @@ public class GeneralNotice extends BaseActivity {
                     mProgressBar.setVisibility(View.GONE);
                     connectionLayout.setVisibility(View.VISIBLE);
                 }
-            }, 1000);
+            }, 1500);
 
         } else {
             connectionLayout.setVisibility(View.GONE);
@@ -97,6 +100,20 @@ public class GeneralNotice extends BaseActivity {
             });
         }
         mProgressBar.setVisibility(View.VISIBLE);
+
+        findViewById(R.id.btn_try).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reloadWebView();
+            }
+        });
+
+        findViewById(R.id.btn_setting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNetworkSettings();
+            }
+        });
     }
 
     private class MyChromeClient extends WebChromeClient {
@@ -104,7 +121,6 @@ public class GeneralNotice extends BaseActivity {
             mProgressBar.setProgress(progress);
             if (progress == 100) {
                 mProgressBar.setVisibility(View.GONE);
-
             } else {
                 mProgressBar.setVisibility(View.VISIBLE);
 
@@ -133,6 +149,34 @@ public class GeneralNotice extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_general_notice;
+    }
+
+    protected void reloadWebView() {
+        mProgressBar.setVisibility(View.VISIBLE);
+        connectionLayout.setVisibility(View.GONE);
+        if (isConnected(getApplicationContext())) {
+            mProgressBar.setIndeterminate(false);
+            myWebView.loadUrl("https://ctae.ac.in");
+        } else {
+            mProgressBar.setIndeterminate(true);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //Do something after 100ms
+                    mProgressBar.setVisibility(View.GONE);
+                    connectionLayout.setVisibility(View.VISIBLE);
+                }
+            }, 1500);
+        }
+    }
+
+    protected void openNetworkSettings() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setComponent(new ComponentName("com.android.settings",
+                "com.android.settings.Settings$DataUsageSummaryActivity"));
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override

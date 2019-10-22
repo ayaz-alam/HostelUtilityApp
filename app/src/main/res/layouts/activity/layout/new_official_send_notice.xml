@@ -43,12 +43,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_upload">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -56,11 +57,9 @@
 
             <Button
                 android:id="@+id/btn_add_image"
-                android:layout_marginTop="@dimen/def_16dp"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
                 android:drawableLeft="@drawable/ic_add_a_photo"
                 android:drawablePadding="12dp"
                 android:drawableTint="@color/colorPrimary"
@@ -69,44 +68,42 @@
                 android:textAllCaps="false"
                 android:textColor="@color/grey"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/et_notice_desc" />
+                app:layout_constraintBottom_toBottomOf="@+id/btn_send_notice"
+                app:layout_constraintStart_toStartOf="@+id/et_notice_desc"
+                app:layout_constraintTop_toTopOf="@+id/btn_send_notice" />
 
             <Button
                 android:id="@+id/btn_send_notice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
+                android:layout_marginTop="@dimen/def_16dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/new_submit_btn"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
                 android:text="Send Notice"
                 android:textColor="@color/white"
-                android:layout_marginTop="@dimen/def_16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.855"
-                app:layout_constraintStart_toEndOf="@+id/btn_add_image"
-                app:layout_constraintTop_toBottomOf="@+id/et_notice_desc"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintEnd_toEndOf="@+id/et_notice_desc"
+                app:layout_constraintTop_toBottomOf="@+id/et_notice_desc" />
 
 
             <EditText
                 android:id="@+id/et_notice"
                 android:layout_width="0dp"
-                android:paddingLeft="@dimen/def_16dp"
-                android:paddingRight="@dimen/def_16dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/def_16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="@dimen/def_16dp"
                 android:background="@drawable/new_edit_txt_bg"
                 android:ems="10"
-                android:layout_marginTop="@dimen/def_16dp"
                 android:gravity="start|top"
                 android:hint="Type notice/subject/title here"
                 android:inputType="textMultiLine"
+                android:maxLines="2"
+                android:paddingLeft="@dimen/def_16dp"
+                android:paddingRight="@dimen/def_16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,15 +112,17 @@
             <EditText
                 android:id="@+id/et_notice_desc"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxHeight="150dp"
+                android:minHeight="100dp"
                 android:layout_marginTop="@dimen/def_16dp"
-                android:layout_height="100dp"
-                android:scrollbars="vertical"
                 android:background="@color/new_edit_box_state"
-                android:paddingLeft="@dimen/def_16dp"
-                android:paddingRight="@dimen/def_16dp"
                 android:gravity="start|top"
                 android:hint="Type title description"
                 android:inputType="textMultiLine"
+                android:paddingLeft="@dimen/def_16dp"
+                android:paddingRight="@dimen/def_16dp"
+                android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="@+id/et_notice"
                 app:layout_constraintStart_toStartOf="@+id/et_notice"
                 app:layout_constraintTop_toBottomOf="@+id/et_notice" />
