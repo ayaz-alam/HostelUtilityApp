@@ -5,10 +5,10 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/scene">
+    app:layoutDescription="@xml/profile_activity_scene">
 
-    <include layout="@layout/motion_profile" />
+    <include layout="@layout/profile_motion" />
 
-    <include layout="@layout/new_scroll" />
+    <include layout="@layout/profile_scroll_view" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

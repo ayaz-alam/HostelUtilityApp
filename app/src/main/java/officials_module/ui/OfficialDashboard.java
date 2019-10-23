@@ -1,15 +1,22 @@
 package officials_module.ui;
 
 import android.content.Intent;
+import android.transition.Fade;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.code_base_update.beans.DashBoardBean;
 import com.code_base_update.interfaces.OnItemClickListener;
+import com.code_base_update.ui.AboutSection;
 import com.code_base_update.ui.BaseActivity;
 import com.code_base_update.ui.GeneralNotice;
 import com.code_base_update.ui.HostelNoticeActivity;
@@ -54,6 +61,7 @@ public class OfficialDashboard extends BaseActivity<IODashboardView, IODashboard
 
     @Override
     protected void initViewsAndEvents() {
+        setupToolbar("");
         adapter = getAdapter();
         RecyclerView recyclerView = getRecyclerView();
         recyclerView.setAdapter(adapter);
@@ -113,7 +121,30 @@ public class OfficialDashboard extends BaseActivity<IODashboardView, IODashboard
 
         }
 
+    }
 
+    private void openAboutSection() {
+        startActivity(new Intent(this, AboutSection.class));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.about:
+                openAboutSection();
+                break;
+            case R.id.logout:
+                logout();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

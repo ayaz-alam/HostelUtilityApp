@@ -5,7 +5,7 @@
     android:id="@+id/motionPro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/scene_header">
+    app:layoutDescription="@xml/profile_header_scene">
 
     <View
         android:id="@+id/view"

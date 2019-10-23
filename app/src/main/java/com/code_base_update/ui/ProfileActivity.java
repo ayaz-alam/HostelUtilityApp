@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +52,7 @@ public class ProfileActivity extends BaseActivity {
 
         setupToolbar("");
         enableNavigation();
+        setFadeAnim();
         getView(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

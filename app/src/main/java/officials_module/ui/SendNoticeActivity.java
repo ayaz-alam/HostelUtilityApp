@@ -41,6 +41,8 @@ public class SendNoticeActivity extends BaseActivity<ISendNoticeView, ISendNotic
 
     @Override
     protected void initViewsAndEvents() {
+        setupToolbar("Send Notice");
+        enableNavigation();
         progressDialog = new MyDialog().getProgressDialog("Please wait...",this);
 
         getView(R.id.btn_send_notice).setOnClickListener(new View.OnClickListener() {

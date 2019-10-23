@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/new_card_title_bg"
-    android:fillViewport="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

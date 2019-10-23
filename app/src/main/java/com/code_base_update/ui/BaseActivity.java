@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.View;
@@ -243,6 +244,16 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
 
         }
 
+    }
+
+    public void setFadeAnim() {
+        Fade fade = new Fade();
+        fade.excludeTarget(R.id.toolbar, true);
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+
+        getWindow().setEnterTransition(fade);
+        getWindow().setExitTransition(fade);
     }
 
     public boolean isConnected(Context context) {
