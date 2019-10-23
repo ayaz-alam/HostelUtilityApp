@@ -13,6 +13,7 @@
             motion:touchAnchorId="@+id/view"
             motion:touchAnchorSide="bottom" />
 
+    </Transition>
         <ConstraintSet android:id="@+id/start">
 
             <Constraint
@@ -216,6 +217,5 @@
                 motion:layout_constraintGuide_percent="0.48" />
 
         </ConstraintSet>
-    </Transition>
 
 </MotionScene>
