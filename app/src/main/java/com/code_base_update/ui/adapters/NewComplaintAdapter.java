@@ -13,12 +13,12 @@ public class NewComplaintAdapter extends BaseRecyclerAdapter<ComplaintBean> {
     }
 
     @Override
-    void bindData(BaseViewHolder viewHolder, ComplaintBean item, int position) {
+    public void bindData(BaseViewHolder viewHolder, ComplaintBean item, int position) {
 
     }
 
     @Override
-    void updateDataOnTouch(int position) {
+    public void updateDataOnTouch(int position) {
 
     }
 }

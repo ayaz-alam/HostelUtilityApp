@@ -13,14 +13,14 @@ public class DashboardRecyclerAdapter extends BaseRecyclerAdapter<DashBoardBean>
     }
 
     @Override
-    void bindData(BaseViewHolder viewHolder, DashBoardBean item, int position) {
+    public void bindData(BaseViewHolder viewHolder, DashBoardBean item, int position) {
         viewHolder.setText(R.id.tv_dashboard_card,item.getTitle());
         viewHolder.setImageResource(R.id.iv_dashboard_icon,item.getDrawableId());
 
     }
 
     @Override
-    void updateDataOnTouch(int position) {
+    public void updateDataOnTouch(int position) {
 
     }
 }

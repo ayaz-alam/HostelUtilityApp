@@ -17,7 +17,7 @@ public class HostelNoticeAdapter extends BaseRecyclerAdapter<HostelNoticeBean> {
     }
 
     @Override
-    void bindData(BaseViewHolder viewHolder, HostelNoticeBean item, int position) {
+    public void bindData(BaseViewHolder viewHolder, HostelNoticeBean item, int position) {
         viewHolder.setText(R.id.tv_notice_title, item.getNoticeId());
         viewHolder.setText(R.id.tv_faculty, item.getByFaculty());
         viewHolder.setText(R.id.tv_notice_date, DateUtils.getTime(item.getDate()));
@@ -39,7 +39,7 @@ public class HostelNoticeAdapter extends BaseRecyclerAdapter<HostelNoticeBean> {
     }
 
     @Override
-    void updateDataOnTouch(int position) {
+    public void updateDataOnTouch(int position) {
 
     }
 }

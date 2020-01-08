@@ -20,7 +20,7 @@ public class ApplicationListAdapter extends BaseRecyclerAdapter<ApplicationBean>
     }
 
     @Override
-    void bindData(BaseViewHolder viewHolder, ApplicationBean item, int position) {
+    public void bindData(BaseViewHolder viewHolder, ApplicationBean item, int position) {
         viewHolder.setText(R.id.tv_head, item.getApplicationDomain());
         viewHolder.setText(R.id.tv_subject, item.getSubject());
         viewHolder.setText(R.id.tv_desription, item.getDescription());
@@ -72,7 +72,7 @@ public class ApplicationListAdapter extends BaseRecyclerAdapter<ApplicationBean>
     }
 
     @Override
-    void updateDataOnTouch(int position) {
+    public void updateDataOnTouch(int position) {
 
     }
 }
