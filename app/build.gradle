@@ -61,6 +61,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
     implementation 'id.zelory:compressor:2.1.0'
+
+    //guest
+    implementation 'com.synnapps:carouselview:0.1.5'
 }
 
 apply plugin: 'com.google.gms.google-services'

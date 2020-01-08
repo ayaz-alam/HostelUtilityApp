@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.code_base_update.GuestInside;
 import com.code_base_update.utility.UserManager;
 import com.code_base_update.utility.InputHelper;
 import com.code_base_update.models.LoginModel;
@@ -78,6 +79,14 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
             @Override
             public void onClick(View v) {
                 mPresenter.startForgotPassWordDialog(mCtx);
+            }
+        });
+        getView(R.id.btn_guest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(LoginActivity.this, GuestInside.class);//Optional parameters
+                startActivity(myIntent);
+                //mPresenter.startGuest(mCtx);
             }
         });
 

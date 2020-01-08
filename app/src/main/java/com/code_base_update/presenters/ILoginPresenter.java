@@ -10,4 +10,6 @@ public interface ILoginPresenter extends IBasePresenter<ILoginView>{
     void startSignUpActivity(Context mCtx);
 
     void startForgotPassWordDialog(Context mCtx);
+
+//    void startGuest(Context mCtx);
 }
