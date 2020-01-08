@@ -6,7 +6,7 @@
     <item>
         <bitmap
             android:alpha="1"
-            android:src="@drawable/logo_large"
+            android:src="@drawable/hostelutilityapp_main_logo"
             android:gravity="center"/>
     </item>
 </layer-list>

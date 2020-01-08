@@ -12,6 +12,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
     <string-array name="complaint_array">
         <item>Select complaint field</item>
 
@@ -25,12 +26,24 @@
         <item>Water Supply</item>
 
     </string-array>
+    <string-array name="complaint_type">
+        <item>Select complaint type</item>
+    </string-array>
+
     <string-array name="categories">
         <item>Select Category</item>
         <item>General</item>
         <item>OBC</item>
         <item>SC/ST</item>
     </string-array>
+
+    <string-array name="gender">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Others</item>
+    </string-array>
+
     <string-array name="year">
         <item>Year</item>
         <item>I</item>
@@ -38,6 +51,7 @@
         <item>III</item>
         <item>IV</item>
     </string-array>
+
     <string-array name="branch">
         <item>Branch</item>
         <item>AGE</item>
@@ -50,6 +64,7 @@
         <item>MI</item>
         <item>Dairy and Food Science</item>
     </string-array>
+
     <string-array name="stream">
         <item>Class</item>
         <item>B-Tech</item>
@@ -57,6 +72,7 @@
         <item>PhD</item>
         <item>Other</item>
     </string-array>
+
     <string-array name="blood_group">
         <item>Select Blood Group</item>
         <item>A+</item>
@@ -67,6 +83,13 @@
         <item>B-</item>
         <item>AB-</item>
         <item>O-</item>
+    </string-array>
+
+    <string-array name="application_type">
+        <item>Select Application Subject</item>
+        <item>Diet-Off</item>
+        <item>Leave</item>
+        <item>Other</item>
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -137,6 +160,10 @@
     <string name="fragment_tag">currentFrag</string>
     <string name="pref_mail">pref_mail</string>
     <string name="forgot_pass_hint">Forgot Password</string>
-    <string name="reset_pass_number_hint">An Email would be sent to your registered email Id for resetting the Password</string>
+    <string name="reset_pass_number_hint">An reset link would be sent to your registered email</string>
+
+    <string name="all_char">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "</string>
+    <string name="space">&#160;|</string>
+
 
 </resources>
