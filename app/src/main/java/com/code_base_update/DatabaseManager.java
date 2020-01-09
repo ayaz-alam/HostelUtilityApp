@@ -360,4 +360,28 @@ public class DatabaseManager {
             }
         });
     }
+
+    public void loadAllNotice(final DataCallback<ArrayList<HostelNoticeBean>> callback) {
+        final ArrayList<HostelNoticeBean> list= new ArrayList<>();
+        mDatabase.child(DatabaseManager.NOTICE_FOLDER).
+                orderByChild("timeStamp").
+                addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()) {
+                            list.clear();
+                            for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                list.add(d.getValue(HostelNoticeBean.class));
+                            }
+                            callback.onSuccess(list);
+                        }else callback.onFailure("No data found");
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        callback.onError(databaseError.getMessage());
+                    }
+                });
+    }
 }

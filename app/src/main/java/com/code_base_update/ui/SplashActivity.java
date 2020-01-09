@@ -15,7 +15,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prepareOfflineMode();
-        startActivity(new Intent(this, OfficialDashboard.class));
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 

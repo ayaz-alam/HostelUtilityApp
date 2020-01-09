@@ -67,6 +67,7 @@ public class SendNoticeActivity extends BaseActivity<ISendNoticeView, ISendNotic
         HostelNoticeBean notice  = new HostelNoticeBean();
         notice.setNoticeId(timeStamp+"");
         notice.setDate(timeStamp);
+        notice.setTimeStamp(timeStamp);
         notice.setImageUrl("");
         notice.setByFaculty(getUserManager().getFacultyName());
         notice.setByFaculty(getUserManager().getFacultyId());

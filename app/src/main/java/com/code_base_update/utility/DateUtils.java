@@ -14,7 +14,7 @@ public class DateUtils {
         calendar.setTimeInMillis(timestamp);
         Date date = new Date(timestamp);
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm,  EEE, MMM d, ''yy",new Locale("en-rIN"));
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        sdf.setTimeZone(TimeZone.getDefault());
         String formattedDate = sdf.format(date);
         return formattedDate;
     }

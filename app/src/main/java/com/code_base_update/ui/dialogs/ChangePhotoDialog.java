@@ -1,8 +1,8 @@
 package com.code_base_update.ui.dialogs;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class ChangePhotoDialog extends AlertDialog {
 

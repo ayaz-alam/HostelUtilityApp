@@ -18,13 +18,17 @@ public class HostelNoticeAdapter extends BaseRecyclerAdapter<HostelNoticeBean> {
 
     @Override
     public void bindData(BaseViewHolder viewHolder, HostelNoticeBean item, int position) {
-        viewHolder.setText(R.id.tv_notice_title, item.getNoticeId());
+        viewHolder.setText(R.id.tv_notice_title, item.getNoticeSubject());
         viewHolder.setText(R.id.tv_faculty, item.getByFaculty());
         viewHolder.setText(R.id.tv_notice_date, DateUtils.getTime(item.getDate()));
         viewHolder.setText(R.id.tv_notice_body, item.getNoticeBody());
-        if (item.getImageUrl() != null && item.getImageUrl().equals(""))
+        if (item.hasImage()) {
             viewHolder.setImageUrl(R.id.img_notice, item.getImageUrl());
-        else viewHolder.setVisible(R.id.img_notice, false);
+        }
+        else {
+            viewHolder.setVisible(R.id.img_notice, false);
+            viewHolder.setVisible(R.id.pg_notice_card,false);
+        }
         final TextView noticeBody = viewHolder.getView(R.id.tv_notice_body);
         viewHolder.setOnClickListener(R.id.read_more, new View.OnClickListener() {
             @Override

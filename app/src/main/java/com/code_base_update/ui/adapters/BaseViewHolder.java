@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.code_base_update.interfaces.OnItemClickListener;
+import com.medeveloper.ayaz.hostelutility.R;
 
 public class BaseViewHolder extends RecyclerView.ViewHolder {
 
@@ -78,7 +79,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     public BaseViewHolder setImageUrl(int viewId, String imageUrl) {
         ImageView view = getView(viewId);
-        Glide.with(context).load(imageUrl).into(view);
+        Glide.with(context).load(imageUrl).error(R.drawable.no_image_back).into(view);
         return this;
     }
 

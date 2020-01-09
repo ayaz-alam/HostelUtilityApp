@@ -1,6 +1,10 @@
 package com.code_base_update.models;
 
+import android.content.Context;
+
+import com.code_base_update.DatabaseManager;
 import com.code_base_update.beans.HostelNoticeBean;
+import com.code_base_update.interfaces.DataCallback;
 import com.code_base_update.presenters.IHostelNoticePresenter;
 import com.code_base_update.view.IHostelNoticeView;
 
@@ -9,14 +13,31 @@ import java.util.ArrayList;
 public class HostelNoticeModel implements IHostelNoticePresenter {
 
     private IHostelNoticeView view;
+    private Context context;
+
+    public HostelNoticeModel(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void loadNotice() {
-        ArrayList<HostelNoticeBean> list = new ArrayList<>();
-        for(int i=0;i<20;i++){
-            list.add(new HostelNoticeBean("Notice_no_"+i));
-        }
-        view.onNoticeLoaded(list);
+        DatabaseManager database = new DatabaseManager(context);
+        database.loadAllNotice(new DataCallback<ArrayList<HostelNoticeBean>>() {
+            @Override
+            public void onSuccess(ArrayList<HostelNoticeBean> hostelNoticeBeans) {
+                view.onNoticeLoaded(hostelNoticeBeans);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                view.onErrorOccurred(msg);
+            }
+
+            @Override
+            public void onError(String msg) {
+                view.onErrorOccurred(msg);
+            }
+        });
     }
 
     @Override
