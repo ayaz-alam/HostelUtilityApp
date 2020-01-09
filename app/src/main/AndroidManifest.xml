@@ -80,7 +80,8 @@
         <activity android:name="officials_module.ui.SendNoticeActivity"
             android:windowSoftInputMode="adjustPan"/>
 
-        <activity android:name="com.code_base_update.GuestInside" />
+        <activity android:name="guest_module.ImageGalleyActivity" />
+        <activity android:name="guest_module.GuestDashboard" />
     </application>
 
 </manifest>
