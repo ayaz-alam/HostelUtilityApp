@@ -66,7 +66,6 @@
                 android:id="@+id/slideguest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/guest_desc_bg"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,16 +91,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_headline" />
-
-                <TextView
-                    android:id="@+id/textView29"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:text="@string/Lorem"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_head_desc" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.Guideline

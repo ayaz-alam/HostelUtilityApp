@@ -57,6 +57,8 @@ public class ImageGalleyActivity extends BaseActivity {
         TextView heading = findViewById(R.id.tv_headline);
 
         Intent intent  = getIntent();
+        TextView textView = findViewById(R.id.tv_head_desc);
+        textView.setText(intent.getStringExtra(GuestConstants.TEXT_TYPE));
         images = intent.getStringArrayExtra(GuestConstants.IMAGE_ARRAY);
         switch(intent.getIntExtra(GuestConstants.IMAGE_TYPE,GuestConstants.HOSTEL_OUTSIDE)){
             case GuestConstants.HOSTEL_OUTSIDE:

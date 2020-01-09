@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DatabaseManager {
 
@@ -33,6 +34,7 @@ public class DatabaseManager {
     private static final String APPLICATION_FOLDER = "Applications";
     private static final String NOTICE_FOLDER = "Notices";
     private static final String HOSTEL_CAROUSEL = "HostelImages";
+    private static final String HOSTEL_TEXT = "GuestText";
     private DatabaseReference mDatabase;
     private SessionManager session;
     private Context context;
@@ -425,6 +427,29 @@ public class DatabaseManager {
                         arr[i++] = data.getValue().toString();
                     }
                     list.put(Integer.parseInt(d.getKey()), arr);
+                }
+                hashMapDataCallback.onSuccess(list);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                hashMapDataCallback.onFailure(databaseError.getMessage());
+            }
+        });
+
+
+    }
+
+    public void loadHostelText(final DataCallback<HashMap<String,String>> hashMapDataCallback) {
+        final DatabaseReference ref = mDatabase.child("College_id_1234").child("h_no_1").child(HOSTEL_TEXT);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String,String> list = new HashMap<>();
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    list.put(d.getKey(), d.getValue().toString());
                 }
                 hashMapDataCallback.onSuccess(list);
 

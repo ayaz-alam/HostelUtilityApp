@@ -17,6 +17,9 @@ import com.code_base_update.ui.BaseActivity;
 import com.code_base_update.ui.adapters.DashboardRecyclerAdapter;
 import com.medeveloper.ayaz.hostelutility.R;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static guest_module.GuestConstants.HOSTEL_TEXT;
 
 public class GuestDashboard extends BaseActivity {
 
@@ -25,6 +28,7 @@ public class GuestDashboard extends BaseActivity {
     private RecyclerView recyclerView;
     private SparseArray<String[]> imageMaps;
     private ProgressDialog progressDialog;
+    private HashMap<String, String> textHash;
 
     @Override
     protected int getLayoutId() {
@@ -88,6 +92,7 @@ public class GuestDashboard extends BaseActivity {
         list = new ArrayList<>();
         loadData();
         loadImages();
+        setText(R.id.tv_username,"");
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -104,8 +109,39 @@ public class GuestDashboard extends BaseActivity {
                 }
                 intent.putExtra(GuestConstants.IMAGE_ARRAY,imageMaps.get(type));
                 intent.putExtra(GuestConstants.IMAGE_TYPE,type);
+                intent.putExtra(GuestConstants.TEXT_TYPE,textHash.get(getTextType(type)));
                 startActivity(intent);
 
+            }
+        });
+    }
+
+    private String getTextType(int type){
+        switch (type){
+            case GuestConstants.HOSTEL_OUTSIDE:return HOSTEL_TEXT;
+            case GuestConstants.HOSTEL_INSIDE:return GuestConstants.HOSTEL_INTERIOR;
+            case GuestConstants.MESS:return GuestConstants.HOSTEL_MESS;
+            case GuestConstants.ROOM:return GuestConstants.HOSTEL_ROOM;
+        }
+        return HOSTEL_TEXT;
+    }
+
+    private void loadText(){
+        new DatabaseManager(mContext).loadHostelText(new DataCallback<HashMap<String, String>>() {
+            @Override
+            public void onSuccess(HashMap<String, String> stringStringHashMap) {
+                textHash = stringStringHashMap;
+                removeProgressBar();
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                removeProgressBar();
+            }
+
+            @Override
+            public void onError(String msg) {
+                removeProgressBar();
             }
         });
     }
@@ -116,7 +152,7 @@ public class GuestDashboard extends BaseActivity {
             @Override
             public void onSuccess(SparseArray<String[]> sparseArray) {
                 imageMaps = sparseArray;
-                removeProgressBar();
+                loadText();
             }
 
             @Override
@@ -127,7 +163,7 @@ public class GuestDashboard extends BaseActivity {
 
             @Override
             public void onError(String msg) {
-                removeProgressBar();
+                loadText();
                 toastMsg(msg);
             }
         });

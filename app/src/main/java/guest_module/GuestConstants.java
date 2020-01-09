@@ -2,22 +2,31 @@ package guest_module;
 
 public class GuestConstants {
     public static final String IMAGE_ARRAY = "image_array";
-    protected final static int HOSTEL_OUTSIDE = 10;
+    public static final String TEXT_TYPE = "text_type";
 
-    protected final static int HOSTEL_INSIDE = 1;
+    final static int HOSTEL_OUTSIDE = 10;
 
-    protected final static int ROOM = 2;
+    final static int HOSTEL_INSIDE = 1;
 
-    protected final static int MESS = 3 ;
+    final static int ROOM = 2;
 
-    protected final static String HostelOutside = "Hostel";
+    final static int MESS = 3 ;
 
-    protected final static String HostelInterior = "Hostel Interior";
+    final static String HostelOutside = "Hostel";
 
-    protected final static String Room = "Rooms";
+    final static String HostelInterior = "Hostel Interior";
 
-    protected final static String Mess = "Mess";
+    final static String Room = "Rooms";
 
-    protected final static String IMAGE_TYPE= "Img_typ";
+    final static String Mess = "Mess";
+
+    final static String IMAGE_TYPE= "Img_typ";
+
+    final static String HOSTEL_TEXT ="100";
+    final static String HOSTEL_INTERIOR ="400";
+    final static String HOSTEL_MESS ="200";
+    final static String HOSTEL_ROOM ="300";
+
+
 
 }
