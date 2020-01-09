@@ -75,12 +75,12 @@ public class GuestDashboard extends BaseActivity {
 
         DashBoardBean complaintActivity = new DashBoardBean();
         complaintActivity.setTitle("Rooms");
-        complaintActivity.setDrawableId(R.drawable.ic_new_complaint);
+        complaintActivity.setDrawableId(R.drawable.ic_new_rooms);
         list.add(complaintActivity);
 
         DashBoardBean complaintListActivity = new DashBoardBean();
         complaintListActivity.setTitle("Mess");
-        complaintListActivity.setDrawableId(R.drawable.ic_new_complaint_list);
+        complaintListActivity.setDrawableId(R.drawable.ic_new_mess);
         list.add(complaintListActivity);
 
         onDataLoaded(list);
@@ -92,7 +92,7 @@ public class GuestDashboard extends BaseActivity {
         list = new ArrayList<>();
         loadData();
         loadImages();
-        setText(R.id.tv_username,"");
+        setText(R.id.tv_username, "Guest");
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
