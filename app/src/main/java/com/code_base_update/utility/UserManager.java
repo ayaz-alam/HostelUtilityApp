@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import static com.code_base_update.Constants.STUDENT;
+
 public class UserManager {
 
     private FirebaseAuth mAuth;
@@ -70,8 +72,9 @@ public class UserManager {
 
     }
 
-    public void logout() {
+    public void logout(Context context) {
         mAuth.signOut();
+        new SessionManager(context).clear();
     }
 
     public String getEmail() {
@@ -116,5 +119,14 @@ public class UserManager {
 
     public String getFacultyId() {
         return "";
+    }
+
+    public void setUserType(int userType,Context context){
+        new SessionManager(context).setUserType(userType);
+
+    }
+
+    public int getUserType(Context context) {
+        return new SessionManager(context).getUserType();
     }
 }

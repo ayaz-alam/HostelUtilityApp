@@ -13,6 +13,7 @@ public class SessionManager {
     private static final String PREF_NAME = "hostel_utility";
     private static final String COLLEGE = "clg";
     private static final String HOSTEL = "hstl";
+    private static final String USER_TYPE = "user_tyep";
     private final SharedPreferences mPreferences;
     private final SharedPreferences.Editor mEditor;
     private final String COLLEGE_ID = "clg_id";
@@ -126,6 +127,18 @@ public class SessionManager {
     }
     public HostelBean getHostel(){
         return (HostelBean) retrievePreferenceKeyWithValue(HostelBean.class.toString(),HOSTEL);
+    }
+
+    public void setUserType(int userType) {
+        storePreferenceKeyWithValue(Integer.class.toString(),USER_TYPE,userType);
+    }
+    public int getUserType(){
+        return (int)retrievePreferenceKeyWithValue(Integer.class.toString(),USER_TYPE);
+    }
+
+    public void clear() {
+        mEditor.clear();
+        mEditor.commit();
     }
 }
 

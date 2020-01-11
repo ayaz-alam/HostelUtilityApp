@@ -1,4 +1,4 @@
-package com.code_base_update.ui;
+package officials_module.ui;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.transition.Fade;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +19,9 @@ import com.code_base_update.Human;
 import com.code_base_update.ImageHelper;
 import com.code_base_update.beans.Student;
 import com.code_base_update.interfaces.ImageUploadCallback;
+import com.code_base_update.ui.BaseActivity;
+import com.code_base_update.ui.LoginActivity;
+import com.code_base_update.ui.MyDialog;
 import com.code_base_update.utility.UserManager;
 import com.code_base_update.presenters.IBasePresenter;
 import com.code_base_update.ui.dialogs.ChangePasswordDialog;
@@ -36,7 +38,7 @@ import java.io.IOException;
 
 import id.zelory.compressor.Compressor;
 
-public class ProfileActivity extends BaseActivity {
+public class OfficialProfileActivity extends BaseActivity {
 
     private static final int CAMERA_REQUEST = 125;
 
@@ -65,7 +67,7 @@ public class ProfileActivity extends BaseActivity {
         getView(R.id.btn_change_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangePasswordDialog dialog = new ChangePasswordDialog(ProfileActivity.this);
+                ChangePasswordDialog dialog = new ChangePasswordDialog(OfficialProfileActivity.this);
                 dialog.show();
             }
         });
@@ -77,31 +79,7 @@ public class ProfileActivity extends BaseActivity {
             }
         });
 
-        setUpUser(getSession().getStudent());
-
         profileUpdateDialog = new MyDialog().getProgressDialog("Please wait..",this);
-    }
-
-
-    public void setUpUser(Student student) {
-        setText(R.id.tv_username, student.getName());
-        setText(R.id.tv_emailaddress, student.getEmail());
-        setText(R.id.tv_room_no, "Room no: " + student.getRoom());
-        setText(R.id.tv_user_location, getSession().getHostelName() + "\n" + getSession().getCollege().getCollegeName());
-        setText(R.id.tv_mobile_umber, student.getMobileNo());
-        setText(R.id.tv_blood_group, student.getBloodGroup());
-        setText(R.id.tv_cast, student.getCategory());
-        setText(R.id.tv_gender, student.getSex());
-        setText(R.id.tv_enrollment_no, student.getEnrollNo());
-        setText(R.id.tv_aadhar_no, student.getAdharNo());
-        setText(R.id.tv_perma_address, student.getAddress());
-        setText(R.id.tv_guardian_name, student.getGuardiaName());
-        setText(R.id.sp_class, student.getClassName() + getString(R.string.space));
-        setText(R.id.sp_year, student.getYear() + getString(R.string.space));
-        setText(R.id.sp_branch, student.getBranch());
-        setImageUrl(R.id.iv_display_image, new UserManager().getImageUrl(),
-                student.getSex().equals(Human.FEMALE) ? R.drawable.ic_undraw_female_avatar : R.drawable.ic_undraw_male_avatar, new CircleCrop());
-
     }
 
     @Override

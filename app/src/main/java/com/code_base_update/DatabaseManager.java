@@ -27,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.code_base_update.Constants.TEACHER;
+
 public class DatabaseManager {
 
     public static final String COMPLAINT_FOLDER = "Complaints";
@@ -441,13 +443,13 @@ public class DatabaseManager {
 
     }
 
-    public void loadHostelText(final DataCallback<HashMap<String,String>> hashMapDataCallback) {
+    public void loadHostelText(final DataCallback<HashMap<String, String>> hashMapDataCallback) {
         final DatabaseReference ref = mDatabase.child("College_id_1234").child("h_no_1").child(HOSTEL_TEXT);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String,String> list = new HashMap<>();
+                HashMap<String, String> list = new HashMap<>();
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     list.put(d.getKey(), d.getValue().toString());
                 }
@@ -462,5 +464,34 @@ public class DatabaseManager {
         });
 
 
+    }
+
+    public void verifyOfficial(final String email, final String uid, final SuccessCallback callback) {
+        callback.onInitiated();
+        mDatabase.child("Officials")
+                .child("warden_")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        if (dataSnapshot.exists()) {
+
+                            String emailServer = dataSnapshot.child("email").getValue().toString();
+                            String uidServer = dataSnapshot.child("hashCode").getValue().toString();
+
+                            if (emailServer.equals(email) && uidServer.equals(uid)) {
+                                callback.onSuccess();
+                                new UserManager().setUserType(TEACHER,context);
+                            }
+                            else
+                                callback.onFailure("Credential do not match");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        callback.onFailure(databaseError.getMessage());
+                    }
+                });
     }
 }

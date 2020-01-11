@@ -24,7 +24,7 @@ public class ApplicationListAdapter extends BaseRecyclerAdapter<ApplicationBean>
         viewHolder.setText(R.id.tv_head, item.getApplicationDomain());
         viewHolder.setText(R.id.tv_subject, item.getSubject());
         viewHolder.setText(R.id.tv_desription, item.getDescription());
-        viewHolder.setText(R.id.tv_date, DateUtils.getTime(item.getTimeStamp()));
+        viewHolder.setText(R.id.tv_date, DateUtils.getTime(item.getDate()));
 
         switch (item.getStatus()) {
             case ApplicationBean.STATUS_ACCEPTED:

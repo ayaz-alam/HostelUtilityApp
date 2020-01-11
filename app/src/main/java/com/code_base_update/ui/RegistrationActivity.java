@@ -168,13 +168,13 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
     public void registrationFailed(String msg) {
         toastMsg("Incomplete: "+msg);
         progressDialog.dismiss();
-        getUserManager().logout();
+        logout();
     }
 
     @Override
     public void badCredentials() {
         progressDialog.dismiss();
-        getUserManager().logout();
+        logout();
         toastMsg("Bad credentials");
     }
 
@@ -195,7 +195,7 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
     public void onFailure(String msg) {
         progressDialog.dismiss();
         toastMsg("Error: "+msg);
-        getUserManager().logout();
+        logout();
     }
 
     @Override

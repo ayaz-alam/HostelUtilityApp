@@ -1,26 +1,22 @@
 package officials_module.ui;
 
 import android.content.Intent;
-import android.transition.Fade;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.code_base_update.beans.DashBoardBean;
 import com.code_base_update.interfaces.OnItemClickListener;
 import com.code_base_update.ui.AboutSection;
 import com.code_base_update.ui.BaseActivity;
 import com.code_base_update.ui.GeneralNotice;
 import com.code_base_update.ui.HostelNoticeActivity;
-import com.code_base_update.ui.ProfileActivity;
 import com.code_base_update.ui.adapters.DashboardRecyclerAdapter;
 import com.medeveloper.ayaz.hostelutility.R;
 
@@ -80,7 +76,7 @@ public class OfficialDashboard extends BaseActivity<IODashboardView, IODashboard
             @Override
             public void onClick(View v) {
 
-                Intent profileActivity = new Intent(mContext, ProfileActivity.class);
+                Intent profileActivity = new Intent(mContext, OfficialProfileActivity.class);
                 Pair[] pairs = new Pair[2];
                 pairs[0] = new Pair<>(getView(R.id.view), "bg_anim");
                 pairs[1] = new Pair<>(getView(R.id.iv_display_image), "profile_anim");
@@ -112,7 +108,7 @@ public class OfficialDashboard extends BaseActivity<IODashboardView, IODashboard
                 startActivity(new Intent(this, StudentComplaintsActivity.class));
                 break;
             case 4:
-                startActivity(new Intent(this, StudentApplicatoinsActivity.class));
+                startActivity(new Intent(this, StudentApplicationsActivity.class));
                 break;
             case 5:
                 startActivity(new Intent(this, StaffsAndFacultyActivity.class));
