@@ -202,11 +202,4 @@ TODO
         toastMsg("Error: "+msg);
         getUserManager().logout(this);
     }
-
-    @Override
-    public void onBackPressed() {
-        if(dialog.isShowing()){
-            finish();
-        }else super.onBackPressed();
-    }
 }

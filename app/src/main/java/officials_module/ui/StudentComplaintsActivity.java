@@ -10,6 +10,7 @@ import com.medeveloper.ayaz.hostelutility.R;
 import java.util.ArrayList;
 
 import officials_module.adapters.StudentComplaintAdapter;
+import officials_module.model.StudentComplaintListModel;
 import officials_module.presenter.IStudentComplaintsPresenter;
 import officials_module.view.IStudentComplaintsView;
 
@@ -40,7 +41,7 @@ public class StudentComplaintsActivity extends BaseRecyclerActivity<IStudentComp
 
     @Override
     protected IStudentComplaintsPresenter createPresenter() {
-        return null;
+        return new StudentComplaintListModel();
     }
 
     @Override
