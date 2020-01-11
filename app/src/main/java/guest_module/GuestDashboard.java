@@ -65,23 +65,22 @@ public class GuestDashboard extends BaseActivity {
 
         DashBoardBean collegeNotice = new DashBoardBean();
         collegeNotice.setTitle("Hostel");
-        collegeNotice.setDrawableId(R.drawable.ic_hostel);
-        ;
+        collegeNotice.setDrawableId(R.drawable.ic_new_college_notice);
         list.add(collegeNotice);
 
         DashBoardBean hostelNotice = new DashBoardBean();
-        hostelNotice.setTitle("Rooms and Bathrooms");
-        hostelNotice.setDrawableId(R.drawable.ic_new_rooms);
+        hostelNotice.setTitle("Hostel Interior");
+        hostelNotice.setDrawableId(R.drawable.ic_new_notice);
         list.add(hostelNotice);
 
         DashBoardBean complaintActivity = new DashBoardBean();
-        complaintActivity.setTitle("Mess");
-        complaintActivity.setDrawableId(R.drawable.ic_mess);
+        complaintActivity.setTitle("Rooms");
+        complaintActivity.setDrawableId(R.drawable.ic_new_rooms);
         list.add(complaintActivity);
 
         DashBoardBean complaintListActivity = new DashBoardBean();
-        complaintListActivity.setTitle("Other Facilities");
-        complaintListActivity.setDrawableId(R.drawable.ic_other_facilities);
+        complaintListActivity.setTitle("Mess");
+        complaintListActivity.setDrawableId(R.drawable.ic_new_mess);
         list.add(complaintListActivity);
 
         onDataLoaded(list);
