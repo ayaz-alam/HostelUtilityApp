@@ -80,6 +80,7 @@ public class LoginModel implements ILoginPresenter {
             public void onSuccess() {
                 loginView.onLoginSuccess(TEACHER);
                 new UserManager().setUserType(TEACHER,context);
+                new UserManager().setMVHostel(context);
             }
 
             @Override

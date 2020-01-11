@@ -47,6 +47,7 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
         final RadioGroup rgLoginAs = (RadioGroup)getView(R.id.rg_loginAs);
         final TextInputLayout mUsernameLayout = (TextInputLayout)getView(R.id.txtInputUsername);
         final TextInputLayout mPasswordLayout = (TextInputLayout)getView(R.id.txtInputPassword);
+        getUserManager().setMVHostel(this);
 
         if(getUserManager().isUserLoggedIn()){
             onLoginSuccess(getUserManager().getUserType(mContext));
@@ -123,7 +124,7 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
     public void onLoginFailure(String error) {
         mProgressDialog.dismiss();
         Toast.makeText(this,"Error: "+error,Toast.LENGTH_LONG).show();
-        logout();
+        getUserManager().logout(this);
 
     }
 
@@ -131,6 +132,6 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
     public void onBadCredential(String error) {
         mProgressDialog.dismiss();
         Toast.makeText(this,"Error: "+error,Toast.LENGTH_LONG).show();
-        logout();
+        getUserManager().logout(this);
     }
 }
