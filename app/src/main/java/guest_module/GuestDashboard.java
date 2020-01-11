@@ -76,12 +76,12 @@ public class GuestDashboard extends BaseActivity {
 
         DashBoardBean complaintActivity = new DashBoardBean();
         complaintActivity.setTitle("Mess");
-        complaintActivity.setDrawableId(R.drawable.ic_eat);
+        complaintActivity.setDrawableId(R.drawable.ic_mess);
         list.add(complaintActivity);
 
         DashBoardBean complaintListActivity = new DashBoardBean();
         complaintListActivity.setTitle("Other Facilities");
-        complaintListActivity.setDrawableId(R.drawable.ic_document);
+        complaintListActivity.setDrawableId(R.drawable.ic_other_facilities);
         list.add(complaintListActivity);
 
         onDataLoaded(list);
