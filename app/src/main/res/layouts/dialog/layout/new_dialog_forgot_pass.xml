@@ -18,7 +18,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/round_white"
-        android:drawableLeft="@drawable/ic_mail"
+        android:drawableLeft="@drawable/ic_mail_purple"
         android:drawablePadding="5dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
