@@ -1,6 +1,7 @@
 package guest_module;
 
 import android.content.Intent;
+import android.os.Build;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,12 +36,16 @@ public class ImageGalleyActivity extends BaseActivity {
             circularProgressDrawable.start();
             if(images==null||images.length==0)
                 imageView.setImageResource(noImageStringArray[position]);
-            else
+            else {
                 Glide.with(mContext).
                         load(images[position]).
                         placeholder(circularProgressDrawable).
                         error(R.drawable.no_image_back).
                         into(imageView);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    imageView.setForeground(getDrawable(R.drawable.image_fore_grad));
+                }
+            }
         }
     };
 

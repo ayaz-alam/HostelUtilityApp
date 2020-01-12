@@ -17,6 +17,6 @@ public class StaffsAndFacultyActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.simple_recycler_activity;
+        return R.layout.new_student_list;
     }
 }
