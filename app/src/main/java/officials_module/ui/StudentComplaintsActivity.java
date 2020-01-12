@@ -36,12 +36,13 @@ public class StudentComplaintsActivity extends BaseRecyclerActivity<IStudentComp
 
     @Override
     public void refreshLayout() {
+        mPresenter.loadComplaints();
 
     }
 
     @Override
     protected IStudentComplaintsPresenter createPresenter() {
-        return new StudentComplaintListModel();
+        return new StudentComplaintListModel(this);
     }
 
     @Override
@@ -51,6 +52,12 @@ public class StudentComplaintsActivity extends BaseRecyclerActivity<IStudentComp
 
     @Override
     public void onComplaintListLoaded(ArrayList<ComplaintBean> list) {
+        super.onDataLoaded(list.size());
         adapter.update(list);
+    }
+
+    @Override
+    public void onError(String msg) {
+        toastMsg(msg);
     }
 }

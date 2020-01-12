@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface IStudentComplaintsView extends IBaseView {
     void onComplaintListLoaded(ArrayList<ComplaintBean> list);
+    void onError(String msg);
 }

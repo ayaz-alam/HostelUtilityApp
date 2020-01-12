@@ -416,7 +416,7 @@ public class DatabaseManager {
     }
 
     public void loadHostelImages(final DataCallback<SparseArray<String[]>> hashMapDataCallback) {
-        final DatabaseReference ref = mDatabase.child("College_id_1234").child("h_no_1").child(HOSTEL_CAROUSEL);
+        final DatabaseReference ref = mDatabase.child(HOSTEL_CAROUSEL);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -444,7 +444,7 @@ public class DatabaseManager {
     }
 
     public void loadHostelText(final DataCallback<HashMap<String, String>> hashMapDataCallback) {
-        final DatabaseReference ref = mDatabase.child("College_id_1234").child("h_no_1").child(HOSTEL_TEXT);
+        final DatabaseReference ref = mDatabase.child(HOSTEL_TEXT);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -493,5 +493,35 @@ public class DatabaseManager {
                         callback.onFailure(databaseError.getMessage());
                     }
                 });
+    }
+
+    public void fetchComplaintList(final DataCallback<ArrayList<ComplaintBean>> dataCallback) {
+        DatabaseReference ref = mDatabase.child(COMPLAINT_FOLDER);
+        final ArrayList<ComplaintBean> list = new ArrayList<>();
+        ref.orderByChild("student_id/complaint_id/timeStamp")
+
+        .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+                    for(DataSnapshot d: dataSnapshot.getChildren()){
+                        for(DataSnapshot complaints: d.getChildren()){
+                            list.add(complaints.getValue(ComplaintBean.class));
+                        }
+                    }
+                }
+                else
+                    dataCallback.onFailure("No data found");
+                dataCallback.onSuccess(list);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                dataCallback.onError(databaseError.getMessage());
+            }
+        });
+
+
     }
 }

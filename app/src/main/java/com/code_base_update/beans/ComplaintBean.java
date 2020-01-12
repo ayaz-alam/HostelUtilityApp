@@ -11,6 +11,8 @@ public class ComplaintBean extends BaseBean {
     private boolean resolved;
     private long resolvedOnDate;
     private String optionalDescription;
+    private String studentName = "Student Name";
+    private String RoomNo = "R.No";
 
     public ComplaintBean() {
 
@@ -97,5 +99,21 @@ public class ComplaintBean extends BaseBean {
 
     public String getOptionalDescription() {
         return optionalDescription;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getRoomNo() {
+        return RoomNo;
+    }
+
+    public void setRoomNo(String roomNo) {
+        RoomNo = roomNo;
     }
 }

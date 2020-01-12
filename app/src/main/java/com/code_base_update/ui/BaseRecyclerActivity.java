@@ -50,4 +50,13 @@ public abstract class BaseRecyclerActivity<V extends IBaseView, P extends IBaseP
     public void showNoData(boolean show) {
         setVisible(R.id.no_data_view,show);
     }
+
+    protected void onDataLoaded(int size) {
+        showProgressBar(false);
+        if(swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(false);
+        if(size==0)
+            showNoData(true);
+        else showNoData(false);
+    }
 }
