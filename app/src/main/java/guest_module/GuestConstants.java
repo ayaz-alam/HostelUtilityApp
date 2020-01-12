@@ -14,11 +14,11 @@ public class GuestConstants {
 
     final static String HostelOutside = "Hostel";
 
-    final static String HostelInterior = "Hostel Interior";
+    final static String HostelInterior = "Room and Bathroom";
 
-    final static String Room = "Rooms";
+    final static String Room = "Mess";
 
-    final static String Mess = "Mess";
+    final static String Mess = "Other facilities";
 
     final static String IMAGE_TYPE= "Img_typ";
 
