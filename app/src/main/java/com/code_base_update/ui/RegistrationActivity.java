@@ -36,13 +36,20 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
         enableNavigation();
         if (getSupportActionBar() != null)
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_back);
-
+/*
+TODO
         dialog = new ChooseCollegeDialog(this, this, new SimpleCallback() {
             @Override
             public void onCallback() {
                 finish();
             }
         });
+        dialog.show()
+        dialog.setCancelable(true);
+*/
+//TODO TEMPORARY CODE FOR LAUNCH
+        getUserManager().setMVHostel(this);
+        onSuccess(getSession().getCollege(),getSession().getHostel());
 
         progressDialog = new MyDialog().getProgressDialog("Please wait...",this);
 
@@ -57,8 +64,6 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
                 }
             }
         });
-        dialog.setCancelable(false);
-        dialog.show();
     }
 
     //Get object of student generated from input values
@@ -168,14 +173,14 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
     public void registrationFailed(String msg) {
         toastMsg("Incomplete: "+msg);
         progressDialog.dismiss();
-        getUserManager().logout();
+        getUserManager().logout(this);
     }
 
     @Override
     public void badCredentials() {
         progressDialog.dismiss();
-        getUserManager().logout();
-        toastMsg("Bad credentials");
+        logout();
+        getUserManager().logout(this);
     }
 
     @Override
@@ -195,13 +200,6 @@ public class RegistrationActivity extends BaseActivity<IRegistrationView, IRegis
     public void onFailure(String msg) {
         progressDialog.dismiss();
         toastMsg("Error: "+msg);
-        getUserManager().logout();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(dialog.isShowing()){
-            finish();
-        }else super.onBackPressed();
+        getUserManager().logout(this);
     }
 }

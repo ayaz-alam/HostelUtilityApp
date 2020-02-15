@@ -2,6 +2,7 @@ package com.code_base_update;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 
@@ -17,7 +18,6 @@ import com.code_base_update.utility.SessionManager;
 import com.code_base_update.utility.UserManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.HashMap;
+
+import static com.code_base_update.Constants.TEACHER;
 
 public class DatabaseManager {
 
@@ -33,6 +35,8 @@ public class DatabaseManager {
     private static final String COMPLAINT_TYPES = "ComplaintList";
     private static final String APPLICATION_FOLDER = "Applications";
     private static final String NOTICE_FOLDER = "Notices";
+    private static final String HOSTEL_CAROUSEL = "HostelImages";
+    private static final String HOSTEL_TEXT = "GuestText";
     private DatabaseReference mDatabase;
     private SessionManager session;
     private Context context;
@@ -48,6 +52,7 @@ public class DatabaseManager {
         FirebaseDatabase.getInstance().getReference().child(COMPLAINT_TYPES).keepSynced(true);
         mDatabase.child(DatabaseManager.APPLICATION_FOLDER).keepSynced(true);
         mDatabase.child(DatabaseManager.COMPLAINT_FOLDER).keepSynced(true);
+        mDatabase.child(DatabaseManager.HOSTEL_CAROUSEL).keepSynced(true);
     }
 
     public ArrayList<ComplaintBean> loadAllComplaint() {
@@ -76,19 +81,19 @@ public class DatabaseManager {
     }
 
     public void loadAllApplication(final DataCallback<ArrayList<ApplicationBean>> dataCallback) {
-        final ArrayList<ApplicationBean> list= new ArrayList<>();
+        final ArrayList<ApplicationBean> list = new ArrayList<>();
         mDatabase.child(DatabaseManager.APPLICATION_FOLDER).child(new UserManager().getUID()).
                 orderByChild("timeStamp").
                 addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()) {
+                        if (dataSnapshot.exists()) {
                             list.clear();
                             for (DataSnapshot d : dataSnapshot.getChildren()) {
                                 list.add(d.getValue(ApplicationBean.class));
                             }
                             dataCallback.onSuccess(list);
-                        }else dataCallback.onFailure("No data found");
+                        } else dataCallback.onFailure("No data found");
 
                     }
 
@@ -203,10 +208,10 @@ public class DatabaseManager {
     public void registerStudent(Student studentDetails, final SuccessCallback callback) {
         callback.onInitiated();
         mDatabase = getBaseRef(context);
-        mDatabase.child(Constants.STUDENT_LIST).child(studentDetails.getEmail().replace(".","dot")).setValue(studentDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mDatabase.child(Constants.STUDENT_LIST).child(studentDetails.getEmail().replace(".", "dot")).setValue(studentDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful())
+                if (task.isSuccessful())
                     callback.onSuccess();
                 else callback.onFailure(task.getException().getLocalizedMessage());
 
@@ -217,7 +222,7 @@ public class DatabaseManager {
     public void isStudentEnrolled(final Student studentDetails, final SuccessCallback callback) {
         callback.onInitiated();
         //Double check college and hostel id
-        if(TextUtils.isEmpty(studentDetails.getCollegeId())||TextUtils.isEmpty(studentDetails.getHostelId())){
+        if (TextUtils.isEmpty(studentDetails.getCollegeId()) || TextUtils.isEmpty(studentDetails.getHostelId())) {
             callback.onFailure("Incorrect college and hostel");
             return;
         }
@@ -225,15 +230,15 @@ public class DatabaseManager {
         mRef.child(studentDetails.getAdharNo()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    if(dataSnapshot.child("email").getValue().toString().equals(studentDetails.getEmail())
-                    &&dataSnapshot.child("mobile").getValue().toString().equals(studentDetails.getMobileNo())){
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.child("email").getValue().toString().equals(studentDetails.getEmail())
+                            && dataSnapshot.child("mobile").getValue().toString().equals(studentDetails.getMobileNo())) {
                         callback.onSuccess();
-                        saveCollegeAndHostelIds(studentDetails.getCollegeId(),studentDetails.getHostelId());
-                    }
-                    else callback.onFailure("Credentials don't match with database, please contact warden");
+                        saveCollegeAndHostelIds(studentDetails.getCollegeId(), studentDetails.getHostelId());
+                    } else
+                        callback.onFailure("Credentials don't match with database, please contact warden");
 
-                }else callback.onFailure("Student doesn't exists, please contact your warden");
+                } else callback.onFailure("Student doesn't exists, please contact your warden");
             }
 
             @Override
@@ -256,7 +261,7 @@ public class DatabaseManager {
         FirebaseDatabase.getInstance().getReference().child(Constants.USER_LIST).child(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     try {
                         session.setCollegeId(dataSnapshot.child(Constants.COLLEGE_ID).getValue().toString());
                         session.setHostelId(dataSnapshot.child(Constants.HOSTEL_ID).getValue().toString());
@@ -264,11 +269,11 @@ public class DatabaseManager {
                         mDatabase.child(Constants.STUDENT_LIST).child(finalEmail).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists()){
+                                if (dataSnapshot.exists()) {
                                     Student student = dataSnapshot.getValue(Student.class);
                                     callback.onSuccess(student);
 
-                                }else
+                                } else
                                     callback.onFailure("Data missing in college database, contact warden");
                             }
 
@@ -278,10 +283,10 @@ public class DatabaseManager {
                             }
                         });
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         callback.onFailure(e.getLocalizedMessage());
                     }
-                }else callback.onFailure("User not exists");
+                } else callback.onFailure("User not exists");
 
             }
 
@@ -310,9 +315,9 @@ public class DatabaseManager {
                 .child(collegeId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     callback.onSuccess(dataSnapshot.getValue(CollegeBean.class));
-                }else callback.onFailure("College not found");
+                } else callback.onFailure("College not found");
             }
 
             @Override
@@ -325,11 +330,11 @@ public class DatabaseManager {
 
     public void sendApplicationReminder(ApplicationBean item, final SuccessCallback callback) {
         item.setReminder();
-        mDatabase.child(APPLICATION_FOLDER).child(new UserManager().getUID()).child(item.getApplicationId()+"")
+        mDatabase.child(APPLICATION_FOLDER).child(new UserManager().getUID()).child(item.getApplicationId() + "")
                 .setValue(item).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()) callback.onSuccess();
+                if (task.isSuccessful()) callback.onSuccess();
                 else callback.onFailure(task.getException().getLocalizedMessage());
 
             }
@@ -338,11 +343,11 @@ public class DatabaseManager {
 
     public void withdrawApplication(ApplicationBean item, final SuccessCallback callback) {
         item.setWithdrawn();
-        mDatabase.child(APPLICATION_FOLDER).child(new UserManager().getUID()).child(item.getApplicationId()+"")
+        mDatabase.child(APPLICATION_FOLDER).child(new UserManager().getUID()).child(item.getApplicationId() + "")
                 .setValue(item).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()) callback.onSuccess();
+                if (task.isSuccessful()) callback.onSuccess();
                 else callback.onFailure(task.getException().getLocalizedMessage());
 
             }
@@ -355,9 +360,168 @@ public class DatabaseManager {
         mDatabase.child(NOTICE_FOLDER).child(notice.getNoticeId()).setValue(notice).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()) callback.onSuccess();
+                if (task.isSuccessful()) callback.onSuccess();
                 else callback.onFailure(task.getException().getLocalizedMessage());
             }
         });
+    }
+
+    public void loadAllNotice(final DataCallback<ArrayList<HostelNoticeBean>> callback) {
+        final ArrayList<HostelNoticeBean> list = new ArrayList<>();
+        mDatabase.child(DatabaseManager.NOTICE_FOLDER).
+                orderByChild("timeStamp").
+                addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            list.clear();
+                            for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                list.add(d.getValue(HostelNoticeBean.class));
+                            }
+                            callback.onSuccess(list);
+                        } else callback.onFailure("No data found");
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        callback.onError(databaseError.getMessage());
+                    }
+                });
+    }
+
+    public void fetchImageCarousel(String imagesId, final DataCallback<String[]> dataCallback) {
+        mDatabase.child(DatabaseManager.HOSTEL_CAROUSEL).child(imagesId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> arr = new ArrayList<>();
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot d : dataSnapshot.getChildren()) {
+                        arr.add(d.getValue().toString());
+                    }
+                } else {
+                    dataCallback.onFailure("No Image found");
+                }
+                String[] stringArray = new String[0];
+                dataCallback.onSuccess(arr.toArray(stringArray));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                dataCallback.onError(databaseError.getMessage());
+            }
+        });
+
+
+    }
+
+    public void loadHostelImages(final DataCallback<SparseArray<String[]>> hashMapDataCallback) {
+        final DatabaseReference ref = mDatabase.child(HOSTEL_CAROUSEL);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                SparseArray<String[]> list = new SparseArray<>();
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    String[] arr = new String[5];
+                    int i = 0;
+                    for (DataSnapshot data : d.getChildren()) {
+                        arr[i++] = data.getValue().toString();
+                    }
+                    list.put(Integer.parseInt(d.getKey()), arr);
+                }
+                hashMapDataCallback.onSuccess(list);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                hashMapDataCallback.onFailure(databaseError.getMessage());
+            }
+        });
+
+
+    }
+
+    public void loadHostelText(final DataCallback<HashMap<String, String>> hashMapDataCallback) {
+        final DatabaseReference ref = mDatabase.child(HOSTEL_TEXT);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, String> list = new HashMap<>();
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    list.put(d.getKey(), d.getValue().toString());
+                }
+                hashMapDataCallback.onSuccess(list);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                hashMapDataCallback.onFailure(databaseError.getMessage());
+            }
+        });
+
+
+    }
+
+    public void verifyOfficial(final String email, final String uid, final SuccessCallback callback) {
+        callback.onInitiated();
+        mDatabase.child("Officials")
+                .child("warden_")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        if (dataSnapshot.exists()) {
+
+                            String emailServer = dataSnapshot.child("email").getValue().toString();
+                            String uidServer = dataSnapshot.child("hashCode").getValue().toString();
+
+                            if (emailServer.equals(email) && uidServer.equals(uid)) {
+                                callback.onSuccess();
+                                new UserManager().setUserType(TEACHER,context);
+                            }
+                            else
+                                callback.onFailure("Credential do not match");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        callback.onFailure(databaseError.getMessage());
+                    }
+                });
+    }
+
+    public void fetchComplaintList(final DataCallback<ArrayList<ComplaintBean>> dataCallback) {
+        DatabaseReference ref = mDatabase.child(COMPLAINT_FOLDER);
+        final ArrayList<ComplaintBean> list = new ArrayList<>();
+        ref.orderByChild("student_id/complaint_id/timeStamp")
+
+        .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+                    for(DataSnapshot d: dataSnapshot.getChildren()){
+                        for(DataSnapshot complaints: d.getChildren()){
+                            list.add(complaints.getValue(ComplaintBean.class));
+                        }
+                    }
+                }
+                else
+                    dataCallback.onFailure("No data found");
+                dataCallback.onSuccess(list);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                dataCallback.onError(databaseError.getMessage());
+            }
+        });
+
+
     }
 }

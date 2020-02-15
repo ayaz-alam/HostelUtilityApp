@@ -3,6 +3,9 @@ package com.code_base_update.utility;
 import android.content.Context;
 import android.net.Uri;
 import androidx.annotation.NonNull;
+
+import com.code_base_update.beans.CollegeBean;
+import com.code_base_update.beans.HostelBean;
 import com.code_base_update.beans.Student;
 import com.code_base_update.interfaces.SuccessCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -13,6 +16,10 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+
+import java.util.ArrayList;
+
+import static com.code_base_update.Constants.STUDENT;
 
 public class UserManager {
 
@@ -70,8 +77,9 @@ public class UserManager {
 
     }
 
-    public void logout() {
+    public void logout(Context context) {
         mAuth.signOut();
+        new SessionManager(context).clear();
     }
 
     public String getEmail() {
@@ -116,5 +124,31 @@ public class UserManager {
 
     public String getFacultyId() {
         return "";
+    }
+
+    public void setUserType(int userType,Context context){
+        new SessionManager(context).setUserType(userType);
+
+    }
+
+    public int getUserType(Context context) {
+        return new SessionManager(context).getUserType();
+    }
+
+    public void setMVHostel(Context context){
+        SessionManager sessionManager  =new SessionManager(context);
+        CollegeBean collegeBean =new CollegeBean();
+        collegeBean.setCollegeId("College_id_1234");
+        collegeBean.setCollegeName("CTAE,Udaipur");
+        ArrayList<HostelBean> hostelList= new ArrayList<>();
+        HostelBean bean = new HostelBean();
+        bean.setHostelId("h_no_1");
+        bean.setHostelName("MV Hostel");
+        hostelList.add(bean);
+        collegeBean.setHostels(hostelList);
+        sessionManager.setCollege(collegeBean);
+        sessionManager.setHostel(bean);
+        sessionManager.setHostelId(bean.getHostelId());
+        sessionManager.setCollegeId(collegeBean.getCollegeId());
     }
 }

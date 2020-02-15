@@ -10,7 +10,7 @@
         <OnSwipe
             motion:dragDirection="dragUp"
             motion:onTouchUp="autoComplete"
-            motion:touchAnchorId="@+id/view"
+            motion:touchAnchorId="@+id/motionPro"
             motion:touchAnchorSide="bottom" />
 
     </Transition>

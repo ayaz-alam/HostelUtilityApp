@@ -37,10 +37,10 @@ public abstract class BaseRecyclerAdapter<T extends BaseBean>
         }
     }
 
-    abstract void bindData(BaseViewHolder viewHolder, T item, int
+    public abstract void bindData(BaseViewHolder viewHolder, T item, int
             position);
 
-    abstract void updateDataOnTouch(int position);
+    protected abstract void updateDataOnTouch(int position);
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

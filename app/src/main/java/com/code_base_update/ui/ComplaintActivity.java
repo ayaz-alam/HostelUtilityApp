@@ -131,6 +131,9 @@ public class ComplaintActivity extends BaseActivity<IComplaintView, IComplaintPr
         thisComplaint.setComplaintDomainId(getDomainID());
         thisComplaint.setDescriptions(getDescription());
         thisComplaint.setOptionalDescription(getOptionalDescription());
+        thisComplaint.setStudentName(getSession().getStudent().getName());
+        thisComplaint.setRoomNo(getSession().getStudent().getRoom());
+
         return thisComplaint;
     }
 

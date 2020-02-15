@@ -1,10 +1,10 @@
 package com.code_base_update.ui;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 

@@ -20,7 +20,7 @@ public class ComplaintListAdapter extends BaseRecyclerAdapter<ComplaintBean> {
     }
 
     @Override
-    void bindData(BaseViewHolder viewHolder, ComplaintBean item, int position) {
+    public void bindData(BaseViewHolder viewHolder, ComplaintBean item, int position) {
         if(!item.getComplaintId().equals(Constants.LOADING_ITEM)) {
 
             viewHolder.setText(R.id.tv_card_title, item.getComplaintDomainId());
@@ -67,7 +67,7 @@ public class ComplaintListAdapter extends BaseRecyclerAdapter<ComplaintBean> {
     }
 
     @Override
-    void updateDataOnTouch(int position) {
+    public void updateDataOnTouch(int position) {
 
     }
 }

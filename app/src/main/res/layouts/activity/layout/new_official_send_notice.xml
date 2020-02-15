@@ -9,7 +9,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         android:background="@drawable/new_dashboard_bg"
         android:elevation="6dp"
         android:transitionName="bgq_anim"
@@ -20,7 +20,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         android:elevation="6dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintBottom_toTopOf="@+id/refresh_recycler_view"

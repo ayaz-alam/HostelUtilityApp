@@ -272,7 +272,7 @@ public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter
     }
 
     public void logout(){
-        getUserManager().logout();
+        getUserManager().logout(this);
         startActivity(new Intent(this, LoginActivity.class));
         finishAffinity();
     }

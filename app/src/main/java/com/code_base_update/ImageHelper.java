@@ -1,6 +1,5 @@
 package com.code_base_update;
 
-import android.content.Context;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;

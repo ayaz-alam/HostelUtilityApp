@@ -1,14 +1,15 @@
 package com.code_base_update.beans;
 
-public class HostelNoticeBean extends BaseBean{
+public class HostelNoticeBean extends BaseBean {
 
     private String noticeId;
     private String noticeSubject;
     private String noticeBody;
     private String noticeAuthorId = "";
-    private long date;
+    private long timeStamp;
     private String imageUrl = "";
     private String byFaculty = "";
+    private boolean hasImage = false;
 
     public HostelNoticeBean(String noticeId) {
         this.noticeId = noticeId;
@@ -49,14 +50,6 @@ public class HostelNoticeBean extends BaseBean{
         this.noticeAuthorId = noticeAuthorId;
     }
 
-    public long getDate() {
-        return date;
-    }
-
-    public void setDate(long date) {
-        this.date = date;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -73,5 +66,20 @@ public class HostelNoticeBean extends BaseBean{
         this.byFaculty = byFaculty;
     }
 
+    public long getTimeStamp() {
+        return timeStamp;
+    }
 
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public void noticeHasImage(boolean hasImage) {
+        this.hasImage = hasImage;
+    }
+
+    public boolean hasImage() {
+        if(imageUrl.equals("")) return false;
+        else return true;
+    }
 }

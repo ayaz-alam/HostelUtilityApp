@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import guest_module.GuestDashboard;
+import officials_module.ui.OfficialDashboard;
+
+import com.code_base_update.interfaces.SuccessCallback;
 import com.code_base_update.utility.UserManager;
 import com.code_base_update.utility.InputHelper;
 import com.code_base_update.models.LoginModel;
@@ -43,9 +47,11 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
         final RadioGroup rgLoginAs = (RadioGroup)getView(R.id.rg_loginAs);
         final TextInputLayout mUsernameLayout = (TextInputLayout)getView(R.id.txtInputUsername);
         final TextInputLayout mPasswordLayout = (TextInputLayout)getView(R.id.txtInputPassword);
+        getUserManager().setMVHostel(this);
 
-        if(new UserManager().isUserLoggedIn()){
-            onLoginSuccess();
+        if(getUserManager().isUserLoggedIn()){
+            onLoginSuccess(getUserManager().getUserType(mContext));
+            finishAffinity();
             return;
         }
 
@@ -61,10 +67,11 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
                     mPasswordLayout.setError("Required");
                 else if(InputHelper.verifyInputField(password,6)==InputHelper.SHORT_LENGTH)
                     mPasswordLayout.setError("Length should be at least "+6);
-                else
+                else {
                     mPresenter.performLogin(mUsername.getText().toString(),
                         mPassword.getText().toString(),
                         rgLoginAs.getCheckedRadioButtonId() == R.id.rb_student ? STUDENT :TEACHER);
+                }
             }
         });
 
@@ -78,6 +85,13 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
             @Override
             public void onClick(View v) {
                 mPresenter.startForgotPassWordDialog(mCtx);
+            }
+        });
+        getView(R.id.btn_guest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(LoginActivity.this, GuestDashboard.class);//Optional parameters
+                startActivity(myIntent);
             }
         });
 
@@ -97,9 +111,12 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
     }
 
     @Override
-    public void onLoginSuccess() {
+    public void onLoginSuccess(int UserType) {
         mProgressDialog.dismiss();
-        startActivity(new Intent(this, Dashboard.class));
+        if(UserType==STUDENT)
+            startActivity(new Intent(this, Dashboard.class));
+        else if(UserType==TEACHER)
+            startActivity(new Intent(this, OfficialDashboard.class));
         finish();
     }
 
@@ -107,7 +124,7 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
     public void onLoginFailure(String error) {
         mProgressDialog.dismiss();
         Toast.makeText(this,"Error: "+error,Toast.LENGTH_LONG).show();
-        getUserManager().logout();
+        getUserManager().logout(this);
 
     }
 
@@ -115,6 +132,6 @@ public class LoginActivity extends BaseActivity<ILoginView, ILoginPresenter> imp
     public void onBadCredential(String error) {
         mProgressDialog.dismiss();
         Toast.makeText(this,"Error: "+error,Toast.LENGTH_LONG).show();
-        getUserManager().logout();
+        getUserManager().logout(this);
     }
 }

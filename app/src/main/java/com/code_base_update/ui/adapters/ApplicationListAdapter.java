@@ -20,11 +20,11 @@ public class ApplicationListAdapter extends BaseRecyclerAdapter<ApplicationBean>
     }
 
     @Override
-    void bindData(BaseViewHolder viewHolder, ApplicationBean item, int position) {
+    public void bindData(BaseViewHolder viewHolder, ApplicationBean item, int position) {
         viewHolder.setText(R.id.tv_head, item.getApplicationDomain());
         viewHolder.setText(R.id.tv_subject, item.getSubject());
         viewHolder.setText(R.id.tv_desription, item.getDescription());
-        viewHolder.setText(R.id.tv_date, DateUtils.getTime(item.getTimeStamp()));
+        viewHolder.setText(R.id.tv_date, DateUtils.getTime(item.getDate()));
 
         switch (item.getStatus()) {
             case ApplicationBean.STATUS_ACCEPTED:
@@ -72,7 +72,7 @@ public class ApplicationListAdapter extends BaseRecyclerAdapter<ApplicationBean>
     }
 
     @Override
-    void updateDataOnTouch(int position) {
+    public void updateDataOnTouch(int position) {
 
     }
 }

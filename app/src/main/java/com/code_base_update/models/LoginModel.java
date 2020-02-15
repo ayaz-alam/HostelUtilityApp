@@ -15,11 +15,15 @@ import com.code_base_update.presenters.ILoginPresenter;
 import com.code_base_update.ui.RegistrationActivity;
 import com.code_base_update.ui.dialogs.ForgotPasswordDialog;
 import com.code_base_update.utility.SessionManager;
+import com.code_base_update.utility.UserManager;
 import com.code_base_update.view.ILoginView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import static com.code_base_update.Constants.STUDENT;
+import static com.code_base_update.Constants.TEACHER;
 
 public class LoginModel implements ILoginPresenter {
 
@@ -35,7 +39,8 @@ public class LoginModel implements ILoginPresenter {
     @Override
     public void performLogin(String username, String password, int userType) {
         loginView.onLoginInitiated();
-        mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        if (userType==STUDENT)
+            mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
@@ -44,7 +49,45 @@ public class LoginModel implements ILoginPresenter {
                     loginView.onBadCredential(task.getException().getMessage());
             }
         });
+        else if(userType==TEACHER){
+            mAuth.signInWithEmailAndPassword(username,password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                if(mAuth.getCurrentUser()!=null)
+                                    verifyOfficial(mAuth.getCurrentUser().getEmail(),mAuth.getCurrentUser().getUid());
+                                else
+                                    loginView.onBadCredential("Couldn't log you in please check your credetials and Internet");
+                            }else
+                                loginView.onLoginFailure(task.getException().getLocalizedMessage());
+                        }
+                    });
+        }else
+            loginView.onLoginFailure("Failed");
 
+    }
+
+    private void verifyOfficial(String email, String uid) {
+
+        new DatabaseManager(context).verifyOfficial(email, uid, new SuccessCallback() {
+            @Override
+            public void onInitiated() {
+
+            }
+
+            @Override
+            public void onSuccess() {
+                loginView.onLoginSuccess(TEACHER);
+                new UserManager().setUserType(TEACHER,context);
+                new UserManager().setMVHostel(context);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                loginView.onLoginFailure(msg);
+            }
+        });
     }
 
     private void fetchDetails(final Context context){
@@ -80,7 +123,8 @@ public class LoginModel implements ILoginPresenter {
                 for(HostelBean hostel: collegeBean.getHostels()){
                     sessionManager.setHostel(hostel);
                 }
-                loginView.onLoginSuccess();
+                loginView.onLoginSuccess(STUDENT);
+                new UserManager().setUserType(STUDENT,context);
             }
 
             @Override

@@ -6,6 +6,7 @@
     <color name="PrimaryText">#BF0B3846</color>
     <color name="warning_red">#BFFD2200</color>
     <color name="white">#FFFFFF</color>
+    <color name="nav_light">#ECECEC</color>
     <color name="lightbackground">#f4f9f4</color>
     <color name="light_grey">#e1bbbebb</color>
     <color name="translucent">#ef000000</color>

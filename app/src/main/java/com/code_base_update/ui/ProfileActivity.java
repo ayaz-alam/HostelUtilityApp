@@ -56,7 +56,7 @@ public class ProfileActivity extends BaseActivity {
         getView(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new UserManager().logout();
+                logout();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finishAffinity();
 

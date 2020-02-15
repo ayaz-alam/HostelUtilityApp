@@ -25,6 +25,7 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
     public void initViews() {
         setupToolbar("Hostel Notice");
         enableNavigation();
+        showProgressBar(true);
         mPresenter.loadNotice();
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -37,12 +38,13 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
 
     @Override
     public void refreshLayout() {
-
+        showProgressBar(true);
+        mPresenter.loadNotice();
     }
 
     @Override
     protected IHostelNoticePresenter createPresenter() {
-        return new HostelNoticeModel();
+        return new HostelNoticeModel(this);
     }
 
     @Override
@@ -60,6 +62,16 @@ public class HostelNoticeActivity extends BaseRecyclerActivity<IHostelNoticeView
 
     @Override
     public void onNoticeLoaded(ArrayList<HostelNoticeBean> list) {
+        if(list.size()==0)
+            showNoData(true);
+        if(swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(false);
+        showProgressBar(false);
         adapter.update(list);
+    }
+
+    @Override
+    public void onErrorOccurred(String msg) {
+        toastMsg(msg);
     }
 }

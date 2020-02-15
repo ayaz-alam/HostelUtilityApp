@@ -79,6 +79,13 @@
         <activity android:name="officials_module.ui.OfficialDashboard" />
         <activity android:name="officials_module.ui.SendNoticeActivity"
             android:windowSoftInputMode="adjustPan"/>
+
+        <activity android:name="guest_module.ImageGalleyActivity" />
+        <activity android:name="guest_module.GuestDashboard" />
+        <activity android:name="officials_module.ui.OfficialProfileActivity" />
+        <activity android:name="officials_module.ui.StudentApplicationsActivity" />
+        <activity android:name="officials_module.ui.StaffsAndFacultyActivity" />
+        <activity android:name="officials_module.ui.StudentComplaintsActivity" />
     </application>
 
 </manifest>

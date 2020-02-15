@@ -2,8 +2,8 @@
 <resources>
 
     <style name="Login" parent="AppTheme">
-        <item name="android:windowLightNavigationBar">false</item>
-        <item name="android:navigationBarColor">@color/colorAccent</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">@color/nav_light</item>
     </style>
 
     <style name="Splash" parent="AppTheme">
