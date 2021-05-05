@@ -23,7 +23,7 @@ We were asked to design an **Android App** that would allow college students and
     <td>
 <table>
   <tr>
-    <td align="center" ><a href="https://github.com/Ayaz922"><img src="https://avatars0.githubusercontent.com/u/31290706?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Ayaz Alam</b></sub></a><br /> <a href="https://github.com/Ayaz922/HostelUtilityApp/commits?author=Ayaz922" title="Documentation">📖</a></td>
+    <td align="center" ><a href="https://github.com/Ayaz922"><img src="https://avatars0.githubusercontent.com/u/31290706?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Ayaz Alam</b></sub></a><br /> <a href="https://github.com/Ayaz922/HostelUtilityApp/commits?author=ayaz-alam" title="Documentation">📖</a></td>
     
 <td align="center"><a href="https://github.com/kamalkishormeena"><img src="https://avatars0.githubusercontent.com/u/35453515?s=460&v=4" width="100px;" alt=""/><br /><sub><b>Kamal Kishor Meena</b></sub></a><br /> <a href="https://github.com/Ayaz922/HostelUtilityApp/commits?author=kamalkishormeena" title="Documentation">📖</a></td>
     
