@@ -8,7 +8,7 @@ We were asked to design an **Android App** that would allow college students and
 * [Ayaz Alam](https://github.com/AyazGeek) - Application Developer (Group Leader)
 * [Kanika Ranka](https://github.com/24kanika) - UI Designer
 * [Kamal Kishor Meena](https://github.com/kamalkishormeena) - UI & UX developer
-* [Gopal Sharma](https://github.com/kamalkishormeena) - Researcher & Analyst
+* [Gopal Sharma](https://github.com/Gopal518) - Researcher & Analyst
 
 ## Project made under guidance of
 ### Dr. Vikramaditya Dave 
