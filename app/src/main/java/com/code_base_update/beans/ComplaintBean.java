@@ -1,15 +1,27 @@
 package com.code_base_update.beans;
 
-public class ComplaintBean {
+import com.code_base_update.Constants;
 
-    private String studentId, complaintId, complaintDomainId, complaintSubDomain, complaintDescription;
+public class ComplaintBean extends BaseBean {
+
+    private String studentId, complaintId, complaintDomainId;
+    private String descriptions;
     private long timeStamp;
     private long problemFacingFromDate;
-    private boolean complaintStatus;
+    private boolean resolved;
     private long resolvedOnDate;
+    private String optionalDescription;
+    private String studentName = "Student Name";
+    private String RoomNo = "R.No";
 
     public ComplaintBean() {
 
+    }
+
+    public static ComplaintBean getLoadingComponent() {
+        ComplaintBean complaintBean = new ComplaintBean();
+        complaintBean.setComplaintId(Constants.LOADING_ITEM);
+        return complaintBean;
     }
 
     public String getStudentId() {
@@ -36,22 +48,6 @@ public class ComplaintBean {
         this.complaintDomainId = complaintDomainId;
     }
 
-    public String getComplaintSubDomain() {
-        return complaintSubDomain;
-    }
-
-    public void setComplaintSubDomain(String complaintSubDomain) {
-        this.complaintSubDomain = complaintSubDomain;
-    }
-
-    public String getComplaintDescription() {
-        return complaintDescription;
-    }
-
-    public void setComplaintDescription(String complaintDescription) {
-        this.complaintDescription = complaintDescription;
-    }
-
     public long getTimeStamp() {
         return timeStamp;
     }
@@ -68,12 +64,12 @@ public class ComplaintBean {
         this.problemFacingFromDate = problemFacingFromDate;
     }
 
-    public boolean isComplaintStatus() {
-        return complaintStatus;
+    public boolean isResolved() {
+        return resolved;
     }
 
-    public void setComplaintStatus(boolean complaintStatus) {
-        this.complaintStatus = complaintStatus;
+    public void setResolved(boolean resolved) {
+        this.resolved = resolved;
     }
 
     public long getResolvedOnDate() {
@@ -82,5 +78,42 @@ public class ComplaintBean {
 
     public void setResolvedOnDate(long resolvedOnDate) {
         this.resolvedOnDate = resolvedOnDate;
+    }
+
+    public String getDescriptions() {
+        return descriptions;
+    }
+
+    public String getDetails() {
+        return descriptions;
+    }
+
+
+    public void setDescriptions(String descriptions) {
+        this.descriptions = descriptions;
+    }
+
+    public void setOptionalDescription(String optionalDescription) {
+        this.optionalDescription = optionalDescription;
+    }
+
+    public String getOptionalDescription() {
+        return optionalDescription;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getRoomNo() {
+        return RoomNo;
+    }
+
+    public void setRoomNo(String roomNo) {
+        RoomNo = roomNo;
     }
 }

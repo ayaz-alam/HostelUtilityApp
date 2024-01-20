@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/new_dashboard_bg"
+        android:elevation="6dp"
+        android:transitionName="bgq_anim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="6dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/refresh_recycler_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="6dp"
+        android:text="Send Notice"
+        android:textColor="@color/white"
+        android:textSize="@dimen/action_bar_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/img_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:padding="80dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:srcCompat="@drawable/ic_undraw_uploading" />
+
+    <TextView
+        android:id="@+id/tv_upload_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:alpha="0.5"
+        android:gravity="center"
+        android:text="You can send text notice and can also click a photo or select from gallery"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="346dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_upload">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_add_image"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_add_a_photo"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/colorPrimary"
+                android:padding="8dp"
+                android:text="Add Image"
+                android:textAllCaps="false"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_send_notice"
+                app:layout_constraintStart_toStartOf="@+id/et_notice_desc"
+                app:layout_constraintTop_toTopOf="@+id/btn_send_notice" />
+
+            <Button
+                android:id="@+id/btn_send_notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/def_16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/new_submit_btn"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="Send Notice"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/et_notice_desc"
+                app:layout_constraintTop_toBottomOf="@+id/et_notice_desc" />
+
+
+            <EditText
+                android:id="@+id/et_notice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/def_16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="@dimen/def_16dp"
+                android:background="@drawable/new_edit_txt_bg"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Type notice/subject/title here"
+                android:inputType="textMultiLine"
+                android:maxLines="2"
+                android:paddingLeft="@dimen/def_16dp"
+                android:paddingRight="@dimen/def_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_notice_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/def_16dp"
+                android:background="@color/new_edit_box_state"
+                android:gravity="start|top"
+                android:hint="Type title description"
+                android:inputType="textMultiLine"
+                android:maxHeight="150dp"
+                android:minHeight="100dp"
+                android:paddingLeft="@dimen/def_16dp"
+                android:paddingRight="@dimen/def_16dp"
+                android:scrollbars="vertical"
+                app:layout_constraintEnd_toEndOf="@+id/et_notice"
+                app:layout_constraintStart_toStartOf="@+id/et_notice"
+                app:layout_constraintTop_toBottomOf="@+id/et_notice" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

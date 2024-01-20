@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/translucent"
+    tools:context=".student.PhotoViewer">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_alignParentTop="true"
+    android:gravity="top"
+    android:id="@+id/top_panel"
+    android:layout_height="wrap_content" android:orientation="horizontal">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/back_button"
+        android:layout_margin="@dimen/def_16dp"
+        app:srcCompat="@drawable/ic_back_button_white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:id="@+id/photo_viewer_title"
+        android:text="Title"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/def_16dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+    <com.medeveloper.ayaz.hostelutility.utility.TouchImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/top_panel"
+        android:id="@+id/image_view"
+        />
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/translucent_1"
+    android:layout_alignParentBottom="true"
+
+    >
+    <TextView
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:text="Body of the notice"
+        android:id="@+id/photo_viewer_text"
+        android:layout_above="@id/expand_colapse"
+        />
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Read more.."
+        android:id="@+id/expand_colapse"
+       android:textAlignment="viewEnd"
+        />
+
+
+
+</LinearLayout>
+
+</RelativeLayout>

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,15 +9,35 @@
         <item name="android:fontFamily">@font/mukta_regular</item>
     </style>
 
-    <style name="Splash" parent="AppTheme" >
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:windowBackground">@drawable/pre_splash</item>
+    <style name="test" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+
+    <style name="ActionBar" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/mukta_regular</item>
+    </style>
+
+
+    <style name="Splash" parent="AppTheme" >
+        <item name="android:windowBackground">@drawable/new_splash</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:navigationBarColor">@color/colorAccent</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <style name="Login" parent="AppTheme">
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:navigationBarColor">@color/colorAccent</item>
     </style>
 
     <style name="Theme.Transparent" parent="Theme.AppCompat.Light">
@@ -44,7 +64,35 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/new_spinner_bg</item>
+        <item name="android:padding">5dp</item>
+    </style>
 
+    <style name="radiobutton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:checkedTextViewStyle">@color/white</item>
+    </style>
 
     <color name="trans">#00000000</color>
+
+    <style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+    <item name="chipBackgroundColor">@color/card_grey_background</item>
+    <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="MyDialogBox" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:background">@color/trans</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@color/trans</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    </style>
+
 </resources>

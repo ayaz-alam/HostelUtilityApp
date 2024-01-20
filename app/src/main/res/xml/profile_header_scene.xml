@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="500"
+        motion:motionInterpolator="linear">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:onTouchUp="autoComplete"
+            motion:touchAnchorId="@+id/motionPro"
+            motion:touchAnchorSide="bottom" />
+
+    </Transition>
+        <ConstraintSet android:id="@+id/start">
+
+            <Constraint
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@id/view"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                motion:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@id/iv_display_image"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/new_circle"
+                android:padding="8dp"
+                android:transitionName="profile_anim"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintStart_toStartOf="@+id/view"
+                motion:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@id/iv_edit_photo"
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:background="@drawable/new_circle_bg"
+                android:padding="10dp"
+                android:tint="@color/colorAccent"
+                motion:layout_constraintBottom_toBottomOf="@+id/iv_display_image"
+                motion:layout_constraintDimensionRatio="h,1:1"
+                motion:layout_constraintStart_toStartOf="@+id/edit_pencil_guide_vert"
+                motion:layout_constraintTop_toTopOf="@+id/edit_pencil_guide_horizon" />
+
+            <Constraint
+                android:id="@id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:transitionName="user_anim"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toBottomOf="@+id/iv_display_image" />
+
+            <Constraint
+                android:id="@id/tv_room_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                motion:layout_constraintEnd_toEndOf="@+id/tv_username"
+                motion:layout_constraintStart_toStartOf="@+id/tv_username"
+                motion:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+            <Constraint
+                android:id="@id/tv_user_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:textAlignment="center"
+                motion:layout_constraintEnd_toEndOf="@+id/tv_room_no"
+                motion:layout_constraintStart_toStartOf="@+id/tv_room_no"
+                motion:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+            <Constraint
+                android:id="@id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                motion:layout_constraintGuide_begin="294dp" />
+
+            <Constraint
+                android:id="@id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                motion:layout_constraintGuide_begin="321dp" />
+
+            <Constraint
+                android:id="@+id/edit_pencil_guide_vert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                motion:layout_constraintGuide_percent="0.57" />
+
+            <Constraint
+                android:id="@+id/edit_pencil_guide_horizon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                motion:layout_constraintGuide_percent="0.45" />
+
+        </ConstraintSet>
+
+        <ConstraintSet android:id="@+id/end">
+
+            <Constraint
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@id/view"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                motion:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@id/iv_display_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/new_circle"
+                android:padding="8dp"
+                android:transitionName="profile_anim"
+                motion:layout_constraintBottom_toBottomOf="@+id/tv_room_no"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintTop_toTopOf="@+id/tv_username" />
+
+            <Constraint
+                android:id="@id/iv_edit_photo"
+                android:layout_width="32dp"
+                android:layout_height="0dp"
+                android:background="@drawable/new_circle_bg"
+                android:padding="10dp"
+                android:tint="@color/colorAccent"
+                motion:layout_constraintBottom_toBottomOf="@+id/iv_display_image"
+                motion:layout_constraintDimensionRatio="h,1:1"
+                motion:layout_constraintStart_toStartOf="@+id/edit_pencil_guide_vert"
+                motion:layout_constraintTop_toTopOf="@+id/edit_pencil_guide_horizon" />
+
+            <Constraint
+                android:id="@id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:transitionName="user_anim"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <Constraint
+                android:id="@id/tv_room_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                motion:layout_constraintEnd_toEndOf="@+id/tv_username"
+                motion:layout_constraintStart_toStartOf="@+id/tv_username"
+                motion:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+            <Constraint
+                android:id="@id/tv_user_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:textAlignment="center"
+                motion:layout_constraintEnd_toEndOf="@+id/tv_room_no"
+                motion:layout_constraintStart_toStartOf="@+id/tv_room_no"
+                motion:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+            <Constraint
+                android:id="@id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                motion:layout_constraintGuide_begin="104dp" />
+
+            <Constraint
+                android:id="@id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                motion:layout_constraintGuide_begin="152dp" />
+
+            <Constraint
+                android:id="@+id/edit_pencil_guide_vert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                motion:layout_constraintGuide_percent="0.89" />
+
+            <Constraint
+                android:id="@+id/edit_pencil_guide_horizon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                motion:layout_constraintGuide_percent="0.48" />
+
+        </ConstraintSet>
+
+</MotionScene>

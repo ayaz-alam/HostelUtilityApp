@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Login" parent="AppTheme">
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">@color/nav_light</item>
+    </style>
+
+    <style name="Splash" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/new_splash</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:navigationBarColor">@color/colorAccent</item>
+    </style>
+</resources>

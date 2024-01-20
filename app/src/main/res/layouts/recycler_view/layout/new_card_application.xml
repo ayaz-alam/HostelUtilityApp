@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:background="@drawable/new_notice_card_title_bg"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Heading"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="Date: 1/1/1"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_head"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_head" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Subject"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+            <TextView
+                android:id="@+id/tv_desription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="6"
+                android:minHeight="100dp"
+                android:text="Description"
+                app:layout_constraintStart_toStartOf="@+id/tv_subject"
+                app:layout_constraintTop_toBottomOf="@+id/tv_subject" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="18dp"
+                android:text="Status"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_desription"
+                app:layout_constraintTop_toBottomOf="@+id/tv_desription" />
+
+            <Button
+                android:id="@+id/btn_remind"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/round_white"
+                android:layout_height="@dimen/card_button_width"
+                android:text="Remind"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_status"
+                app:layout_constraintEnd_toStartOf="@+id/btn_withdraw"
+                app:layout_constraintTop_toTopOf="@+id/tv_status" />
+
+            <Button
+                android:id="@+id/btn_withdraw"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/card_button_width"
+                android:paddingLeft="@dimen/card_btn_pad"
+                android:paddingRight="@dimen/card_btn_pad"
+                android:background="@drawable/round_white"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginEnd="16dp"
+                android:text="Withdraw"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_remind"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_remind" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
